@@ -1,0 +1,62 @@
+	<div class="xf_mem_Account">
+		<h3 class="xf_mem_accout_title">账户总览</h3>
+		<div class="xf_mem_accout_cont clr">
+			<div class="xf_mem_accout_cont_l">
+				#{img src:"${user?.photo}",id:"image",alt:"头像",width:"146",height:"136"}#{/img}
+			</div>
+			<div class="xf_mem_accout_cont_r">
+				<table border="0" cellpadding="0" cellspacing="0" width="100%"
+					class="xf_mem_acc_viewcpms">
+					<tbody>
+						<tr>
+							<td align="left" valign="middle" width="81">用户名：</td>
+							<td>
+					  			${user?.name?.substring(0,3)}****${user?.name?.substring(7)}
+							</td>
+						</tr>
+						<tr>
+							<td align="left" valign="middle">注册时间：</td>
+							<td>${user?.time?.format('yyyy-MM-dd')}</td>
+						</tr>
+						<tr>
+							<td align="left" valign="middle">财富统计：</td>
+							<td><a href="@{front.account.accountHome.auditingLoanBids()}" ><span class="xf_mem_acc_sjvip">${user?.investAmount?.bid_count}</span>条借款标记录</a>，
+							    <a href="@{front.account.InvestAccount.investRecord()}"><span class="xf_mem_acc_sjvip">${user?.investAmount?.invest_count}</span>条投标记录</a>，
+							    <a href="@{front.account.InvestAccount.myDebts()}"><span class="xf_mem_acc_sjvip">${user?.investAmount?.transfer_count}</span>条债权转让记录</a></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+<script type="text/javascript">
+    $("#showOrHide").hide();
+    
+    function photo(){
+      $("#showOrHide2").hide();
+      $("#showOrHide").show();
+    }
+    
+function upload() {
+	$.ajaxFileUpload({
+		url : '@{front.account.AccountHome.uploadPhoto()}',
+		secureuri : false,
+		fileElementId : 'imgFile',
+		dataType : 'text',
+		success : function(data) {
+			data = $.evalJSON(data);
+			if (data.code < 0) {
+				alert(data.msg);
+
+				return;
+			}
+			$("#image").attr("src", data.filename);
+			$("#imgFile").val('');
+		},
+		error : function(data, status, e) {
+			alert("上传图片失败");
+		}
+	})
+}
+</script>

@@ -1,0 +1,168 @@
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+    <!-- 搜索 -->
+    
+    
+    #{form @bankList(), id:'submit'}
+    <input type="hidden" id="currPage" name="currPage"/>
+    <input type="hidden" id="pageSize" name="pageSize"/>
+    <div class="xf_ht_search_inon">
+      <div>
+      	<div class="xf_ht_search_xl">
+          <span class="search_timesp">名称：</span>
+          <input name="name" type="text" class="search_w" id="name" value="${page.conditions?.name}" placeholder="银行名称" />
+        </div> 
+        <div class="xf_ht_search_xl">
+          <input type="button" class="search_button" onclick="searchSubmit();" value="搜 索" />
+        </div>
+        <div class="xf_ht_search_xl" style="float:right;">
+			<input type="button" class="search_button" onclick="javascript:location.href='/supervisor/BankAction/queryBankById'" value="添加银行">
+      	</div>
+      </div>
+    </div>
+    #{/form}
+    
+    
+    <!-- 列表内容 -->
+    <div class="xn_c_content_top">
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+        #{tr}
+          #{th}序号#{/th}
+          #{th}名称#{/th}
+          #{th}编号#{/th}
+          #{th}是否使用#{/th}
+          #{th}logo#{/th}
+          #{th}操作#{/th}
+        #{/tr}
+        #{list page?.page}
+        #{tr tr_index:_index}
+          #{td}${(page?.currPage - 1) * page?.pageSize + _index}#{/td}
+          #{td}${_?.name}#{/td}
+          #{td}${_?.code}#{/td}
+          #{td}
+	          #{if _?.is_use}
+	          	是
+	          #{/if}
+	          #{else}
+	          	否
+	          #{/else}
+	      #{/td}
+          #{td}#{img src:"${_?.logo}",alt:"",width:"134px",height:"36px"}#{/img}#{/td}
+          #{td}
+            <span class="xf_ta_onclick" onclick="javascript:location.href = '/supervisor/BankAction/queryBankById?id=${_?.id}'">编辑</span>
+            <span class="xf_ta_onclick" onclick="javascript:if(confirm('确定要删除吗？')){deleteBank('${_?.id}')}">删除</span>
+          #{/td}
+        #{/tr}
+        #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+      <div class="page_warp">
+        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+function showPage(currPage, pageSize){
+     $("#currPage").val(currPage);
+     $("#pageSize").val(pageSize);
+     $("#submit").submit();
+}
+
+function deleteBank(id){
+	$.post("@{supervisor.networkMarketing.BankAction.deleteBank()}",{id:id},function(data){
+		if(data.code < 0){
+			alert(data.msg);
+			return;
+		}else{
+			location.href = location.href;
+		}
+	});
+}
+
+function searchSubmit(){
+  $("#submit").submit();
+}
+
+function edit(id){
+	location.href = "@{supervisor.networkMarketing.BankAction.queryBankById(id)}";
+
+    //直接弹窗，添加
+	if(id == null || id == ""){
+		$.layer({
+		    type: 1,
+		    area: ['560px', 'auto'],
+		    title: '添加银行信息',
+		    page: {dom : '#edit_customer_info'}
+		  });
+		  return;
+    }
+
+  //加载银行信息，再弹窗
+  $.ajax({
+    url : "@{supervisor.networkMarketing.BankAction.queryBankById()}",
+    type : "POST",
+    data : {
+      "id" : id
+    },
+    success : function(data) {
+	  $("#bank_id").val(data.id);
+	  $("#name1").val(data.name);
+	  $("#code").val(data.code);
+	  $("#sequence").val(data.sequence);
+	  $("#image_src").attr("src",data.logo);
+	  $("#image_hidden").val(data.logo);
+	  $("#description").val(data.description);
+	  if(data.is_use){
+	  	$("#is_use_yes").attr("checked","checked");
+	  }else{
+	  	$("#is_use_no").attr("checked","checked");
+	  }
+      $.layer({
+		    type: 1,
+		    area: ['560px', 'auto'],
+		    title: '编辑银行信息',
+		    page: {dom : '#edit_customer_info'}
+		  });
+    },
+    error : function() {
+      alert("对不起，出现错误!");
+    }
+  });
+ }
+ 
+ function saveBank(){
+ 	if(!checkInput()){
+ 		return;
+ 	}
+ 
+ 	//同步kindeditor的数据到textarea中
+	//editor.sync();
+	//alert($('#description').val());
+    var data = {'name':$('#name1').val(),'code':$('#code').val(),'age':$('#sequence').val(),'sequence':$('#sequence').val(),'logo':$('#image_src').attr('src'),'is_use':$('input[name=is_use]:checked').val(),'description':$('#description').val()};
+    var id = $("#bank_id").val();
+ 	if(id != null && id != ""){
+ 		var data = {'name':$('#name1').val(),'code':$('#code').val(),'age':$('#sequence').val(),'sequence':$('#sequence').val(),'logo':$('#image_src').attr('src'),'is_use':$('input[name=is_use]:checked').val(),'description':$('#description').val(),'id':$('#bank_id').val()};
+ 	}
+ 	$.ajax({
+ 		url:"@{supervisor.networkMarketing.BankAction.saveBank()}",
+ 		data:data,
+ 		dataType:"json",
+ 		type:"post",
+ 		success:function(data){
+ 			$("#bank_id").val("");
+ 			$("#image_hidden").val("");
+ 			location.href = location.href;
+ 		},
+ 		error:function(data){
+ 			alert("ajax出现错误，请联系管理员！");
+ 		}
+ 	});
+ }
+ 
+
+</script>

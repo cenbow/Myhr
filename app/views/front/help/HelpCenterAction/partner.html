@@ -1,0 +1,50 @@
+#{extends 'common/frontMain.html' /} 
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|合作伙伴' /}
+
+<div class="p-main clr mt30 p-abmain">
+    <div class="p-cfleft">
+        <ul class="p-cfnav aboutus_leftnav">
+        	#{list types}
+				#{if _?.name == '合作伙伴'}
+					<li id="aboutUs${_?.id}" class="cur">
+						<a href="@{front.help.HelpCenterAction.partner(-1008)}">${_?.name}</a>
+					</li>
+				#{/if}
+				#{else}
+					<li id="aboutUs${_?.id}">
+						<a href="@{front.home.HomeAction.aboutUs(_?.id)}">${_?.name}</a>
+					</li>
+				#{/else}
+			#{/list}
+        </ul>
+    </div>
+    <div class="p-abright">
+        <h4 class="p-abtitle nav_title"></h4>
+        <div class="p-abword clr">
+			<ul class="xf_about_gltd_ll">
+        	#{list page.page} 
+				<li>
+					<div class="xf_about_gltd_lhz">
+						<a href="${_?.url}" target="_blank">#{img src:"${_?.image_filename}",alt:""}#{/img}</a>
+					</div>
+					<!--<div class="xf_about_gltd_r">-->
+						<!--<h2 class="xf_about_gltd_rh2">${_?.name}</h2>-->
+						<!--<div class="xf_about_gltd_rcon">-->
+							<!--<pre class="multiline_show" >${_?.description}</pre>-->
+						<!--</div>-->
+					<!--</div>-->
+				</li>	
+			#{/list}
+			</ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".nav_title").html($("li.cur").find("a").html());
+	});
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_aboutus.js'}"></script>

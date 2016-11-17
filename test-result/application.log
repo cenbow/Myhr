@@ -1,0 +1,26 @@
+17 十一月 2016 16:11:05,893 INFO  ~ Starting E:\code\java\Myhr\com.fz.hr
+17 十一月 2016 16:11:07,720 WARN  ~ You're running Play! in DEV mode
+17 十一月 2016 16:11:07,885 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+17 十一月 2016 16:11:22,510 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/myhr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
+17 十一月 2016 16:11:23,698 INFO  ~ Application 'com.fz.hr' is now started !
+17 十一月 2016 16:11:24,262 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:12:14,360 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:12:14,406 WARN  ~ SQL Error: 0, SQLState: S1009
+17 十一月 2016 16:12:14,406 ERROR ~ Value '0000-00-00' can not be represented as java.sql.Timestamp
+17 十一月 2016 16:12:14,412 INFO  ~ 人员信息查询时：org.hibernate.exception.GenericJDBCException: could not execute query
+17 十一月 2016 16:12:19,140 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:12:19,143 WARN  ~ SQL Error: 0, SQLState: S1009
+17 十一月 2016 16:12:19,144 ERROR ~ Value '0000-00-00' can not be represented as java.sql.Timestamp
+17 十一月 2016 16:12:19,146 INFO  ~ 人员信息查询时：org.hibernate.exception.GenericJDBCException: could not execute query
+17 十一月 2016 16:13:01,887 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:13:01,908 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.age
+17 十一月 2016 16:14:08,551 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:14:08,554 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.age
+17 十一月 2016 16:14:24,214 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:14:24,224 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.census_register_type
+17 十一月 2016 16:14:44,959 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:14:44,962 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.degree
+17 十一月 2016 16:16:26,604 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:17:02,458 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:20:03,560 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+17 十一月 2016 16:28:48,866 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home

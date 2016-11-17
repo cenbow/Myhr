@@ -1,0 +1,71 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'全部银行列表' /}
+
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist"> 
+    <!--左-->
+	#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}
+    <!--右-->
+    #{include 'supervisor/networkMarketing/BankAction/allBankContent.control'/} 
+  </div>
+</div>
+<!--弹出层-->
+<div class="xn_c_ban_jox xn_c_ban_jox_hyxq" id="xf_ht_fkzh_ttc" style="display: none;"></div>
+<div class="xn_c_ban_jox xn_c_ban_jox_hyxq" id="edit_customer_info" style="display: none;">
+	<div class="xf_ht_jr_obu_width">
+  <div class="xf_fktz_tcc_table">
+  <form action="" method="post" enctype="application/x-www-form-urlencoded">
+  <table border="0" cellspacing="0" cellpadding="0" class="xf_ht_jr_obu_form">
+    <tr>
+      <input type="hidden" id="bank_id" name="id" />
+      <td align="right" width="140">银行名称：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="name1" name="name"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">银行编号：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="code"  name="code"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">序号：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="sequence"  name="sequence"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">是否使用：</td>
+      <td>
+      	<input type="radio" checked="checked" value="1" name="is_use" id="is_use_yes"/><label for = "is_use_yes">是</label>
+      	<input type="radio" value="0"  name="is_use" id="is_use_no"/><label for = "is_use_no">否</label>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">银行logo图片：</td>
+      <td>
+      		<img src="" id="image_src" style="width: 134px;height: 36px;"/> 
+      		<input type="file" id="imgFile" name="imgFile" style="width: 183px;">
+      		<input class="xf_ht_ptgl_dfk_i" type="hidden" id="image_hidden" >
+      		<input type="button" onclick="uploadImage('imgFile','image_src');" value="上传">
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">描述：</td>
+      <td>
+      	<textarea rows="5" cols="40" id="description" name="description" style="width:350px"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="xf_ht_tcc_button">
+        <input class="jbox_ok" type="button" value="确  定" onclick="saveBank();">
+        <input class="jbox_on" type="button" value="取  消" onclick="layer.closeAll()">
+      </td>
+    </tr>
+  </table>
+  </form>
+  </div>
+</div>
+</div>
+<script>
+//高亮显示
+$(function(){
+	showHighLight(7,7,17);
+});
+</script>

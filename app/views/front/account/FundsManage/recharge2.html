@@ -1,0 +1,203 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 资金管理  | 充值'/}
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	
+	<!-- 右侧内容区 begin -->
+	
+	<div class="p-cfright">
+        <div class="p-zhmobanbox">
+            <div>
+            	<div class="xf_mem_Account xf_mem_shzdjkb_box">
+	               #{form @submitRecharge(), id:'paySubmit', target:'_blank'}
+	                <input type="hidden" name="uuidRepeat" value="${flash?.success}">
+	                <input type="hidden" id="type" name="type" />
+	                <input type="hidden" id="bankType" name="bankType" />
+					<h3 class="xf_mem_accout_title">充值</h3>
+					<!-- 充值 -->
+					<div class="xf_mem_accout_content">
+						<table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_mem_zjgl_cz">
+							<tr>
+								<td align="right">真实姓名：</td>
+								<td>${user?.realityName} (余额：${user?.balance?.format('###,##0.00')}元)</td>
+							</tr>
+							<tr>
+								<td align="right">用户名：</td>
+								<td>${user?.name?.substring(0,3)}****${user?.name?.substring(7)}</td>
+							</tr>
+							<tr>
+								<td align="right">请输入充值金额： </td>
+								<td><input class="xf_mem_zjgl_czinput" type="text" id="money" name="money" onkeyup="ndigitInteger(this,7)"/>  元</td>
+							</tr>
+							<tr>
+								<td align="right"> </td>
+								<td>最低充值${rechargeLowest}元</td>
+							</tr>
+						</table>
+					</div>
+					
+					
+					
+					<div class="xf_mem_zjgl_input_atijiao" style="text-align: center">
+						<a Onclick="recharge()" class="xf_con_inputfbjk">确定充值</a>
+					</div>
+				</div>
+				#{/form}
+				<!-- 清除浮动 -->
+				<div class="clear"></div>
+            	
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 内容区域 end -->
+<script type="text/javascript">
+        var bankNum;
+        var typeNum
+    
+	    $(function(){
+	    	$("#money").focus();
+	        if(${payType[0]?.is_use} & ${payType[1]?.is_use}){
+	             $("#payTypes").hide();
+	             $("#selectBank").show();
+	             $("#type").val(1);
+	             $("#bankType").val(0);
+	        }else{
+	            if(${payType[0]?.is_use}){
+	               $("#payTypes").hide();
+	               $("#selectBank").show();
+	               $("#type").val(1);
+	               $("#bankType").val(0);
+	               return;
+	            }
+	            
+	            if(${payType[1]?.is_use}){
+	               $("#payTypes").show();
+	               $("#selectBank").hide();
+	               $("#type").val(2);
+	               $("#bankType").val(0);
+	               return;
+	            }
+	            
+	            //易宝
+	            if(${payType[2]?.is_use}){
+		               $("#payTypes").hide();
+		               $("#selectBank").hide();
+		                $("#yibaoBank").show();	//易宝
+		               $("#type").val(3);
+		               $("#bankType").val(0);
+		               return;
+		        }
+	            
+	        }
+		})
+		
+	  function recharge(){
+	      if($("#type").val() == ''){
+	         alert("请选择充值类型");
+	         return;
+	      }
+	      
+	      if($("#bankType").val() == ''){
+	         alert("请选择支付方式");
+	         return;
+	      }
+	      
+	      if($("#money").val() == ''){
+	    	  alert("充值金额不能为空");
+	    	  retur;
+	      }
+	      
+	      if(isNaN($("#money").val())){
+	      	alert("请输入正确的充值金额");
+	      	return;
+	      }
+	      
+	      if($("#money").val() < ${rechargeLowest} ){
+	      	alert("最低充值${rechargeLowest}元");
+	      	return;
+	      }
+	      
+	      if($("#money").val() > ${rechargeHighest}){
+	    	  alert("充值金额不能大于${rechargeHighest}元");
+	    	  return;
+	      }
+	      
+	      $("#paySubmit").submit();
+	      
+	      var _html = '<a href="@{front.account.FundsManage.recharge()}" class="xf_con_inputfbjk" style="display:inline-block">充值成功</a> ' +
+					'<a href="@{front.help.HelpCenterAction.index(13)}" class="xf_con_inputfbjk" style="display:inline-block">充值遇到问题</a> ';
+			$('.xf_mem_zjgl_input_atijiao').html(_html);
+	  }	
+	  
+	  function select(num){
+	      if(num == 1){
+	          $("#payTypes").hide();
+	          $("#selectBank").show();
+	          $("#yibaoBank").hide();
+	          $("#ul_li_2").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_1").addClass("xf_mem_img_ishow");
+	          $("#type").val(num);
+	      }
+	      
+	      if(num == 2){
+	          $("#payTypes").show();
+	          $("#selectBank").hide();
+	          $("#yibaoBank").hide();
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_2").addClass("xf_mem_img_ishow");
+	          $("#type").val(num);
+	      }
+	      
+	      if(num == 3){
+	          $("#yibaoBank").show();
+	          $("#yibaoBank1").hide();
+	          $("#payTypes").hide();
+	          $("#selectBank").hide();
+	          $("#ul_li_1").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_2").removeClass("xf_mem_img_ishow");
+	          $("#ul_li_3").addClass("xf_mem_img_ishow");
+	          $("#type").val(num);
+	      }
+	  }
+	  
+	  function selectBank(num){
+	      $("#bank_0").removeClass("xf_mem_img_ishowt");
+	      $("#bank_"+bankNum).removeClass("xf_mem_img_ishowt");
+	      $("#bank_"+num).addClass("xf_mem_img_ishowt");
+	      $("#bankType").val(num)
+	      bankNum = num;
+	  }
+	  
+	  function payTypes(num){
+	      $("#pay_"+typeNum).removeClass("xf_mem_img_ishowt");
+	      $("#pay_0").removeClass("xf_mem_img_ishowt");
+	      $("#pay_"+num).addClass("xf_mem_img_ishowt");
+	      $("#bankType").val(num);
+	      typeNum = num;
+	  }
+	  
+	  //易宝支付银行选择
+	  function yiBanks(num){
+	      $("#yb_"+typeNum).removeClass("xf_mem_img_ishowt");
+	      $("#yb_0").removeClass("xf_mem_img_ishowt");
+	      $("#yb_"+num).addClass("xf_mem_img_ishowt");
+	      $("#bankType").val(num);
+	      typeNum = num;
+	  };
+		
+	</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		myAccountSelect(5,27);
+	});
+</script>

@@ -1,0 +1,74 @@
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+    <!-- 列表内容 -->
+    <div class="xn_c_content_top">
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0"}
+        #{tr}
+          *{#{th}&nbsp;#{/th}}*
+		  #{th}序号#{/th}
+		  #{th}菜单名称#{/th}
+		  #{th}菜单级别#{/th}
+		  #{th}菜单类型#{/th}
+		  #{th}操作#{/th}
+        #{/tr}
+		#{list items:menus, as:"first"}
+        #{tr class:"xn_tr_bj_ht"}
+          *{#{td}&nbsp;#{/td}}*
+          #{td}${first_index}#{/td}
+          #{td}${first?.name}#{/td}
+          #{td}一级菜单#{/td}
+          #{td}
+          #{if first?.type == 1}
+          	  view 
+          #{/if}
+          #{if first?.type == 2}
+          	  click  
+          #{/if}
+          #{/td}
+          #{td}
+            <span class="xf_ta_onclick" onClick="editMenu('${first?.id}', '${first?.name?.trim()}')">编辑名称</span>
+          #{/td}
+        #{/tr}
+        #{list items:first.childMenus, as:"second"}
+          #{tr class:"xn_tr_bj_zj"}
+          #{td}${first_index}.${second_index}#{/td}
+          #{td}${second?.name}#{/td}
+          #{td}二级菜单#{/td}
+          #{td}
+          #{if second?.type == 1}
+          	  view 
+          #{/if}
+          #{if second?.type == 2}
+          	  click  
+          #{/if}
+          #{/td}
+          #{td}
+            <span class="xf_ta_onclick" onClick="editMenu('${second?.id}', '${second?.name?.trim()}')">编辑名称</span>
+          #{/td}
+          #{/tr}
+        #{/list}
+		#{/list}
+      #{/table}
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+  function editMenu(id, name) {
+	  $("#weChatMenuId").val(id);
+	  $("#weChatMenuName").val(name);
+	  $.layer({
+	      type: 1,
+	      area: ['500', 'auto'],
+	      title: '编辑微信菜单名称',
+	      page: {dom : '#xf_ht_fkzh_ttc_wechatMenu'}
+	    });
+  }
+  
+  $(function () {
+		var info = "${flash.info}";
+		if (info != '' && info != 'undefined') {
+				alert(info);
+		}
+	})
+</script>

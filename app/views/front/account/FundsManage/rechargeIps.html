@@ -1,0 +1,226 @@
+#{extends 'common/frontMain.html' /} #{set title:'充值' /}
+%{
+String TRUST_FUNDS_TYPE = constants.Constants.TRUST_FUNDS_TYPE;
+}%
+<!-- 内容区域 start -->
+<div class="p-main clr mt30">
+    <!-- 左边导航区域 -->
+    #{include "front/account/AccountHome/homeLeft.html"/}
+
+    <div class="p-cfright">
+        <div class="xf_con_mem_nav"></div>
+        <!-- 右侧内容区域 -->
+        #{form @submitRecharge(), id:'paySubmit', target:'_blank'}
+        <div class="xf_mem_Account xf_mem_shzdjkb_box rechargeips-review  clearfix">
+            <input type="hidden" name="uuidRepeat" value="${flash?.success}">
+            <div class="xf_mem_accout_title rechargeips-tt">
+                <span>充值</span>
+            </div>
+            <div class="rechargeIps-wrapl fl clearfix">
+                <!-- 充值 -->
+                <div class="xf_mem_accout_content ml20 clearfix" style="height: 160px; border-bottom: 1px dashed #e3e3e3">
+                    <table border="0" cellpadding="0" cellspacing="0" class="xf_mem_zjgl_cz">
+                        <tr>
+                            <td width="75">真实姓名：</td>
+                            <td>${user?.realityName}</td>
+                        </tr>
+                        <tr>
+                            <td >用户名：</td>
+                            <td>${user?.name?.substring(0,3)}****${user?.name?.substring(7)}</td>
+                        </tr>
+                        <tr>
+                            <td >充值金额： </td>
+                            <td><input class="xf_mem_zjgl_czinput" type="text" id="money" name="money">	元，(最低充值 <i style="color: #f76d02 ">${rechargeLowest} </i>元)</td>
+                        </tr>
+                        <!-- 是否需要选择银行，环讯，富友需要 -->
+                        <!--*{-->
+                        <!--#{if isNeedSelectBank}-->
+                        <!--<tr id ="tr_bankCode">-->
+                        <!--<td align="right">选择充值银行： </td>-->
+                        <!--<td>-->
+                        <!--<select name="bankCode" class="xf_membill_selectAge" id="bankCode">-->
+                        <!--<option value="0">-请选择-</option>-->
+                        <!--#{list bankList}-->
+                        <!--<option value="${_?.code}">${_?.name}</option>-->
+                        <!--#{/list}-->
+                        <!--</select>-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        <!--#{/if}-->
+                        <!--}*-->
+
+                        <!-- 是否支持闪电充值，环讯不支持 -->
+                        <!-- *{
+                         #{if isFastRecharge}
+                         <tr>
+                             <td>充值类型： </td>
+                             <td>
+                                 <input type="hidden" name="bankCode" id="bank_code">
+                                 &lt;!&ndash; 						<input type="radio" name="rechargeType" value="1" id="radio_fast_recharge" checked="checked"><label for="radio_fast_recharge" style="padding-right:10px;">闪电快充</label> &ndash;&gt;
+                                 <input type="radio" name="rechargeType" value="2" id="radio_account_recharge" checked="checked"><label for="radio_account_recharge" style="padding-right:10px;">账户直充</label>
+                             </td>
+                         </tr>
+                         #{/if}
+                         }*-->
+                    </table>
+                    <div class="pt10 fl"  style="text-align: center">
+                        <a href="#" onclick="recharge();" class="btn_common btn_blue bank_btn" style="width: 265px" >确定充值</a>
+                    </div>
+                </div>
+
+                <!--&lt;!&ndash; 银行资金限额 &ndash;&gt;-->
+                <!--<div id="bank_account_limit" class="mt10 ml20 clearfix">-->
+                <!--<p style="width:738px;margin:0 auto;"></p>-->
+                <!--</div>-->
+            </div>
+            <div class="rechargeIps-wrapr fl">
+                <h3>友情提示:</h3>
+                <ul>
+                    <li>1.&nbsp;您的账户资金是由新浪支付第三方资金托管平台托管，充值将跳转到新浪进行充值。</li>
+
+                </ul>
+            </div>
+
+            <!-- 闪电快充（通联支付）支持的银行列表 -->
+
+            <!-- 账户直充（资金托管方：汇付）支持的银行列表，目前本平台不支持选择开户行，请托管方选择  -->
+            <!--*{
+             <div class="xf_mem_acc_titlebox" id="account_recharge">
+                 <h3 class="xf_mem_zflx_lti">选择开户银行：</h3>
+                 <ul class="xf_mem_accout_titleUL clr">
+                     #{list bankList}
+                     <li value="0" id="bank_2_${_index-1}" onClick="selectBank(${_index-1},'${_?.code}')" code="${_?.code}" class="xf_mem_accout_titleUL_li">
+                         <img src="${_?.logo}" alt="${_?.name}" style="width:100%;height:100%">
+                         &lt;!&ndash; <div class="xf_mem_zjgl_img">
+                             <img src="/public/images/banks/${_?.code}.png" alt="${_?.name}">
+                         </div> &ndash;&gt;
+                     </li>
+                     #{/list}
+                 </ul>
+             </div>
+             }*-->
+
+
+        </div>
+        #{/form}
+
+    </div>
+</div>
+<!-- 内容区域 end -->
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+    #{if isFastRecharge}
+    var rechargeType = $('input[name="rechargeType"]:checked').val();
+
+    $(function(){
+        if(rechargeType == 1){
+            showFRecBankList();
+        }
+
+        if(rechargeType == 2){
+            showARecBankList();
+        }
+
+        $("#radio_fast_recharge").change(function(){
+            rechargeType = 1;
+            showFRecBankList();
+        });
+
+        $("#radio_account_recharge").change(function(){
+            rechargeType = 2;
+            showARecBankList();
+        });
+    });
+    #{/if}
+
+    $(function(){
+        /* 高亮显示 */
+        myAccountSelect(1,1);
+
+        $("#money").focus();
+
+        #{if TRUST_FUNDS_TYPE == "FY"}
+        $("#bankCode").html('<option value="1">-请选择-</option>');
+        $("#tr_bankCode").hide();
+        #{/if}
+
+        //页面一加载就显示第一个银行的限额信息，并且将其code放在隐藏域中
+        var bankCode = $("#account_recharge ul li:eq(0)").attr("code");
+        $("#bank_code").val(bankCode);
+        queryBankByCode(bankCode);
+    });
+
+    function showFRecBankList(){
+        $("#fast_recharge").show();
+        $("#account_recharge").hide();
+
+        $(".xf_mem_img_ishowt").removeClass("xf_mem_img_ishowt");
+        $("#bank_1_0").addClass("xf_mem_img_ishowt");
+        $("#bank_code").val('vbank');
+    }
+
+    function showARecBankList(){
+        $("#account_recharge").show();
+        $("#fast_recharge").hide();
+
+        $(".xf_mem_img_ishowt").removeClass("xf_mem_img_ishowt");
+        $("#bank_2_0").addClass("xf_mem_img_ishowt");
+        //$("#bank_code").val('1100');
+    }
+
+    function selectBank(newNum, bankCode){
+        $(".xf_mem_img_ishowt").removeClass("xf_mem_img_ishowt");
+        $("#bank_"+rechargeType+"_"+newNum).addClass("xf_mem_img_ishowt");
+        $("#bank_code").val(bankCode);
+
+        queryBankByCode(bankCode);
+    }
+
+    //发送ajax请求获取相关银行的限额信息
+    //	function queryBankByCode(bankCode){
+    //	    $.ajax({
+    //	    	url:"@{front.account.FundsManage.queryBankByCode}",
+    //	    	data:{code:bankCode},
+    //	    	type:"post",
+    //	    	dataType:"json",
+    //	    	success:function(responseData){
+    //	    		if(responseData.error.code == -1){
+    //	    			alert(responseData.error.msg);
+    //	    			return;
+    //	    		}
+    //	    		$("#bank_account_limit").find("p").html(responseData.obj.description);
+    //	    	}
+    //	    });
+    //	}
+
+    function recharge(){
+        if(${isNeedSelectBank} && $("#bankCode").val() == '0'){
+            alert("请选择充值银行");
+            return;
+        }
+        if($("#money").val() == '' || $("#money").val() == '0'){
+            alert("充值金额不能为空或0");
+            return;
+        }
+
+        if(isNaN($("#money").val())){
+            alert("请输入正确的充值金额");
+            return;
+        }
+
+        if($("#money").val() < ${rechargeLowest} ){
+            alert("最低充值${rechargeLowest}元");
+            return;
+        }
+
+        if($("#money").val() > ${rechargeHighest}){
+            alert("充值金额不能大于${rechargeHighest}元");
+            return;
+        }
+
+        $("#paySubmit").submit();
+        var _html = '<a href="@{front.account.FundsManage.recharge()}" class="xf_con_inputfbjk" style="display:inline-block">充值成功</a> ' +
+                '<a href="@{front.help.HelpCenterAction.index(13)}" class="xf_con_inputfbjk" style="display:inline-block">充值遇到问题</a> ';
+        $('.xf_mem_zjgl_input_atijiao').html(_html);
+    }
+</script>

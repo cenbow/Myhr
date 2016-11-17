@@ -1,0 +1,117 @@
+#{extends 'common/supervisor.html' /} 
+#{set title:'CPS推广员列表' /} 
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+<!--左-->
+#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}    
+ <script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+  <link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+  <script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+  <script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+  <script   type="text/javascript">  
+    var editor;
+    KindEditor.ready(function(K) {
+      editor = K.create('#TextArea3', {
+           cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+           uploadJson : '@{FileUpload.uploadImage2()}',
+        allowFileManager : true,
+        allowUpload: true
+      });
+    });
+  </script>
+<!--右-->
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+  #{form @supervisor.networkMarketing.BonusAction.regBonusAll(), id:'submit'}
+  <input type="hidden" id="currPage" name="currPage"/>
+  <input type="hidden" id="pageSize" name="pageSize"/>
+  <input type="hidden" id="orderType" name="orderType" value="${page?.conditions?.orderType}"/>
+  <!-- 搜索 -->
+    <div class="xf_ht_search">
+      <div class="xf_ht_search_l">
+        <span id="div_0" onClick="location.href='@{regBonusAll()}'">默认排序</span>
+		<span id="div_1" onClick="location.href='@{manuallyBonusAll()}'">手动发红包 </span>
+		<span id="div_3" onClick="location.href='@{birthdayBonusAll()}'">生日红包</span>
+		<span id="div_5" onClick="location.href='@{investBonusAll()}'">满就送红包</span>
+		<span id="div_5" class="xf_sea_isshow" onClick="javascript:void(0);">红包规则说明</span>
+      </div>
+     </div>
+     #{/form}
+	<!-- 列表内容 -->
+	<div>
+	<br/><br/>
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+        #{tr}
+          #{td valign:"top" }内容编辑：#{/td}
+          #{td}<div class="xf_ht_news_conr">
+              <textarea class="xf_ht_jr_obttd_textarea" id="TextArea3">${exp.raw()}</textarea>
+            </div>#{/td}
+        #{/tr}
+        #{tr}
+        #{td valign:"top" }#{/td}
+          #{td align="center"}<input class="jbox_ok" type="button" value="保  存" onclick="save();">#{/td}
+        #{/tr}
+      #{/table}
+      <input type="hidden" id="editcontent" name="editcontent" />
+    </div>
+  </div>
+</div>
+<div class="xn_c_ban_jox xn_c_ban_jox_hyxq" id="showCpaDetail"></div>
+</div>
+</div>
+<script type="text/javascript">
+
+$(function(){
+  //高亮显示
+  showHighLight(5,5,13);
+});
+
+		
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+}
+function upBonusStatus(brId){
+	if(!confirm("确认修改？")){
+		return;
+	}
+	var upBonusStatus = #{jsAction @supervisor.networkMarketing.BonusAction.upBonusStatus(':brId')/}
+    	$.post(upBonusStatus({brId:brId}),function(data){
+    		if(data == "success"){
+    			alert("修改状态操作成功！");
+    			location.reload();
+    		}else{
+    			alert(date);
+    		}
+    	},"text");
+}
+function delBonus(brId){
+	if(!confirm("确认删除？")){
+		return;
+	}
+	var delBonus = #{jsAction @supervisor.networkMarketing.BonusAction.delBonus(':brId')/}
+    	$.post(delBonus({brId:brId}),function(data){
+    		if(data == "success"){
+    			alert("删除成功！");
+    			location.reload();
+    		}else{
+    			alert(date);
+    		}
+    	},"text");
+}
+function save(){
+	var exp = editor.html();
+    exp = replaceAllHTML(exp);
+    exp = encodeURIComponent(exp);
+    var upExp = #{jsAction @supervisor.networkMarketing.BonusAction.upExplanation(':exp')/}
+    	$.post(upExp({exp:exp}),function(data){
+    		if(data == "success"){
+    			alert("修改成功！");
+    			location.reload();
+    		}else{
+    			alert(date);
+    		}
+    	},"text");
+}
+</script>

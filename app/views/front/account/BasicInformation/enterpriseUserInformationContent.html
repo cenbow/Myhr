@@ -1,0 +1,179 @@
+<!-- 基本资料 -->
+<div class="xf_mem_Account">
+	<h3 class="xf_mem_accout_title xf_mem_accout_tijbzl">
+		<span class="xf_mem_accout_jbzl">资料设置</span>
+		*{
+		<span style="float:right;">
+			<a class="xf_mem_accout_jbzl2" href="javascript:void(0)" onclick="edit()">编辑</a>
+			<a class="xf_mem_accout_jbzl2" href="javascript:void(0)" id="save">保存</a>
+		</span>
+		}*
+	</h3>
+	#{form @front.account.BasicInformation.saveInformation(), id:'basicInformation'}
+		<table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_memjbzl_table">
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">企业名称：</span>
+				<input class="xf_jbzl_input" name="name" id="name" value="${user?.name}"/>
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">财务登记证：</span>
+				<input class="xf_jbzl_input" name="financeCertificate" id="financeCertificate" value="${user?.financeCertificate}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">手机号：</span>
+				<input class="xf_jbzl_input" name="mobile" id="mobile" value="${user?.mobile}"/>
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">法人姓名：</span>
+				<input class="xf_jbzl_input" name="realityName" id="realityName" value="${user?.realityName}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">营业执照：</span>
+				<input class="xf_jbzl_input" name="businessLicense" id="businessLicense" value="${user?.businessLicense}"/>
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">身份证号：</span>
+				<input class="xf_jbzl_input" name="idNumber" id="idNumber" value="${user?.idNumber}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">税务等级证：</span>
+				<input class="xf_jbzl_input" name="taxCertificate" id="taxCertificate" value="${user?.taxCertificate}"/>
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">组织结构代码：</span>
+				<input class="xf_jbzl_input" name="organizationCode" id="organizationCode" value="${user?.organizationCode}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="xf_jbzl_stitle">法人邮箱：</span>
+				<input class="xf_jbzl_input" name="email" id="email" value="${user?.email}"/>
+			</td>
+			<td>
+				<span class="xf_jbzl_stitle">开户许可证：</span>
+				<input class="xf_jbzl_input" name="openingPermit" id="openingPermit" value="${user?.openingPermit}"/>
+			</td>
+		</tr>
+		
+		
+		<tr>
+		</tr>
+	</table>
+	#{/form}
+</div>
+<script >
+	$(function() {
+		$("form :input").attr("disabled",true);
+		
+		if('${user.isAddBaseInfo}' == 'false') {
+			if('${flash?.city}'==0) {
+			$("#province").append("<option value='0' selected>--请选择--</option>");
+			$("#city").append("<option value='0' selected>--请选择--</option>");
+			
+			}
+			
+			if('${flash?.education}'==0) {
+				$("#education").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.marital}'==0) {
+				$("#marital").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.car}'==0) {
+				$("#car").append("<option value='0' selected>--请选择--</option>");
+			}
+			
+			if('${flash?.house}'==0) {
+				$("#house").append("<option value='0' selected>--请选择--</option>");
+			}
+		}
+		
+		if('${flash.error}' != '') {
+			edit();
+		}
+	})
+	
+	$("#province").change(function(){
+		var selectVal = $(this).children('option:selected').val();
+		var jsAction = #{jsAction @Application.getCity(":provinceId")/}
+		$.post(jsAction({provinceId:selectVal}),function(data) {
+			var cityList = [];
+			for(var i = 0; i < data.length; i ++){
+				cityList.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+			}
+			$("#city").html(cityList);
+		});
+	});
+	
+	function refreshCaptcha() {
+    $.ajax({
+	  url : "@{Application.randomID()}",
+	  type : "POST",
+	  data : {
+	  },
+	  success : function(randomID) {
+	    $("#captchaImage").attr("src","@{Application.captcha()}?id="+randomID);
+		  $("#randomID").val(randomID);
+		},
+	  error : function() {
+	    alert("对不起，出现错误!");
+	  }
+	 });
+  }
+
+	function edit() {
+		$("form :input").attr("disabled",false);
+		$("#save").attr("onclick","save();");
+		
+	}
+	
+	function save() {
+	    
+	    if($("#sex").val() == 0){
+	       alert("性别不能为空");
+	       return;
+	    }
+	    
+	    if($("#age").val().trim() == ''){
+	       alert("年龄不能为空");
+	       return;
+	    }
+	    
+	    if($("#province").val() == 0) {
+	       alert("请选择户口所在地");
+	       return;
+	    }
+	    
+	    if($("#education").val() == 0) {
+	       alert("请选择文化程度");
+	       return;
+	    }
+	    
+	    if($("#marital").val() == 0) {
+	       alert("请选择婚姻状况");
+	       return;
+	    }
+	    
+	    if($("#car").val() == 0) {
+	       alert("请选择购车情况");
+	       return;
+	    }
+	    
+	    if($("#house").val() == 0) {
+	       alert("请选择购房情况");
+	       return;
+	    }
+	   
+		$("#basicInformation").submit();
+		
+		$("#save").attr("onclick","void();");
+	}
+</script>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta content="telephone=no" name="format-detection">
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/czstyle.css'}" />
+<script type="text/javascript" src="@{'/public/javascripts/zepto.min.js'}"></script>
+</head>
+
+<body>
+	#{form @submitRechargeApp(), id:'paySubmit'}
+	<div class="s_czbody s_main">
+		<ul class="s_czuser">
+			<input type="hidden" id="type" name="type" />
+	        <input type="hidden" id="bankType" name="bankType" />
+	        <input type="hidden"  name="id"  value="${user?.sign}"/>
+			<li>真实姓名：<strong>${user?.realityName}</strong></li>
+			<li>账<i class="whitespace"></i>号：<strong>${user?.name?.substring(0,3)}****${user?.name?.substring(7)}</strong></li>
+			
+			<li>请输入银行卡号：
+				<div class="s_input">
+					<input type="text" placeholder="请输入银行卡号" id="number" name="number"/>
+				</div>
+			</li>
+			<li>请输入充值金额：
+				<div class="s_input">
+					<input type="text" placeholder="请输入充值金额" id="money" name="money"/><span>元</span>
+				</div>
+			</li>
+			<li>
+				<input value="确定充值" type="button" class="s_czsubbtn" Onclick="recharge()"/>
+			</li>
+		</ul>
+		*{<div class="s_fixedbg .s_main">
+			<dl class="s_fixedbox">
+				<dt>充值成功</dt>
+				<dd>
+					<a class="s_closebtn" href="javascript:void(0);">确 定</a>
+				</dd>
+			</dl>
+		</div>}*
+	</div>
+	#{/form}
+	<script type="text/javascript">
+	  var bankNum;
+      var typeNum
+  
+
+	    $(function(){
+	    	$("#money").focus();
+	    	$("#type").val(1);
+	    	$("#bankType").val(0)
+	    	if("${info}"!=""){
+				alert(${info});
+		    }
+		});
+	    function recharge(){
+	      var money = $("#money").val();
+	      
+	      if(isNaN(money)) {
+	      	 alert("请输入正确的充值金额");
+	      	 return;
+	      }
+	      
+	      if(money <= 0) {
+	      	 alert("请输入正确的充值金额");
+	      	 return;
+	      }
+	      
+	      if(money > 10000000) {
+	      	 alert("已超过最大充值金额10000000元");
+	      	 return;
+	      }
+	      
+	      if($("#type").val() == '' || $("#type").val() < 0 || $("#type").val() > 2){
+	         alert("请选择充值类型");
+	         return;
+	      }
+	      
+	      if($("#bankType").val() == ''){
+	         alert("请选择支付方式");
+	         return;
+	      }
+	      
+	      $("#paySubmit").submit();
+	  }
+	</script>
+</body>
+</html>

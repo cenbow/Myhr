@@ -1,0 +1,71 @@
+<div class="p-bdtitle">
+    <img src="images/p-bshi.png" alt="" width="22" height="22" class="fl" />
+    <span class="fz18 co333 ml10">${debt?.title}</span>
+    *{
+    <span class="co333">0892152333</span>
+    }*
+    <span class="co999 ml35">编号1：${debt?.no}</span>
+</div>
+<div class="p-bdtopleft">
+     <ul class="clr p-bdjkxxul">
+         <li>
+             <h6>年化收益率</h6>
+             <div><span class="p-bdlilnum">${debt?.invest?.bid?.apr}</span><span class="p-bdlilbfb">%</span></div>
+         </li>
+         <li class="w288">
+             <h6>项目总额</h6>
+             <div><span class="fz24">${debt?.invest?.bid?.amount?.format("###,##0.00")}</span><span class="fz18">元</span></div>
+         </li>
+         <li class="w218">
+             <h6>投标本金</h6>
+             <div><span class="fz24">${debt?.invest?.amount?.format("###,##0.00")}</span><span class="fz18">元</span></div>
+         </li>
+     </ul>
+     <div class="p-bdotherinfo">
+         <table class="p-bdotable" width="100%">
+             <tr height="44">
+                 <th>已收金额</th>
+                 <td width="140">${debt?.map?.has_receive_money}元</td>
+                 <th>剩余本息</th>
+                 <td width="140">#{format money:debt.debtAmount}#{/format}元</td>
+                 <th>待收本金</th>
+                 <td> ${debt?.map?.receive_corpus}元</td>
+             </tr>
+             <tr height="44">
+                 
+                 <th>逾期情况</th>
+                 <td>
+                		#{if debt?.invest?.bid?.hasOverdue == true}
+						有逾期
+					#{/if}
+					#{else}
+						无逾期
+					#{/else}
+                 </td>
+                 <th>剩余期数</th>
+                 <td>${debt?.invest_periods - debt?.has_received_periods}期</td>
+                 <th>最后还款日期</th>
+                 <td>${debt?.map?.receive_time != "" ? debt?.map?.receive_time: '已还款'}</td>
+             </tr>
+             <tr height="46">
+                 <th>还款方式</th>
+                 <td>${debt?.bid?.repayment?.name}</td>
+                 
+                 #{if debt?.bid?.agency?.id>0}
+                 <th>合作机构</th>
+                 <td>
+                 	<a target="_blank" href="@{front.invest.investAction.agencyDetails(debt?.bid?.agencyId,debt?.id,2)}">
+                 		<img src="${debt?.bid?.agency?.imageFilenames}" alt="" width="110" height="36" />
+                 	</a>
+                 </td>
+                 <td colspan="2">
+                     <span class="mr10">担保机构</span>
+                     <a target="_blank" href="@{front.invest.investAction.agencyDetails(debt?.bid?.guaranteeId,debt?.id,2)}">
+                     	<img src="${debt?.bid?.guaranteeAgency?.imageFilenames}" alt="" width="110" height="36" />
+                     </a>
+                 </td>
+                 #{/if}
+             </tr>
+         </table>
+     </div>
+ </div>

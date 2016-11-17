@@ -1,0 +1,346 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle +' | '+bid?.title +'确认投标'/}
+<!--内容区-->
+<div class="p-main mt30">
+    <div class="p-qrmian">
+        <div class="p-ptone">
+            <h4 class="p-ptitle">项目信息</h4>
+            <table class="p-p1table">
+                <thead>
+                    <tr>
+                        <td width="200"><span class="co333">项目名称</span></td>
+                        <td width="160"><span class="co333">借款总额</span></td>
+                        <td width="160"><span class="co333">年化收益</span></td>
+                        <td><span class="co333">借款期限</span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="co999">${bid?.title}</span></td>
+                        <td><span class="co999">${bid?.amount?.format('###,##0.00')}元</span></td>
+                        <td><span class="cozhuse">${bid?.apr}%</span></td>
+                        <td><span class="co999">${bid?.period}${bid?.strPeriodUnit}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="p-pttwo">
+            <h4 class="p-ptitle">确认投标信息</h4>
+            <table class="p-pttable">
+                <tr>
+                    <th><span class="co666">投标金额</span></th>
+                    <th><span class="co666">起息时间</span></th>
+                    <th><span class="co666">计息天数</span></th>
+                    <th><span class="co666">到期回款总额</span></th>
+                    <th><span class="co666">到期收益</span></th>
+                    <th><span class="co666">还款方式</span></th>
+                    <th><span class="co666">详情</span></th>
+                </tr>
+                <tr>
+                    <td>
+                    	<input type="hidden" id="investAmount_" value="${investAmountStr?.format('###,##0')}" > 
+                    	<span class="cozhuse">${investAmountStr}</span>
+                       <!--  <input type="text" value="" class="p-ptoinpt" id="investAmount_"  disabled="disabled"  onchange="amountChange();"  autocomplete="off" onkeyup="ndigitInteger(this,8);checkGold(this);"/> -->
+                    </td>
+                    <td><span class="co666" id="investAccstart_">起息时间</span></td>
+                    <td><span class="co666" id="investAcctime_">计息天数</span></td>
+                    <td><span class="co666" id="sumAmount_">${(borrowSum+totalInterest).format('###,##0.00')}元</span></td>
+                    <td><span class="co666" id="interest_">${totalInterest?.format('###,##0.00')}元</span></td>
+                    <td><span class="co666">${bid?.repayment?.name}</span></td>
+                    <td><a href="javascript:void(0)" class="cozhuse" id="investCheckMore" onclick="showInvesrDiv()"><i class="investCheckMore-ico"></i>查看详情</a></td>
+                </tr>
+            </table>
+            <script>
+                $(function () {
+                    function  showInvesrDiv() {
+
+                    }
+                })
+            </script>
+        </div>
+        #{form @front.invest.investAction.confirmInvest(bid?.sign, uuid2), method:'POST', id:'confirmInvest'}
+        <div class="p-pthree">
+            <h4 class="p-ptitle">确认支付</h4>
+            <div class="p-thrword1">
+                <dl class="clr p-qritem">
+                    <dt>账户可用余额：</dt>
+                    <dd><span class="cozhuse">${(accountInfo?.user_account-accountInfo?.freeze+accountInfo?.user_account2)?.format('###,##0.00')}元</span></dd>
+                </dl>
+                <dl class="clr p-qritem">
+                   #{if !bid.isExperienceInvest}
+                    <dt>红包：</dt>
+                    <dd>
+                    <select class="p-vm" id="bonusList" name="bonusId" onchange="changeRealAmountByBonus();" style="width: 80px;">
+                    <option  value="0">不使用</option>
+					</select>
+                   </dd>
+                   #{/if}
+                   #{if gold != null && bid.isExperienceInvest}
+                    <dd class="ml50">体验金：</dd>
+                    <dd>
+					<select id="experienceId" name="goldId" onchange="changeRealAmount(this);" style="width: 80px;">
+							<option class="experienceOpt" value="0" amount="0">不使用</option>
+							<option class="experienceOpt" value="${gold?.id}" style="display: none;" id="goldOption" selected="selected" amount="">${gold?.experience_amount}</option>
+						</select>
+						<input type="hidden" name="goldAmount" id="goldAmount" value="0" />
+					</dd>
+                    #{/if}
+                </dl>
+            </div>
+            <div class="p-thrword2">
+                <dl class="clr p-qritem h50">
+                    <dt>应付总额：</dt>
+                    <dd><strong class="fz18 cozhuse" id="realAmount">0</strong> <span class="cozhuse">元</span></dd>
+                    <dd class="ml25" id="toRegPay"><span class="co333">可用余额不足，请</span><a href="@{front.account.FundsManage.recharge()}" class="cozhuse p-un">充值</a><span class="co333">!</span></dd>
+                </dl>
+                #{if bid?.product?.isDealPassword == true && !ipsEnable}
+                <dl class="clr p-qritem h50">
+                    <dt>输入交易密码：</dt>
+                    <dd><input type="text" class="p-pthinpt" id="dealpwd" name="dealpwd" onfocus="this.type='password'" autocomplete="off" onMouseOver="checkDelPwd();" value=""/>&nbsp;</dd>
+                    #{if user != null && user.payPassword == null}
+                    <dd class="ml15"><a href="@{front.account.BasicInformation.modifyPassword()}">您未设置交易密码！点击此处设置交易密码</a></dd>
+                	#{/if}
+                </dl>
+                #{/if}
+                <dl class="clr p-qritem h50">
+                    <dt>&nbsp;</dt>
+                    <dd><label class="p-315lab"><input name="tyxy" id="tyxy" type="checkbox" value="" />我已阅读并同意</label><a href="###" onclick="showProtocolF();" class="cozhuse p-un">《购买协议/转让协议》</a></dd>
+                </dl>
+                <dl class="clr p-qritem h50">
+                    <dt>&nbsp;</dt>
+                    <dd id="ok_sumbit"><a href="###" class="p-pthbtn" onclick="investApplyNow();">#{if bid?.status > 0 && bid?.status < 3 && bid?.amount > bid?.hasInvestedAmount}
+					 确认投标
+			#{/if}
+			#{elseif bid?.status == 30 && bid?.amount > bid?.hasInvestedAmount}
+				确认预约
+			#{/elseif}</a></dd>
+                    <dd id="no_sumbit"><a href="###" class="p-pthbtn" style="background-color: #666666;display:none">确认投标</a></dd>
+                </dl>
+            </div>
+            <input type="hidden" value="${investAmountStr}" id="investAmount" name="investAmount"/>
+        </div>
+    	#{/form}
+    </div>
+</div>
+
+
+#{include "front/account/AccountHome/homeVipContent.control"/}
+<script type="text/javascript">
+$(function(){
+	var investAmount = $("#investAmount").val()*1;
+	//获取红包列表
+		var queryBonus = #{jsAction @queryBonus(':amount')/};
+		$.post(queryBonus({amount:investAmount}),function(data){
+	 		var arr=eval(data);
+ 			var bonusList =  "<option class='experienceOpt' value='0'>不使用</option>";
+ 			var length = arr.length;
+	 		for(var i = 0; i < length; i ++){
+		 		if(i==length-1){
+		 			//最后一条
+		 		 	bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"' selected = 'selected'>"+arr[i].amount+"元</option>";
+		 		 	break;
+			 	}
+ 				bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"'>"+arr[i].amount+"元</option>";
+		 	}
+		 	$("#bonusList").html(bonusList);
+		 	changeRealAmountByBonus();
+		 	checkGold();
+		});
+});
+function amountChange(){
+	var investAmount = $("#investAmount_").val()*1;
+	var sign = "${bid?.sign}";
+	var queryInterest = #{jsAction @queryInterest(':sign',':investAmountStr')/};
+	$.post(queryInterest({sign:sign,investAmountStr:investAmount}),function(data){
+		$("#investAmount").val(investAmount);
+		$("#interest_").text(data);
+		var amo = parseFloat(data)+parseFloat(investAmount);
+		$("#sumAmount_").text(amo);
+		//获取红包列表
+		var queryBonus = #{jsAction @queryBonus(':amount')/};
+		$.post(queryBonus({amount:investAmount}),function(data){
+	 		var arr=eval(data);
+ 			var bonusList =  "<option class='experienceOpt' value='0'>不使用</option>";
+ 			var length = arr.length;
+	 		for(var i = 0; i < length; i ++){
+		 		if(i==length-1){
+		 			//最后一条
+		 		 	bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"' selected = 'selected'>"+arr[i].amount+"元</option>";
+		 		 	break;
+			 	}
+ 				bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"'>"+arr[i].amount+"元</option>";
+		 	}
+		 	$("#bonusList").html(bonusList);
+		 	changeRealAmountByBonus();
+		});
+		
+		var usedGoldAmount = 0;
+		var goldId = $("#experienceId").val();
+		if(goldId > 0) {
+			usedGoldAmount = $("#goldOption").attr("amount");
+		}
+		var realAmount = investAmount - usedGoldAmount;
+		$("#realAmount").html(realAmount);
+		checkAmount();
+	},'text');
+};
+function changeTotalAmount(){
+		var investAmount = $("#investAmount").val();
+		if(investAmount < 0) {
+			$("this").val("");
+			alert("请填写正确的投标金额");
+			return false;
+		}
+		
+		//获取红包列表
+		var queryBonus = #{jsAction @queryBonus(':amount')/};
+		$.post(queryBonus({amount:investAmount}),function(data){
+	 		var arr=eval(data);
+ 			var bonusList =  "<option class='experienceOpt' value='0'>不使用</option>";
+ 			var length = arr.length;
+	 		for(var i = 0; i < length; i ++){
+		 		if(i==length-1){
+		 			//最后一条
+		 		 	bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"' selected = 'selected'>"+arr[i].amount+"元</option>";
+		 		 	break;
+			 	}
+ 				bonusList = bonusList + "<option class='experienceOpt' value='"+arr[i].id+"'>"+arr[i].amount+"元</option>";
+		 	}
+		 	$("#bonusList").html(bonusList);
+		 	changeRealAmountByBonus();
+		});
+		
+		var usedGoldAmount = 0;
+		var goldId = $("#experienceId").val();
+		if(goldId > 0) {
+			usedGoldAmount = $("#goldOption").attr("amount");
+		}
+		var realAmount = investAmount - usedGoldAmount;
+		$("#realAmount").html(realAmount);
+		checkAmount();
+	};
+	
+	
+	//下拉列表选择体验金修改实付金额
+	function changeRealAmount(obj) {
+		var goldId = $(obj).val();
+		var goldAmount = $(obj).find("option:selected").attr("amount");
+		var investAmount = $("#investAmount").val();
+		
+		//体验金金额
+		var bonus = $("#bonusList").find("option:selected");
+		var bonusAmount = 0;
+		if(bonus.val() != 0){//不使用体验金
+			var str = bonus.text();
+			bonusAmount = str.substring(0,str.length-1)*1;
+		}
+		$("#realAmount").text(investAmount*1-goldAmount*1-bonusAmount*1);
+		checkAmount();
+	};
+	
+	//根据红包修改实付金额
+	function changeRealAmountByBonus(){
+		var investAmount = $("#investAmount").val();
+		var bonus = $("#bonusList").find("option:selected");
+		var bonusAmount = 0;
+		if(bonus.val() != 0){//不使用体验金
+			var str = bonus.text();
+			bonusAmount = str.substring(0,str.length-1)*1;
+		}
+		
+		var usedGoldAmount = 0;
+		var goldId = $("#experienceId").val();
+		if(goldId > 0) {
+			usedGoldAmount = $("#goldOption").attr("amount");
+		}
+		realAmount = investAmount - bonusAmount - usedGoldAmount;//实际支付金额=投标金额-红包金额-体验金金额
+		$("#realAmount").text(realAmount);
+		checkAmount();
+	};
+	
+	
+	//动态显示红包金额
+	function checkGold() {
+		var investAmount = $("#investAmount").val();//投标金额
+		if(investAmount == 0) {
+			$("#realAmount").text(0);
+			return;
+		}
+		if(${bid?.isExperienceInvest} && ${gold != null} && investAmount > 0) {//开启了体验金投标，并且当前登录用户有未使用的体验金
+			var goldAmount = ${gold?.experience_amount}+"";//体验金金额
+			var investGoldAmount = investAmount*${bid?.experienceInvestRate}/100;//投标金额*体验金投资占比
+			var usedGoldAmount = 0;
+			if(investGoldAmount*1 <= goldAmount*1) {
+				usedGoldAmount = investGoldAmount;
+			} else {
+				usedGoldAmount = goldAmount;
+			}
+			$("#experienceId").val(${gold?.id});
+			$("#goldOption").html(usedGoldAmount+"元").attr("amount",usedGoldAmount).show();
+			
+			
+			//红包金额
+			var bonus = $("#bonusList").find("option:selected");
+			var bonusAmount = 0;
+			if(bonus.val() != 0){//不使用体验金
+				var str = bonus.text();
+				bonusAmount = str.substring(0,str.length-1)*1;
+			}
+			realAmount = investAmount - bonusAmount - usedGoldAmount;//实际支付金额=投标金额-红包金额-体验金金额
+			$("#realAmount").text(realAmount);
+		}
+		checkAmount();
+	};
+	
+	//查询用户金额是否足够
+	function checkAmount(){
+		var investAmount = parseInt($("#realAmount").text());
+		var userAmount = ${(accountInfo?.user_account-accountInfo?.freeze+accountInfo?.user_account2)};
+		if(investAmount>userAmount){
+			$("#ok_sumbit").css("display","none");
+			$("#no_sumbit").css("display","");
+			$("#toRegPay").css("display","");
+		}else{
+			$("#no_sumbit").css("display","none");
+			$("#ok_sumbit").css("display","");
+			$("#toRegPay").css("display","none");
+		}
+		
+	}
+	function investApplyNow(){
+		if($("#tyxy").is(':checked')==false){
+			alert("请先确认投资协议");
+			return;
+		}
+ 		/** 检查用户是否激活, fronMain.html 中的拦截器*/
+	 	var result = frontJSIntercepter();
+ 
+   		if(!result){
+   	   		confirmInvest(); 
+   		}		  		
+	};
+	
+	
+	//确认投标方法
+	function confirmInvest(){
+		var investAmount = $("#investAmount").val();
+		var minInvestAmount = ${bid?.minAllowInvestAmount};
+		var maxInvestAmount = ${bid?.amount - bid?.hasInvestedAmount};
+		var averageInvestAmount = ${bid?.averageInvestAmount};
+		var patrn=/^([1-9]\d*)$/;
+		var flag = patrn.exec(investAmount);
+		
+		var isDealPassword = ${bid?.product?.isDealPassword};
+		
+		if(!${ipsEnable} && isDealPassword == true){
+			if($("#dealpwd").val().replace(/\s+/g,"") == "" || null == $("#dealpwd").val().replace(/\s+/g,"")){
+				alert("对不起！请输入交易密码!");
+				return;
+			}
+		}
+		$("#confirmInvest").submit();
+	};
+</script>

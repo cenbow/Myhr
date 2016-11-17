@@ -1,0 +1,79 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'体验金规则设置' /}
+<div class="xn_c_contentwarp">
+	<div class="xn_c_contentlist">
+	<!--左-->
+	#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}
+  		<div class="xn_c_content">
+    		<div class="xf_content_add">
+    			#{form @saveExperienceGoldRule(), id:'saveExperienceGoldRule'}
+      				<div class="xfht_t_j_y_2">
+      					<!--右上-->
+				        <div class="xf_ht_obu_fklm">
+			          		体验金规则设置
+				        </div>
+       					<!-- 体验金规则设置 -->
+       					<div class="xf_ht_cps_gz" style="height: 220px;">
+			          		<ul class="xf_ht_cps_gz_ul">
+			          			<li>
+			          				体验金状态：
+			          				<input type="radio" name="experience_enable" value="1" checked="checked">启动
+			          				<input type="radio" name="experience_enable" value="0" checked="checked">关闭
+			          			</li>
+			            		<li>
+			            			体验金：
+			            			<input style="width: 140px;" class="xfht_zr_input" type="text" style="width:80px;" id="experience_amount" name="experience_amount" value="${backstageSet?.experienceAmount}" onkeyup="value=value.replace(/[^\d]/g, '').replace(/^(10000000|\d{0,7}).*/, '$1');"/> 元
+			            		</li>
+			            		<li>
+			            			体验金有效期：
+			            			<input style="width: 100px;" class="xfht_zr_input" type="text" style="width:80px;" id="experience_period" name="experience_period" value="${backstageSet?.experiencePeriod}" /> 天
+			            		</li>
+			          		</ul>
+			          		<div class="xf_htgl_jgsix">
+			            		<input class="xf_ht_tcc_button_ok" type="submit" value="保存">
+			          		</div>
+			        	</div>
+    				</div>
+   				#{/form}
+    		</div>
+  		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+  		//高亮显示
+  		showHighLight(6,6,15);
+  		$("input[name='experience_enable'][value='"+${backstageSet?.experienceEnable}+"']").prop("checked","true");
+	});
+	
+	$("#saveExperienceGoldRule").submit(function(){
+			var experienceEnable = $("input[name='experience_enable']:checked").val();
+			if(experienceEnable != 0 && experienceEnable != 1) {
+				alert("请选择是否启用体验金");
+				return false;
+			}
+			var experienceAmount = $.trim($("#experience_amount").val());
+			if(!experienceAmount) {
+				alert("体验金金额不能为空");
+				return false;
+			}
+			if(experienceAmount <= 0) {
+				alert("请填写正确的体验金金额");
+				return false;
+			}
+			var experiencePeriod = $.trim($("#experience_period").val());
+			if(!experiencePeriod) {
+				alert("体验金有效期不能为空");
+				return false;
+			}
+			if(experiencePeriod <= 0) {
+				alert("请填写正确的体验金有效期");
+				return false;
+			}
+			/* 页面防止重复提交 */
+			$(":submit",this).attr("disabled","disabled");
+			
+			return true;
+	});
+	
+</script>

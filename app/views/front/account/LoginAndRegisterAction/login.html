@@ -1,0 +1,71 @@
+    #{extends 'common/frontMain.html' /}
+%{
+business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|登录' /}
+<div class="p-login-bg">
+    <div class="p-main p-zcmain-wrap">
+        <div class="p-zcmain">
+            <div class="p-zctabox-wrap">
+               <!-- <div class="p-zctop clr p-zctop-new">
+                    <ul class="p-zcxxkul">
+                        <li class="cur">登录中心</li>
+                    </ul>
+                    <a href="@{front.account.LoginAndRegisterAction.registerMobile}" class="p-un">注册新用户</a>
+                </div>-->
+                #{form @front.account.loginAndRegisterAction.logining(), id:'submit'}
+
+                <div class="p-zctabox mt50">
+                    <p class="login-submit-tt mt40">欢迎登录拓米金融</p>
+                    <div class="p-zcitem mt40">
+                        <input type="text" class="p-input" name="name" id="name" title="请输入手机号" />
+                        <i class="iconfont">&#xe619;</i>
+                        <span class="p-zcline"></span>
+                        <label class="p-tips">请输入手机号</label>
+                    </div>
+                    <div class="p-zcitem mt20">
+                        <input type="password" class="p-input" name="password" id="password" autocomplete="off"  title="请输入6-20位字符组成的密码" />
+                        <i class="iconfont">&#xe60a;</i>
+                        <span class="p-zcline"></span>
+                        <label class="p-tips">请输入6-20位字符组成的密码</label>
+                    </div>
+
+                    #{if flash?.loginCount > "2"}
+                    <div class="clr mt20">
+                        <div class="p-zcitem yzm">
+                            <input type="text" class="p-input" id="code" title="输入验证码" name="code" #{if !constants.Constants.CHECK_CODE}value="1234" readonly="readonly" #{/if}/>
+                            <input type="hidden" name="randomID" id="randomID"/>
+                            <i class="iconfont">&#xe617;</i>
+                            <span class="p-zcline"></span>
+                            <label class="p-tips">输入验证码</label>
+                        </div>
+                        <a href="javascript:void(0)" title="刷新验证码" class="p-zcyanzm" onclick="change();">
+                            <img src="images/p-yanzm.png" alt="" width="115" height="44" id="img" onclick="change();"/>
+                        </a>
+                    </div>
+                    #{/if}
+                    <div class="p-zcbotword clr">
+                        <a href="@{front.account.loginAndRegisterAction.resetPasswordByMobile()}" class="p-fogetmm">忘记密码</a>
+                    </div>
+                    <a href="javascript:void(0);" onClick="login();" class="btn p-zcbtn mt30">安全登录</a>
+                    <a href="@{front.account.LoginAndRegisterAction.registerMobile}" class="login-submit-zc mt20">没有账户?点此立即注册</a>
+                </div>
+                #{/form}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        var setCode = #{jsAction @front.account.loginAndRegisterAction.setCode()/}
+                $.post(setCode({}), function (data) {
+                    var arr = eval(data);
+                    var img = arr.img;
+                    $("#img").attr("src", "@{front.account.loginAndRegisterAction.getImg()}?id=" + img);
+                    $("#randomID").val(img);
+                });
+
+    });
+</script>

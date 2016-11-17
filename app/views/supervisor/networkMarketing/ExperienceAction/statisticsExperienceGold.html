@@ -1,0 +1,185 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'体验金发放统计表' /}
+<div class="xn_c_contentwarp">
+	<div class="xn_c_contentlist">
+		<!--左-->
+		#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}    
+		<!--右-->
+	
+		<div class="xn_c_content">
+	  		<div class="xf_ht_tablelist">
+	  			#{form @supervisor.networkMarketing.ExperienceAction.statisticsExperienceGold(), id:'statisticsExperienceGold'}
+			  		<input type="hidden" id="currPage" name="currPage"/>
+			  		<input type="hidden" id="pageSize" name="pageSize"/>
+			  		<input type="hidden" id="orderType" name="orderType" value="${page?.conditions?.orderType}"/>
+	  				<!-- 搜索 -->
+	    			<div class="xf_ht_search">
+	      				<div class="xf_ht_search_l">
+					        <span id="div_0" onClick="conditonSearch(0)">默认排序</span>
+							<span id="div_1" onClick="conditonSearch(1)">发放日期 <a id="tab_1">↑</a></span>
+							<span id="div_3" onClick="conditonSearch(3)">体验金金额<a id="tab_3">↑</a></span>
+							<span id="div_5" onClick="conditonSearch(5)">使用日期<a id="tab_5">↑</a></span>
+							<span id="div_7" onClick="conditonSearch(7)">使用金额<a id="tab_7">↑</a></span>
+				      	</div>
+			     	</div>
+	     			<div class="xf_ht_search_inon">
+     					<div class="xf_ht_search_xl">
+			          		<select class="xf_membill_selectAge" name="type" id="timeType">
+				            	<option value="0">发放日期</option>
+				            	<option value="1">使用日期</option>
+				            	<option value="2">到期日期</option>
+				          	</select>
+			        	</div>
+			         	<div class="xf_ht_search_xl">
+		  					<input type="text" class="search_time" name="startDate" id="startDate" onclick="laydate()" class="laydate-icon" style="cursor:pointer" value="${pageBean?.conditions?.startDate}">
+		  					<span class="search_timesp">--</span>
+		  					<input type="text" class="search_time" name="endDate" id="endDate" onclick="laydate()" class="laydate-icon" style="cursor:pointer" value="${pageBean?.conditions?.endDate}">  
+	    				</div>
+	    				
+	    				<div class="xf_ht_search_xl">
+	    					<span class="search_timesp">使用状态：</span>
+	    					<select class="xf_membill_selectAge" name="status" id="status">
+				            	<option value="0">全部</option>
+				            	<option value="1">未使用</option>
+				            	<option value="2">处理中</option>
+				            	<option value="3">已使用</option>
+				            	<option value="4">已过期</option>
+				          	</select>
+	    				</div>
+	     			
+			       		<div class="xf_ht_search_r">
+			         		<div class="xf_ht_search_xl">
+				           		<input name="keyword" id="keyword" type="text" class="search_w"  placeholder="用户名" value="${pageBean?.conditions?.keyword}"/>
+				         	</div>
+				         	<div class="xf_ht_search_xl">
+				           		<input type="submit" class="search_button" value="搜索">
+				         	</div>
+				         	
+				         	<div class="xf_ht_search_xl" style="float:right;">
+						         <input type="hidden" id="isExport" name="isExport" value="0">
+						         <input type="button" class="search_button" onclick="search(1);" onmouseout="$('#isExport').val(0);" value="导出">
+					    	</div>
+			       		</div>
+			     	</div>
+	     		#{/form}
+				<!-- 列表内容 -->
+				<div class="xn_c_content_top">
+	      			#{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+				        #{tr}
+			          		#{th}序号#{/th}
+				      	  	#{th}会员名#{/th}
+						  	#{th}金额#{/th}
+						  	#{th}发放时间#{/th}
+						  	#{th}使用时间#{/th}
+						  	#{th}到期时间#{/th}
+						  	#{th}使用金额#{/th}
+						  	#{th}使用状态#{/th}
+				        #{/tr}
+						#{list pageBean?.page}
+							#{tr tr_index:_index}
+						  		#{td}${(pageBean?.currPage - 1)*pageBean?.pageSize + _index}#{/td}
+					          	#{td}${_?.user_name}#{/td}
+					          	#{td}${_?.experience_amount?.format('###,##0.00')}#{/td}
+					          	#{td}${_?.send_time?.format('yyyy-MM-dd')}#{/td}
+					          	#{td}${_?.invest_use_time?.format('yyyy-MM-dd')}#{/td}
+					          	#{td}${_?.expire_time?.format('yyyy-MM-dd')}#{/td}
+					          	#{td}${_?.used_amount?.format('###,##0.00')}#{/td}
+					          	#{td}
+					          		#{if _?.status == 0}
+					          			未使用
+					          		#{/if}
+					          		#{elseif _?.status == 1}
+					          			处理中
+					          		#{/elseif}
+					          		#{elseif _?.status == 2}
+					          			已使用
+					          		#{/elseif}
+					          		#{elseif _?.status == -1}
+					          			已过期
+					          		#{/elseif}
+					          	#{/td}
+		    				#{/tr}
+		   	 			#{/list}
+	      			#{/table}
+	    		</div>
+	    		<!-- 列表底部 -->
+	    		<div class="xn_c_content_bottom">
+	        		<div class="page_warp">
+	        			#{page currPage:pageBean.currPage,totalCount:pageBean.totalCount,pageSize:pageBean.pageSize,theme:2,style:4/}
+	        		</div>
+	    		</div>
+	  		</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function search(isExport){
+	$("#isExport").val(isExport);
+	$("#statisticsExperienceGold").submit();
+}
+
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#statisticsExperienceGold").submit();
+}
+
+	$(function(){
+  		//高亮显示
+		showHighLight(6,6,16);
+	  	//条件查询控制样式
+	  	var num= ${pageBean?.conditions?.orderType};
+	  	if(num == 0){
+	    	$("#div_0").addClass("xf_sea_isshow");
+	    	return;
+	  	}
+	       
+	  	var sum = num/2;
+	  	if(sum.toString().indexOf('.') == -1){
+	    	var sum2 = num -1;
+	    	$("#div_"+sum2).addClass("xf_sea_isshow");
+	    	$("#tab_"+sum2).html("↓");
+	    	return;
+	  	}
+	  	$("#div_"+num).addClass("xf_sea_isshow");
+	  	$("#tab_"+num).html("↑");
+	});
+	
+	//排序
+	function conditonSearch(num){
+  		var orderType= ${pageBean.conditions?.orderType};
+  		if(orderType == 0){
+	    	$("#orderType").val(num);
+		    $("#statisticsExperienceGold").submit();
+		    return;
+	  	}
+  	  	var sum = orderType/2;
+  	  	if(sum.toString().indexOf('.') == -1){
+  	    	var sum2 = orderType - 1;
+  	    	if(sum2 = num){
+  	      		$("#orderType").val(num);
+  	      		$("#statisticsExperienceGold").submit();
+  	      		return;
+  	    	}else{
+  	      		$("#orderType").val(num);
+  	      		$("#statisticsExperienceGold").submit();
+  	      		return;
+  	    	}
+	  	} else{
+ 	    	if(orderType == num){
+  	      		$("#orderType").val(num + 1);
+  	      		$("#statisticsExperienceGold").submit();
+  	      		return;
+  	    	} else{
+  	      		$("#orderType").val(num);
+  	      		$("#statisticsExperienceGold").submit();
+  	      		return;
+  	    	}
+  	  	}
+	};
+	$(function(){
+		$("#timeType").val(${pageBean?.conditions?.type});
+		$("#status").val(${pageBean?.conditions?.status});
+	});
+	
+</script>

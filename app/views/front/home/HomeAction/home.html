@@ -1,0 +1,798 @@
+%{
+business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle /}
+<!-- 首页弹窗 -->
+<script type="text/javascript">
+    $(function () {
+        if (${showBox}) {
+            $("#register_top").show();
+            countDown(8, "@{front.account.accountHome.home()}");
+        }
+    });
+</script>
+<script type="text/javascript">
+    function countDown(secs, surl) {
+        var jumpTo = document.getElementById('p-syjump');
+        jumpTo.innerHTML = secs + "秒";
+        if (--secs > 0) {
+            setTimeout("countDown(" + secs + ",'" + surl + "')", 1000);
+        } else {
+            location.href = surl;
+        }
+    }
+</script>
+<script>
+    $(function () {
+        //显示7天后时间
+        var date1 = new Date();
+//        var date2 = new Date(date1);
+        var date3 = new Date(date1);
+//        date2.setDate(date1.getDate() + 7);
+//        var times = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
+//        $("#hm-xswp-rp-endtime").html(times);
+        date3.setDate(date1.getDate() + 1);
+        var times2 = date3.getFullYear() + "-" + (date3.getMonth() + 1) + "-" + date3.getDate();
+        $("#hm-tywp-rp-endtime").html(times2);
+
+    })
+</script>
+<!--注册成功后弹出框start-->
+<div class="p-sytanc p-pop zcts" id="register_top" style="display: none">
+    <div class="p-popbg"></div>
+    <div class="p-tsmain p-popbox">
+        <div class="p-tsmain-tt">
+            <span>恭喜您,注册成功!</span>
+        </div>
+        <div class="p-tsmain-bd">
+            <p>您已获得<em>18888元</em>体验金</p>
+            <p><em>实名认证</em>后可再获得188元红包</p>
+            <span class="p-tsmain-bd-time"><i style="color: #fbd92f;" id="p-syjump">8秒</i>后进入<a href="@{front.account.accountHome.home()}" style="color: #fbd92f;">我的账户</a>完善用户信息</span>
+            <a href="@{front.account.basicInformation.certification()}" class="p-tsbtn p-tsbtn1" style="color: #dd2b17;">立即认证</a>
+            <a href="@{front.account.accountHome.home()}" class="p-tsbtn p-tsbtn2" style="color: #fff;">我的账户</a>
+        </div>
+
+    </div>
+</div>
+<!--注册成功后弹出框end-->
+<div class="p-sytanc p-pop two" id="register_tip" style="display:none;">
+    <div class="p-popbg"></div>
+    <div class="p-tcmain p-popbox">
+        <div class="p-tcmoney">
+            <em id="bonusAmount"></em> <span>元</span>
+        </div>
+        <div class="p-tcmonytt">
+            <span><em>恭喜您获得红包</em></span>
+        </div>
+        <div class="p-tcmoney mt60">
+            <em id="goldAmount"></em> <span>元</span>
+        </div>
+        <div class="p-tcmonytt">
+            <span><em>恭喜你获得投标体验金</em></span>
+        </div>
+        <div class="p-tcbtnbox">
+            <a title="" target="" href="@{front.account.accountHome.bonusByUser()}" title="" target="" class="p-op">查看红包</a>
+            <a title="" target="" href="@{front.invest.InvestAction.investHome()}" class="p-op">马上投标</a>
+        </div>
+    </div>
+</div>
+
+<div class="p-sytanc p-pop" id="register_tip2" style="display: none;">
+    <div class="p-popbg"></div>
+    <div class="p-tcmain p-popbox">
+        <div class="p-tcmoney">
+            <em id="goldAmount2"></em> <span>元</span>
+        </div>
+        <div class="p-tcmonytt">
+            <span><em>恭喜你获得投标体验金</em></span>
+        </div>
+        <div class="p-tcbtnbox">
+            <a title="" target="" href="@{front.account.FundsManage.myExperienceGold()}" title="" target="" class="p-op">查看体验金</a>
+            <a title="" target="" href="@{front.invest.InvestAction.investHome()}" class="p-op">马上投标</a>
+        </div>
+    </div>
+</div>
+
+<div class="p-sytanc p-pop" id="register_tip3" style="display: none;">
+    <div class="p-popbg"></div>
+    <div class="p-tcmain p-popbox">
+        <div class="p-tcmoney">
+            <em id="bonusAmount2"></em> <span>元</span>
+        </div>
+        <div class="p-tcmonytt">
+            <span><em>恭喜您获得红包</em></span>
+        </div>
+        <div class="p-tcbtnbox">
+            <a title="" target="" href="@{front.account.accountHome.bonusByUser()}" title="" target="" class="p-op">查看红包</a>
+            <a title="" target="" href="@{front.invest.InvestAction.investHome()}" class="p-op">马上投标</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- 大广告 -->
+#{include "front/home/HomeAction/banner.html"/}
+
+<!--官方公告 begin-->
+<div class="p-syggbox">
+    <div class="p-main clr p-syggoverhide">
+        <div class="p-syggleft" id="p-syggleft-newscrol">
+            <i class="home_notice_ico">网站公告:</i>
+            <ul class="p-syggscrul">
+                #{list items:news,as:'news'}
+                <li class="clr">
+                    <a title="" target="_blank" href="front/wealthinfomation/newDetails?id=${news?.id}">${news?.title.truncate(0,17)} </a>
+                    <span>${news?.time?.format('yyyy-MM-dd')}</span>
+                </li>
+                #{/list}
+            </ul>
+            <!--<a title="" target="_self" href="@{front.wealthinfomation.WealthInfomationAction.home()}" class="p-syggmore">更多公告 &gt;&gt;</a>-->
+            <a title="" target="_self" href="@{front.home.HomeAction.aboutUs(7)}" class="p-syggmore">更多公告 &gt;&gt;</a>
+        </div>
+    </div>
+</div>
+<!--官方公告 end-->
+<!--数据展示begin-->
+<div class="p-main pc-numshove clearfix">
+    <ul>
+        <li class="pc-numshove-1">
+            <p class="pc-numshove-val">￥${jobs.IndexStatisticsJob.sumInvest?.format('###,##0')}</p>
+            <p class="pc-numshove-tt">累计成交金额</p>
+        </li>
+        <li class="pc-numshove-2">
+            <p class="pc-numshove-val">￥${jobs.IndexStatisticsJob.repayingBorrowAmount?.format('###,##0')}</p>
+            <p class="pc-numshove-tt">待收金额</p>
+        </li>
+        <li class="pc-numshove-3">
+            <p class="pc-numshove-val">￥${jobs.IndexStatisticsJob.sumIncome?.format('###,##0')}</p>
+            <p class="pc-numshove-tt">为投资人赚取的收益</p>
+        </li>
+        <li class="pc-numshove-4">
+            <p class="pc-numshove-val">￥${jobs.IndexStatisticsJob.riskReserveFund?.format('###,##0')}</p>
+            <p class="pc-numshove-tt">风险备付金余额</p>
+        </li>
+        <li class="pc-numshove-5">
+            <p class="pc-numshove-val">${jobs.IndexUserJob.regCount?.format('###,##0')}</p>
+            <p class="pc-numshove-tt">平台注册用户</p>
+        </li>
+    </ul>
+
+
+</div>
+<!--数据展示end-->
+
+<!-- 本金保障begin -->
+<div class="p-sysafebz">
+    <div class="p-main">
+        <ul class="p-sysful clr">
+            <li class="homeico homeicochange1">
+                <div class="p-sysficon">
+                    <b></b>
+                </div>
+                <h6>精选项目</h6>
+                <div class="p-sysfword">
+                    <p>个人、个体户、小微企业借款</p>
+                    <p>抵押物充足变现时间短</p>
+                </div>
+            </li>
+            <li class="homeico homeicochange2">
+                <div class="p-sysficon">
+                    <b></b>
+                </div>
+                <h6>理想收益</h6>
+                <div class="p-sysfword">
+                    <p>数倍银行及宝类收益；</p>
+                    <p>100元起投，免收平台服务费</p>
+                </div>
+            </li>
+            <li class="homeico homeicochange3">
+                <div class="p-sysficon">
+                    <b></b>
+                </div>
+                <h6>规范运营</h6>
+                <div class="p-sysfword">
+                    <p>严格信审风控体系</p>
+                    <p>第三方资金托管</p>
+                </div>
+            </li>
+            <li class="homeico homeicochange4">
+                <div class="p-sysficon">
+                    <b></b>
+                </div>
+                <h6>逾期先行垫付</h6>
+                <div class="p-sysfword">
+                    <p>风险备付基金制度</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 本金保障end -->
+
+<!-- update by fz 20160523 -->
+<!--体验标start-->
+<div class="hm-xstyWrap-out">
+
+    <div class="hm-xstyWrap">
+        <div class="hm-xswp-l">
+            <p class="hm-xswp-lp1">新手体验福利</p>
+            <b></b>
+            <p class="hm-xswp-lp2">米粒宝</p>
+        </div>
+        <div class="hm-xswp-r">
+            #{if noviceBid}
+            <div class="hm-xswp-rtt">
+                <span class="hm-xswp-rtt-sp1">【体验金专享体验标】</span>
+                <span class="hm-xswp-rstt-sp2">新用户送18888元体验金</span>
+            </div>
+            <div class="hm-xswp-rbd clearfix">
+                <span class="hm-xswp-rs hm-xswp-rs-yq">
+                    <p class="hm-xswp-rp1">预期年化收益</p>
+                    <p class="hm-xswp-rp-nhsy">${noviceBid?.apr}%</p>
+                </span>
+                <span class="hm-xswp-rs hm-xswp-rs-tzqx">
+                    <p class="hm-xswp-rp1">投资期限</p>
+                    <p class="hm-xswp-rp-tzqx">${noviceBid?.period}天</p>
+                </span>
+                <span class="hm-xswp-rs hm-xswp-rs-endtime">
+                    <p class="hm-xswp-rp1">到期时间</p>
+                    <p class="hm-xswp-rp-endtime" id="hm-tywp-rp-endtime">
+                    </p>
+                </span>
+                <div class="hm-xswp-r-bt">
+                    <a href="@{front.invest.InvestAction.invest(noviceBid?.id)}" target="_blank;_top">立即投资</a>
+                </div>
+            </div>
+            #{/if}
+            #{if experienceBid}
+            <div class="hm-xswp-rtt mt30">
+                <span class="hm-xswp-rtt-sp1">【${experienceBid?.title?.substring(3)}】</span>
+                <span class="hm-xswp-rstt-sp2">3倍宝类收益，旨在为新用户专属体验</span>
+            </div>
+            <div class="hm-xswp-rbd clearfix">
+                <span class="hm-xswp-rs hm-xswp-rs-yq hm-xswp-rs-yq2">
+                    <p class="hm-xswp-rp1">预期年化收益</p>
+                    <p class="hm-xswp-rp-nhsy">${experienceBid?.apr}%</p>
+                </span>
+                <span class="hm-xswp-rs hm-xswp-rs-tzqx hm-xswp-rs-tzqx2">
+                    <p class="hm-xswp-rp1">投资期限</p>
+                    <p class="hm-xswp-rp-tzqx">${experienceBid?.period}
+                      #{if experienceBid?.period_unit ==-1}
+                                                                  年
+                      #{/if}
+                      #{if experienceBid?.period_unit ==0}
+                                                                   个月
+                      #{/if}
+                      #{if experienceBid?.period_unit ==1}
+                                                                  天
+                      #{/if}</p>
+                </span>
+                <span class="hm-xswp-rs hm-xswp-rs-endtime hm-xswp-rs-endtime2">
+                    <p class="hm-xswp-rp1">项目金额</p>
+                    <p class="hm-xswp-rp-endtime">
+                    ${experienceBid?.amount}元
+                    </p>
+                </span>
+                 <span class="hm-xswp-rs hm-xswp-rs-jd hm-xswp-rs-jd2">
+                    <p class="hm-xswp-rp1">进度</p>
+                    <p class="hm-xswp-rp-endtime">
+                    <span class="p-sylcjindt"><span style="height:${experienceBid?.loan_schedule_rest}%"></span></span>
+                <span>${experienceBid?.loan_schedule}%</span>
+                    </p>
+                </span>
+
+                <div class="hm-xswp-r-bt">
+                    #{if experienceBid?.loan_schedule == 100}
+                    <a title="" target="" href="@{front.invest.InvestAction.invest(experienceBid?.id)}" class="p-lcbtn p-lcbtn-over">被抢光了</a>
+                    #{/if }
+                    #{else}
+                    <a href="@{front.invest.InvestAction.invest(experienceBid?.id)}" target="_blank;_top" class="p-lcbtn">立即投资</a>
+                    #{/else}
+                </div>
+            </div>
+            #{/if}
+        </div>
+    </div>
+</div>
+<!--新手体验标end-->
+
+<!--特色产品 -->
+<div class="ttn-box">
+
+    <!-- 优质标 -->
+    <div class="ttn ttn-zqzr">
+        <div class="g-cf common-box-zqzr">
+            <h3>米丰收</h3>
+            <div class="ttn-yzb-shove">
+                <p class="ttn-yzb-shove-p1">稳健投资产品</p>
+                <p class="ttn-yzb-shove-p2">50倍银行收益</p>
+            </div>
+            <div class="ttn-yzb-ico">
+                <strong>50倍</strong>
+                <div class="ttn-yzb-ico-d">
+                    <span class="ttn-yzb-ico-ds1">银行</span><span class="ttn-yzb-ico-ds2">宝类</span><span class="ttn-yzb-ico-ds3">拓米金融</span>
+                </div>
+            </div>
+            <div class="ttn-yzb-state">
+                <p class="ttn-yzb-state-p1">双重风控审核</p>
+                <p class="ttn-yzb-state-p2">期限金额灵活选择</p>
+            </div>
+            <a href="@{front.invest.InvestAction.investHome()}" target="_blank" class="more">查看更多</a>
+        </div>
+        <div class="ttn-zqlist">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <thead>
+                <tr>
+                    <th class="name">项目名称</th>
+                    <th class="forecast ">年化收益率</th>
+                    <th class="deadline ">期限</th>
+                    <th class="p-assure">项目金额</th>
+                    <th class="progress">进度</th>
+                    <th class="check">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tr>
+                #{list items:bidList , as:'bid'}
+                <tr onmouseover="style.backgroundColor='#EEF3F7'" onmouseout="style.backgroundColor='#FFFFFF'">
+                    <td class="name">
+                        <a title="" target="" href="@{front.invest.InvestAction.invest(bid?.id)}"><em>${bid?.title}&nbsp;${bid?.no}</em></a>
+                    </td>
+                    <td class="forecast forecast_td">
+                        <em>${bid?.apr}%</em>
+
+                    </td>
+                    <td class="deadline deadline_td"><em>${bid?.period}</em>
+                        #{if bid?.period_unit ==-1}
+                        年
+                        #{/if}
+                        #{if bid?.period_unit ==0}
+                        个月
+                        #{/if}
+                        #{if bid?.period_unit ==1}
+                        天
+                        #{/if}
+                    </td>
+                    <td class="p-assure"><em>${bid?.amount?.format('###,##0')}</em></td>
+                    <td class="progress">
+                        <div class="home-p-lcwtime">
+                            <span class="p-sylcjindt"><span style="height:${bid?.loan_schedule_rest}%"></span></span>
+                            <span>${bid?.loan_schedule}%</span>
+                        </div>
+                    </td>
+                    <td class="check">
+                        <!--这边预约标-->
+                        #{if bid?.amount > bid?.has_invested_amount && bid?.status == 30}
+                        <script type="text/javascript">
+                            $(function () {
+                                showOrderTime(${bid?.id}, "${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}");
+                            });
+                        </script>
+                        <a href="@{front.invest.InvestAction.invest(bid?.id)}" id="bid${bid?.id}" target="_self" class="p-lcbtn">
+                            <div class="p-lcwtime ttn-zqlist-time-wrap">
+                                <strong class="ttn-zqlist-time" id="day${bid?.id}"></strong> 天
+                                <strong class="ttn-zqlist-time" id="hours${bid?.id}"></strong> 时
+                                <strong class="ttn-zqlist-time" id="minutes${bid?.id}"></strong> 分
+                                <strong class="ttn-zqlist-time" id="seconds${bid?.id}"></strong> 秒
+                            </div>
+                        </a>
+                        #{/if}
+                        #{elseif bid?.loan_schedule == 100}
+                        <a title="" target="" href="@{front.invest.InvestAction.invest(bid?.id)}" class="p-lcbtn p-lcbtn-over">被抢光了</a>
+                        #{/elseif }
+                        #{else}
+                        <a title="" target="" href="@{front.invest.InvestAction.invest(bid?.id)}" class="p-lcbtn">立即投标</a>
+                        #{/else}
+                    </td>
+                </tr>
+                #{/list}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 高效理财start -->
+    <div class="ttn ttn-gxlc">
+        <div class="common-box-lhlc">
+            <h3>债权转让</h3>
+            <div class="ttn-gxlc-shove">
+                投资人以持有的资产向其他投资人变现
+            </div>
+            <div class="ttn-gxlc-tedian">
+                <p class="ttn-gxlc-tedian-p1">利润高</p>
+                <p class="ttn-gxlc-tedian-p2">挣钱快</p>
+            </div>
+            <a href="@{front.debt.debtAction.debtHome()}" target="_blank" class="more">了解更多</a>
+        </div>
+        <div class="ttn-gxlclist">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <thead>
+                <tr>
+                    <th class="name">项目名称</th>
+                    <th class="forecast ">年化收益率</th>
+                    <th class="itemmonety ">项目金额</th>
+                    <th class="deadline ">期限</th>
+                    <th class="progress">转让人</th>
+                    <th class="check">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tr>
+                #{list items:debts , as:'debt'}
+                <tr onmouseover="style.backgroundColor='#EEF3F7'" onmouseout="style.backgroundColor='#FFFFFF'">
+                    <td class="name">
+                        <a title="" target="" href="@{front.debt.DebtAction.debtDetails(debt.id)}"><em>${debt?.title}</em></a>
+                    </td>
+                    <td class="forecast forecast_td">
+                        <em>${debt?.apr}%</em>
+
+                    </td>
+                    <td class="itemmonety">2000</td>
+                    <td class="deadline deadline_td">${debt?.repayment_time != null ? debt?.repayment_time?.format('yyyy-MM-dd') : '已还款'}
+                    </td>
+                    <td class="progress">
+                        转让人的用户名
+                    </td>
+                    <td class="check">
+                        <a title="" target="" href="@{front.debt.DebtAction.debtDetails(debt.id)}" class="p-lcbtn">立即购买</a>
+                    </td>
+                </tr>
+                #{/list}
+                </tbody>
+            </table>
+            <a href="@{front.debt.debtAction.debtHome()}" target="_blank" class="ttn-gxlclist-more">查看更多</a>
+        </div>
+    </div>
+
+</div>
+<!-- 特色产品 end -->
+
+<!--投资排行榜 begin-->
+<div class="p-main p-sytzpmbox">
+    <div class="p-sytzpmboxoverhide">
+        <div class="p-sytzpmleft" id="p-sytzpm">
+            <i class="p-sytzpm-tt">投资排行:</i>
+            <ul class="p-sytzpmul">
+
+                #{list items:investBillboard , as:'investBillboardItem'}
+                <li class="clearfix">
+                    <i class="p-sytzpmul-hignum">${investBillboardItem_index}</i><i class="p-sytzpmul-higname">${investBillboardItem?.name?.asterisk()}</i><i class="p-sytzpmul-higmoney">${investBillboardItem?.corpus}元</i>
+                </li>
+                #{/list}
+            </ul>
+
+
+            <div class="p-sytzpmul-late" id="p-syzjtz"><i class="p-sytzpmul-latett">最近投资者:</i>
+                <ul class="p-syzjtzul">
+                    #{list items:recentInvestBoard , as:'recentInvestBoardItem'}
+                    <li class="clearfix">
+                        <i class="p-sytzpmul-latetime">${recentInvestBoardItem_index}</i><i class="p-sytzpmul-latename">${recentInvestBoardItem?.name?.asterisk()}</i><i class="p-sytzpmul-latemoney">${recentInvestBoardItem?.corpus}元</i>
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--投资排行榜 end-->
+
+
+<!-- 行业动态+媒体报告begin -->
+<div class="p-synews clearfix">
+    <div class="p-main">
+        <div class="p-synews-dt">
+            <div class="p-synews-dt-tt clearfix">
+                <h3>理财课堂</h3>
+                <a title="" target="_self" href="@{front.home.HomeAction.aboutUs(10)}" class="p-synews-dt-more">更多 &gt;&gt;</a>
+                <div class="p-synews-tt-line"></div>
+            </div>
+            <div>
+                <div class="p-synews-dt-new">
+                    <a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(singleInvestSkill?.id)}"><img src="${singleInvestSkill?.image_filename}" alt=""></a>
+                    <div class="p-synews-dt-new-p">${singleInvestSkill?.content.raw()}</div>
+                </div>
+                <ul class="p-synews-dt-newul">
+                    #{list items:investSkills,as:'investSkills'}
+                    <li class=""><p><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(investSkills?.id)}">${investSkills?.title}</a></p></li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+        <div class="p-synews-dt p-synews-dt-mt">
+            <div class="p-synews-dt-tt clearfix">
+                <h3>媒体报道</h3>
+                <a title="" target="_self" href="@{front.home.HomeAction.aboutUs(9)}" class="p-synews-dt-more">更多 &gt;&gt;</a>
+                <div class="p-synews-tt-line"></div>
+            </div>
+            <div>
+                <div class="p-synews-dt-new clearfix">
+                    <a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(singleMediaReport?.id)}"><img src="${singleMediaReport?.image_filename}" alt=""></a>
+                    <div class="p-synews-dt-new-p">${singleMediaReport?.content.raw()}</div>
+                </div>
+                <ul class="p-synews-dt-newul">
+                    #{list items:mediaReport,as:'mediaReport'}
+                    <li><p><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(mediaReport?.id)}">${mediaReport?.title}</a></p></li>
+                    #{/list}
+                </ul>
+                *{ #{list items:mediaReport.subList(0,4),as:'mediaReport'} }*
+            </div>
+        </div>
+
+        <div class="p-synews-dt p-synews-dt-gs">
+            <div class="p-synews-dt-tt clearfix">
+                <h3>公司动态</h3>
+                <a title="" target="_self" href="@{front.home.HomeAction.aboutUs(8)}" class="p-synews-dt-more">更多 &gt;&gt;</a>
+                <div class="p-synews-tt-line"></div>
+            </div>
+            <div>
+                <div class="p-synews-dt-new clearfix">
+                    <a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(singleSuccessStory?.id)}"><img src="${singleSuccessStory?.image_filename}" alt=""></a>
+                    <div class="p-synews-dt-new-p">${singleSuccessStory?.content.raw()}</div>
+                </div>
+                *{#{list items:successStorys,as:'successStorys'} }*
+                <ul class="p-synews-dt-newul">
+                    #{list items:successStorys,as:'successStorys'}
+                    <li><p><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(successStorys?.id)}">${successStorys?.title}</a></p></li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function showOrderTime(index, endTime) {
+        //var endTime =" ${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}";
+        time_end = new Date(endTime);//结束的时间
+        var tt = time_end.getTime();
+        var now = new Date().getTime();
+        var cha = tt - now;
+        var SysSecond = parseInt(cha);
+        if (SysSecond > 0) {
+            int_day = Math.floor(SysSecond / 86400000);
+            SysSecond -= int_day * 86400000;
+            int_hour = Math.floor(SysSecond / 3600000);
+            SysSecond -= int_hour * 3600000;
+            int_minute = Math.floor(SysSecond / 60000);
+            SysSecond -= int_minute * 60000;
+            int_second = Math.floor(SysSecond / 1000);
+            if (int_hour < 10) {
+                int_hour = "0" + int_hour;
+            }
+            if (int_minute < 10) {
+                int_minute = "0" + int_minute;
+            }
+            if (int_second < 10) {
+                int_second = "0" + int_second;
+            }
+            $("#day" + index).html(int_day);
+            $("#hours" + index).html(int_hour);
+            $("#minutes" + index).html(int_minute);
+            $("#seconds" + index).html(int_second);
+        } else {
+            $("#day" + index).html("00");
+            $("#hours" + index).html("00");
+            $("#minutes" + index).html("00");
+            $("#seconds" + index).html("00");
+        }
+        setTimeout('showOrderTime(' + index + ',"' + endTime + '")', 1000);
+    }
+    ;
+</script>
+<script>
+    $(document).ready(function () {
+        //限制字符个数
+        $(".p-synews-dt-new-p").each(function () {
+            var maxwidth = 40;
+            if ($(this).text().length > maxwidth) {
+                $(this).text($(this).text().substring(0, maxwidth));
+                $(this).html($(this).html() + '...');
+            }
+        });
+    });
+</script>
+
+<!-- 行业动态 end -->
+<!-- 合作伙伴 begin -->
+<div class="p-syfrbox p-main">
+    <div class="g-cf ttn-box p-syfrbox-title ">
+        <h3>合作伙伴</h3>
+        <span class=" g-cf p-syfrbox-btn partner-ctrl" style="display: inline;">
+            <a href="javascript:" class="prev" id="p-prev"></a>
+            <a href="javascript:" class="next" id="p-next"></a>
+        </span>
+    </div>
+    <div class="p-main p-syfrulbox">
+        <div class="p-syfrulbox-banner"></div>
+        <ul>
+            #{list items:adsPartner,as:'adsPartner'}
+            <li><a title="" target="_blank" href="${adsPartner?.url}"><img src="${adsPartner?.imageFileName}" alt="" width="165" height="68"/></a></li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="p-main p-syblogroll clearfix">
+        <span class="p-syblogroll-tt">友情链接</span>
+        <ul class="p-syblogroll-list clearfix">
+            <li><a target="_blank" rel="nofollow" href="http://www.tirumgroup.com/index.html">天瑞金控</a></li>
+            <li><a target="_blank" rel="nofollow" href="https://www.fraudmetrix.cn/">同盾科技</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://fengkong.haodai.com/">好贷云</a></li>
+            <li><a target="_blank" rel="nofollow" href="https://www.yunsign.com/">中国云签</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.minivision.com.cn/">小视科技</a></li>
+            <li><a target="_blank" href="http://www.wdzj.com/">网贷之家</a></li>
+            <li><a target="_blank" href="http://www.erongtu.com/">融途网</a></li>
+            <li><a target="_blank" href="http://www.p2peye.com/">网贷天眼</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.hexun.com/">和讯财经</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.eastmoney.com/"> 东方财富</a></li>
+        </ul>
+        <ul class="p-syblogroll-list clearfix p-syblogroll-list2">
+            <li><a target="_blank" rel="nofollow" href="http://www.ips.com/">环迅支付</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.czbank.com/">浙商银行</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://bank.pingan.com/">平安银行</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.boc.cn/">中国银行</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.fjhxbank.com/">海峡银行</a></li>
+            <li><a target="_blank" href="http://www.wdtianxia.com/">网贷天下</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://kh.htsc.com.cn/dept/kh/index.jsp">华泰证券</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.cs.ecitic.com/">中信证券</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://www.nju.edu.cn/">南京大学</a></li>
+            <li><a target="_blank" rel="nofollow" href="http://emba.pbcsf.tsinghua.edu.cn/">清华五道口</a></li>
+        </ul>
+    </div>
+</div>
+<!-- 合作伙伴 end -->
+<!--底部进度-->
+<div class="djjd_ftip">
+    <div class="djjd_wrap clearfix">
+        <div class="djjd_wrap_l ">
+            <div class="djjd_ftip_l fl"></div>
+        </div>
+        <div class="p-main">
+            <div class="djjd_wrap_lr fl"></div>
+            <div class="djjd_bd_wrap fl">
+                <div class="djjd_bd djjd_on fz16 fl ml15">
+                    <span class="mt40 pl20">①新浪托管接口开发阶段</span>
+                </div>
+                <div class="djjd_bd djjd_wei fz16 fl ml-10">
+                    <span class="mt30 pl20">②环迅支付不再支持充值、投资（可正常提现）</span>
+                </div>
+                <div class="djjd_bd djjd_wei fz16 fl ml-10">
+                    <span class="mt30 pl20">③激活新浪支付，设置支付密码，完成新浪开户</span>
+                </div>
+                <div class="djjd_bd djjd_wei fz16 fl ml-10">
+							<span class="mt40 pl20">④新浪托管对接完成</span>
+                </div>
+                <div class="djjd_bd djjd_wei fz16 fl ml-10 ">
+                    <span class="mt40 pl20">⑤关闭所有环迅接口</span>
+                </div>
+            </div>
+            <a class="djjd_wrap_rl fl ml15" href="/front/promotion/theme?id=11-4"></a>
+        </div>
+        <div class="djjd_wrap_r fl ml10"></div>
+    </div>
+
+</div>
+<!-- 行业动态bannercontrol -->
+<script type="text/javascript">
+    $(".fullSlide").hover(function () {
+                $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+            },
+            function () {
+                $(this).find(".prev,.next").fadeOut()
+            });
+    $(".hydt-body").slide({
+        titCell: ".p-synews-ul li",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: false,
+        trigger: "click",
+    });
+</script>
+
+
+*{
+<script type="text/javascript">
+    $(function () {
+        showbids();
+        /**tab切换 start */
+        $("#xf_c_idx_8_tabsColName li a").first().addClass(
+                "xf_c_idx_8_tabsColNameActive");
+        $("#xf_c_idx_8_tabsColName li").click(
+                function () {
+                    $(this).children().addClass("xf_c_idx_8_tabsColNameActive")
+                            .parent().siblings().children().removeClass(
+                            "xf_c_idx_8_tabsColNameActive");
+                    $("#xf_c_idx_8_content").children().eq(
+                            $(".xf_c_idx_8_tabsColName li").index($(this)))
+                            .show().siblings().hide();
+
+                });
+        /**tab切换 ends */
+
+        /***截取字数 append 链接 start***/
+        $(".xf_c_idx_5_gfggIntroduce p").limit();
+        $(".xf_c_idx_5_gfggIntroduce p").append("<a  class='xf_c_idx_5_gfggIntroduceMore'>[全文]</a>");
+        /***截取字数 append 链接 end***/
+
+    });
+
+
+    function showbids() {
+        $("#bids").show();
+        $("#agencybids").hide();
+    }
+    function showagencybids() {
+        $("#bids").hide();
+        $("#agencybids").show();
+    }
+
+    (function ($) {
+        $.fn.FontScroll = function (options) {
+            var d = {time: 3000, s: 'fontColor', num: 1}
+            var o = $.extend(d, options);
+
+
+            this.children('ul').addClass('line');
+            this.children('ul').attr("style", 'margin-top:0');
+            var _con = $('.line').eq(0);
+            var _conH = _con.height(); //滚动总高度
+            var _conChildH = _con.children().eq(0).height();//一次滚动高度
+            var _temp = _conChildH;  //临时变量
+            var _time = d.time;  //滚动间隔
+            var _s = d.s;  //滚动间隔
+
+
+            _con.clone().insertAfter(_con);//初始化克隆
+
+            //样式控制
+            var num = d.num;
+            var _p = this.find('li');
+            var allNum = _p.length;
+
+            _p.eq(num).addClass(_s);
+
+
+            var timeID = setInterval(Up, _time);
+            this.hover(function () {
+                clearInterval(timeID)
+            }, function () {
+                timeID = setInterval(Up, _time);
+            });
+
+            function Up() {
+
+                _con.animate({marginTop: '-' + _conChildH});
+                //样式控制
+                _p.removeClass(_s);
+                num += 1;
+                _p.eq(num).addClass(_s);
+
+                if (_conH == _conChildH) {
+                    _con.animate({marginTop: '-' + _conChildH}, "normal", over);
+                } else {
+                    _conChildH += _temp;
+                }
+            }
+
+            function over() {
+
+                _con.attr("style", 'margin-top:0');
+                _conChildH = _temp;
+                num = 1;
+                _p.removeClass(_s);
+                _p.eq(num).addClass(_s);
+            }
+
+
+        }
+    })(jQuery);
+
+    $('#FontScroll2').FontScroll({time: 2500, num: 1});
+
+    $('#FontScroll').FontScroll({time: 2500, num: 1});
+</script>
+}*
+
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_index.js'}"></script>

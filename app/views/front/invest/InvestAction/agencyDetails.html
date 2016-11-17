@@ -1,0 +1,37 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle+'| 机构详情' /}
+<div class="p-main mt30">
+    <div class="p-jgmain">
+        <h2>${agency?.name}${type}</h2>
+        <div class="p-jgword">
+        	*{
+            <p>晓风安全网贷系统由一支曾在华尔街顶级投行工作、有着丰富金融及互联网经验的团队成立。网站由深圳英迈思文化科技有限公司运营。</p><br />
+            <p>我们致力于为广大缺乏投资渠道的人们提供一个安全、诚信、低风险、回报稳定的理财渠道。在金融产品的设计不断变得让人眼花缭乱、各种理财渠道推销鱼龙混杂的今天，晓风安全网贷系统希望能帮助您化解看似高深的理财投资，将各种复杂的理财产品变成让所有人都能看得懂的理财计划！</p><br />
+            <p>晓风安全网贷系统由一支曾在华尔街顶级投行工作、有着丰富金融及互联网经验的团队成立。网站由深圳英迈思文化科技有限公司运营。我们致力于为广大缺乏投资渠道的人们提供一个安全、诚信、低风险、回报稳定的理财渠道。在金融产品的设计不断变得让人眼花缭乱、各种理财渠道推销鱼龙混杂的今天，晓风安全网贷系统希望能帮助您化解看似高深的理财投资，将各种复杂的理财产品变成让所有人都能看得懂的理财计划！</p><br />
+        	}*
+        	<p>${agency?.introduction.raw()}</p>
+            <ul class="p-jgimgul clr img_content">
+            	#{list items:agency?.relateImgList, as:'imgItem'}
+	                <li>
+	                    <img src="${imgItem?.relate_img}" alt="" width="378" height="248" />
+	                    <div>${imgItem?.img_name}</div>
+	                </li>
+                #{/list}
+            </ul>
+            
+            #{if type == 1}
+            	<a href="@{front.invest.investAction.invest(id)}" class="btn p-jgbtn">返回标的</a>
+            #{/if}
+            #{elseif type == 2}
+            	<a href="@{front.debt.debtAction.debtDetails(id)}" class="btn p-jgbtn">返回债权</a>
+            #{/elseif}
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_invest.js'}"></script>
+

@@ -1,0 +1,112 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'全部银行列表' /}
+
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist"> 
+    <!--左-->
+	#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}
+    <!--右-->
+  <form action="@{supervisor.networkMarketing.BankAction.saveBank}" method="post" enctype="application/x-www-form-urlencoded" id="myForm">
+	<div class="xn_c_content">
+  <div class="xf_content_add">
+  <div class="xfht_t_j_y_2">
+  <div class="xf_ht_obu_fklm">银行操作</div>
+  <div class="xf_ht_news_content">
+  <table border="0" cellspacing="0" cellpadding="0" class="xf_ht_jr_obu_form">
+    <tr>
+      <input type="hidden" id="bank_id" name="id" value="${object.id}"/>
+      <td align="right" width="140">银行名称：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="name1" name="name" value="${object?.name}"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">银行编号：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="code"  name="code" value="${object?.code}"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">序号：</td>
+      <td><input class="xf_ht_ptgl_dfk_i" type="text" id="sequence"  name="sequence" value="${object?.sequence}"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">是否使用：</td>
+      <td>
+      	<input type="radio" #{if object.is_use} checked="checked" #{/if} value="1" name="is_use" id="is_use_yes"/><label for = "is_use_yes">是</label>
+      	<input type="radio" #{if !object.is_use} checked="checked" #{/if} value="0"  name="is_use" id="is_use_no"/><label for = "is_use_no">否</label>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">银行logo图片：</td>
+      <td>
+      		<img src="${object?.logo}" id="image_src" style="width: 134px;height: 36px;"/> 
+      		<input type="file" id="imgFile" name="imgFile" style="width: 183px;">
+      		<input class="xf_ht_ptgl_dfk_i" type="hidden" id="image_hidden" name="logo">
+      		<input type="button" onclick="uploadImage('imgFile','image_src');" value="上传">
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">描述：</td>
+      <td>
+      	<textarea rows="5" cols="40" id="description" name="description" style="width:350px">${object?.description}</textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="xf_ht_tcc_button">
+        <input class="jbox_ok" type="submit" value="保  存" >
+        <input class="jbox_on" type="button" value="取  消" onclick="javascript:location.href='@{supervisor.networkMarketing.BankAction.bankList}'">
+      </td>
+    </tr>
+  </table>
+  </div>
+</div>
+</div>
+</div>
+  </form>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+<link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+<script   type="text/javascript">  
+    var editor;
+    KindEditor.ready(function(K) {
+      editor = K.create('#description', {
+           cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+           uploadJson : '@{FileUpload.uploadImage2()}',
+        allowFileManager : true,
+        allowUpload: true,
+        afterBlur: function(){this.sync();}
+      });
+    });
+</script>
+<script>
+	$(function(){
+		$("#hi_7").show();
+		$("#hi_7").find("a:eq(0)").addClass("xn_c_li_head_ishow");
+	});
+	
+	//提交表单
+	$("#myForm").submit(function(){
+		return checkInput();
+	});
+	
+	
+	function checkInput() {
+		if ($("#name1").val() == "") {
+			alert("请输入银行名称");
+			return false;
+		}
+		if ($("#code").val() == "") {
+			alert("请输入银行编号");
+			return false;
+		}
+		$("#image_hidden").val($("#image_src").attr("src"));
+		/* if ($("#sequence").val() == "") {
+			alert("请输入序号");
+			return false;
+		} */
+		return true;
+	}
+</script>

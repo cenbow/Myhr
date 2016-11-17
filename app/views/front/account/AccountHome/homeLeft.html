@@ -1,0 +1,126 @@
+%{ boolean ipsEnable = constants.Constants.IPS_ENABLE; boolean debtUse =
+constants.Constants.DEBT_USE; boolean isMsg =
+constants.Constants.IS_MSG; business.User currUser =
+business.User.currUser(); utils.ErrorInfo error = new utils.ErrorInfo();
+int unreadSystemMsgCount =
+business.StationLetter.queryUserUnreadSystemMsgsCount(currUser.id,
+error); int unreadInboxMsgCount =
+business.StationLetter.queryUserUnreadInboxMsgsCount(currUser.id,
+error); }%
+<!-- 左侧导航栏 end -->
+<div class="p-cfleft">
+    <ul class="p-cfnav">
+        <li id="li_1"><a title="" target="" href="javascript:void(0)">我的账户<i
+                class="ico"></i></a>
+            <dl class="p-hphidenav none">
+                <dd id="child1">
+                    <a title="" target="" href="@{front.account.accountHome.home()}">账户总览</a>
+                </dd>
+                <dd id="child30" class="">
+                    <a title="" target=""
+                       href="@{front.account.basicInformation.basicInformation()}">基本资料</a>
+                </dd>
+                <dd id="child80">
+                    <a title="" target=""
+                       href="@{front.account.accountHome.accountSecurity()}">安全设置</a>
+                </dd>
+                *{
+                <!--<dd id="child110" class=""><a title="" target="" href="@{front.account.FundsManage.loginAccount} ">银行卡绑定</a></dd>-->
+                }*
+                <dd id="child55" class=""><a title="" target="" href="@{front.account.basicInformation.certification()}">实名认证</a></dd>
+
+
+                *{
+                <dd>
+                    <a title="" target="" href="###">我的关注</a>
+                </dd>
+                }*
+            </dl>
+        </li>
+        <li id="li_3">
+            <a title="" target="" href="javascript:void(0)">借款管理<i class="ico"></i></a>
+            <dl class="p-hphidenav none">
+                <dd id="child7" class=""><a title="" target="" href="@{front.account.accountHome.loanAccount()}">借款首页</a></dd>
+                <dd id="child8" class=""><a title="" target="" href="@{front.account.accountHome.myLoanBills()}">借款账单</a></dd>
+                <dd id="child9" class=""><a title="" target="" href="@{front.account.accountHome.auditingLoanBids()}">借款记录</a></dd>
+                #{if ipsEnable && isMsg}
+                    <dd id="child40" class=""><a title="" target="" href="@{front.account.accountHome.waitVerifyBids()}">待验证的借款标</a></dd>
+                #{/if}
+                *{
+                <dd id="child10" class=""><a title="" target="" href="@{front.account.accountHome.loaningBids()}">借款中的借款标</a></dd>
+                <dd id="child38" class=""><a title="" target="" href="@{front.account.AccountHome.readyReleaseBid()}">待放款的借款标</a></dd>
+                <dd id="child11" class=""><a title="" target="" href="@{front.account.accountHome.repaymentBids()}">还款中的借款标</a></dd>
+                <dd id="child12" class=""><a title="" target="" href="@{front.account.accountHome.successBids()}">已成功的借款标</a></dd>
+                <dd id="child39" class=""><a title="" target="" href="@{front.account.accountHome.failBids()}">失败的借款标</a></dd>
+                }*
+            </dl>
+        </li>
+
+            #{if !user?.isEnterpriseUser}
+        <li id="li_4"><a title="" target="" href="javascript:void(0)">投标管理<i
+                class="ico"></i></a>
+            <dl class="p-hphidenav none">
+                <dd id="child14" class="">
+                    <a title="" target="" href="@{front.account.FundsManage.accountInformation()}">账户总览</a>
+                </dd>
+                <dd id="child16" class="">
+                    <a title="" target=""
+                       href="@{front.account.InvestAccount.investRecord()}">投标记录</a>
+                </dd>
+                <dd id="child18" class="">
+                    <a title="" target=""
+                       href="@{front.account.InvestAccount.repayingInvestBid()}">待收记录</a>
+                </dd>
+                <dd id="child15" class="">
+                    <a title="" target=""
+                       href="@{front.account.InvestAccount.investBills()}">回款记录</a>
+                </dd>
+            </dl>
+
+        <li id="li_5">
+            <a title="" target="" href="javascript:void(0)">资金管理<i class="ico"></i></a>
+            <dl class="p-hphidenav none">
+                <dd id="child27" class=""><a title="" target="" href="@{front.account.FundsManage.recharge()}">我要充值</a></dd>
+                <dd id="child28" class=""><a title="" target="" href="@{front.account.FundsManage.withdrawal()}">我要提现</a></dd>
+                <dd id="child29" class=""><a title="" target="" href="@{front.account.FundsManage.dealRecord()}">交易记录</a></dd>
+               <!--*{ <dd id="child93" class=""><a title="" target="" href="@{front.account.CheckAction.trustAccount}">资金托管</a></dd>}*-->
+            </dl>
+        </li>
+        </li>
+            #{/if}
+        <li id="li_6"><a title="" target="" href="javascript:void(0)">债权转让<i class="ico"></i></a>
+            #{if debtUse}
+            <dl class="p-hphidenav none">
+                <dd id="child20" class="">
+                    <a title="" target=""
+                       href="@{front.account.InvestAccount.myDebts()}">转让记录</a>
+                </dd>
+            </dl>
+            #{/if}
+        </li>
+        <li id="li_8"><a title="" target="" href="javascript:void(0)">奖励中心<i class="ico"></i></a>
+            <dl class="p-hphidenav none">
+
+                <dd id="child35" class="">
+                    <a title="" target="" href="@{front.account.spread.spreadLink()}">推广链接</a>
+                </dd>
+                <dd id="child70">
+                    <a title="" target=""
+                       href="@{front.account.accountHome.bonusByUser()}">我的红包</a>
+                </dd>
+                <dd id="child52" class="">
+                    <a title="" target=""
+                       href="@{front.account.FundsManage.myExperienceGold()}">体验金</a>
+                </dd>
+
+                <dd id="child36" class="">
+                    <a title="" target="" href="@{front.account.spread.spreadUser()}">推广奖励</a>
+                </dd>
+            </dl>
+        </li>
+
+        <li id="li_10"><a title="" target="" href="@{front.account.FundsManage.myCredit()}">专属客服<i class="ico"></i></a>
+        </li>
+    </ul>
+</div>
+<!-- 左侧导航栏 end -->

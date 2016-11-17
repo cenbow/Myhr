@@ -1,0 +1,65 @@
+ <div class="xn_c_ban_jox_zzaqyd">
+        <div class="xf_ht_jr_obu_width">
+            <div class="xf_ht_glylist_ss">
+                <div class="xfht_t_jk_zt2">
+                  <div class="xfht_t_jk_zt_wz">投资时间范围：</div>
+                  <div class="xfht_t_jk_zt_rj">
+                  <input name="beginTime" type="text" id="startDate1" class="search_time" onclick="laydate()" style="cursor: pointer" value="${page?.conditions?.beginTime}" />
+                  </div>
+                  <div class="xfht_t_j_zt_x">__</div>
+                  <div class="xfht_t_jk_zt_rj">
+                    <input name="endTime" type="text" class="xfht_t_jk_zt_rj1" id="endDate1" onclick="laydate()" style="cursor: pointer; color: #777;" value="${page?.conditions?.endTime}" />
+                  </div>
+                  <input class="search_w" placeholder="用户名/手机号" type="text" id="nameMobile1" value="${page?.conditions?.nameMobile}" name="nameMobile">
+                  <a class="xf_ht_jkbgl_page_prev xf_ht_dfp" onClick="showPagess(1, 5)">搜索</a>
+                </div>
+            </div>
+            <div class="xf_ht_glylist_two">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="xf_con_mem_r_b_table">
+                   <tr>
+                    <th>序号</th>
+		            <th>用户名</th>
+		            <th>手机号</th>
+		            <th>投资金额</th>
+		            <th>投资期限</th>
+		            <th>投资时间</th>
+		            <th>业绩</th>
+                  </tr>
+                    #{list items:page?.page, as:'cpsDetail'}
+		          <tr>
+		            <td>${cpsDetail_index}</td>
+		            <td>${cpsDetail?.username}</td>
+		            <td>${cpsDetail?.mobile}</td>
+		            <td>${cpsDetail?.investAmount}</td>
+		            <td>${cpsDetail?.period}</td>
+		             <td>${cpsDetail?.investTime?.format('yyyy-MM-dd HH:mm:ss')}</td>
+		            <td>${cpsDetail?.awardAmount?.format("###,##0.00")}</td>
+		          </tr>
+		          #{/list}
+                </table>
+            </div>
+             <div class="xf_ht_shmx_button xf_ht_jobx_page">
+                  <div class="page_warp">
+                      #{page funMethod:"showPagess",currPage:page?.currPage,totalCount:page?.totalCount,pageSize:page?.pageSize,theme:2,style:4}
+				      #{/page}
+                  </div>
+                </div>
+        </div>
+    </div>
+<script type="text/javascript">
+      $("#xf_ht_mememail_ttc").center();
+      $("#xf_ht_mememail_ttc").show();
+      
+      $("#close").click(function(){
+          $("#xf_ht_mememail_ttc").hide();
+      })
+      
+      *{
+	  #{if page?.conditions?.endTime == null}
+	  	  $("#startDate1").val(startTime());
+	  #{/if}
+	  #{if page?.conditions?.endTime == null}
+		  $("#endDate1").val(endTime()); 
+	  #{/if}
+      }*
+</script>

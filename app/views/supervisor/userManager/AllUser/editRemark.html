@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <style>
+
+    </style>
+</head>
+<body>
+<div style="margin: 0 auto;">
+    <h3>编辑:</h3>
+    <textarea  id="editRemark" cols="50" rows="8" style="width: 100%;">${remark}</textarea><br>
+    <input type="submit" value="提交" onclick="submitRemark('${remark}','${userId}')" style="float: right; margin-top: 10px">
+</div>
+
+
+       
+</body>
+  <script type="text/javascript">
+function submitRemark(remark,userId){
+     //var remark = document.getElementById("editRemark").value;
+     var remark=$("#editRemark").val();
+	 $.ajax({
+	    url : "@{supervisor.userManager.AllUser.submitRemark()}",
+	    type : "GET",
+	    data : {
+	      "remark" : remark,
+	      "userId" : userId
+	    },
+	    success : function(data) {
+	    	alert("备注修改成功");
+	    	layer.closeAll();
+	    	location.reload();
+	    	
+	    	 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){					
+					return;
+				}
+			if (data.code < 0) {			
+			alert(data.msg);		
+			return;
+			        }
+			
+	    },
+	    error : function() {
+	      alert("对不起，出现错误!");
+	    }
+	  });
+	}
+</script>
+</html>

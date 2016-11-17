@@ -1,0 +1,198 @@
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+    <!-- 搜索 -->
+    
+    
+    #{form @customerList(), id:'submit'}
+    <input type="hidden" id="currPage" name="currPage"/>
+    <input type="hidden" id="pageSize" name="pageSize"/>
+    <input type="hidden" id="name" name="name" value="${page.conditions?.name}"/>
+    <div class="xf_ht_search_inon">
+      <div>
+      	<div class="xf_ht_search_xl">
+          <span class="search_timesp">会员：</span>
+          <input name="name" type="text" class="search_w" id="name" value="${page.conditions?.name}" placeholder="客服名称" />
+        </div> 
+        <div class="xf_ht_search_xl">
+          <input type="button" class="search_button" onclick="searchSubmit();" value="搜 索" />
+        </div>
+        <div class="xf_ht_search_xl" style="float:right;">
+			<input type="button" class="search_button" onclick="edit();" value="添加客服">
+      	</div>
+      </div>
+    </div>
+    #{/form}
+    
+    
+    <!-- 列表内容 -->
+    <div class="xn_c_content_top">
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+        #{tr}
+          #{th}序号#{/th}
+          #{th}名称#{/th}
+          #{th}工号#{/th}
+          #{th}年龄#{/th}
+          #{th}座机号#{/th}
+          #{th}手机号#{/th}
+          #{th}qq号#{/th}
+          #{th}微信号#{/th}
+          #{th}图片#{/th}
+          #{th}备注#{/th}
+          #{th}操作#{/th}
+        #{/tr}
+        #{list page?.page}
+        #{tr tr_index:_index}
+          #{td}${(page?.currPage - 1) * page?.pageSize + _index}#{/td}
+          #{td}${_?.name}#{/td}
+          #{td}${_?.number}#{/td}
+          #{td}${_?.age}#{/td}
+          #{td}${_?.phone}#{/td}
+          #{td}${_?.mobile}#{/td}
+          #{td}${_?.qq}#{/td}
+          #{td}${_?.weixin}#{/td}
+          #{td}#{img src:"${_?.image}",alt:"",width:"30px",height:"30px"}#{/img}#{/td}
+          #{td}${_?.mark}#{/td}
+          #{td}
+            <span class="xf_ta_onclick" onclick="edit('${_?.id}');">编辑</span>
+            <span class="xf_ta_onclick" onclick="javascript:if(confirm('确定要删除吗？')){deleteCustomer('${_?.id}')}">删除</span>
+          #{/td}
+        #{/tr}
+        #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+      <div class="page_warp">
+        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+
+function showPage(currPage, pageSize){
+     $("#currPage").val(currPage);
+     $("#pageSize").val(pageSize);
+     $("#submit").submit();
+}
+
+function deleteCustomer(id){
+	$.post("@{supervisor.customerManager.CustomerAction.deleteCustomer()}",{id:id},function(data){
+		if(data.code < 0){
+			alert(data.msg);
+			return;
+		}else{
+			location.href = location.href;
+		}
+	});
+}
+
+function searchSubmit(){
+  $("#submit").submit();
+}
+
+function edit(id){
+    //直接弹窗，添加
+	if(id == null || id == ""){
+		$.layer({
+		    type: 1,
+		    area: ['560px', 'auto'],
+		    title: '添加客服信息',
+		    page: {dom : '#edit_customer_info'}
+		  });
+		  return;
+    }
+
+  //加载客服信息，再弹窗
+  $.ajax({
+    url : "@{supervisor.customerManager.CustomerAction.queryCustomerById()}",
+    type : "POST",
+    data : {
+      "id" : id
+    },
+    success : function(data) {
+	  $("#customer_id").val(data.id);
+	  $("#name1").val(data.name);
+	  $("#number").val(data.number);
+	  $("#age").val(data.age);
+	  $("#phone").val(data.phone);
+	  $("#mobile").val(data.mobile);
+	  $("#qq").val(data.qq);
+	  $("#weixin").val(data.weixin);
+	  $("#image_src").attr("src",data.image);
+	  $("#image_hidden").val(data.image);
+	  $("#mark").val(data.mark);
+      $.layer({
+		    type: 1,
+		    area: ['560px', 'auto'],
+		    title: '编辑客服信息',
+		    page: {dom : '#edit_customer_info'}
+		  });
+    },
+    error : function() {
+      alert("对不起，出现错误!");
+    }
+  });
+ }
+ 
+ function saveCustomer(){
+ 	if(!checkInput()){
+ 		return;
+ 	}
+ 
+    var data = {'name':$('#name1').val(),'number':$('#number').val(),'age':$('#age').val(),'phone':$('#phone').val(),'mobile':$('#mobile').val(),'qq':$('#qq').val(),'weixin':$('#weixin').val(),'image':$('#image_src').attr('src'),'mark':$('#mark').val()};
+    var id = $("#customer_id").val();
+ 	if(id != null && id != ""){
+ 		var data = {'name':$('#name1').val(),'number':$('#number').val(),'age':$('#age').val(),'phone':$('#phone').val(),'mobile':$('#mobile').val(),'qq':$('#qq').val(),'weixin':$('#weixin').val(),'image':$('#image_src').attr('src'),'mark':$('#mark').val(),'id':$('#customer_id').val()};
+ 	}
+ 	$.ajax({
+ 		url:"@{supervisor.customerManager.CustomerAction.saveCustomer()}",
+ 		data:data,
+ 		dataType:"json",
+ 		type:"post",
+ 		success:function(data){
+ 			$("#customer_id").val("");
+ 			$("#image_hidden").val("");
+ 			location.href = location.href;
+ 		},
+ 		error:function(data){
+ 			alert("ajax出现错误，请联系管理员！");
+ 		}
+ 	});
+ }
+ 
+ function checkInput(){
+ 	if($("#name1").val() == ""){
+ 		alert("请输入姓名");
+ 		return false;
+ 	}
+ 	if($("#number").val() == ""){
+ 		alert("请输入工号");
+ 		return false;
+ 	}
+ 	if($("#age").val() == ""){
+ 		alert("请输入年龄");
+ 		return false;
+ 	}
+ 	if($("#phone").val() == ""){
+ 		alert("请输入座机号码");
+ 		return false;
+ 	}
+ 	if($("#mobile").val() == ""){
+ 		alert("请输入手机号码");
+ 		return false;
+ 	}
+ 	if($("#qq").val() == ""){
+ 		alert("请输入qq号码");
+ 		return false;
+ 	}
+ 	if($("#weixin").val() == ""){
+ 		alert("请输入微信号码");
+ 		return false;
+ 	}
+ 	return true;
+ }
+
+</script>

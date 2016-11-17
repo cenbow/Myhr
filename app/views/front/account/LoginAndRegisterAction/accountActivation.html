@@ -1,0 +1,29 @@
+#{extends 'common/frontMain.html' /}
+#{set title:'帐号激活页面' /}
+<div class="xf_login_centent xf_login_fh"  style="margin-top:50px;">
+			<h3 class="xf_login_hh">${info}</h3>
+			<p class="ln_zcyougg" id="jumpTo"><span>5秒钟后返回我的帐户-账户信息页！</span></p>
+		</div>
+<script>
+//页面加载后自动刷新一次，解决充值已完成后页面金额不更新问题。
+$(function(){
+	var code = '${code}';
+	if(code == '-11' && location.href.indexOf("?xyz=")<0) {
+		location.href = location.href + "?xyz=" + Math.random();
+  	}
+	
+	//5秒钟返回 
+	countDown(5, "@{front.account.AccountHome.home()}");
+})
+
+
+function countDown(secs,surl){   
+	 var jumpTo = document.getElementById('jumpTo');
+	 jumpTo.innerHTML=secs+"秒钟后返回我的帐户-账户信息页！"; 
+	 if(--secs>0){    
+	     setTimeout("countDown("+secs+",'"+surl+"')",1000);
+	 }else{      
+	     location.href=surl;    
+	     }    
+	 }
+</script>

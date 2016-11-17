@@ -1,0 +1,11 @@
+# Home page                       
+#网站首页
+GET     /  																		companies.employees.HomeAction.home
+
+#新建员工
+*     /companies/employees/create  												companies.employees.HomeAction.create
+#禁止百度收录                           											
+* /robots.txt																	front.home.HomeAction.robots
+
+GET     /public/                                staticDir:public
+GET     /data/                                  staticDir:data

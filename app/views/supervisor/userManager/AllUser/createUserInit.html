@@ -1,0 +1,534 @@
+<div class="xf_ht_jr_obu_width">
+	<div class="xf_fktz_tcc_table">
+		
+		<input type="radio" name="user_type" value="1"/>普通用户
+		<input type="radio" name="user_type" value="2"/>企业用户
+		<!-- 普通用户 begin -->
+		<table border="0" cellspacing="0" cellpadding="0" class="xf_ht_jr_obu_form" id="usual">
+			<tr>
+				<td align="right" width="250">
+					用户名：<input type="text" name="user_name" id="user_name"/>
+				</td>
+				<td>
+					密码：<input type="password" id="password" name="password"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					手机号：<input type="text" name="mobile" id="mobile"/>
+				</td>
+				<td>
+					性别：
+					<select name="sex" id="sex">
+						<option value="0" >--请选择--</option>
+						<option value="1" selected>男</option> 
+						<option value="2" >女</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					姓名：<input type="text" name="realName" id="realName"/>
+				</td>
+				<td>
+					身份证：<input type="password" id="idNumber" name="idNumber"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					年龄：<input type="text" name="age" id="age"/>
+				</td>
+				<td>
+					文化程度：
+					<select name="education" id="education">
+						<option value="0" selected>--请选择--</option>
+						#{list items:educations}
+							<option value="${_?.id}">${_?.name}</option> 
+						#{/list}
+					</select>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td align="right" width="250">
+					<span style="float: left;">户口所在地：</span>
+					<select name="province" id="province" style="width: 80px;" onchange="chagnProvince(this.value);">
+						<option value="0" selected>--请选择--</option>
+						#{list items:provinces}
+							<option value="${_?.id}">${_?.name}</option> 
+						#{/list}
+					</select>
+					<select name="city" id="city" style="width: 80px;">
+						<option value="0" selected>--请选择--</option>
+					</select>
+				</td>
+				
+				<td>
+					购车情况：
+					<select name="car" id="car">
+						<option value="0" selected>--请选择--</option>
+						#{list items:cars}
+							<option value="${_?.id}">${_?.name}</option> 
+						#{/list}
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					婚姻情况：
+					<select name="marital" id="marital">
+						<option value="0" selected>--请选择--</option>
+						#{list items:maritals}
+							<option value="${_?.id}">${_?.name}</option> 
+						#{/list}
+					</select>
+				</td>
+				<td>
+					购房情况：
+					<select name="house" id="house">
+						<option value="0" selected>--请选择--</option>
+						#{list items:houses}
+							<option value="${_?.id}">${_?.name}</option> 
+						#{/list}
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td class="xf_ht_tcc_button">
+					<input class="jbox_ok" type="button" value="确  定" onclick="createUser();"> 
+					<input class="jbox_on" type="button" value="取  消" onclick="layer.closeAll()">
+				</td>
+			</tr>
+		</table>
+		<!-- 普通用户 end -->
+		
+		
+		<!-- 企业用户begin -->
+		<table border="0" cellspacing="0" cellpadding="0" class="xf_ht_jr_obu_form" id="super" style="display: none">
+			<tr>
+				<td align="right" width="250">
+					用户名：<input type="text" name="e_user_name" id="e_user_name"/>
+				</td>
+				<td align="right" width="250">
+					企业名称：<input type="text" name="enterprise_name" id="enterprise_name"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					密码：<input type="password" id="e_password" name="e_password"/>
+				</td>
+				<td align="right" width="250">
+					手机号：<input type="text" name="e_mobile" id="e_mobile"/>
+				</td>
+
+			</tr>
+			
+			<tr>
+				<td align="right" width="250"> 
+					法人姓名：<input type="text" name="e_realName" id="e_realName"/>
+				</td>
+				<td align="right" width="250">
+					身份证号：<input type="text" id="e_idNumber" name="e_idNumber"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="250">
+					营业执照：<input type="text" name="business_license" id="business_license"/>
+				</td>
+
+			</tr>
+			
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td class="xf_ht_tcc_button" >
+					<input class="jbox_ok" type="button" value="确  定" onclick="createUser();"> 
+					<input class="jbox_on" type="button" value="取  消" onclick="layer.closeAll()">
+				</td>
+			</tr>
+		</table>
+		
+		<!-- 企业用户end -->
+		
+		
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+
+
+	//添加会员
+	function createUser() {
+		//会员类型
+		var userType = $("input[name='user_type']:checked").val();
+		if(userType != 1 && userType != 2) {
+			alert("请选择会员类型");
+			return false;
+		}
+		if(userType == 1) {//普通会员
+			
+			//用户名
+			var userName = $.trim($("#user_name").val());
+			if(!userName) {
+				alert("请输入用户名");
+				return false;
+			} else if(userName.length < 3) {
+				alert("用户名长度过短");
+				return false;
+			} else if(userName.length > 10) {
+				alert("用户名长度过长");
+				return false;
+			} else if(!/^[\u4E00-\u9FA5A-Za-z0-9_]+$/.test(userName)){
+				alert("用户名含有敏感字符");
+				return false;
+			} else if(bName < 0) {
+				alert("用户名已存在");
+				return false;
+			}
+			/* var hasNameExist = #{jsAction @front.account.loginAndRegisterAction.hasNameExist(':name')/}
+		  	$.post(hasNameExist({name:encodeURI(userName)}),function(data){
+		  		var arr=eval(data);
+		  		if(arr.error.code == -2){
+		  	   		bName = -1;
+		  	   		alert("用户名已存在");
+		    	}else{
+			       	bName = 0;
+		    	}
+	        }); */
+	        
+	        
+			//密码
+	     	var password = $("#password").val();
+	      	if(password == ""){
+	      		alert("请设置密码");
+	        	return false; 
+	      	} else if(password.length < 6 || password.length > 20){
+		      	alert("密码长度为6-20个字符");
+		      	return false; 
+	      	} else if(!/^([^\s'‘’]{6,20})$/.test(password)){
+		      	alert("密码由6-20位字符组成（不含'）");
+		      	return false; 
+	      	}
+	      	
+	      	//手机号码
+	  		var mobile = $.trim($("#mobile").val());
+	       	if(mobile == ""){
+	        	alert("请输入手机号码");
+	          	return false;
+	       	}else if(!(mobile).isMobileNum()){
+	       		alert("手机号格式有误");
+	          	return false;
+	       	} else if(bMobile < 0) {
+	       		alert("该手机号码已存在");
+	       		return false;
+	     	}
+	       	
+	       	var sex = $("#sex").val();
+	      	//性别
+	       	if(sex == 0){
+	 	       alert("性别不能为空");
+	 	       return false;
+	 	    }
+	      
+	       	//真实姓名
+	       	var realName = $.trim($("#realName").val());
+	       	if(!realName){
+	        	alert("请输入真实姓名");
+	          	return false;
+	       	}
+	       	
+	       	//身份证
+	       	var idNumber = $.trim($("#idNumber").val());
+	       	if(!idNumber){
+	        	alert("请输入身份证号码");
+	          	return false;
+	       	}
+	       	
+	       	
+	       	//年龄
+	       	var age = $.trim($("#age").val());
+	       	if(!age){
+	  	       alert("年龄不能为空");
+	  	       return false;
+	  	    }
+	       	
+	       	//文化程度
+	       	var education = $("#education").val();
+	       	if(education == 0) {
+	   	       alert("请选择文化程度");
+	   	       return false;
+	   	    }
+	       	
+	       	//户口
+	       	var province = $("#province").val();
+	        if(province == 0) {
+	  	       alert("请选择省份");
+	  	       return false;
+	  	    }
+	        var city = $("#city").val();
+	        if(city == 0) {
+	  	       alert("请选择城市");
+	  	       return false;
+	  	    }
+	        
+	 	    //购车情况
+	 	    var car = $("#car").val();
+		    if(car == 0) {
+	       		alert("请选择购车情况");
+	 	       	return false;
+	 	    }
+		    var marital = $("#marital").val();
+	 	   	if(marital == 0) {
+	 	       alert("请选择婚姻状况");
+	 	       return false;
+	 	    }
+	 	   	
+	 	   	var house = $("#house").val();
+	 	    if(house == 0) {
+	 	       alert("请选择购房情况");
+	 	       return false;
+	 	    }
+	 	    
+	 	    
+	 	   $.ajax({
+				url : "@{createUsualUser()}",
+		      	type : "POST",
+		      	data : {
+		      		"name" : userName,
+		      		"password" : password,
+		      		"mobile" : mobile,
+		      		"sex" : sex,
+		      		"idNumber" : idNumber,
+		      		"realName" : realName,
+		      		"age" : age,
+		        	"education" : education,
+		        	"province" : province,
+		        	"city" : city,
+			        "car" : car,
+			        "marital" : marital,
+			        "house" : house
+		      	},
+		      	success : function(data) {
+				var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+					if(result){
+						return;
+					}
+			        alert(data.msg);
+			        if (data.code == 0) {
+		          		location.reload();
+			        }
+		      	},
+		      	error : function() {
+		        	alert("对不起，出现错误!");
+		      	}
+		    });
+	 	   
+	 	    
+		} else if(userType == 2) {//企业用户
+			//用户名
+			var userName = $.trim($("#e_user_name").val());
+			if(!userName) {
+				alert("请输入用户名");
+				return false;
+			} else if(userName.length < 3) {
+				alert("用户名长度过短");
+				return false;
+			} else if(userName.length > 10) {
+				alert("用户名长度过长");
+				return false;
+			} else if(!/^[\u4E00-\u9FA5A-Za-z0-9_]+$/.test(userName)){
+				alert("用户名含有敏感字符");
+				return false;
+			} else if(bName < 0) {
+				alert("用户名已存在");
+				return false;
+			}
+			
+			//企业名称
+			var enterpriseName = $.trim($("#enterprise_name").val());
+			if(!enterpriseName) {
+				alert("请输入企业名称");
+				return false;
+			}
+			//密码
+	     	var password = $("#e_password").val();
+	      	if(password == ""){
+	      		alert("请设置密码");
+	        	return false; 
+	      	} else if(password.length < 6 || password.length > 20){
+		      	alert("密码长度为6-20个字符");
+		      	return false; 
+	      	} else if(!/^([^\s'‘’]{6,20})$/.test(password)){
+		      	alert("密码由6-20位字符组成（不含'）");
+		      	return false; 
+	      	}
+	      	
+	      	//手机号
+	      	var mobile = $.trim($("#e_mobile").val());
+	       	if(mobile == ""){
+	        	alert("请输入手机号码");
+	          	return false;
+	       	}else if(!(mobile).isMobileNum()){
+	       		alert("手机号格式有误");
+	          	return false;
+	       	} else if(bMobile < 0) {
+	       		alert("该手机号码已存在");
+	       		return false;
+	     	}
+	       	
+	       	//法人姓名
+	       	var realName = $.trim($("#e_realName").val());
+	       	if(!realName){
+	        	alert("请输入法人姓名");
+	          	return false;
+	       	}
+	       	
+	       	//营业执照
+	       	var businessLicense = $.trim($("#business_license").val());
+	       	if(!businessLicense){
+	        	alert("请输入营业执照");
+	          	return false;
+	       	}
+	       	
+	       	//身份证号
+	       	var idNumber = $.trim($("#e_idNumber").val());
+	       	if(!idNumber){
+	        	alert("请输入身份证号码");
+	          	return false;
+	       	}
+	       	
+
+	       	
+	       	
+	       	//法人邮箱
+	       	/*var email = $.trim($("#email").val());
+	       	if(!email) {
+	       		alert("请输入法人邮箱");
+	          	return false;
+	       	}*/
+	       	
+	       	
+		       	
+	       	$.ajax({
+				url : "@{createEnterpriseUser()}",
+		      	type : "POST",
+		      	data : {
+		      		"name" : userName,
+		      		"enterpriseName" : enterpriseName,
+		      		"password" : password,
+		      		"mobile" : mobile,
+		      		"realName" : realName,
+		      		"businessLicense" : businessLicense,
+		        	"idNumber" : idNumber
+		      	},
+		      	success : function(data) {
+		      		if(data.code<0)
+		      		{
+		      			alert(data.msg);
+
+		      		}
+		      		else
+		      		{
+		      			$(document.body).html(data);
+		      		}
+		      		
+				//var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+					//if(result){
+					//	return;
+					//}
+				
+					//location.reload();
+			        //alert(data.msg);
+			        //if (data.code == 0) {
+		          	//	location.reload();
+			        //}
+		      	},
+		      	error : function() {
+		        	alert("对不起，出现错误!");
+		      	}
+		    });
+		}
+		
+		
+	};
+	
+	
+	//省市二级联动
+	function chagnProvince(provinceId) {
+		var jsAction = #{jsAction @Application.getCity(":provinceId")/}
+		$.post(jsAction({provinceId:provinceId}),function(data) {
+			var cityList = [];
+			cityList.push("<option value='0' selected>--请选择--</option>");
+			for(var i = 0; i < data.length; i ++){
+				cityList.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+			}
+			$("#city").html(cityList);
+		});
+	};
+	
+	
+	var bName = 0;
+	var bMobile = 0;
+	$(document).ready(function(){
+		//默认为普通会员
+		$("input[name='user_type'][value='1']").prop("checked","true");
+		
+		$("#user_name").blur(function(){
+			var _this = this;
+			var name = _this.value;
+          	var hasNameExist = #{jsAction @front.account.loginAndRegisterAction.hasNameExist(':name')/}
+		  	$.post(hasNameExist({name:encodeURI(name)}),function(data){
+		  		var arr=eval(data);
+		  		if(arr.error.code == -2){
+		  	   		bName = -1;
+		    	}else{
+			       	bName = 0;
+		    	}
+          	});
+		});
+		
+		
+		$("#mobile,#e_mobile").blur(function(){
+			var _this = this;
+			$.ajax({
+    		  	url : "@{front.account.LoginAndRegisterAction.hasMobileExists()}",
+    		  	type : "POST",
+    		  	data : {
+			  		"mobile" : _this.value
+    		  	},
+    		  	dataType:'json',
+    		  	success : function(data) {
+			  		if(data.code < 0){
+			  			bMobile = -1;
+    			  	}else{
+    			  		bMobile = 0;
+    			  	}
+				},
+ 			});
+		});
+		
+	});
+	
+	
+	//会员类型选择切换
+	$("input[name='user_type']").click(function(){
+		if($(this).val() == 1) {
+			$("#usual").show();
+			$("#super").hide();
+		} else if($(this).val() == 2) {
+			$("#usual").hide();
+			$("#super").show();
+		}
+	});
+	
+</script>

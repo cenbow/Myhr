@@ -1,0 +1,296 @@
+#{extends 'common/supervisor.html' /} 
+#{set title:'审核中的借款标详情' /} 
+#{if bid?.status == 0}
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+    #{include '/supervisor/bidManager/bidManagerLeft.control'/} 
+      <div class="xn_c_content">
+        <div class="xf_content_add">
+          <div class="xfht_t_j_y_2">
+            <!--右上-->
+            <div class="xf_ht_obu_fklm">
+              #{include '/supervisor/bidManager/BidPlatformAction/lastAndNext.control'/} 
+            </div>
+            <!-- 审核详情 -->
+            #{form @auditToFundraise(bid?.sign), method:'POST', id:'auditPass'} 
+            <div class="xfht_t_j_y_2">
+              #{include '/supervisor/bidManager/BidPlatformAction/detailTop.control'/} 
+              <div class="xf_con_mem_r_bottomtwo">
+                 <div class="xf_con_mem_r_h3">
+                   	综合评定：
+                 </div>
+                 #{table width:"100%", border:"0", cellspacing:"0", cellpadding:"0", class:"xf_ht_memcz_table"}
+                   #{tr}
+                     #{td align:"right", width:"133"}<span class="xf_s_sz">审核进度：</span>#{/td}
+                     #{td}
+                       <div class="xf_jd_ds">
+                         <div class="xf_jd_sj" id="showAuditScheduleDown"></div>
+                       </div>
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td align:"right"}#{/td}
+                     #{td}
+                        <input type="checkbox" id="quality" class="xf_ht_radio"
+		                  #{if bid?.isQuality}
+		               	    checked="checked"
+		                  #{/if}
+		                 > 设为优质标 <span class="xf_ht_ptjk_sh_span"> 注：当勾选此项后，此借款将作为优质标推荐给平台用户</span>
+                     #{/td}
+                   #{/tr}
+                    #{tr}
+                     #{td align:"right"}#{/td}
+                     #{td}
+                         <input type="checkbox" id="hot" class="xf_ht_radio"
+		                   #{if bid?.isHot}
+		                     checked="checked"
+		                   #{/if}
+		                 > 标记为火标
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td align:"right", valign:"top"}<span class="xf_s_sz">CBO风控体系审核：</span>#{/td}
+                     #{td}
+                       <textarea onkeyup="LimitSuggest(this)" oninput="LimitSuggest(this)" class="xf_ht_jr_obttd_textarea xf_ht_jr_shmx_textarea" id="setSuggest" style="max-width:760px;" #{if bid?.isRelationLoan} readonly="readonly" #{/if}></textarea>
+                       <br><span class="xf_con_zqzr_znx" style="display:inline-block; margin-top:5px;">您还可以输入<span class="xf_con_zqzr_znxsz" id="showSuggestLength">300</span>字</span>
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td}#{/td}
+                     #{td class:"xf_ht_shmx_button"}
+                         <input type="hidden" name="suggest" id="suggest"/>
+                         <input type="hidden" name="userBasicInfo" id="userBasicInfo"/>
+                       <input class="xf_ht_tcc_button_ok" type="button" value="通  过" #{if bid?.isRelationLoan} disabled="disabled" #{/if}
+                         onclick="auditToFundraise()";
+                       />
+                       <input class="xf_ht_tcc_button_on" type="button" value="不通过" #{if bid?.isRelationLoan} disabled="disabled" #{/if}
+                         onclick="showNotPassBox();"
+                       />
+                       <input class="xf_ht_tcc_button_tq" type="button" value="提前在线借款" onclick="auditToadvanceLoan();" #{if bid?.isRelationLoan} disabled="disabled" #{/if}/>
+                     #{/td}
+                   #{/tr}
+                 #{/table}
+             </div>
+             <div class="xf_jkb_btowarp">
+               <div class="xf_jkb_bto">
+                 #{include '/supervisor/bidManager/BidPlatformAction/lastAndNext.control'/} 
+               </div>
+            </div>
+          </div>
+          #{/form}
+          
+          #{form @auditToNotThrough(bid?.sign), method:'POST', id:'auditNotPass'} 
+            <input type="hidden" name="through" id="through"/>
+          #{/form}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+$("#province").change(function(){
+	getCitiesByProvinceId();
+});
+
+/*var obj = '${userBasicInfo}';
+alert(obj);
+if(obj == ''){
+	alert(1);
+}*/
+
+getCitiesByProvinceId();
+
+function getCitiesByProvinceId(){
+	var selectVal = $("#province").children('option:selected').val();
+	var jsAction = #{jsAction @Application.getCity(":provinceId")/}
+	$.post(jsAction({provinceId:selectVal}),function(data) {
+		var cityList = [];
+		for(var i = 0; i < data.length; i ++){
+			cityList.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+		}
+		$("#city").html(cityList);
+	});
+}
+
+
+  var suggestMaxLength = 300;
+
+  $("#showSuggestLength").html(suggestMaxLength - $("#setSuggest").val().length);
+
+  function LimitSuggest(obj){
+       if (obj.value.length > suggestMaxLength){
+      	obj.value = obj.value.substring(0, suggestMaxLength);
+       }
+       
+       $("#showSuggestLength").html(suggestMaxLength - obj.value.length);
+  }
+
+	$(function(){
+		/* 高亮显示 */
+	    showHighLight(1, 1, 1);
+		
+		/* 不通过提交验证 */
+		$("#auditNotPass").submit(function(){
+			if($.trim($("#setSuggest").val()) == ""){
+				//layer.msg("请填写不通过原因!", 1, 5);
+				alert("请填写审核不通过的意见!");
+				
+				return false;
+			}
+
+			return true;
+		});
+		
+		var q = ${bid?.isQuality};
+		var h = ${bid?.isHot};
+		
+		$("#quality").click(function(){
+			if(q) q = false;
+			else q = true;
+			var listAction = #{jsAction @siteQuality(':bidId',':status') /};
+			$.post(listAction({bidId:${bid?.id},status:q}), function(data) {
+				
+				 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){
+						return;
+				}
+    
+				
+				var arr=eval(data);
+				if(arr.error.code < 0){
+                  alert(arr.error.msg);
+				}
+				$("#quality").attr("checked", q);
+			});
+		});
+		
+		/* 设置火标 */
+		$("#hot").click(function(){
+			if(h) h = false;
+			else h = true;
+			 var listAction = #{jsAction @siteHot(':bidId',':status') /};
+			 $.post(listAction({bidId:${bid?.id},status:h}), function(data) {
+				 
+				 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){
+						return;
+				}
+				 
+				 var arr=eval(data);
+				 if(arr.error.code < 0){
+	               alert(arr.error.msg);
+					}
+				$("#hot").attr("checked", h);
+			});
+		});  
+	 });
+
+	/* 提前借款 */
+	function auditToadvanceLoan(){
+		$.layer({
+		    shade: [0],
+		    area: ['auto','auto'],
+		    dialog: {
+		        msg: '请您再次确认!',
+		        btns: 2,                    
+		        type: 4,
+		        btn: ['好的','算了'],
+		        yes: function(){
+				    window.location.href='@{auditToadvanceLoan(bid?.sign)}';
+		        }, no: function(){
+		        	return false;
+		        }
+		    }
+		});
+	}
+	
+	/* 审核不通过 */
+	function showNotPassBox(){
+		var setSuggest = $.trim($("#setSuggest").val());
+		
+		if(setSuggest == ""){
+			alert("请填写审核不通过的意见!");
+			
+			return;
+		}
+		
+		$("#through").val(setSuggest);
+ 		$("#auditNotPass").submit();
+	}
+
+	/* 审核通过 */
+	function auditToFundraise(){
+		if($("#name").val().trim() == ''){
+	       alert("借款人不能为空");
+	       return;
+	    }
+		if($("#idcard").val().trim() == ''){
+	       alert("身份证号码不能为空");
+	       return;
+	    }
+		
+		if($("#age").val().trim() == ''){
+	       alert("年龄不能为空");
+	       return;
+	    }
+		
+		if($("#sex").val() == 0){
+	       alert("性别不能为空");
+	       return;
+	    }
+	    
+	    if($("#province").val() == 0) {
+	       alert("请选择户口所在地");
+	       return;
+	    }
+	    
+	    if($("#education").val() == 0) {
+	       alert("请选择文化程度");
+	       return;
+	    }
+	    
+	    if($("#marital").val() == 0) {
+	       alert("请选择婚姻状况");
+	       return;
+	    }
+	    
+	    if($("#car").val() == 0) {
+	       alert("请选择购车情况");
+	       return;
+	    }
+	    
+	    if($("#house").val() == 0) {
+	       alert("请选择购房情况");
+	       return;
+	    }
+	    
+	    if($("#goal").val().trim() == ''){
+	       alert("借款用途不能为空");
+	       return;
+	    }
+	    
+	    var setSuggest = $.trim($("#setSuggest").val());
+		if(setSuggest == ""){
+			//layer.msg("请填写审核意见!", 1, 5);
+			alert("请填写审核意见!");
+			return;
+		}
+		
+		//$("#userBasicInfo").val($("#TextArea3").val());
+		$("#suggest").val(setSuggest);
+ 		$("#auditPass").submit();
+	}
+	
+	/* 下一个 */
+	function upBid(){
+		window.location.href = "@{auditingDetail(bid?.upId)}"; 
+	}
+
+	/* 上一个 */
+	function nextBid(){
+		window.location.href = "@{auditingDetail(bid?.nextId)}"; 
+	}
+</script>
+#{/if}

@@ -1,0 +1,71 @@
+#{extends 'common/frontMain.html' /}
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|财富资讯' /}
+
+<div class="p-main clr mt30">
+    <div class="p-cfleft">
+        <ul class="p-cfnav aboutus_leftnav">
+        	#{list items:types, as:'type'}
+            	<li id="li${type_index + 6}">
+            		<a href="@{home(type?.id)}">${type?.name}</a>
+            	</li>
+				<script type="text/javascript">
+					$(function(){
+						$("#li"+${typeId}).addClass("cur");
+						$(".s_helphead").html($("#li"+${typeId}).find("a").html());
+					});
+				</script>
+            #{/list}
+        </ul>
+    </div>
+    
+    #{form @home(),id:'wealthHomeForm'}
+	    <input type="hidden" id="currPage" name="currPage"/>
+	    <input type="hidden" id="pageSize" name="pageSize"/>
+	    <input type="hidden" id="typeId" name="typeId" value="${typeId}"/>
+	    <div class="p-cfright">
+	        <ul class="p-cflist">
+	        	#{if typeId == -1}
+	            #{/if}
+	            #{else}
+	            	#{list items:newsList.page, as:'news'}
+	            		<li class="clr">
+			                <img src="${news?.image_filename}" alt="" width="120" height="75" class="p-cfimg" />
+			                <div class="p-cfword">
+			                    <h6><a href="@{newDetails(news?.id)}" target="_blank" limit="20">${news?.title}</a></h6>
+			                    <div class="p-cftext">
+			                    	<span limit="100">
+			                    		${news?.content.raw()} 
+			                    	</span>
+			                    </div>
+			                    	<span class="p-date">${news?.start_show_time?.format('yyyy/MM/dd')}</span>
+			                </div>
+			            </li>
+	    			#{/list}
+	            #{/else}
+	        </ul>
+	        <div class="xf_wylc_page p-lcpage">
+	        	#{page pageTitle:"财富咨询列表", currPage:newsList.currPage,totalCount:newsList.totalCount,pageSize:newsList.pageSize,theme:2,style:2}
+				#{/page}
+	        </div>
+	    </div>
+   	#{/form}
+</div>
+
+*{
+<!--财富信息内容-->
+#{include 'front/wealthinfomation/WealthInfomationAction/homeWealthInfomationAction.html'/} 
+<!--财富工具箱-->
+#{include 'front/wealthinfomation/WealthInfomationAction/homeTools.html'/}
+}*
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_wealth.js'}"></script>
+
+<script type="text/javascript">
+	function showPage(currPage, pageSize){
+	    $("#currPage").val(currPage);
+	    $("#pageSize").val(pageSize);
+	    $("#wealthHomeForm").submit();
+	};
+</script>

@@ -1,0 +1,107 @@
+<div class="p-bdbotbox mt30" id="xf_wyjkview_xxk">
+	<ul class="p-bdxxkul clr">
+		
+	    <li class="cur" id="debtAuctionRecords" onclick="showDebtAuctionRecords(1,10);" #{if debt?.status != 3}style="display:none"#{/if}>购买记录</li>
+	    <li id="zrbxq">转让标详情</li>
+	</ul>
+	
+	<!-- 竞拍记录 -->
+	<div class="xf_con_wyjk_tentultbody" id="debtAuctionsRecords">
+    </div>
+    
+    <input type="hidden" id="debtId" value="${debt?.id}" />
+	<div class="p-bdtabox xf_con_wyjk_tentultbody" style="display: none;">
+	    <h4>借款人基本资料</h4>
+	    <div class="p-bdziliao">
+	        <table class="p-bdzltable">
+	            <tr>
+	                <td width="72">真实姓名：</td>
+	                <td width="250">${debt?.invest?.bid?.user?.realityName?.asterisk()}</td>
+	                <td width="92">性别：</td>
+	                <td width="232">${debt?.invest?.bid?.user?.sex}</td>
+	                <td width="106">年龄：</td>
+	                <td>${debt?.invest?.bid?.user?.age}岁</td>
+	            </tr>
+	            <tr>
+	                <td>身份证号：</td>
+	                <td>${debt?.invest.bid?.user?.idNumber?.asterisk()}</td>
+	                <td>户口所在地：</td>
+	                <td>${debt?.invest?.bid?.user?.provinceName}${debt?.invest?.bid?.user?.cityName}</td>
+	                <td>文化程度：</td>
+	                <td>${debt?.invest?.bid?.user?.educationName}</td>
+	            </tr>
+	            <tr>
+	                <td>婚姻情况：</td>
+	                <td>${debt?.invest?.bid?.user?.maritalName}</td>
+	                <td>购房情况：</td>
+	                <td>${debt?.invest?.bid?.user?.houseName}</td>
+	                <td>购车情况：</td>
+	                <td>${debt?.invest?.bid?.user?.carName}</td>
+	            </tr>
+	            <tr>
+	                <td>借款目的：</td>
+	                <td colspan="5">${debt?.invest?.bid?.purpose?.name}</td>
+	            </tr>
+	        </table>
+	    </div>
+	    <h4>借款详情对借款用途还款能力的详细说明</h4>
+	    <div class="p-bdshuom">
+	        <p>${debt?.invest?.bid?.description}</p>
+	    </div>
+
+
+	    *{
+	    <h4>投标奖励</h4>
+	    <div class="p-bdshuom bornone">
+	        <p>不设置奖励</p>
+	    </div>
+	    }*
+	</div>
+	
+		<!-- 查看资料弹出层 -->
+   	<div id="itemImage" class="xf_ht_ttc" >  
+   	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		 
+		if(${debt?.status} == 3){
+			showDebtAuctionRecords(1,10);
+		}else{
+			$("#zrbxq").click();
+		}
+	});
+	
+	function showDebtAuctionRecords(pageNum,pageSize){
+		var debtId = ${debt?.id};
+		$.ajax({
+			url:"@{viewDebtAllAuctionRecords()}",
+			type:"POST",
+			data: {"pageNum" : pageNum, "pageSize" : pageSize , "debtId":debtId},
+	    	success:function(data){$("#debtAuctionsRecords").html(data);},
+	    	error:function(){alert("对不起，出现错误!");}
+		})
+	};
+	
+	function showitemNow(mark,signUserId){
+  		/** 检查用户是否激活, fronMain.html 中的拦截器*/
+	  	var result = frontJSIntercepter();
+	  	if(!result){
+      	 	showitem(mark,signUserId); 
+	  	}		  		
+	};
+	
+	/* 查看弹出层 */
+	function showitem(mark,signUserId){
+		var listAction = #{jsAction @front.invest.InvestAction.showitem(':mark',':signUserId') /};
+		$.post(listAction({mark:mark,signUserId:signUserId}), function(data) {
+			
+			//拦截器，拦截判断。frontMain.html
+			if(checkIntercepterResult(data)){
+				return;
+			}
+			
+			showDiv($("#itemImage").html(data));
+		});		
+	};
+</script>

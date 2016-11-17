@@ -1,0 +1,308 @@
+ %{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle + '|借款申请'/}
+
+<div class="xf_c_wyjkfb_1_wrap">
+	<div class="xf_c_wyjkfb_1_location">
+	</div>
+	<div class="xf_c_wyjkfb_2_aside">
+		#{include 'front/bid/BidAction/applyNowLeft.control'/}
+		<!--侧边栏结束-->
+	</div>
+	<div class="xf_c_wyjkfb_3_content">
+		<!--内容区开始-->
+		<div class="xf_c_wyjkfb_3_colName">
+			借款申请
+		</div> 
+		<div class="xf_c_wyjkfb_3_cont">
+		
+
+			#{form @loanApplyNow(application, uuid), method:'POST', id:'loanApplyNow'}
+				<div class="xf_c_wyjkfb_3_jbxxWrap">
+					<!--1/填写基本信息 start-->
+					<div class="xf_c_wyjkfb_3_jbxxColName">
+						<span class="xf_c_wyjkfb_3_jbxxColbg">1/</span><span>填写个人信息</span>
+					</div>
+					<div class="xf_c_wyjkfb_3_jbxxCont">
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle">
+								姓名：
+							</div>
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<span class="xf_c_wyjkfb_3_jkjeInp">
+									<input type="text" name="application.userName" id="userName"/>
+								 </span>
+								<span id="aname" style="color: red"></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle">
+								联系方式：
+							</div>
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<span class="xf_c_wyjkfb_3_jkjeInp">
+									<input type="text" name="application.mobile" id="mobile" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+								 </span>
+								<span id="cmobile" style="color: red"></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<!--1/填写基本信息 ends-->
+				</div>
+				<div class="xf_c_wyjkfb_3_jbxxWrap">
+					<!--2/填写基本信息 start-->
+					<div class="xf_c_wyjkfb_3_jbxxColName">
+						<span class="xf_c_wyjkfb_3_jbxxColbg">2/</span><span>填写基本信息</span>
+					</div>
+					<div class="xf_c_wyjkfb_3_jbxxCont">
+						
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle">
+								借款标题：
+							</div>
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<div>
+									<input type="text" class="xf_c_wyjkfb_3_jbxxTitleInp" onblur="checkTitle()" id="title" name="application.title" 
+									maxlength="24"/>
+								</div>
+								<div class="xf_c_wyjkfb_3_jbxxTitleTips">
+									不超过24个汉字，重视标题描述，能加快借款满标。
+									<span id="ctitle" style="color: red"></span>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle">
+								借款金额：
+							</div>
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<span class="xf_c_wyjkfb_3_jkjeInp">
+									<input type="text" name="application.amount" id="amount" onkeyup="value=value.replace(/[^\d]/g,'')" 
+									maxlength="7"/>
+									 元
+								 </span>
+								<span id="camount" style="color: red"></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle">
+								借款期限：
+							</div>
+							<!-- 借款期限-1: 年;0:月;1:日; -->
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<select class="xf_c_wyjkfb_3_jkqxSel" name="application.periodUnit" id="periodUnit" onchange="changePeriod(this.value);">
+									<option value="-999">请选择</option>
+									<option value="-1">年</option>
+									<option value="0">月</option>
+									<option value="1">日</option>
+									
+								</select>
+								<select class="xf_c_wyjkfb_3_jkqxSel" name="application.period" id="period" >
+									<option value="-999">请选择</option>
+								</select>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="xf_c_wyjkfb_3_jbxxColunm">
+							<div class="xf_c_wyjkfb_3_jbxxTitle" style="width: 155px;">
+								能承受的年化利率范围：
+							</div>
+							<div class="xf_c_wyjkfb_3_jbxxText">
+								<select class="xf_c_wyjkfb_3_jkytSel" name="application.apr" id="apr">
+									<option value="-999">请选择</option>
+									<option value="1">5%-10%</option>
+									<option value="2">10%-15%</option>
+									<option value="3">15%-18%</option>
+								</select>
+							</div>
+							<div class="clear"></div>
+						</div>
+				
+					</div>
+					<!--1/填写基本信息 ends-->
+				</div>
+		
+				<div class="xf_c_wyjkfb_3_jkxqWrap">
+					<!--3/描述借款详情 start-->
+					<div class="xf_c_wyjkfb_3_jbxxColName">
+						<span class="xf_c_wyjkfb_3_jbxxColbg">3/</span><span>描述借款详情</span>
+					</div>
+					<div class="xf_c_wyjkfb_3_jkxqCont">
+					
+						<div class="xf_c_wyjkfb_3_jkxqIntro">
+							<textarea cols="115" rows="5" name="application.description" id="description" oninput="editorLimit(this)" onkeyup="editorLimit(this)" autocomplete="off"></textarea>
+							<br />
+							<span class="xf_c_wyjkfb_3_jkxqIntroTips">请对借款用途进行详细说明。</span>
+							<span class="xf_ht_wa_font" id="limit">您还可以输入<span class="xf_con_zqzr_znxsz" id="editornum">600</span>字</span>
+						</div>
+					</div>
+					<!--2/描述借款详情 ends-->
+				</div>
+				<div class="xf_c_wyjkfb_3_submitWrap">
+					<input type="submit" value="提交申请" class="xf_c_wyjkfb_3_submiBtn" id="xf_c_wyjkfb_3_submiBtn"/>
+				</div>
+			#{/form}
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>	
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_bid.js'}"></script>
+<script type="text/javascript">
+
+
+	//富文本字数限制
+	function editorLimit(obj){
+  		if(obj.value.length > 600){
+	    	obj.value = obj.value.substring(0, 600);
+    	}
+	    $("#editornum").html(600 - obj.value.length);
+	};
+	
+	
+	$(function(){
+		//提交借款申请
+		$("#loanApplyNow").submit(function(){
+			//姓名
+			var userName = $.trim($("#userName").val());
+			if(!userName) {
+				alert("请填写姓名!");
+				$("#userName").val("");
+				return false;
+			}
+			//联系方式
+			var mobile = $.trim($("#mobile").val());
+			if(!mobile) {
+				alert("请填写联系方式!");
+				$("#mobile").val("");
+				return false;
+			}
+			if(!mobile.isMobileNum()){
+		  		alert("请输入正确的手机号码!");
+		  		return false;
+		   	}
+			
+			//借款标题
+			if($.trim($("#title").val()) == ""){
+				alert("请填写借款标题!");
+				$("#title").val("");
+				return false;
+			} 
+			
+			//借款金额
+			var amount = $.trim($("#amount").val());
+			if(amount == ""){
+				alert("请填写借款金额!");
+				$("#amount").val("");
+				return false;
+			}
+			//借款期限单位
+			var periodUnit = $("#periodUnit").val() * 1;
+			if(periodUnit < -1 || periodUnit > 1){
+				alert("请选择借款期限单位!");
+				return false;
+			} 
+			
+			if($("#periodUnit").val() == ""){
+				alert("请选择借款期限单位!");
+				return false;
+			} 
+			
+			var period = $("#period").val();
+			if(period == null || period == "" || period == 0){
+				alert("请选择借款期限!");
+				return false;
+			} 
+			
+			//利率
+			var apr = $("#apr").val();
+			if(apr == null || apr == "" || apr < 0){
+				alert("请选择年化利率范围!");
+				return false;
+			}
+			
+			//借款描述
+			var description = $.trim($("#description").val());
+			if(description == "" || description.length > 1000){
+				$("#description").html("请描述借款详情并控制在1~1000个字符单位之间!");
+				return false;
+			}
+			/* 页面防止重复提交 */
+			$(":submit",this).attr("disabled","disabled");
+			
+		});
+		
+	});
+	
+	function checkTitle(){
+		if($.trim($("#title").val()) == ""){
+			$("#ctitle").html("请填写借款标题!");
+		}else{
+			$("#ctitle").html("");
+		} 
+	};
+	$(":input").blur(function(){
+		var idStr = $(this).attr("id");
+		var valueStr = $.trim($("#"+idStr).val());
+		if(idStr == 'userName') {
+			if(!valueStr) {
+				$("#aname").html("请填写姓名!");
+			} else {
+				$("#ctitle").html("");
+			}
+		} else if(idStr == 'mobile') {
+			if(!valueStr) {
+				$("#cmobile").html("联系方式不能为空!");
+			} else if(!valueStr.isMobileNum(valueStr)){
+				$("#cmobile").html("请填写正确的联系方式!");
+			} else {
+				$("#cmobile").html("");
+			}
+		} else if(idStr == 'title') {
+			if(!valueStr){
+				$("#ctitle").html("请填写借款标题!");
+			} else {
+				$("#ctitle").html("");
+			} 
+		} else if(idStr == 'amount') {
+			if(!valueStr) {
+				$("#camount").html("请填写借款金额!");
+			} else {
+				$("#camount").html("");
+			}
+		}
+	});
+	
+	
+	function changePeriod(value) {
+		$("#period").removeAttr('disabled').empty();
+		$("#period").append('<option value="0">请选择</option>');
+		var i;
+		if(value == -1) {//年
+			for (i=1; i<=5; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		} else if(value == 0) {//月
+			for (i=1; i<=12; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		} else if(value == 1) {//日
+			for (i=1; i<=30; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		}
+	};
+	
+	
+	$(function(){
+		changePeriod($("#periodUnit").val());
+	});
+</script>

@@ -1,0 +1,1482 @@
+2016-11-07 10:06:24,493 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:06:26,258 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1765
+2016-11-07 10:06:26,440 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1947
+2016-11-07 10:08:05,787 ERROR ~ Cannot connected to the database : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 101294
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:348)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2391)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2428)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2213)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:797)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:133)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:257)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:298)
+	... 16 more
+2016-11-07 10:08:07,342 ERROR ~ 
+
+@72213ijd7
+Internal Server Error (500) for request GET /
+
+Database error
+A database error occured : Cannot connected to the database, Communications link failure  The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 102849
+play.exceptions.DatabaseException: Cannot connected to the database, Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:185)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:348)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2391)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2428)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2213)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:797)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:133)
+	... 5 more
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:257)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:298)
+	... 16 more
+2016-11-07 10:08:07,343 ERROR ~ 
+
+@72213ijd8
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 102850
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:08:07,748 ERROR ~ 
+
+@72213ijd9
+Internal Server Error (500) for request GET /favicon.ico
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 103255
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve404(PlayHandler.java:691)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/404.html.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:08:07,749 ERROR ~ 
+
+@72213ijda
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 103256
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:14:40,778 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:14:41,593 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 815
+2016-11-07 10:14:41,667 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 889
+2016-11-07 10:14:57,123 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 16345
+2016-11-07 10:15:01,842 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 21064
+2016-11-07 10:15:02,638 ERROR ~ 
+
+@72214gc3f
+Error during job execution (jobs.Bootstrap)
+
+Oops: VerifyError
+An unexpected error occured caused by exception VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 21860
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.Invoker$Invocation.onException(Invoker.java:244)
+	at play.jobs.Job.onException(Job.java:124)
+	at play.jobs.Job.call(Job.java:163)
+	at Invocation.Job(Play!)
+Caused by: java.lang.VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+	at jobs.Bootstrap.doJob(Bootstrap.java:36)
+	at play.jobs.Job.doJobWithResult(Job.java:50)
+	at play.jobs.Job.call(Job.java:146)
+	... 1 more
+2016-11-07 10:15:03,298 ERROR ~ 
+
+@72214gc3g
+Internal Server Error (500) for request GET /
+
+Oops: VerifyError
+An unexpected error occured caused by exception VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22520
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.jobs.JobsPlugin.afterApplicationStart(JobsPlugin.java:131)
+	at play.plugins.PluginCollection.afterApplicationStart(PluginCollection.java:531)
+	at play.Play.start(Play.java:554)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+	at jobs.Bootstrap.doJob(Bootstrap.java:36)
+	at play.jobs.Job.doJobWithResult(Job.java:50)
+	at play.jobs.Job.call(Job.java:146)
+	at Invocation.Job(Play!)
+2016-11-07 10:15:03,298 ERROR ~ 
+
+@72214gc3h
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22520
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:15:03,641 ERROR ~ 
+
+@72214gc3i
+Internal Server Error (500) for request GET /favicon.ico
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22863
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve404(PlayHandler.java:691)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/404.html.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:15:03,642 ERROR ~ 
+
+@72214gc3j
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22864
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:16:15,191 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:16:16,082 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 891
+2016-11-07 10:16:16,161 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 970
+2016-11-07 10:16:29,711 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 14520
+2016-11-07 10:16:33,769 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 18578
+2016-11-07 10:16:34,299 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 19108
+2016-11-07 10:16:34,300 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 19109
+2016-11-07 10:16:34,471 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 19280
+2016-11-07 10:16:34,472 ERROR ~ 读取新浪配置库时 :E:\document\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p\conf\sina\sina.properties (系统找不到指定的路径。)  ~ play.Logger.error(Logger.java:399) ~ play ~ 19281
+2016-11-07 10:16:34,473 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 19282
+2016-11-07 10:16:40,538 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 25347
+2016-11-07 10:16:43,031 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 10:16:43 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 27840
+2016-11-07 10:16:44,349 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 29158
+2016-11-07 10:16:44,366 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 29175
+2016-11-07 10:16:44,366 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 29175
+2016-11-07 10:17:01,039 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.loginInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 45848
+2016-11-07 10:17:01,733 DEBUG ~ 正在执行action请求命令：Application.captcha  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46542
+2016-11-07 10:17:02,949 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.ipLocation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 47758
+2016-11-07 10:17:08,644 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.login  ~ play.Logger.debug(Logger.java:232) ~ play ~ 53453
+2016-11-07 10:17:08,655 INFO  ~ supervisor_[id:edab9ff4-795a-4236-95eb-7b80f36b3d42][random:Bkjq]  ~ play.Logger.info(Logger.java:289) ~ play ~ 53464
+2016-11-07 10:17:09,193 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 54002
+2016-11-07 10:17:09,194 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 54003
+2016-11-07 10:17:09,195 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 54004
+2016-11-07 10:17:16,892 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61701
+2016-11-07 10:17:16,893 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61702
+2016-11-07 10:17:16,893 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61702
+2016-11-07 10:17:16,980 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61789
+2016-11-07 10:17:16,992 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61801
+2016-11-07 10:17:16,993 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 61802
+2016-11-07 10:17:37,820 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82629
+2016-11-07 10:17:37,821 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82630
+2016-11-07 10:17:37,822 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82631
+2016-11-07 10:17:39,752 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 84561
+2016-11-07 10:17:39,752 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 84561
+2016-11-07 10:17:39,753 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 84562
+2016-11-07 10:17:48,027 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 92836
+2016-11-07 10:17:48,028 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 92837
+2016-11-07 10:17:48,028 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 92837
+2016-11-07 10:17:48,852 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93661
+2016-11-07 10:17:48,852 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93661
+2016-11-07 10:17:48,853 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93662
+2016-11-07 10:17:53,652 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 98461
+2016-11-07 10:17:53,653 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 98462
+2016-11-07 10:17:53,653 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 98462
+2016-11-07 10:17:56,212 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 101021
+2016-11-07 10:17:56,213 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 101022
+2016-11-07 10:17:56,213 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 101022
+2016-11-07 10:20:15,610 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 240419
+2016-11-07 10:20:15,611 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 240420
+2016-11-07 10:20:15,621 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 240430
+2016-11-07 10:20:15,636 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 240445
+2016-11-07 10:20:15,923 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 240732
+2016-11-07 10:20:17,870 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 10:20:17 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 242679
+2016-11-07 10:21:04,439 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:21:05,293 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 854
+2016-11-07 10:21:05,364 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 925
+2016-11-07 10:23:01,976 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 117537
+2016-11-07 10:23:06,381 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 121942
+2016-11-07 10:23:06,706 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 122267
+2016-11-07 10:23:06,706 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 122267
+2016-11-07 10:23:06,747 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 122308
+2016-11-07 10:23:06,748 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 122309
+2016-11-07 10:23:07,142 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 122703
+2016-11-07 10:23:09,230 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 10:23:09 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 124791
+2016-11-07 10:23:09,704 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 125265
+2016-11-07 10:23:09,717 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 125278
+2016-11-07 10:23:09,717 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 125278
+2016-11-07 10:23:19,440 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.loginInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 135001
+2016-11-07 10:23:19,820 DEBUG ~ 正在执行action请求命令：Application.captcha  ~ play.Logger.debug(Logger.java:232) ~ play ~ 135381
+2016-11-07 10:23:20,392 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.ipLocation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 135953
+2016-11-07 10:23:27,037 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.login  ~ play.Logger.debug(Logger.java:232) ~ play ~ 142598
+2016-11-07 10:23:27,049 INFO  ~ supervisor_[id:ffbaee06-9fbb-44ec-bd45-b796f3d0225b][random:yJsF]  ~ play.Logger.info(Logger.java:289) ~ play ~ 142610
+2016-11-07 10:23:27,244 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 142805
+2016-11-07 10:23:27,244 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 142805
+2016-11-07 10:23:27,245 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 142806
+2016-11-07 10:23:27,939 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143500
+2016-11-07 10:23:27,939 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143500
+2016-11-07 10:23:27,940 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143501
+2016-11-07 10:23:28,028 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143589
+2016-11-07 10:23:28,029 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143590
+2016-11-07 10:23:28,030 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 143591
+2016-11-07 10:23:29,348 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 144909
+2016-11-07 10:23:29,350 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 144911
+2016-11-07 10:23:29,350 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 144911
+2016-11-07 10:23:31,972 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 147533
+2016-11-07 10:23:31,973 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 147534
+2016-11-07 10:23:31,973 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 147534
+2016-11-07 10:23:34,451 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 150012
+2016-11-07 10:23:34,452 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 150013
+2016-11-07 10:23:34,452 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 150013
+2016-11-07 10:23:39,817 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 155378
+2016-11-07 10:23:39,817 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 155378
+2016-11-07 10:23:39,818 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 155379
+2016-11-07 10:24:44,025 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219586
+2016-11-07 10:24:44,026 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219587
+2016-11-07 10:24:44,027 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219588
+2016-11-07 10:24:44,299 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219860
+2016-11-07 10:24:44,300 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219861
+2016-11-07 10:24:44,300 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 219861
+2016-11-07 10:25:11,868 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247429
+2016-11-07 10:25:11,869 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247430
+2016-11-07 10:25:11,870 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247431
+2016-11-07 10:25:11,978 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247539
+2016-11-07 10:25:11,978 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247539
+2016-11-07 10:25:11,980 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 247541
+2016-11-07 10:25:15,165 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 250726
+2016-11-07 10:25:15,166 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 250727
+2016-11-07 10:25:15,166 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 250727
+2016-11-07 10:25:16,788 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 252349
+2016-11-07 10:25:16,789 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 252350
+2016-11-07 10:25:16,789 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 252350
+2016-11-07 10:25:34,846 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 270407
+2016-11-07 10:25:34,847 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 270408
+2016-11-07 10:25:34,848 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 270409
+2016-11-07 10:25:34,999 INFO  ~ ******************标的录入开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 270560
+2016-11-07 10:25:35,001 INFO  ~ ***********out_bid_no--2016110710107458  ~ play.Logger.info(Logger.java:289) ~ play ~ 270562
+2016-11-07 10:25:35,002 INFO  ~ ***********web_site_name--拓米金融  ~ play.Logger.info(Logger.java:289) ~ play ~ 270563
+2016-11-07 10:25:35,002 INFO  ~ ***********bid_name--test111  ~ play.Logger.info(Logger.java:289) ~ play ~ 270563
+2016-11-07 10:25:35,003 INFO  ~ ***********bid_type--CREDIT  ~ play.Logger.info(Logger.java:289) ~ play ~ 270564
+2016-11-07 10:25:35,003 INFO  ~ ***********bid_amount--10000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 270564
+2016-11-07 10:25:35,004 INFO  ~ ***********bid_year_rate--11.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 270565
+2016-11-07 10:25:35,004 INFO  ~ ***********bid_duration--90  ~ play.Logger.info(Logger.java:289) ~ play ~ 270565
+2016-11-07 10:25:35,005 INFO  ~ ***********repay_type--AVERAGE_CAPITAL_PLUS_INTERES  ~ play.Logger.info(Logger.java:289) ~ play ~ 270566
+2016-11-07 10:25:35,005 INFO  ~ ***********begin_date--20161107102534  ~ play.Logger.info(Logger.java:289) ~ play ~ 270566
+2016-11-07 10:25:35,006 INFO  ~ ***********term--20160826010101  ~ play.Logger.info(Logger.java:289) ~ play ~ 270567
+2016-11-07 10:25:35,006 INFO  ~ ***********guarantee_method--银行担保  ~ play.Logger.info(Logger.java:289) ~ play ~ 270567
+2016-11-07 10:25:35,007 INFO  ~ ***********borrower_info_list--201609191576086~UID~10000.0~11111111111111~13851953236  ~ play.Logger.info(Logger.java:289) ~ play ~ 270568
+2016-11-07 10:25:35,007 INFO  ~ ***********sinaAcctNo--201609191576086  ~ play.Logger.info(Logger.java:289) ~ play ~ 270568
+2016-11-07 10:25:35,008 INFO  ~ ******************标的录入结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 270569
+2016-11-07 10:25:36,084 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 271645
+2016-11-07 10:25:36,085 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 271646
+2016-11-07 10:25:36,085 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 271646
+2016-11-07 10:25:39,712 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 275273
+2016-11-07 10:25:39,714 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 275275
+2016-11-07 10:25:39,714 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 275275
+2016-11-07 10:25:41,261 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 276822
+2016-11-07 10:25:41,262 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 276823
+2016-11-07 10:25:41,262 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 276823
+2016-11-07 10:25:55,727 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291288
+2016-11-07 10:25:55,728 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291289
+2016-11-07 10:25:55,729 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291290
+2016-11-07 10:25:55,851 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291412
+2016-11-07 10:25:55,851 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291412
+2016-11-07 10:25:55,852 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 291413
+2016-11-07 10:26:46,245 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 341806
+2016-11-07 10:26:46,246 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 341807
+2016-11-07 10:26:46,247 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 341808
+2016-11-07 10:26:47,759 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 343320
+2016-11-07 10:26:47,760 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 343321
+2016-11-07 10:26:47,760 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 343321
+2016-11-07 10:26:49,058 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 344619
+2016-11-07 10:26:49,059 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 344620
+2016-11-07 10:26:49,060 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 344621
+2016-11-07 10:27:01,666 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357227
+2016-11-07 10:27:01,667 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357228
+2016-11-07 10:27:01,667 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357228
+2016-11-07 10:27:01,777 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357338
+2016-11-07 10:27:01,778 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357339
+2016-11-07 10:27:01,778 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 357339
+2016-11-07 10:27:06,907 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 362468
+2016-11-07 10:27:06,911 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 362472
+2016-11-07 10:28:26,244 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:28:27,286 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1042
+2016-11-07 10:28:27,363 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1119
+2016-11-07 10:28:34,882 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 10:28:35,741 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 859
+2016-11-07 10:28:35,811 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 929
+2016-11-07 10:28:52,710 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 17828
+2016-11-07 10:28:57,034 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 22152
+2016-11-07 10:28:57,360 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 22478
+2016-11-07 10:28:57,360 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 22478
+2016-11-07 10:28:57,400 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 22518
+2016-11-07 10:28:57,401 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 22519
+2016-11-07 10:28:57,737 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 22855
+2016-11-07 10:28:59,823 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 10:28:59 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 24941
+2016-11-07 10:29:00,394 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.loginInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 25512
+2016-11-07 10:29:01,305 DEBUG ~ 正在执行action请求命令：Application.captcha  ~ play.Logger.debug(Logger.java:232) ~ play ~ 26423
+2016-11-07 10:29:01,925 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.ipLocation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 27043
+2016-11-07 10:29:10,651 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.login  ~ play.Logger.debug(Logger.java:232) ~ play ~ 35769
+2016-11-07 10:29:10,665 INFO  ~ supervisor_[id:1a404845-aeb2-4511-b6de-4e952fd6a488][random:8fi4]  ~ play.Logger.info(Logger.java:289) ~ play ~ 35783
+2016-11-07 10:29:10,866 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 35984
+2016-11-07 10:29:10,867 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 35985
+2016-11-07 10:29:10,868 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 35986
+2016-11-07 10:29:11,676 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36794
+2016-11-07 10:29:11,677 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36795
+2016-11-07 10:29:11,677 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36795
+2016-11-07 10:29:11,769 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36887
+2016-11-07 10:29:11,769 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36887
+2016-11-07 10:29:11,769 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showEchartsData  ~ play.Logger.debug(Logger.java:232) ~ play ~ 36887
+2016-11-07 10:29:19,567 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44685
+2016-11-07 10:29:19,568 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44686
+2016-11-07 10:29:19,569 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44687
+2016-11-07 10:29:21,727 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46845
+2016-11-07 10:29:21,728 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46846
+2016-11-07 10:29:21,728 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46846
+2016-11-07 10:29:23,450 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 48568
+2016-11-07 10:29:23,451 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 48569
+2016-11-07 10:29:23,451 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 48569
+2016-11-07 10:29:28,416 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 53534
+2016-11-07 10:29:28,417 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 53535
+2016-11-07 10:29:28,418 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 53536
+2016-11-07 10:29:30,107 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55225
+2016-11-07 10:29:30,108 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55226
+2016-11-07 10:29:30,108 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55226
+2016-11-07 10:30:04,728 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89846
+2016-11-07 10:30:04,729 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89847
+2016-11-07 10:30:04,729 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89847
+2016-11-07 10:30:04,802 INFO  ~ ******************标的录入开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 89920
+2016-11-07 10:30:04,802 INFO  ~ ***********out_bid_no--2016110710107459  ~ play.Logger.info(Logger.java:289) ~ play ~ 89920
+2016-11-07 10:30:04,802 INFO  ~ ***********web_site_name--拓米金融  ~ play.Logger.info(Logger.java:289) ~ play ~ 89920
+2016-11-07 10:30:04,802 INFO  ~ ***********bid_name--test1111  ~ play.Logger.info(Logger.java:289) ~ play ~ 89920
+2016-11-07 10:30:04,802 INFO  ~ ***********bid_type--CREDIT  ~ play.Logger.info(Logger.java:289) ~ play ~ 89920
+2016-11-07 10:30:04,803 INFO  ~ ***********bid_amount--11111.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********bid_year_rate--11.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********bid_duration--30  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********repay_type--AVERAGE_CAPITAL_PLUS_INTERES  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********begin_date--20161107103004  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********term--20160826010101  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********guarantee_method--银行担保  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********borrower_info_list--20160919090724~UID~11111.0~11111111111~13182928319  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ***********sinaAcctNo--20160919090724  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:04,803 INFO  ~ ******************标的录入结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 89921
+2016-11-07 10:30:05,397 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 90515
+2016-11-07 10:30:05,398 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 90516
+2016-11-07 10:30:05,398 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 90516
+2016-11-07 10:32:09,103 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 214221
+2016-11-07 10:32:09,103 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 214221
+2016-11-07 10:32:09,104 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 214222
+2016-11-07 10:32:11,251 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 216369
+2016-11-07 10:32:11,251 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 216369
+2016-11-07 10:32:18,430 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 223548
+2016-11-07 10:32:18,431 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 223549
+2016-11-07 10:32:36,553 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.checkRecommendName  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241671
+2016-11-07 10:32:36,554 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.checkRecommendName  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241672
+2016-11-07 10:32:36,712 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241830
+2016-11-07 10:32:36,713 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241831
+2016-11-07 10:32:36,776 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241894
+2016-11-07 10:32:36,777 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 241895
+2016-11-07 10:32:51,547 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 256665
+2016-11-07 10:32:51,547 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 256665
+2016-11-07 10:32:51,811 INFO  ~ ******************创建激活会员开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 256929
+2016-11-07 10:32:51,811 INFO  ~ ***********identity_id--2016110710107460  ~ play.Logger.info(Logger.java:289) ~ play ~ 256929
+2016-11-07 10:32:51,811 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 256929
+2016-11-07 10:32:51,812 INFO  ~ ***********member_type--1  ~ play.Logger.info(Logger.java:289) ~ play ~ 256930
+2016-11-07 10:32:51,812 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 256930
+2016-11-07 10:32:51,812 INFO  ~ ******************创建激活会员结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 256930
+2016-11-07 10:32:52,083 INFO  ~ {response_time=20161107103252, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 257201
+2016-11-07 10:32:52,087 INFO  ~ ******************绑定认证信息开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 257205
+2016-11-07 10:32:52,087 INFO  ~ ***********identity_id--2016110710107460  ~ play.Logger.info(Logger.java:289) ~ play ~ 257205
+2016-11-07 10:32:52,087 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 257205
+2016-11-07 10:32:52,088 INFO  ~ ***********verify_type--MOBILE  ~ play.Logger.info(Logger.java:289) ~ play ~ 257206
+2016-11-07 10:32:52,088 INFO  ~ ***********verify_entity--dt40nI0YY771LyXtHcyA7BNi6JyHjTsIA0c/GZvk+R72R6dCtK+fi0iGb8VKyq5CRnvY8Or6jdEBwt8gbvCbkdUGmHxYtpSGM8+i8rWDLBeRpU2oypiWjygV2UfsyRlsnpt2XD/GPRPKyGauHH2iDyXbL2o9wL0iIRiMWqgYgqc=  ~ play.Logger.info(Logger.java:289) ~ play ~ 257206
+2016-11-07 10:32:52,088 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 257206
+2016-11-07 10:32:52,089 INFO  ~ ******************绑定认证信息结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 257207
+2016-11-07 10:32:52,314 INFO  ~ {response_time=20161107103252, partner_id=200004595271, _input_charset=UTF-8, sign=CZvsXWb4m0cPEZeqkU+oV0WeLZt5halQlymEyP89MmychP1jz4stCzhRpDijxvujrBSY6dVr8vU+P7yd/7fZ0wZFg/hb/7r0X9MM9cn4E5MCMyAzjaC6epw5WSelDmgln0HusrsuaNGeEGQKcbnzgbRti5JWZhOlRkxBy9dGVGo=, sign_type=RSA, sign_version=1.0, response_code=MEMBER_IDENTITY_BINDED_OVERRUN_FAIL, response_message=认证信息已被其他用户绑定}  ~ play.Logger.info(Logger.java:289) ~ play ~ 257432
+2016-11-07 10:32:52,377 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.register  ~ play.Logger.debug(Logger.java:232) ~ play ~ 257495
+2016-11-07 10:32:52,378 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.register  ~ play.Logger.debug(Logger.java:232) ~ play ~ 257496
+2016-11-07 10:32:57,507 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 262625
+2016-11-07 10:32:57,511 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 262629
+2016-11-07 10:33:02,479 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 267597
+2016-11-07 10:33:02,480 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 267598
+2016-11-07 10:33:15,799 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 280917
+2016-11-07 10:33:15,800 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 280918
+2016-11-07 10:33:15,857 INFO  ~ ******************创建激活会员开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 280975
+2016-11-07 10:33:15,857 INFO  ~ ***********identity_id--2016110710107461  ~ play.Logger.info(Logger.java:289) ~ play ~ 280975
+2016-11-07 10:33:15,857 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 280975
+2016-11-07 10:33:15,857 INFO  ~ ***********member_type--1  ~ play.Logger.info(Logger.java:289) ~ play ~ 280975
+2016-11-07 10:33:15,858 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 280976
+2016-11-07 10:33:15,858 INFO  ~ ******************创建激活会员结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 280976
+2016-11-07 10:33:16,089 INFO  ~ {response_time=20161107103316, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 281207
+2016-11-07 10:33:16,090 INFO  ~ ******************绑定认证信息开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 281208
+2016-11-07 10:33:16,090 INFO  ~ ***********identity_id--2016110710107461  ~ play.Logger.info(Logger.java:289) ~ play ~ 281208
+2016-11-07 10:33:16,091 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 281209
+2016-11-07 10:33:16,091 INFO  ~ ***********verify_type--MOBILE  ~ play.Logger.info(Logger.java:289) ~ play ~ 281209
+2016-11-07 10:33:16,091 INFO  ~ ***********verify_entity--axKa9UGLs+40rRg0Pfs/OOhXu6OvCwxsYea+po5ra/npHanP0z11ia9T7PGKgROACBD3HlVT00ucEH4/4nFvOjTe2Y8Um9kZFBzclhpiHFekKT5a7zoCAhY/YxvLtKu4nYbCodOBdSIaP6MTxF58Vrm+X2b8WjdsprqHLj/osQE=  ~ play.Logger.info(Logger.java:289) ~ play ~ 281209
+2016-11-07 10:33:16,091 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 281209
+2016-11-07 10:33:16,091 INFO  ~ ******************绑定认证信息结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 281209
+2016-11-07 10:33:16,347 INFO  ~ {response_time=20161107103316, partner_id=200004595271, _input_charset=UTF-8, sign=O9AT0sdl6MIOBRl9pumDTuKx6BtpZ3ipCpz6TRjm/mK8+Hlfct7MAk8U5uQqL3BhsrwHidisz6U9V5UPEya4jy9+GjcjVRGm/A30ihx7zQhuD/B5aqBhHcEa08iLLyjACMjBVAPeG6Wlxwpf7/mvSrqi6W4/0JBhs9OAxRy1XAI=, sign_type=RSA, sign_version=1.0, response_code=MEMBER_IDENTITY_BINDED_OVERRUN_FAIL, response_message=认证信息已被其他用户绑定}  ~ play.Logger.info(Logger.java:289) ~ play ~ 281465
+2016-11-07 10:33:16,405 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.register  ~ play.Logger.debug(Logger.java:232) ~ play ~ 281523
+2016-11-07 10:33:16,405 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.register  ~ play.Logger.debug(Logger.java:232) ~ play ~ 281523
+2016-11-07 10:33:20,821 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 285939
+2016-11-07 10:33:20,822 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 285940
+2016-11-07 10:33:37,569 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 302687
+2016-11-07 10:33:37,570 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 302688
+2016-11-07 10:33:37,643 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 302761
+2016-11-07 10:33:37,643 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 302761
+2016-11-07 10:33:37,643 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 302761
+2016-11-07 11:23:54,407 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 11:23:55,317 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 910
+2016-11-07 11:23:55,390 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 983
+2016-11-07 11:24:13,765 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 19358
+2016-11-07 11:24:18,255 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 23848
+2016-11-07 11:24:18,728 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 24321
+2016-11-07 11:24:18,729 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 24322
+2016-11-07 11:24:18,772 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 24365
+2016-11-07 11:24:18,772 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 24365
+2016-11-07 11:24:19,124 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 24717
+2016-11-07 11:24:21,462 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 11:24:21 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 27055
+2016-11-07 11:24:21,996 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 27589
+2016-11-07 11:24:22,011 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 27604
+2016-11-07 11:24:22,011 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 27604
+2016-11-07 11:25:11,823 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.loginInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 77416
+2016-11-07 11:25:12,286 DEBUG ~ 正在执行action请求命令：Application.captcha  ~ play.Logger.debug(Logger.java:232) ~ play ~ 77879
+2016-11-07 11:25:12,872 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.ipLocation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 78465
+2016-11-07 11:25:19,276 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.login  ~ play.Logger.debug(Logger.java:232) ~ play ~ 84869
+2016-11-07 11:25:19,287 INFO  ~ supervisor_[id:f06fd43d-e6c9-4c45-a791-034938cafc15][random:ZnbM]  ~ play.Logger.info(Logger.java:289) ~ play ~ 84880
+2016-11-07 11:25:19,625 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 85218
+2016-11-07 11:25:19,626 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 85219
+2016-11-07 11:25:19,626 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 85219
+2016-11-07 11:25:21,536 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 87129
+2016-11-07 11:25:21,537 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 87130
+2016-11-07 11:25:21,537 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 87130
+2016-11-07 11:25:23,866 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89459
+2016-11-07 11:25:23,867 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89460
+2016-11-07 11:25:23,867 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89460
+2016-11-07 11:25:25,569 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 91162
+2016-11-07 11:25:25,570 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 91163
+2016-11-07 11:25:25,570 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 91163
+2016-11-07 11:25:33,421 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 99014
+2016-11-07 11:25:33,421 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 99014
+2016-11-07 11:25:33,421 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 99014
+2016-11-07 11:25:36,321 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 101914
+2016-11-07 11:25:36,321 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registerMobile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 101914
+2016-11-07 11:25:43,348 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 108941
+2016-11-07 11:25:43,348 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.hasMobileExists  ~ play.Logger.debug(Logger.java:232) ~ play ~ 108941
+2016-11-07 11:25:51,086 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 116679
+2016-11-07 11:25:51,086 DEBUG ~ 正在执行action请求命令：front.account.LoginAndRegisterAction.registering  ~ play.Logger.debug(Logger.java:232) ~ play ~ 116679
+2016-11-07 11:25:51,198 INFO  ~ ******************创建激活会员开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 116791
+2016-11-07 11:25:51,198 INFO  ~ ***********identity_id--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 116791
+2016-11-07 11:25:51,198 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 116791
+2016-11-07 11:25:51,199 INFO  ~ ***********member_type--1  ~ play.Logger.info(Logger.java:289) ~ play ~ 116792
+2016-11-07 11:25:51,199 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 116792
+2016-11-07 11:25:51,199 INFO  ~ ******************创建激活会员结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 116792
+2016-11-07 11:25:51,643 INFO  ~ {response_time=20161107112551, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 117236
+2016-11-07 11:25:51,646 INFO  ~ ******************绑定认证信息开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 117239
+2016-11-07 11:25:51,646 INFO  ~ ***********identity_id--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 117239
+2016-11-07 11:25:51,646 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 117239
+2016-11-07 11:25:51,646 INFO  ~ ***********verify_type--MOBILE  ~ play.Logger.info(Logger.java:289) ~ play ~ 117239
+2016-11-07 11:25:51,647 INFO  ~ ***********verify_entity--ES1ydn6dwQheLMUk2lJbeZaFAMOfh8PFE5PBDWkY0QexXwEagEzCLJgg8YisF+Qi+kLUIkpAGW3QSxSCkIvZUe+fZDNjROO6B3JEwvmbnysXsz/3oBsNzuLnbE0JYZpdnJcE8TBZsrTVDGZfqlaegIkJur8y8nN+KckSkuJ5Fbw=  ~ play.Logger.info(Logger.java:289) ~ play ~ 117240
+2016-11-07 11:25:51,647 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 117240
+2016-11-07 11:25:51,647 INFO  ~ ******************绑定认证信息结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 117240
+2016-11-07 11:25:51,859 INFO  ~ {response_time=20161107112552, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 117452
+2016-11-07 11:25:52,632 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 118225
+2016-11-07 11:25:52,634 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 118227
+2016-11-07 11:25:52,634 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 118227
+2016-11-07 11:25:56,457 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 122050
+2016-11-07 11:25:56,459 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 122052
+2016-11-07 11:27:23,925 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.doCertification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 209518
+2016-11-07 11:27:23,928 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.doCertification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 209521
+2016-11-07 11:27:24,677 DEBUG ~ 正在执行action请求命令：front.account.CheckAction.createAcct  ~ play.Logger.debug(Logger.java:232) ~ play ~ 210270
+2016-11-07 11:27:24,691 INFO  ~ ******************设置实名信息开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 210284
+2016-11-07 11:27:24,691 INFO  ~ ***********identity_id--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 210284
+2016-11-07 11:27:24,691 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 210284
+2016-11-07 11:27:24,692 INFO  ~ ***********real_name--TvXo4LYHRidajpcXI/QaDrdUpDBirmVnh5WXWpbOOQMU23OMu594MMbay+B20KHeAFF86UFs4cBZGK9zwVLlG2jxg8AiQVsNoaSipzBxyrvhsO0PiNSuK/zMDebRzsTzpxIjgthAOGaM6e6T5ZNEmR9HspX7ic0BEfi0/tHEVLw=  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:24,692 INFO  ~ ***********cert_type--IC  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:24,692 INFO  ~ ***********cert_no--IHXdhdcJ1oaKOH+myaWKYrL1aUTGbftoBPJEdvnV680vuPZpMWFIDmdc/CpQH+XtD9aGNaCOLH0BUWvoBSAep+YjMnf+N0ORVYp3kWr3UGJdfA5XHDTQx/qr1nXFH478Sw5Yn07CaX6qIoawMYY3sebIarxqy5CxeUuq0SyqLdI=  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:24,692 INFO  ~ ***********need_confirm--Y  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:24,692 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:24,692 INFO  ~ ******************设置实名信息结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 210285
+2016-11-07 11:27:26,536 INFO  ~ {response_time=20161107112726, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 212129
+2016-11-07 11:27:26,859 DEBUG ~ 正在执行action请求命令：BaseController.payErrorInfo  ~ play.Logger.debug(Logger.java:232) ~ play ~ 212452
+2016-11-07 11:27:29,271 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 214864
+2016-11-07 11:27:29,273 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 214866
+2016-11-07 11:27:30,613 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.queryQualityBids  ~ play.Logger.debug(Logger.java:232) ~ play ~ 216206
+2016-11-07 11:27:30,615 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.queryQualityBids  ~ play.Logger.debug(Logger.java:232) ~ play ~ 216208
+2016-11-07 11:27:48,546 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 234139
+2016-11-07 11:27:48,547 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 234140
+2016-11-07 11:27:48,548 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 234141
+2016-11-07 11:27:51,773 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 237366
+2016-11-07 11:27:51,775 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 237368
+2016-11-07 11:27:51,776 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 237369
+2016-11-07 11:28:01,383 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 246976
+2016-11-07 11:28:01,385 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 246978
+2016-11-07 11:28:03,792 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.basicInformation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 249385
+2016-11-07 11:28:03,793 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.basicInformation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 249386
+2016-11-07 11:28:18,857 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 264450
+2016-11-07 11:28:18,861 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 264454
+2016-11-07 11:28:37,194 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282787
+2016-11-07 11:28:37,196 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282789
+2016-11-07 11:28:37,197 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282790
+2016-11-07 11:28:37,301 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282894
+2016-11-07 11:28:37,303 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282896
+2016-11-07 11:28:37,307 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 282900
+2016-11-07 11:28:54,287 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 299880
+2016-11-07 11:28:54,289 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 299882
+2016-11-07 11:28:54,290 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 299883
+2016-11-07 11:28:54,341 INFO  ~ ******************标的录入开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 299934
+2016-11-07 11:28:54,341 INFO  ~ ***********out_bid_no--2016110711107463  ~ play.Logger.info(Logger.java:289) ~ play ~ 299934
+2016-11-07 11:28:54,341 INFO  ~ ***********web_site_name--拓米金融  ~ play.Logger.info(Logger.java:289) ~ play ~ 299934
+2016-11-07 11:28:54,341 INFO  ~ ***********bid_name--test11111  ~ play.Logger.info(Logger.java:289) ~ play ~ 299934
+2016-11-07 11:28:54,342 INFO  ~ ***********bid_type--CREDIT  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********bid_amount--11111.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********bid_year_rate--11.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********bid_duration--30  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********repay_type--AVERAGE_CAPITAL_PLUS_INTERES  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********begin_date--20161107112854  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********term--20160826010101  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********guarantee_method--银行担保  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,342 INFO  ~ ***********borrower_info_list--2016110711107462~UID~11111.0~111111~13951444444  ~ play.Logger.info(Logger.java:289) ~ play ~ 299935
+2016-11-07 11:28:54,343 INFO  ~ ***********sinaAcctNo--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 299936
+2016-11-07 11:28:54,343 INFO  ~ ******************标的录入结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 299936
+2016-11-07 11:28:54,715 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 300308
+2016-11-07 11:28:54,717 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 300310
+2016-11-07 11:28:54,718 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 300311
+2016-11-07 11:29:13,366 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 318959
+2016-11-07 11:29:13,367 DEBUG ~ 正在执行action请求命令：front.account.BasicInformation.certification  ~ play.Logger.debug(Logger.java:232) ~ play ~ 318960
+2016-11-07 11:29:14,733 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.accountSecurity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 320326
+2016-11-07 11:29:14,734 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.accountSecurity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 320327
+2016-11-07 11:29:14,872 INFO  ~ {response_time=20161107112915, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功}  ~ play.Logger.info(Logger.java:289) ~ play ~ 320465
+2016-11-07 11:29:16,793 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.loginAccount  ~ play.Logger.debug(Logger.java:232) ~ play ~ 322386
+2016-11-07 11:29:16,794 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.loginAccount  ~ play.Logger.debug(Logger.java:232) ~ play ~ 322387
+2016-11-07 11:29:31,630 DEBUG ~ 正在执行action请求命令：Application.getCity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 337223
+2016-11-07 11:29:46,755 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.verifyMobileForBankCard  ~ play.Logger.debug(Logger.java:232) ~ play ~ 352348
+2016-11-07 11:29:46,757 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.verifyMobileForBankCard  ~ play.Logger.debug(Logger.java:232) ~ play ~ 352350
+2016-11-07 11:29:46,769 INFO  ~ ******************绑定银行卡开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 352362
+2016-11-07 11:29:46,770 INFO  ~ ***********request_no--2016110711107464  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********identity_id--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********identity_type--UID  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********bank_code--ICBC  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********bank_account_no--VE6o14ZUWjuS7Ev05OOTmnZp+tu0s2bvE29vkjE9lwZbnvci90TVuLl6+0iJ+mDBi+r1aIZVOQXaowIxNhaS/INdsJsz3MJgSoKNONhmjqeFcCzd+WHAUN+Hlv7LxWZFltMFMlvfDSb+4k/+OxMRdH4qaWtCCgeVYtjLnye0Nl8=  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********card_type--DEBIT  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,770 INFO  ~ ***********card_attribute--C  ~ play.Logger.info(Logger.java:289) ~ play ~ 352363
+2016-11-07 11:29:46,771 INFO  ~ ***********province--河北省  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ***********city--石家庄市  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ***********verify_mode--SIGN  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ***********phone_no--YZO0JpoIEB+j6aSpxTyS7gsB9dBey4YUjaqmHi3YVYxALRrQ2u7v/5P+4q/yr8h8mfGs84OgfZ31lNhe3oXAof8NheX07VWGgUgRXVOYjUIbSP8a7gibnhJnOEPT0JMajkJEzXv2F1wwtRkeWK7czbjINXjYq5xb1/FiTnXYTzU=  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ***********orderNum--2016110711107464  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:46,771 INFO  ~ ******************绑定银行卡结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 352364
+2016-11-07 11:29:50,017 INFO  ~ {response_time=20161107112950, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功, ticket=f0cd5d120f4249ca9937551aef04688b}  ~ play.Logger.info(Logger.java:289) ~ play ~ 355610
+2016-11-07 11:30:03,456 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.bankCardBinding  ~ play.Logger.debug(Logger.java:232) ~ play ~ 369049
+2016-11-07 11:30:03,457 DEBUG ~ 正在执行action请求命令：front.account.FundsManage.bankCardBinding  ~ play.Logger.debug(Logger.java:232) ~ play ~ 369050
+2016-11-07 11:30:03,468 INFO  ~ ******************绑定银行卡推进开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 369061
+2016-11-07 11:30:03,469 INFO  ~ ***********ticket--f0cd5d120f4249ca9937551aef04688b  ~ play.Logger.info(Logger.java:289) ~ play ~ 369062
+2016-11-07 11:30:03,469 INFO  ~ ***********valid_code--867646  ~ play.Logger.info(Logger.java:289) ~ play ~ 369062
+2016-11-07 11:30:03,469 INFO  ~ ***********client_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 369062
+2016-11-07 11:30:03,469 INFO  ~ ******************绑定银行卡推进结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 369062
+2016-11-07 11:30:05,326 INFO  ~ {response_time=20161107113005, partner_id=200004595271, _input_charset=UTF-8, response_code=APPLY_SUCCESS, response_message=提交成功, card_id=153955, is_verified=Y}  ~ play.Logger.info(Logger.java:289) ~ play ~ 370919
+2016-11-07 11:30:05,482 DEBUG ~ 正在执行action请求命令：BaseController.payErrorInfo  ~ play.Logger.debug(Logger.java:232) ~ play ~ 371075
+2016-11-07 11:30:07,889 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 373482
+2016-11-07 11:30:07,891 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 373484
+2016-11-07 11:30:08,802 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.queryQualityBids  ~ play.Logger.debug(Logger.java:232) ~ play ~ 374395
+2016-11-07 11:30:08,804 DEBUG ~ 正在执行action请求命令：front.account.AccountHome.queryQualityBids  ~ play.Logger.debug(Logger.java:232) ~ play ~ 374397
+2016-11-07 11:30:29,620 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395213
+2016-11-07 11:30:29,621 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395214
+2016-11-07 11:30:29,623 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395216
+2016-11-07 11:30:29,689 INFO  ~ ******************标的录入开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 395282
+2016-11-07 11:30:29,689 INFO  ~ ***********out_bid_no--2016110711107465  ~ play.Logger.info(Logger.java:289) ~ play ~ 395282
+2016-11-07 11:30:29,690 INFO  ~ ***********web_site_name--拓米金融  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********bid_name--test11111  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********bid_type--CREDIT  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********bid_amount--11111.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********bid_year_rate--11.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********bid_duration--30  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********repay_type--AVERAGE_CAPITAL_PLUS_INTERES  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********begin_date--20161107113029  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,690 INFO  ~ ***********term--20160826010101  ~ play.Logger.info(Logger.java:289) ~ play ~ 395283
+2016-11-07 11:30:29,691 INFO  ~ ***********guarantee_method--银行担保  ~ play.Logger.info(Logger.java:289) ~ play ~ 395284
+2016-11-07 11:30:29,691 INFO  ~ ***********borrower_info_list--2016110711107462~UID~11111.0~111111~13951444444  ~ play.Logger.info(Logger.java:289) ~ play ~ 395284
+2016-11-07 11:30:29,691 INFO  ~ ***********sinaAcctNo--2016110711107462  ~ play.Logger.info(Logger.java:289) ~ play ~ 395284
+2016-11-07 11:30:29,691 INFO  ~ ******************标的录入结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 395284
+2016-11-07 11:30:30,005 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395598
+2016-11-07 11:30:30,007 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395600
+2016-11-07 11:30:30,008 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 395601
+2016-11-07 11:31:23,381 INFO  ~ Starting E:\code\java\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2016-11-07 11:31:24,412 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1031
+2016-11-07 11:31:24,480 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1099
+2016-11-07 11:31:37,363 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/sp2p_jstr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 13982
+2016-11-07 11:31:41,801 INFO  ~ Application 'com.shovesoft.sp2p' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 18420
+2016-11-07 11:31:42,150 INFO  ~ ####支付网关初始化...  ~ play.Logger.info(Logger.java:289) ~ play ~ 18769
+2016-11-07 11:31:42,150 INFO  ~ ####新浪支付托管接口加载中...  ~ play.Logger.info(Logger.java:289) ~ play ~ 18769
+2016-11-07 11:31:42,194 DEBUG ~ 读取sina配置文件...  ~ play.Logger.debug(Logger.java:232) ~ play ~ 18813
+2016-11-07 11:31:42,195 INFO  ~ ####支付网关初始化完毕...  ~ play.Logger.info(Logger.java:289) ~ play ~ 18814
+2016-11-07 11:31:46,527 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 23146
+2016-11-07 11:31:48,622 INFO  ~ #### 直客模块相关数据更新定时任务，时间: 2016-11-07 11:31:48 ####  ~ play.Logger.info(Logger.java:289) ~ play ~ 25241
+2016-11-07 11:31:49,258 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.loginInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 25877
+2016-11-07 11:31:50,316 DEBUG ~ 正在执行action请求命令：Application.captcha  ~ play.Logger.debug(Logger.java:232) ~ play ~ 26935
+2016-11-07 11:31:50,981 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.ipLocation  ~ play.Logger.debug(Logger.java:232) ~ play ~ 27600
+2016-11-07 11:32:06,033 DEBUG ~ 正在执行action请求命令：supervisor.login.LoginAction.login  ~ play.Logger.debug(Logger.java:232) ~ play ~ 42652
+2016-11-07 11:32:06,045 INFO  ~ supervisor_[id:0aba219b-5bf6-4337-ba37-874052828ff3][random:c7JQ]  ~ play.Logger.info(Logger.java:289) ~ play ~ 42664
+2016-11-07 11:32:06,308 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 42927
+2016-11-07 11:32:06,309 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 42928
+2016-11-07 11:32:06,310 DEBUG ~ 正在执行action请求命令：supervisor.managementHome.HomeAction.showHome  ~ play.Logger.debug(Logger.java:232) ~ play ~ 42929
+2016-11-07 11:32:08,233 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44852
+2016-11-07 11:32:08,234 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44853
+2016-11-07 11:32:08,235 DEBUG ~ 正在执行action请求命令：supervisor.webContentManager.NewsManageAction.contentManagement  ~ play.Logger.debug(Logger.java:232) ~ play ~ 44854
+2016-11-07 11:32:10,208 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46827
+2016-11-07 11:32:10,209 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46828
+2016-11-07 11:32:10,209 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.loanApplicationList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 46828
+2016-11-07 11:32:12,822 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 49441
+2016-11-07 11:32:12,823 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 49442
+2016-11-07 11:32:12,823 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 49442
+2016-11-07 11:32:15,098 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 51717
+2016-11-07 11:32:15,099 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 51718
+2016-11-07 11:32:15,100 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 51719
+2016-11-07 11:32:18,747 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55366
+2016-11-07 11:32:18,748 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55367
+2016-11-07 11:32:18,749 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.selectUsersInit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 55368
+2016-11-07 11:32:45,043 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 81662
+2016-11-07 11:32:45,044 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 81663
+2016-11-07 11:32:45,045 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.addingAgencyBid  ~ play.Logger.debug(Logger.java:232) ~ play ~ 81664
+2016-11-07 11:32:45,688 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82307
+2016-11-07 11:32:45,689 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82308
+2016-11-07 11:32:45,690 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidAgencyAction.agencyBidList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 82309
+2016-11-07 11:32:52,393 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89012
+2016-11-07 11:32:52,394 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89013
+2016-11-07 11:32:52,394 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 89013
+2016-11-07 11:32:57,143 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93762
+2016-11-07 11:32:57,145 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93764
+2016-11-07 11:32:57,145 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 93764
+2016-11-07 11:32:58,355 DEBUG ~ 正在执行action请求命令：Application.getCity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 94974
+2016-11-07 11:32:58,505 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 95124
+2016-11-07 11:32:58,506 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 95125
+2016-11-07 11:32:58,506 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 95125
+2016-11-07 11:33:08,948 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteQuality  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105567
+2016-11-07 11:33:08,948 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteQuality  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105567
+2016-11-07 11:33:08,949 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteQuality  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105568
+2016-11-07 11:33:09,225 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteHot  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105844
+2016-11-07 11:33:09,226 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteHot  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105845
+2016-11-07 11:33:09,226 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.siteHot  ~ play.Logger.debug(Logger.java:232) ~ play ~ 105845
+2016-11-07 11:33:09,917 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106536
+2016-11-07 11:33:09,918 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106537
+2016-11-07 11:33:09,919 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106538
+2016-11-07 11:33:10,172 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106791
+2016-11-07 11:33:10,173 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106792
+2016-11-07 11:33:10,174 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 106793
+2016-11-07 11:33:10,658 DEBUG ~ 正在执行action请求命令：Application.getCity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 107277
+2016-11-07 11:33:10,739 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 107358
+2016-11-07 11:33:10,740 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 107359
+2016-11-07 11:33:10,740 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 107359
+2016-11-07 11:34:21,616 DEBUG ~ 正在执行action请求命令：FileUpload.uploadFile  ~ play.Logger.debug(Logger.java:232) ~ play ~ 178235
+2016-11-07 11:34:22,715 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.createUserAuditItem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179334
+2016-11-07 11:34:22,716 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.createUserAuditItem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179335
+2016-11-07 11:34:22,716 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.createUserAuditItem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179335
+2016-11-07 11:34:22,906 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179525
+2016-11-07 11:34:22,907 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179526
+2016-11-07 11:34:22,907 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 179526
+2016-11-07 11:34:23,402 DEBUG ~ 正在执行action请求命令：Application.getCity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 180021
+2016-11-07 11:34:23,484 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 180103
+2016-11-07 11:34:23,485 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 180104
+2016-11-07 11:34:23,485 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 180104
+2016-11-07 11:34:26,353 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audititem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 182972
+2016-11-07 11:34:26,354 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audititem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 182973
+2016-11-07 11:34:26,354 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audititem  ~ play.Logger.debug(Logger.java:232) ~ play ~ 182973
+2016-11-07 11:34:29,459 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186078
+2016-11-07 11:34:29,460 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186079
+2016-11-07 11:34:29,460 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.UserAuditItemAction.audit  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186079
+2016-11-07 11:34:29,719 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186338
+2016-11-07 11:34:29,720 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186339
+2016-11-07 11:34:29,720 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingDetail  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186339
+2016-11-07 11:34:30,221 DEBUG ~ 正在执行action请求命令：Application.getCity  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186840
+2016-11-07 11:34:30,298 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186917
+2016-11-07 11:34:30,299 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186918
+2016-11-07 11:34:30,299 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.userItemsList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 186918
+2016-11-07 11:35:42,379 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 258998
+2016-11-07 11:35:42,384 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 259003
+2016-11-07 11:39:42,483 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 499102
+2016-11-07 11:39:42,486 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 499105
+2016-11-07 11:41:42,327 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 618946
+2016-11-07 11:41:48,583 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 625202
+2016-11-07 11:41:55,312 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 631931
+2016-11-07 11:42:47,780 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684399
+2016-11-07 11:42:47,781 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684400
+2016-11-07 11:42:47,782 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditToFundraise  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684401
+2016-11-07 11:42:47,930 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684549
+2016-11-07 11:42:47,931 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684550
+2016-11-07 11:42:47,931 DEBUG ~ 正在执行action请求命令：supervisor.bidManager.BidPlatformAction.auditingList  ~ play.Logger.debug(Logger.java:232) ~ play ~ 684550
+2016-11-07 11:42:54,038 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 690657
+2016-11-07 11:42:54,039 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 690658
+2016-11-07 11:42:54,039 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 690658
+2016-11-07 11:43:42,573 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 739192
+2016-11-07 11:43:42,575 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 739194
+2016-11-07 11:47:42,627 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 979246
+2016-11-07 11:47:42,675 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 979294
+2016-11-07 11:51:42,743 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1219362
+2016-11-07 11:51:42,745 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1219364
+2016-11-07 11:51:50,911 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1227530
+2016-11-07 11:51:55,408 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1232027
+2016-11-07 11:51:55,414 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1232033
+2016-11-07 11:55:42,812 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1459431
+2016-11-07 11:55:42,814 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1459433
+2016-11-07 11:59:42,896 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1699515
+2016-11-07 11:59:42,897 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1699516
+2016-11-07 12:00:42,365 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1758984
+2016-11-07 12:00:45,611 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762230
+2016-11-07 12:00:45,612 INFO  ~ ***********out_trade_no--2016110712107466  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762231
+2016-11-07 12:00:45,613 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762232
+2016-11-07 12:00:45,613 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762232
+2016-11-07 12:00:45,614 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762233
+2016-11-07 12:00:45,614 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762233
+2016-11-07 12:00:45,615 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762234
+2016-11-07 12:00:45,615 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762234
+2016-11-07 12:00:45,616 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762235
+2016-11-07 12:00:45,616 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762235
+2016-11-07 12:00:45,616 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762235
+2016-11-07 12:00:46,221 INFO  ~ {sign=mIPWcC7YeLXoG68GuL1R9+m1WE0CgQugvdwv6IpNq5kJziv45b4lCSOmHj8lSWIEK+BzD4L6Cuq4Fqnrr5tc5Y9/lkmu/OCKUJbtNM0qq3pVg6UNFvxkPHGtjo5RzeR+gin/2nh1gy4FW5yE7zkzZNxVsm0i5+p69g4ajjEC5uU=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107120046, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762840
+2016-11-07 12:00:46,222 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 1762841
+2016-11-07 12:00:46,224 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 1762843
+2016-11-07 12:00:49,487 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766106
+2016-11-07 12:00:49,487 INFO  ~ ***********out_trade_no--2016110712107467  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766106
+2016-11-07 12:00:49,488 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766107
+2016-11-07 12:00:49,488 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766107
+2016-11-07 12:00:49,489 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766108
+2016-11-07 12:00:49,490 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766109
+2016-11-07 12:00:49,490 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766109
+2016-11-07 12:00:49,491 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766110
+2016-11-07 12:00:49,491 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766110
+2016-11-07 12:00:49,492 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766111
+2016-11-07 12:00:49,492 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766111
+2016-11-07 12:00:49,719 INFO  ~ {sign=DhOaC9wDZSWAacAO0Udxk2+cQ2+eW9wU9oIr85g//LK072uRvV/p/TkX1MVUYKLtPMCacHPsjymLLMKsv/ojTXCtJO+XKNQXi+ClHiyHVhdxJMeNzUHBkqs8VTeiyhQguoVsy5K8dWUllfvepcEUWPYfk8+Fqf1CfRY+NvMdPO8=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107120049, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766338
+2016-11-07 12:00:49,720 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 1766339
+2016-11-07 12:00:49,724 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 1766343
+2016-11-07 12:00:52,251 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768870
+2016-11-07 12:00:52,252 INFO  ~ ***********out_trade_no--2016110712107468  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768871
+2016-11-07 12:00:52,252 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768871
+2016-11-07 12:00:52,253 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768872
+2016-11-07 12:00:52,253 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768872
+2016-11-07 12:00:52,254 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768873
+2016-11-07 12:00:52,254 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768873
+2016-11-07 12:00:52,255 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768874
+2016-11-07 12:00:52,255 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768874
+2016-11-07 12:00:52,256 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768875
+2016-11-07 12:00:52,256 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 1768875
+2016-11-07 12:00:52,485 INFO  ~ {sign=k3cyRTvlHGK/jwL82h1LOBvZWumHEtVR5hVa2aMbC/pMIo6zVd7xUuuQrLswzl8CWhOMcSTGEiiSy+qR3vW4lPLkoZTAz0fOvETTreFru6vbNObswZ32oSCJomVD6CoN9v4snu3f9F8c3slP/sj27nrmmtO6barxqJ4iDlQo27o=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107120052, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 1769104
+2016-11-07 12:00:52,485 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 1769104
+2016-11-07 12:00:52,487 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 1769106
+2016-11-07 12:00:52,487 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1769106
+2016-11-07 12:01:52,832 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1829451
+2016-11-07 12:01:55,507 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1832126
+2016-11-07 12:01:55,811 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1832430
+2016-11-07 12:03:43,019 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1939638
+2016-11-07 12:03:43,021 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 1939640
+2016-11-07 12:07:43,088 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2179707
+2016-11-07 12:07:43,090 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2179709
+2016-11-07 12:11:43,170 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2419789
+2016-11-07 12:11:43,172 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2419791
+2016-11-07 12:11:55,875 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2432494
+2016-11-07 12:11:55,881 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2432500
+2016-11-07 12:11:58,291 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2434910
+2016-11-07 12:15:43,284 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2659903
+2016-11-07 12:15:43,287 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2659906
+2016-11-07 12:19:43,382 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2900001
+2016-11-07 12:19:43,384 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 2900003
+2016-11-07 12:21:55,975 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 3032594
+2016-11-07 12:21:55,980 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 3032599
+2016-11-07 12:22:00,210 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 3036829
+2016-11-07 12:23:43,467 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 3140086
+2016-11-07 12:23:43,469 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 3140088
+2016-11-07 13:53:56,779 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8553398
+2016-11-07 13:53:56,977 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8553596
+2016-11-07 13:53:57,085 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8553704
+2016-11-07 13:53:57,139 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8553758
+2016-11-07 13:54:01,670 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8558289
+2016-11-07 13:54:01,818 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8558437
+2016-11-07 13:54:02,009 INFO  ~ 更新财富圈邀请码表[t_wealthcircle_invite]的邀请码状态，更新0条完成  ~ play.Logger.info(Logger.java:289) ~ play ~ 8558628
+2016-11-07 13:54:15,979 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572598
+2016-11-07 13:54:15,979 INFO  ~ ***********out_trade_no--2016110713107469  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572598
+2016-11-07 13:54:15,980 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:15,980 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572599
+2016-11-07 13:54:16,295 INFO  ~ {sign=2RioPzAPYik5hRPLWZIeliBQIIrzmHzRACOrIGzfx5/1+i2btI/bV+DKxsmCpSbenUd3VbRf3qXZMFIW7YxldePM8CXaq37dD5TiLH2SxIsFLAUGRRgQ01KRxH2B5ufFnOggH58HIUViVpZX3Nj07ew8ofpsvrdu6tlcBHORzbY=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107135416, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572914
+2016-11-07 13:54:16,296 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 8572915
+2016-11-07 13:54:16,296 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 8572915
+2016-11-07 13:54:24,119 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580738
+2016-11-07 13:54:24,120 INFO  ~ ***********out_trade_no--2016110713107470  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,120 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580739
+2016-11-07 13:54:24,121 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580740
+2016-11-07 13:54:24,121 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8580740
+2016-11-07 13:54:24,462 INFO  ~ {sign=CqO6hY76WiuRipn+NndzkZMO16cFK25wZXndgtqeec0sUu/4Nigff/g5DeDcDWRUTm5AX++ubrEKiXhUpBrFnVX7I2O1NLCVDAtmABauhnK2wKrg4FYugWCM5JkbXhM0LHh50umH+voexDbRJjztjbyV20KVCWEStdq22x5m51k=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107135424, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 8581081
+2016-11-07 13:54:24,463 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 8581082
+2016-11-07 13:54:24,464 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 8581083
+2016-11-07 13:54:33,347 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589966
+2016-11-07 13:54:33,348 INFO  ~ ***********out_trade_no--2016110713107471  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589967
+2016-11-07 13:54:33,348 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589967
+2016-11-07 13:54:33,348 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589967
+2016-11-07 13:54:33,348 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589967
+2016-11-07 13:54:33,349 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,349 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,349 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,349 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,349 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,349 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 8589968
+2016-11-07 13:54:33,724 INFO  ~ {sign=XAWX3SyjkrVZZlu5u/j/OXPWilKXbxspMHPnT1MzJo89a6aWACIfw/GbNYzDx6PdzYN7clk7A8zxUaN1n8MMCBgYW4fHJv3annN3qXHPm3ul/5AIfCKSuxpRVq58gzEeKibfbYf8Bo5so6XCiUb2rFE7M61WeNZz2OdNrpJizRM=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107135433, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 8590343
+2016-11-07 13:54:33,725 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 8590344
+2016-11-07 13:54:33,726 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 8590345
+2016-11-07 13:54:33,727 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8590346
+2016-11-07 13:58:01,762 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8798381
+2016-11-07 13:58:02,001 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 8798620
+2016-11-07 14:02:02,075 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9038694
+2016-11-07 14:02:02,077 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9038696
+2016-11-07 14:04:02,101 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9158720
+2016-11-07 14:04:02,199 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9158818
+2016-11-07 14:04:06,148 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9162767
+2016-11-07 14:06:02,146 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9278765
+2016-11-07 14:06:02,148 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9278767
+2016-11-07 14:10:02,204 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9518823
+2016-11-07 14:10:02,206 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9518825
+2016-11-07 14:14:02,270 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9758889
+2016-11-07 14:14:02,275 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9758894
+2016-11-07 14:14:02,316 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9758935
+2016-11-07 14:14:02,317 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9758936
+2016-11-07 14:14:11,445 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9768064
+2016-11-07 14:18:02,396 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9999015
+2016-11-07 14:18:02,397 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 9999016
+2016-11-07 14:22:02,462 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10239081
+2016-11-07 14:22:02,463 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10239082
+2016-11-07 14:23:33,814 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10330433
+2016-11-07 14:23:36,634 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333253
+2016-11-07 14:23:36,635 INFO  ~ ***********out_trade_no--2016110714107472  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,635 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333254
+2016-11-07 14:23:36,636 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333255
+2016-11-07 14:23:36,636 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333255
+2016-11-07 14:23:36,955 INFO  ~ {sign=44f4OUDLc9E/Xw0FlTaTTshYBkNgkfjmmrQMDjPeoeaJlwmiTU1XPh1YFOM2DFyFLFnEiRgiNvibUDSpRRLTjmg5FkCXsb5lPzW9I/owLtavHQgAeyNA8C5EM5MY4IyqyuqTTvBYQG0G1XRthg1Q2LuZCweqooF4q3fHyVvy4E8=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107142336, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333574
+2016-11-07 14:23:36,955 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 10333574
+2016-11-07 14:23:36,957 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 10333576
+2016-11-07 14:23:42,579 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339198
+2016-11-07 14:23:42,580 INFO  ~ ***********out_trade_no--2016110714107473  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,580 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339199
+2016-11-07 14:23:42,581 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339200
+2016-11-07 14:23:43,036 INFO  ~ {sign=mYqXekTj+bxoKWeZU38votlE6/d7u+Lw9vLNHORQe+6vCka42WOmMnxSVXK/3EaEiwvR+EyQG7KZRSfJWgGXauaRskVN3hvz1KsTiYnqdeg7UEewUWuPjajyLOouNOztM86iXYUmry14O/a/6CwGAUQMmC0oXDycJ8Y4eK96TL0=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107142343, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339655
+2016-11-07 14:23:43,037 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 10339656
+2016-11-07 14:23:43,038 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 10339657
+2016-11-07 14:23:46,728 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343347
+2016-11-07 14:23:46,728 INFO  ~ ***********out_trade_no--2016110714107474  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343347
+2016-11-07 14:23:46,728 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343347
+2016-11-07 14:23:46,729 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343348
+2016-11-07 14:23:46,729 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343348
+2016-11-07 14:23:46,729 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343348
+2016-11-07 14:23:46,730 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343349
+2016-11-07 14:23:46,730 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343349
+2016-11-07 14:23:46,730 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343349
+2016-11-07 14:23:46,731 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343350
+2016-11-07 14:23:46,731 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343350
+2016-11-07 14:23:46,958 INFO  ~ {sign=6N0B/liOj3KiU9VuWpGC8Y7sX1qTvvJ7yEpBhzzZ3a++EPV8iBlLkZsFXkPoyKx3VBEeZ/C7aaTniEfKw4VJkJkruUTimT2pBVF/+ucplg+ixsQwhiX7oZXlJbEi8spYFFrGpKXIPCsbk/2y3+k2THjVIOWsGaM/PWDvWf0V2TQ=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107142346, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343577
+2016-11-07 14:23:46,958 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343577
+2016-11-07 14:23:46,960 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 10343579
+2016-11-07 14:23:46,961 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10343580
+2016-11-07 14:24:02,359 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10358978
+2016-11-07 14:24:02,459 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10359078
+2016-11-07 14:24:13,410 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10370029
+2016-11-07 14:26:02,545 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10479164
+2016-11-07 14:26:02,547 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10479166
+2016-11-07 14:30:02,640 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10719259
+2016-11-07 14:30:02,641 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10719260
+2016-11-07 14:34:02,539 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10959158
+2016-11-07 14:34:02,544 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10959163
+2016-11-07 14:34:02,715 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10959334
+2016-11-07 14:34:02,717 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10959336
+2016-11-07 14:34:19,820 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 10976439
+2016-11-07 14:38:02,793 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11199412
+2016-11-07 14:38:02,795 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11199414
+2016-11-07 14:42:02,868 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11439487
+2016-11-07 14:42:02,869 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11439488
+2016-11-07 14:44:02,647 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11559266
+2016-11-07 14:44:02,653 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11559272
+2016-11-07 14:44:21,755 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11578374
+2016-11-07 14:46:02,934 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11679553
+2016-11-07 14:46:02,936 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11679555
+2016-11-07 14:50:03,020 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11919639
+2016-11-07 14:50:03,021 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 11919640
+2016-11-07 14:52:02,138 INFO  ~ 更新财富圈邀请码表[t_wealthcircle_invite]的邀请码状态，更新0条完成  ~ play.Logger.info(Logger.java:289) ~ play ~ 12038757
+2016-11-07 14:52:36,950 DEBUG ~ 正在执行action请求命令：front.home.HomeAction.home  ~ play.Logger.debug(Logger.java:232) ~ play ~ 12073569
+2016-11-07 14:52:36,950 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12073569
+2016-11-07 14:52:36,950 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12073569
+2016-11-07 14:52:47,051 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12083670
+2016-11-07 14:52:51,031 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********out_trade_no--2016110714107475  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,031 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087650
+2016-11-07 14:52:51,032 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087651
+2016-11-07 14:52:51,032 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087651
+2016-11-07 14:52:51,032 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087651
+2016-11-07 14:52:51,032 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12087651
+2016-11-07 14:52:51,463 INFO  ~ {sign=lXSUKXDAvfjLuOwev0Svhz8O/e5tqHi/0Zdas22unAXbi629p+wecYBqIAOTKt/r333XS8ckYH0ck3RtKd9mP0rWCdrlsE86AOYs9gsbdJJ0wiGYMbnBI7lcF4Zu96JmSi5EDzoGemeFsxPBQQEXLkaJlQiLqCKrX1RMPF4ruHw=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107145251, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 12088082
+2016-11-07 14:52:51,464 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 12088083
+2016-11-07 14:52:51,465 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 12088084
+2016-11-07 14:52:55,377 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,377 INFO  ~ ***********out_trade_no--2016110714107476  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,377 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,377 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,377 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,377 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091996
+2016-11-07 14:52:55,378 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091997
+2016-11-07 14:52:55,378 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091997
+2016-11-07 14:52:55,378 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091997
+2016-11-07 14:52:55,378 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091997
+2016-11-07 14:52:55,378 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12091997
+2016-11-07 14:52:55,553 INFO  ~ {sign=d49tcvgY8mr+ASgOuRm9PlLAepxZbfccVBULKhu8xaR+Xsj86lgHaPu1ah/EGP8vKVr+49o8sYy9y9OzvxoF3MWltDqSkzcNYQuCmRL/ufJ0r8g9spAq1eLblAiMh648sMl2FwsGyZeT9GzFVZWiJtDHdHiZ82mS0DOCeSvKbOQ=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107145255, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 12092172
+2016-11-07 14:52:55,553 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 12092172
+2016-11-07 14:52:55,554 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 12092173
+2016-11-07 14:52:58,090 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094709
+2016-11-07 14:52:58,090 INFO  ~ ***********out_trade_no--2016110714107477  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094709
+2016-11-07 14:52:58,090 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094709
+2016-11-07 14:52:58,091 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,091 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094710
+2016-11-07 14:52:58,293 INFO  ~ {sign=u70Afr3/iXpguEhsLQ7UCWfBg5URLFbqxA2t51tUqksYxXpAyEXK2w8mxSu6hA+81gBX1lMrUeN/A89sD8EeMnWHXHKuEEu5aig0k3YZk0Z5qO68SVQyXm8GfPKi1VX7uccMSAFCvgIEEN+EnDxDNMLfj5mUR8++TI/I81L/Y3Q=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107145258, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094912
+2016-11-07 14:52:58,293 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094912
+2016-11-07 14:52:58,294 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 12094913
+2016-11-07 14:52:58,295 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12094914
+2016-11-07 14:54:02,723 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12159342
+2016-11-07 14:54:02,909 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12159528
+2016-11-07 14:54:03,096 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12159715
+2016-11-07 14:54:03,350 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12159969
+2016-11-07 14:54:23,619 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12180238
+2016-11-07 14:58:03,430 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12400049
+2016-11-07 14:58:03,432 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12400051
+2016-11-07 15:02:03,536 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12640155
+2016-11-07 15:02:03,540 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12640159
+2016-11-07 15:04:02,991 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12759610
+2016-11-07 15:04:02,997 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12759616
+2016-11-07 15:04:28,876 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12785495
+2016-11-07 15:06:03,616 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12880235
+2016-11-07 15:06:03,617 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 12880236
+2016-11-07 15:10:03,700 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13120319
+2016-11-07 15:10:03,702 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13120321
+2016-11-07 15:14:03,075 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13359694
+2016-11-07 15:14:03,081 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13359700
+2016-11-07 15:14:03,768 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13360387
+2016-11-07 15:14:03,769 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13360388
+2016-11-07 15:14:30,796 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13387415
+2016-11-07 15:18:03,859 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13600478
+2016-11-07 15:18:03,861 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13600480
+2016-11-07 15:21:58,376 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13834995
+2016-11-07 15:22:01,941 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838560
+2016-11-07 15:22:01,941 INFO  ~ ***********out_trade_no--2016110715107478  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838560
+2016-11-07 15:22:01,941 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838560
+2016-11-07 15:22:01,941 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838560
+2016-11-07 15:22:01,941 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838560
+2016-11-07 15:22:01,942 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:01,942 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:01,942 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:01,942 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:01,942 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:01,942 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838561
+2016-11-07 15:22:02,292 INFO  ~ {sign=LGEWPu+ayb5MF3zzwy5UGg8zaSe5wRQszR5P6ATGsYs1/3CvC634VOMzWDEabnuU1Lmgv8IVijvYwhrVedpP376uK9t+X9JLS5PqudXxFX9a+0LpcZvfM/+bXiA5dusc9DgEpbmcSeS/IAIukDc8cJcKr2sCsakEodMXDHjyyn0=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107152202, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838911
+2016-11-07 15:22:02,293 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 13838912
+2016-11-07 15:22:02,294 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 13838913
+2016-11-07 15:22:03,922 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13840541
+2016-11-07 15:22:04,415 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13841034
+2016-11-07 15:22:06,985 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843604
+2016-11-07 15:22:06,985 INFO  ~ ***********out_trade_no--2016110715107479  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843604
+2016-11-07 15:22:06,986 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843605
+2016-11-07 15:22:06,986 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843605
+2016-11-07 15:22:06,986 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843605
+2016-11-07 15:22:06,986 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843605
+2016-11-07 15:22:06,987 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843606
+2016-11-07 15:22:06,987 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843606
+2016-11-07 15:22:06,987 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843606
+2016-11-07 15:22:06,987 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843606
+2016-11-07 15:22:06,988 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843607
+2016-11-07 15:22:07,206 INFO  ~ {sign=714dkHkWKqrvwUVjTk7T37YSedJXMMIL4Pi1ICDR2RWXG+AXUSjXbwWPcc294Yow/1ow+5ask6dCC5iOzsRk2fkLs0DTybszQC/R0CuWbdx9U8OMcbG37ZQeuRU58x1IXDTKZxudrBWGT0XfLJBUX0H/a1jHU+KLY14XcUBd0BY=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107152207, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843825
+2016-11-07 15:22:07,207 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 13843826
+2016-11-07 15:22:07,208 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 13843827
+2016-11-07 15:22:09,897 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,897 INFO  ~ ***********out_trade_no--2016110715107480  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,897 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,897 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,897 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,897 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846516
+2016-11-07 15:22:09,898 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846517
+2016-11-07 15:22:09,898 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846517
+2016-11-07 15:22:09,898 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846517
+2016-11-07 15:22:09,898 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846517
+2016-11-07 15:22:09,898 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846517
+2016-11-07 15:22:10,169 INFO  ~ {sign=noG1fMYPIY5euaVgJO8KrLEx3KHJ1fPGiy4jq8JFv/OIDt5LaNcFe+4DTvcqw93OkHhABoafgof5SYTkqYa2rrO+pb4wEE+xhDapcTnqHXTYK7n3EMqWJfov2YvDsG6FCapF7LQjvgKW/iZ2xDNF1+Up5WoojcszwKfoqp5yqnw=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107152210, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846788
+2016-11-07 15:22:10,169 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846788
+2016-11-07 15:22:10,170 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 13846789
+2016-11-07 15:22:10,171 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13846790
+2016-11-07 15:24:03,148 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13959767
+2016-11-07 15:24:03,238 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13959857
+2016-11-07 15:24:32,683 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 13989302
+2016-11-07 15:26:04,480 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14081099
+2016-11-07 15:26:04,481 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14081100
+2016-11-07 15:30:04,549 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14321168
+2016-11-07 15:30:04,550 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14321169
+2016-11-07 15:34:03,317 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14559936
+2016-11-07 15:34:03,324 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14559943
+2016-11-07 15:34:04,620 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14561239
+2016-11-07 15:34:04,622 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14561241
+2016-11-07 15:34:38,398 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14595017
+2016-11-07 15:38:04,696 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14801315
+2016-11-07 15:38:04,697 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 14801316
+2016-11-07 15:42:04,763 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15041382
+2016-11-07 15:42:04,765 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15041384
+2016-11-07 15:44:03,407 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15160026
+2016-11-07 15:44:03,413 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15160032
+2016-11-07 15:44:40,282 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15196901
+2016-11-07 15:46:04,828 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15281447
+2016-11-07 15:46:04,829 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15281448
+2016-11-07 15:50:02,265 INFO  ~ 更新财富圈邀请码表[t_wealthcircle_invite]的邀请码状态，更新0条完成  ~ play.Logger.info(Logger.java:289) ~ play ~ 15518884
+2016-11-07 15:50:04,893 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15521512
+2016-11-07 15:50:04,894 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15521513
+2016-11-07 15:51:10,255 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15586874
+2016-11-07 15:51:13,411 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590030
+2016-11-07 15:51:13,411 INFO  ~ ***********out_trade_no--2016110715107481  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590030
+2016-11-07 15:51:13,411 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590030
+2016-11-07 15:51:13,412 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,412 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590031
+2016-11-07 15:51:13,712 INFO  ~ {sign=tPEKdtByxlfl5ISFtbsLRgVveFXc7gJPZwPQfHR4I8bFXaFYk348W3FoHgsMMEySNFoHxXTgcIPEsG30ZFnuGvbJtFiJamvAp8avdj/Ue/nJGjcJNvfoL8iXds0SJVwhPTf3exwxiKh/NsagY+5daN8fd5jGO7EIKbEqjo3Q1PM=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107155113, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590331
+2016-11-07 15:51:13,712 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 15590331
+2016-11-07 15:51:13,714 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 15590333
+2016-11-07 15:51:16,342 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592961
+2016-11-07 15:51:16,343 INFO  ~ ***********out_trade_no--2016110715107482  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,343 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592962
+2016-11-07 15:51:16,344 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592963
+2016-11-07 15:51:16,344 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592963
+2016-11-07 15:51:16,344 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15592963
+2016-11-07 15:51:16,555 INFO  ~ {sign=y2aiFV86uwNkCQ9W/+E+Vz6gdOPxMsoQepg+AjAhK7TeRDukAUI0h3uHoB3XbxNZVtR9qVUpt1skhB70uhd7h/kB0dn8qz7KPVlt90p9c1mrNDpOXxG8wCei6smrQAxkyWsdOuzRbYJv5RBYIXXvXE6GE6M/6gfUV4r2QNzE8Nk=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107155116, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 15593174
+2016-11-07 15:51:16,555 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 15593174
+2016-11-07 15:51:16,557 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 15593176
+2016-11-07 15:51:19,631 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,631 INFO  ~ ***********out_trade_no--2016110715107483  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,631 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,631 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,631 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,631 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596250
+2016-11-07 15:51:19,632 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596251
+2016-11-07 15:51:19,632 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596251
+2016-11-07 15:51:19,632 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596251
+2016-11-07 15:51:19,632 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596251
+2016-11-07 15:51:19,632 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596251
+2016-11-07 15:51:19,801 INFO  ~ {sign=b8wQntYuLPNyWjIFSJ1WX8s0jVgXO0S6eS+AnUCy9lYZzTh9f39yOFUv3DR9eePqUf8+1DrN0HBaXJbv2EbwFW7q7d4Oz6guzpg2B8Lt7SbN536adwj1OYH74Q6HLoJ1bxNqpwnc1fM+6Yhc9NvCf8y1SgGmUiRDVlBrI6fpRAU=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107155119, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596420
+2016-11-07 15:51:19,802 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596421
+2016-11-07 15:51:19,808 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 15596427
+2016-11-07 15:51:19,808 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15596427
+2016-11-07 15:54:03,476 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15760095
+2016-11-07 15:54:03,568 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15760187
+2016-11-07 15:54:04,962 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15761581
+2016-11-07 15:54:05,185 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15761804
+2016-11-07 15:54:42,380 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 15798999
+2016-11-07 15:58:05,270 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16001889
+2016-11-07 15:58:05,272 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16001891
+2016-11-07 16:02:05,356 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16241975
+2016-11-07 16:02:05,357 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16241976
+2016-11-07 16:04:03,663 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16360282
+2016-11-07 16:04:03,669 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16360288
+2016-11-07 16:04:47,433 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16404052
+2016-11-07 16:06:05,487 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16482106
+2016-11-07 16:06:05,488 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16482107
+2016-11-07 16:10:05,562 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16722181
+2016-11-07 16:10:05,564 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16722183
+2016-11-07 16:14:03,759 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16960378
+2016-11-07 16:14:03,765 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16960384
+2016-11-07 16:14:05,621 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16962240
+2016-11-07 16:14:05,622 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 16962241
+2016-11-07 16:14:49,317 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17005936
+2016-11-07 16:18:05,696 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17202315
+2016-11-07 16:18:05,698 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17202317
+2016-11-07 16:20:19,904 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17336523
+2016-11-07 16:20:23,245 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339864
+2016-11-07 16:20:23,246 INFO  ~ ***********out_trade_no--2016110716107484  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,246 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339865
+2016-11-07 16:20:23,247 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17339866
+2016-11-07 16:20:23,656 INFO  ~ {sign=mRYIfHgfctl884Iu5lG5vN7+Ol6wxOnqjSLdKyvBmFXtG3NbCy3v3Vcxm1/tmmwfYoOAVMYdBzaQry1x7apLCZl6RCbWxDx+WaQVmDIVx2j3me/tcumldi4bJBIFaVG4ogmiecnOln7WqIwQGzKR9aX6ll+RT03fkAbpEaxzrb4=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107162023, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 17340275
+2016-11-07 16:20:23,657 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 17340276
+2016-11-07 16:20:23,658 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 17340277
+2016-11-07 16:20:26,293 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342912
+2016-11-07 16:20:26,293 INFO  ~ ***********out_trade_no--2016110716107485  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342912
+2016-11-07 16:20:26,293 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342912
+2016-11-07 16:20:26,293 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342912
+2016-11-07 16:20:26,293 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342912
+2016-11-07 16:20:26,294 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,294 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,294 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,294 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,294 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,294 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17342913
+2016-11-07 16:20:26,539 INFO  ~ {sign=HxHCqDRET8NLA9ERyI+9bXw/mJ7pmpL95OsDG1Q4gU3wfBjAve0sbR/BiMeqTvhQRP5QzrkAlsv2uQk4pwYz3lpSl2/qv+x08UQcCkTHVW9T+mDVLV6Utp+SxkIeaYqgFy7vxcdG8d0BW6r7UWeUnxXnhEu1Ri2vyVitwv9pHAU=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107162026, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 17343158
+2016-11-07 16:20:26,539 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 17343158
+2016-11-07 16:20:26,540 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 17343159
+2016-11-07 16:20:29,647 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346266
+2016-11-07 16:20:29,648 INFO  ~ ***********out_trade_no--2016110716107486  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:29,648 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346267
+2016-11-07 16:20:30,109 INFO  ~ {sign=lyhc2y6XUxnRDF+I5g0F6onhWy2xgXnlQyVYjVr0eOkg5Dsg/qlS6aGa1gxOjNzTmKl56P8Ps/YXm3XSncvVgMHO8zi8vQoVb5nhbELyy9QVxhAP3euUGn7k8DEZEXaCw0vgEpkfmxdC1K5d9lJ2rspJ7I56A2nBxn8jE6NA99Y=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107162029, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346728
+2016-11-07 16:20:30,109 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346728
+2016-11-07 16:20:30,110 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 17346729
+2016-11-07 16:20:30,111 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17346730
+2016-11-07 16:22:05,758 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17442377
+2016-11-07 16:22:06,010 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17442629
+2016-11-07 16:24:03,863 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17560482
+2016-11-07 16:24:03,975 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17560594
+2016-11-07 16:24:51,133 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17607752
+2016-11-07 16:26:06,088 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17682707
+2016-11-07 16:26:06,089 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17682708
+2016-11-07 16:30:06,169 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17922788
+2016-11-07 16:30:06,171 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 17922790
+2016-11-07 16:34:04,059 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18160678
+2016-11-07 16:34:04,065 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18160684
+2016-11-07 16:34:06,238 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18162857
+2016-11-07 16:34:06,241 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18162860
+2016-11-07 16:34:56,533 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18213152
+2016-11-07 16:38:06,312 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18402931
+2016-11-07 16:38:06,313 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18402932
+2016-11-07 16:42:06,400 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18643019
+2016-11-07 16:42:06,402 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18643021
+2016-11-07 16:44:04,134 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18760753
+2016-11-07 16:44:04,140 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18760759
+2016-11-07 16:44:58,445 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18815064
+2016-11-07 16:46:06,459 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18883078
+2016-11-07 16:46:06,460 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 18883079
+2016-11-07 16:48:02,385 INFO  ~ 更新财富圈邀请码表[t_wealthcircle_invite]的邀请码状态，更新0条完成  ~ play.Logger.info(Logger.java:289) ~ play ~ 18999004
+2016-11-07 16:49:30,195 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19086814
+2016-11-07 16:49:33,508 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090127
+2016-11-07 16:49:33,516 INFO  ~ ***********out_trade_no--2016110716107487  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090135
+2016-11-07 16:49:33,516 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090135
+2016-11-07 16:49:33,516 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090135
+2016-11-07 16:49:33,516 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090135
+2016-11-07 16:49:33,516 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090135
+2016-11-07 16:49:33,517 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090136
+2016-11-07 16:49:33,517 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090136
+2016-11-07 16:49:33,517 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090136
+2016-11-07 16:49:33,517 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090136
+2016-11-07 16:49:33,517 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090136
+2016-11-07 16:49:33,764 INFO  ~ {sign=3i0JhUwaltmzRkbp7mb88PmKTBhzvqpx0JfNWCy8NPWUL+TNoMV1KkvunjXIRcJzotF0TrGYY4HYQkCLhMan8lq1R+2iTrLTRxeBScZiE1Pmdk5XFuo11sd1E627VJb+vvXS6NHD/VaC16L0aGcs+VAkGFmAIWpzPqFe0SW0mVk=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107164933, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090383
+2016-11-07 16:49:33,764 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 19090383
+2016-11-07 16:49:33,765 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 19090384
+2016-11-07 16:49:36,851 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093470
+2016-11-07 16:49:36,851 INFO  ~ ***********out_trade_no--2016110716107488  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093470
+2016-11-07 16:49:36,851 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093470
+2016-11-07 16:49:36,852 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:36,852 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093471
+2016-11-07 16:49:37,031 INFO  ~ {sign=o67m3WZioL0iTlYKDYqEl3Bxx2V7bcaJGIOF7ggOub3Z/DJjKrjgA6gKZXF1qYEklHk7H9ZiftaITdJe1Ete9AecMTqI0EiGBfMa6wVFa8rKxYuu29DpleGfJG+W89MQxpL8lhkyJ6Q3jv4a/N9H80e2HPwsJn7rmUdSkK62NDg=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107164936, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093650
+2016-11-07 16:49:37,032 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 19093651
+2016-11-07 16:49:37,033 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 19093652
+2016-11-07 16:49:40,423 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097042
+2016-11-07 16:49:40,424 INFO  ~ ***********out_trade_no--2016110716107489  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097043
+2016-11-07 16:49:40,424 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097043
+2016-11-07 16:49:40,425 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,425 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,425 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,425 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,425 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,425 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097044
+2016-11-07 16:49:40,426 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097045
+2016-11-07 16:49:40,426 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097045
+2016-11-07 16:49:40,637 INFO  ~ {sign=ItDyALIabpl3+dHDLPrmBWnTxo6Vq+kqVF/67IZd5U3cAOBx1e9Y1DI1MaY+v5Ja6Mg3lZYUt8+27ALSxqRea7FRCcF3n9OgLfn4jx0iRoOrUomAE258yv7dsq1rXOj/RElAyivCQWFHsFnoO6mWTnKWZTAvofkso7tXPX590dw=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107164940, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097256
+2016-11-07 16:49:40,637 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097256
+2016-11-07 16:49:40,638 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 19097257
+2016-11-07 16:49:40,639 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19097258
+2016-11-07 16:50:06,518 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19123137
+2016-11-07 16:50:06,744 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19123363
+2016-11-07 16:54:04,238 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19360857
+2016-11-07 16:54:04,335 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19360954
+2016-11-07 16:54:06,818 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19363437
+2016-11-07 16:54:06,820 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19363439
+2016-11-07 16:55:00,393 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19417012
+2016-11-07 16:58:06,876 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19603495
+2016-11-07 16:58:06,877 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19603496
+2016-11-07 17:02:06,933 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19843552
+2016-11-07 17:02:06,934 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19843553
+2016-11-07 17:04:04,404 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19961023
+2016-11-07 17:04:04,412 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 19961031
+2016-11-07 17:05:05,476 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20022095
+2016-11-07 17:06:07,012 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20083631
+2016-11-07 17:06:07,014 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20083633
+2016-11-07 17:10:07,101 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20323720
+2016-11-07 17:10:07,103 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20323722
+2016-11-07 17:14:04,482 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20561101
+2016-11-07 17:14:04,488 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20561107
+2016-11-07 17:14:07,175 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20563794
+2016-11-07 17:14:07,176 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20563795
+2016-11-07 17:15:07,340 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20623959
+2016-11-07 17:18:07,255 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20803874
+2016-11-07 17:18:07,256 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20803875
+2016-11-07 17:18:40,727 INFO  ~ --------------检查是否流标,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20837346
+2016-11-07 17:18:43,963 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840582
+2016-11-07 17:18:43,963 INFO  ~ ***********out_trade_no--2016110717107490  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840582
+2016-11-07 17:18:43,963 INFO  ~ ***********orig_outer_trade_no--2016101712106862  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840582
+2016-11-07 17:18:43,964 INFO  ~ ***********refund_amount--1006.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840583
+2016-11-07 17:18:43,964 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840583
+2016-11-07 17:18:43,964 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840583
+2016-11-07 17:18:43,964 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840583
+2016-11-07 17:18:43,965 INFO  ~ ***********bidId--568  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840584
+2016-11-07 17:18:43,965 INFO  ~ ***********invest_id--8184  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840584
+2016-11-07 17:18:43,965 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840584
+2016-11-07 17:18:43,965 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840584
+2016-11-07 17:18:44,275 INFO  ~ {sign=4vPrKRjC+sV1bDNWeOeWtspXKbp7YjQ0bUHNcorOr8jradYLW3clx3GrRZvkA9VCvmXMIyR4uVVD0yBGZd/QRRXA8eMSQg8oStgRFt4VW7+ARdIjanK970aT/ShsxasHsgqKgVj5kyiILrvv6/0oFMc+5pPe8ajfGO6/9q1FLfE=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107171844, response_message=交易订单号不存在：2016101712106862, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840894
+2016-11-07 17:18:44,275 INFO  ~ 自动流标失败编号(借款中->流标)：568  ~ play.Logger.info(Logger.java:289) ~ play ~ 20840894
+2016-11-07 17:18:44,276 INFO  ~ 自动流标事务正常关闭，id = 568   ~ play.Logger.info(Logger.java:289) ~ play ~ 20840895
+2016-11-07 17:18:47,176 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********out_trade_no--2016110717107491  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********orig_outer_trade_no--2016101809107264  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********refund_amount--2000.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,176 INFO  ~ ***********bidId--575  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843795
+2016-11-07 17:18:47,177 INFO  ~ ***********invest_id--8208  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843796
+2016-11-07 17:18:47,177 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843796
+2016-11-07 17:18:47,177 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843796
+2016-11-07 17:18:47,372 INFO  ~ {sign=hWyhiIijkKQDhCzJiFCJsQp0XsOBJs5oASftOqMSmM7TbWfHdWNAw3PXfKmW88/JQc1TFhp5VV5V5vLyD8uv3wIGSclfQsd5CFK93zMyCNEsm9SUKWTcCDcqFlPGwttdmjtVd/VfVK36TgdEf+8SsjCNA9TwCvPiDWdEis2+qlA=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107171847, response_message=交易订单号不存在：2016101809107264, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843991
+2016-11-07 17:18:47,372 INFO  ~ 自动流标失败编号(借款中->流标)：575  ~ play.Logger.info(Logger.java:289) ~ play ~ 20843991
+2016-11-07 17:18:47,373 INFO  ~ 自动流标事务正常关闭，id = 575   ~ play.Logger.info(Logger.java:289) ~ play ~ 20843992
+2016-11-07 17:18:50,489 INFO  ~ ******************托管退款开始******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847108
+2016-11-07 17:18:50,490 INFO  ~ ***********out_trade_no--2016110717107492  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847109
+2016-11-07 17:18:50,490 INFO  ~ ***********orig_outer_trade_no--2016101809107286  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847109
+2016-11-07 17:18:50,490 INFO  ~ ***********refund_amount--2020.0  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847109
+2016-11-07 17:18:50,490 INFO  ~ ***********summary--投标退款  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847109
+2016-11-07 17:18:50,490 INFO  ~ ***********user_ip--218.94.146.106  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847109
+2016-11-07 17:18:50,491 INFO  ~ ***********notify_url--http://localhost:9001/payment/sina/returnRefundAsyn  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847110
+2016-11-07 17:18:50,491 INFO  ~ ***********bidId--576  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847110
+2016-11-07 17:18:50,491 INFO  ~ ***********invest_id--8211  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847110
+2016-11-07 17:18:50,491 INFO  ~ ***********typeStr--flowI  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847110
+2016-11-07 17:18:50,491 INFO  ~ ******************托管退款结束******************  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847110
+2016-11-07 17:18:50,636 INFO  ~ {sign=KsUa0xEtI/XAm+X4mcdt5/r1nmoJd4Q762kRTykgd7fzfP/ImbqpzzOGgscTjywR3BWrtQ/14HmpPyrveQLHAeXd6o+VDQePzCTGTetnkyhIopjlvfCJVO7mDO3fbDIYQDFvf9Qn4pncXmCA7evi7D2fBlr6o2UYrPz2MTpZdO4=, partner_id=200004595271, _input_charset=UTF-8, response_time=20161107171850, response_message=交易订单号不存在：2016101809107286, sign_type=RSA, response_code=ILLEGAL_OUTER_TRADE_NO}  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847255
+2016-11-07 17:18:50,637 INFO  ~ 自动流标失败编号(借款中->流标)：576  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847256
+2016-11-07 17:18:50,638 INFO  ~ 自动流标事务正常关闭，id = 576   ~ play.Logger.info(Logger.java:289) ~ play ~ 20847257
+2016-11-07 17:18:50,638 INFO  ~ --------------检查是否流标,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 20847257
+2016-11-07 17:22:07,336 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21043955
+2016-11-07 17:22:07,588 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21044207
+2016-11-07 17:24:04,585 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21161204
+2016-11-07 17:24:04,679 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21161298
+2016-11-07 17:25:09,185 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21225804
+2016-11-07 17:26:07,666 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21284285
+2016-11-07 17:26:07,667 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21284286
+2016-11-07 17:30:07,740 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21524359
+2016-11-07 17:30:07,742 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21524361
+2016-11-07 17:34:04,746 INFO  ~ --------------定时判断体验金是否过期,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21761365
+2016-11-07 17:34:04,751 INFO  ~ --------------定时判断体验金是否过期,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21761370
+2016-11-07 17:34:07,852 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21764471
+2016-11-07 17:34:07,853 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21764472
+2016-11-07 17:35:14,744 INFO  ~ --------------更新首页数据除用户---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 21831363
+2016-11-07 17:38:07,911 INFO  ~ --------------定时判断标的预约状态,开始---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 22004530
+2016-11-07 17:38:07,912 INFO  ~ --------------定时判断标的预约状态,结束---------------------  ~ play.Logger.info(Logger.java:289) ~ play ~ 22004531

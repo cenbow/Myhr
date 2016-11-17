@@ -1,0 +1,33 @@
+<table border="0" cellpadding="0" cellspacing="0" width="958" class="xf_wylc_tb_viewcpms">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>标的编号</th>
+			<th>标的名称</th>
+			<th>借款金额</th>
+			*{
+			<th>放款时间</th>
+			}*
+			<th>状态</th>
+		</tr>
+		#{list pageBean?.page}	
+			<tr>
+				<td>${(pageBean?.currPage - 1)*pageBean?.pageSize + _index}</td>
+				<td>${_?.bid_no}</td>
+				
+				<td>
+					<a href="@{front.invest.investAction.invest(_?.id)}" class="xf_membill_cza" target="_blank" title="查看标的详情">${_?.title}</a>
+				</td>
+				<td>${_?.amount?.format("###,##0.00")}</td>
+				*{
+				<td>${}</td>
+				}*
+				<td>${_?.strStatus}</td>
+			</tr>
+		#{/list}	
+	</tbody>
+</table>
+<!-- 分页器 -->
+<div class="xf_wylc_page xf_zqzr_view_page1">
+	#{page funMethod:"showRelationBids",currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:2 /}
+</div>

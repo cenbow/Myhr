@@ -1,0 +1,34 @@
+#{extends 'common/frontMain.html' /} 
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	java.lang.String type5Name = business.NewsType.queryName(5);
+}%
+#{set title:currBackstageSet.seoTitle+'|新手入门' /}
+
+
+
+<div class="p-main clr mt30 p-abmain">
+    <div class="p-cfleft">
+        <ul class="p-cfnav">
+        	#{list newsTypes}
+            	<li id="xsrm${_?.id}"><a href="@{getStart(_?.id)}">${_?.name}</a></li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="p-abright">
+        <div class="p-abword clr">
+        	#{if content == null}
+				还没有添加哦!
+			#{/if}
+			#{else}
+				${content.raw()}
+			#{/else}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#xsrm" + ${id}).addClass("cur");
+	});
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_index.js'}"></script>

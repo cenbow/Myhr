@@ -1,0 +1,96 @@
+#{extends 'common/frontMain.html' /} 
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|财富工具箱' /}
+
+<div class="p-main clr mt30 p-abmain">
+    <div class="p-cfleft">
+        <ul class="p-cfnav">
+            <li id="w1"><a href="@{front.home.HomeAction.wealthToolkit(1)}">信用计算器</a></li>
+            <li id="w2"><a href="@{front.home.HomeAction.wealthToolkit(2)}">还款计算器</a></li>
+            <li id="w3"><a href="@{front.home.HomeAction.wealthToolkit(3)}">净值计算器</a></li>
+            <li id="w4"><a href="@{front.home.HomeAction.wealthToolkit(4)}">利率计算器</a></li>
+            <li id="w5"><a href="@{front.home.HomeAction.wealthToolkit(5)}">服务手续费</a></li>
+            <li id="w6"><a href="@{front.home.HomeAction.wealthToolkit(6)}">信用额度</a></li>
+        </ul>
+    </div>
+    <div class="p-abright">
+        <div class="p-abword clr" id="content">
+        	
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+	/* 信用借款器 */ 
+	function wealthToolkitCreditCalculator(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitCreditCalculator() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+  	
+	/* 还款计算器 */
+	function wealthToolkitRepaymentCalculator(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitRepaymentCalculator() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+  	
+	/* 净值计算器 */
+	function wealthToolkitNetValueCalculator(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitNetValueCalculator() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+  	
+	/* 利率计算器 */
+	function wealthToolkitAPRCalculator(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitAPRCalculator() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+  	
+	/* 服务手续费 */
+	function wealthToolkitServiceFee(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitServiceFee() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+  	
+	/* 超额借款 */
+	function wealthToolkitOverLoad(){
+  		var listAction = #{jsAction @front.home.homeAction.wealthToolkitOverLoad() /};
+		$.get(listAction(), function(data) {
+			$("#content").html(data);
+		});
+  	}
+	
+	$(function(){
+		switch(${key}){ 
+			case 1: wealthToolkitCreditCalculator(); showBg(1); break; 
+			case 2: wealthToolkitRepaymentCalculator(); showBg(2); break; 
+			case 3: wealthToolkitNetValueCalculator(); showBg(3); break; 
+			case 4: wealthToolkitAPRCalculator(); showBg(4); break; 
+			case 5: wealthToolkitServiceFee(); showBg(5); break; 
+			case 6: wealthToolkitOverLoad(); showBg(6); break; 
+		} 
+		
+		$("#wealthToolkit li a").click(function(){
+			$("#wealthToolkit li").attr('class','');
+			$(this).parent().attr('class','xf_con_wyjk_leftliisshow');
+		});	
+	});
+
+	function showBg(id){
+		$("#wealthToolkit li").attr('class','');
+		$("#w"+id).attr('class','cur');
+	}
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_index.js'}"></script>

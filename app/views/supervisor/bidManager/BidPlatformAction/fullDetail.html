@@ -1,0 +1,314 @@
+#{extends 'common/supervisor.html' /} 
+#{set title:'满标的借款标详情' /} 
+#{if (bid?.status == 1 || bid?.status == 2 || bid?.status == 30) && bid?.amount == bid?.hasInvestedAmount}
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+    #{include '/supervisor/bidManager/bidManagerLeft.control'/} 
+      <div class="xn_c_content">
+        <div class="xf_content_add">
+          <div class="xfht_t_j_y_2">
+            <!--右上-->
+            <div class="xf_ht_obu_fklm">
+              #{include '/supervisor/bidManager/BidPlatformAction/lastAndNext.control'/} 
+            </div>
+            <!-- 审核详情 -->
+            <div class="xfht_t_j_y_2">
+              #{include '/supervisor/bidManager/BidPlatformAction/detailTop.control'/} 
+              <div class="xf_con_mem_r_bottomtwo">
+                 <div class="xf_con_mem_r_h3">
+                   	综合评定：
+                 </div>
+                 #{table width:"100%", border:"0", cellspacing:"0", cellpadding:"0", class:"xf_ht_memcz_table"}
+                   #{tr}
+                     #{td align:"right", width:"133"}<span class="xf_s_sz">审核进度：</span>#{/td}
+                     #{td}
+                       <div class="xf_jd_ds">
+                         <div class="xf_jd_sj" id="showAuditScheduleDown"></div>
+                       </div>
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td align:"right", width:"133"}<span class="xf_s_sz">借款进度：</span>#{/td}
+                     #{td}
+                       <div class="xf_jd_ds">
+		                 <div class="xf_jd_sj" style="width:${bid?.loanSchedule}px">${bid?.loanSchedule}%</div>
+		               </div>
+                     #{/td}
+                   #{/tr}
+                   #{if bid?.status == 1}
+                   #{tr}
+                     #{td align:"right", valign:"top"}<span class="xf_s_sz">CBO风控体系审核：</span>#{/td}
+                     #{td}
+                       <textarea class="xf_ht_jr_obttd_textarea xf_ht_jr_shmx_textarea" id="setSuggest"></textarea>
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td}#{/td}
+                     #{td class:"xf_ht_shmx_button"}
+                       #{form @advanceLoanToFundraise(bid?.sign), method:'POST', id:'auditPass'} 
+                         <input type="hidden" name="suggest" id="suggest"/>
+                       #{/form}
+                       <input class="xf_ht_tcc_button_ok" type="button" value="通  过"
+                         onclick="advanceLoanToFundraise()";
+                       />
+                       #{form @advanceLoanToPeviewNotThrough(bid?.sign), method:'POST', id:'loanNotPass'} 
+                         <input type="hidden" name="through" id="through"/>
+                       #{/form}
+                       <input class="xf_ht_tcc_button_on" type="button" value="不通过"
+                         onclick="loanNotPass();"
+                       />
+                     #{/td}
+                   #{/tr}
+                   #{/if}
+                   #{elseif bid?.status == 2 || bid?.status == 30}
+                   #{tr}
+                     #{td align:"right", valign:"top"}<span class="xf_s_sz">CBO风控体系审核：</span>#{/td}
+                     #{td}
+                       <textarea class="xf_ht_jr_obttd_textarea xf_ht_jr_shmx_textarea" style="max-width:760px;"  disabled="disabled">${bid?.auditSuggest}</textarea>
+                     #{/td}
+                   #{/tr}
+                   #{tr}
+                     #{td}#{/td}
+                     #{td class:"xf_ht_shmx_button"}
+                       #{form @fundraiseToEaitLoan(bid?.sign), method:'POST', id:'fundraiseToEaitLoan'}
+                         <input class="xf_ht_tcc_button_ok" type="button" value="同意放款" onclick="fundraiseToEaitLoan();"/>
+                       #{/form}
+                       
+                       <!-- 判断是否是团标 -->
+                       #{if bid?.isGroup}
+                       		<input class="xf_ht_tcc_button_ok" type="button" value="关联标的放款" onclick="showSelectBids();"/>
+                       #{/if}
+                       #{form @fundraiseToLoanNotThrough(bid?.sign), method:'POST', id:'fundraiseToLoanNotThrough'}
+                         <input class="xf_ht_tcc_button_on" type="button" value="不同意放款" onclick="fundraiseToLoanNotThrough();"/>
+                       #{/form}
+                     #{/td}
+                   #{/tr}
+                   #{/elseif}
+                 #{/table}
+             </div>
+             <div class="xf_jkb_btowarp">
+               <div class="xf_jkb_bto">
+                 #{include '/supervisor/bidManager/BidPlatformAction/lastAndNext.control'/} 
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 关联借款标-弹出层 begin -->
+<div  id="kefu" style="display: none;">
+	<div class="xn_c_ban_jox xn_c_ban_jox_ptsh">
+		#{form @fundraiseToEaitLoan(), method:'POST', id:'relationFundraiseToEaitLoan'}
+			<input type="hidden" id="orderType" name="orderType"/>
+	        <input type="hidden" id="currPage" name="currPage"/>
+	        <input type="hidden" value="${bidId}" id="bid">
+			<input type="hidden" name="sign" id="bidSign" value="${groupBid?.sign}"/>
+			<input type="hidden" name="bidsAndAmount" id="bidsAndAmount" />
+			<div class="xf_ht_jr_obu_width">
+			    <span>
+			    	已投金额：${bid?.hasInvestedAmount?.format("###,##0.00")}元，待分配金额：${bid?.hasInvestedAmount?.format("###,##0.00")}元
+			    	
+			    	<input type="button" value="添加借款标的" style="margin-left: 90px;" onclick="selectRelationBid();"/>
+			    </span>
+			    <div class="xf_ht_ures_view_tcc">
+			    	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="xf_con_mem_r_b_table" id="relation_table">
+				        <tr id="header">
+			          		<th width="40px">标的编号</th>
+				          	<th width="40px">借款人</th>
+				          	<th width="80px">原借款金额</th>
+				          	<th width="80px">修改后金额</th>
+				          	<th width="80px">操作</th>
+				        </tr>
+				        *{
+				        #{list pageBean.page, as:'bid'}
+					        <tr class="select_bid">
+					          <td>${bid?.bid_no}</td>
+					          <td>${bid?.user_name}</td>
+					          <td>${bid?.amount?.format("###,##0.00")}</td>
+					          <td class="bid_amount" bidId="${bid?.id}" oldBidAmount="${bid?.amount}"><input class="correct_amount" type="text" value="${bid?.amount}" name="correctAmount" onkeyup="ndigitInteger(this,7)"/></td>
+					          <td><a href="javascript:void(0);" onclick="deleteBid(this);">删除</a></td>
+					        </tr>
+			        	#{/list}
+				        }*
+			     	</table>
+			    </div>
+			    <div>
+				         关联的借款标的显示到前台：
+				    <input type="radio" name="is_show" value="1" />显示
+					&nbsp;&nbsp;&nbsp;
+				    <input type="radio" name="is_show" value="0" />不显示
+				    <div style="height:30px;padding: 0px 19px 0px 15px;">
+				      	<div class="page_warp">
+				      	</div>
+				    </div>
+				    <div style="height:50px;padding: 0px 0px 0px 15px">
+				    	<input class="xf_ht_tcc_button_ok" type="button" onClick="confirmRelationLoan()" value="确定">
+				      	<input class="xf_ht_tcc_button_on" type="button" onClick="cancleRelationLoan(this)" value="取 消">
+				    </div>
+				 </div>
+			</div>
+		#{/form}
+	</div>
+</div>
+<!-- 关联借款标-弹出层 begin -->
+
+<!-- 关联借款标列表--弹出层 begin -->
+<div id="relation_bids"></div>
+<!-- 关联借款标列表--弹出层 end -->
+
+
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		showHighLight(1, 1, 3);
+	 });
+
+	function fundraiseToEaitLoan(){
+
+		if(confirm("确认同意放款?")){
+			 $("#fundraiseToEaitLoan").submit();
+		}
+		
+	}
+
+	function fundraiseToLoanNotThrough(){
+		if(confirm("确认不同意放款?")){
+			 $("#fundraiseToLoanNotThrough").submit();
+		}
+		
+	}
+
+	/* 提前借款审核通过 */
+	function advanceLoanToFundraise(){
+	    var setSuggest = $.trim($("#setSuggest").val());
+		
+		if(setSuggest == ""){
+			//layer.msg("请填写审核意见!", 1, 5);
+			alert("请填写审核意见!");
+			
+			return;
+		}
+		
+		$("#suggest").val(setSuggest);
+ 		$("#auditPass").submit();
+	}
+
+	/* 提前借款审核不通过验证 */
+	function loanNotPass(){
+		var setSuggest = $.trim($("#setSuggest").val());
+		
+		if(setSuggest == ""){
+			alert("请填写审核不通过意见!");
+			
+			return;
+		}
+		
+		$("#through").val(setSuggest);
+		$("#loanNotPass").submit();
+	}
+	
+	function upBid(){
+		window.location.href = "@{fullDetail(bid?.upId)}"; 
+	}
+	
+	function nextBid(){
+		window.location.href = "@{fullDetail(bid?.nextId)}"; 
+	}
+	
+	//关联标的放款
+	function selectRelationBid(currPage, pageSize) {
+		var bidId = ${bid?.id};
+		var sign = '${bid?.sign}';
+		$("#bidSign").val(sign);
+		$.ajax({
+			url : "@{selectRelationBidInit()}",
+			type : "POST",
+			data : {
+				"bidId" : bidId,
+				"currPage" : currPage,
+				"pageSize" : pageSize,
+				"keyword" : $("#keyword").val()
+			},
+			success : function(data) {
+				var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){
+					return;
+				}
+				if (data.code < 0) {
+					alert(data.msg);
+
+					return;
+				}
+				$("#relation_bids").html(data);
+				$.layer({
+			        type: 1,
+			        area: ['50%', 'auto'],
+			        title: '借款标列表',
+			        page: {dom : '#relation_bids'}
+		      	});
+			},
+			error : function() {
+				//layer.msg("对不起，出现错误!", 1, 5);
+				alert("对不起，出现错误!");
+			}
+		});
+	};
+	
+	function showSelectBids() {
+		//$("#kefu").html(data);
+		$.layer({
+	        type: 1,
+	        area: ['40%', 'auto'],
+	        title: '关联借款标',
+	        page: {dom : '#kefu'}
+      	});
+	}
+	
+	function cancle() {
+		$("#relation_bids").hide();
+	};
+	
+	//删除关联标的
+	function deleteBid(obj) {
+		$(obj).parent("td").parent("tr").remove();
+	};
+	
+	//确认关联标的放款
+	function confirmRelationLoan() {
+		var amount = ${bid.hasInvestedAmount};//借款标已投金额
+		var selectAmount = 0;
+		var as = [];
+		var temp = []; 
+		$.each($(".bid_amount"),function(){
+			selectAmount = selectAmount + $(this).find("input").val() * 1;
+			temp = [];
+			temp.push('{"bidId":');
+			temp.push($(this).attr("bidId"));
+			temp.push(',"correctAmount":');
+			temp.push($(this).find("input").val());
+			temp.push(',"oldBidAmount":');
+			temp.push($(this).attr("oldBidAmount"));
+			temp.push('}');
+			as.push(temp.join("")); 
+		});
+		if(selectAmount != amount) {
+			alert("累计金额必须等于已投金额："+ amount +"元");
+			return false;
+		}
+		$("#bidsAndAmount").val(as.toString());
+		$("#relationFundraiseToEaitLoan").submit();
+	};
+	
+	
+	//取消关联标的放款审核
+	function cancleRelationLoan(obj) {
+		var index = layer.getIndex($(obj));
+		layer.close(index);
+	};
+	
+</script>
+#{/if}

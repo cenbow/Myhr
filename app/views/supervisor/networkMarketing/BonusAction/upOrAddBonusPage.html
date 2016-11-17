@@ -1,0 +1,148 @@
+<div class="xf_ht_jr_obu_width">
+  <div class="xf_fktz_tcc_table">
+  #{form @supervisor.networkMarketing.BonusAction.upOrAddBonus(), id:'upOrAddBonus'}
+  <input type="hidden" id="bonusRuleType" name="bonusRule.type" value="${tbr?.type}"/>
+  <input type="hidden" id="bonusRule.amount" name="bonusRule.id" value="${tbr?.id}"/>
+  <table border="0" cellspacing="0" cellpadding="0" class="xf_ht_jr_obu_form">
+  	 #{if type == 4}
+  	 <tr>
+      <td align="right" width="140">投资满：</td>
+      <td><input class="xf_ht_jr_dfk_i_input" name="bonusRule.invest_amount" type="text" onkeyup="value=value.replace(/[^\d\.]/g, '').replace(/(\.\d{2}).*/g, '$1')" value="${tbr?.invest_amount}" />元</td>
+    </tr>
+    <tr>
+      <td align="right" width="140">红包金额：</td>
+      <td><input type="radio" id="ruleType1" name="bonusRule.rule_type" #{if tbr?.rule_type==2}  #{/if}#{else} checked #{/else} value="1" />固定金额　
+      <input type="radio" id="ruleType2" name="bonusRule.rule_type" #{if tbr?.rule_type==2} checked #{/if} value="2" />投资比例</td>
+    </tr>
+    <tr>
+      <td align="right" width="140"><span id="rule_type_text1">固定金额</span>：</td>
+      <td><input class="xf_ht_jr_dfk_i_input" id="bAmount" name="bonusRule.amount" type="text" onkeyup="value=value.replace(/[^\d\.]/g, '').replace(/(\.\d{2}).*/g, '$1')" value="${tbr?.amount}" value="${tbr?.amount}" /><span id="rule_type_text2">元</span></td>
+    </tr>
+  	 #{/if}
+  	 #{else}
+    <tr>
+      <td align="right" width="140">红包金额：</td>
+      <td><input class="xf_ht_jr_dfk_i_input" id="bAmount" name="bonusRule.amount" type="text" onkeyup="value=value.replace(/[^\d\.]/g, '').replace(/(\.\d{2}).*/g, '$1')" value="${tbr?.amount}" />元</td>
+    </tr>
+    #{/else}
+    #{if type != 3}
+    <tr>
+      <td align="right" valign="middle" class="xf_ht_jr_obttd_l">规则生效时间：</td>
+      <td align="" valign="middle" class="xf_ht_jr_obttd_l">
+      <input name="bonusRule.use_time" type="text" id="beginTime" class="search_time" onclick="laydate()" value="${tbr?.use_time?.format('yyyy-MM-dd')}" style="cursor: pointer"/>
+	         	<span class="search_timesp">--</span>
+	         <input name="bonusRule.validity_time" type="text" id="endTime" class="search_time" onclick="laydate()" value="${tbr?.validity_time?.format('yyyy-MM-dd')}" style="cursor: pointer"/>
+      </td>
+    </tr>
+    #{/if}
+    <tr>
+      <td align="right" width="140">红包类型：</td>
+      <td>
+      <input type="radio" id="rule1" name="bonusRule.is_cash" #{if tbr?.is_cash==1} checked #{/if} value="1" />现金红包　
+      <input type="radio" id="rule0" name="bonusRule.is_cash" #{if tbr?.is_cash==1} #{/if}#{else} checked #{/else} value="0" />非现金红包</td>
+    </tr>
+    <tr class="rule_">
+      <td align="right" width="140">红包使用最低投资额：</td>
+      <td><input name="bonusRule.min_invest" class="xf_ht_jr_dfk_i_input" type="text" value="${tbr?.min_invest}" onkeyup="value=value.replace(/[^\d\.]/g, '').replace(/(\.\d{2}).*/g, '$1')" value="${tbr?.amount}"/>元</td>
+    </tr>
+    
+    <tr class="rule_">
+      <td align="right" width="140">红包有效期：</td>
+      <td><input class="xf_ht_jr_dfk_i_input" id="validity" name="bonusRule.validity" type="text" value="${tbr?.validity}" onkeyup="value=value.replace(/[^\d]/g, '').replace(/^(10000000|\d{0,7}).*/, '$1')" onblur="value=value.replace(/[^\d]/g, '').replace(/^(10000000|\d{0,7}).*/, '$1')" onpaste="return false"/>个月</td>
+    </tr>
+    <tr class="rule_">
+      <td align="right" width="140">几月标可用：</td>
+      <td><input class="xf_ht_jr_dfk_i_input" id="used_month" name="bonusRule.used_month" type="text" value="${tbr?.used_month}" onkeyup="value=value.replace(/[^\d]/g, '').replace(/^(10000000|\d{0,7}).*/, '$1')" onblur="value=value.replace(/[^\d]/g, '').replace(/^(10000000|\d{0,7}).*/, '$1')" onpaste="return false"/>个月</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td class="xf_ht_tcc_button">
+        <input class="jbox_ok" type="button" value="确  定" onclick="save();">
+        <input class="jbox_on" type="button" value="取  消" onclick="layer.closeAll()">
+      </td>
+    </tr>
+  </table>
+  #{/form}
+</div>
+</div>
+<script type="text/javascript">
+  var g_groupIds;
+  var g_selectedIds;
+  
+  $(function() {
+    //关闭
+    $(".xf_ht_jr_obu_r").click(function() {
+      $("#xf_ht_tjgly_ttc").hide();
+    });
+
+    init();
+	if(${tbr?.is_cash==1}){
+		$(".rule_").hide();
+	}
+	$("#rule1").click(function(){
+		$(".rule_").hide();
+	});
+	$("#rule0").click(function(){
+		$(".rule_").show();
+	});
+	$("#ruleType1").click(function(){
+		$("#rule_type_text1").text("固定金额");
+		$("#rule_type_text2").text("元");
+	});
+	$("#ruleType2").click(function(){
+		$("#rule_type_text1").text("投资比例");
+		$("#rule_type_text2").text("%");
+	});
+	if(${tbr?.rule_type==1}){
+		$("#rule_type_text1").text("固定金额");
+		$("#rule_type_text2").text("元");
+	}else if(${tbr?.rule_type==2}){
+		$("#rule_type_text1").text("投资比例");
+		$("#rule_type_text2").text("%");
+	}
+  });
+
+  //初始化
+  function init() {
+    g_groupIds = new Array();
+    g_selectedIds = new Array();
+  }
+  function save(){
+  	if($("#bAmount").val()==0){
+  		alert("金额必须大于0！");
+  		return;
+  	}
+  	if($(".rule_").css("display")!="none"){
+  		if($("#validity").val()==0){
+  			alert("有效期必须大于0！");
+  			return;
+  		}
+  	}
+  	if($(".rule_").css("display")!="none"){
+  		if($("#used_month").val()==0){
+  			alert("适用月份必须大于0！");
+  			return;
+  		}
+  	}
+  	if(!confirm("确认操作？")){
+		return;
+	}
+	$.ajax({
+      url : "@{supervisor.networkMarketing.BonusAction.upOrAddBonus()}",
+      type : "POST",
+      data : $('#upOrAddBonus').serialize(),
+      dataType : "text",
+      success : function(data) {
+        if(data == "success"){
+    			alert("保存成功！");
+    			location.reload();
+    		}else{
+    			alert(data);
+    		}
+      },
+      error : function() {
+        alert("对不起，出现错误!");
+      }
+    });
+  }
+</script>

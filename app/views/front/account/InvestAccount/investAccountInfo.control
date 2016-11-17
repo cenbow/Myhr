@@ -1,0 +1,32 @@
+<div class="xf_mem_accout_cont_r">
+							<table border="0" cellpadding="0" cellspacing="0" width="100%" class="xf_mem_acc_viewcpms">
+								<tbody>
+									<tr>
+										<td align="left" valign="middle" width="81">用户名：</td>
+									  	<td>${user?.name}</td>
+									</tr>
+									<tr>
+										<td align="left" valign="middle">信用等级：</td>
+									  	<td><span class="xf_mem_l_memhyA">#{img src:"${user?.myCredit?.imageFilename}",alt:"",width:"30px",height:"30px"}#{/img}</span></td>
+									</tr>
+									<tr>
+										<td align="left" valign="middle">信用积分：</td>
+									  	<td>${user?.creditScore}分<a href="@{front.account.FundsManage.myCredit()}" class="xf_mem_acc_sjvip">[积分明细]</a></td>
+									</tr>
+									<tr>
+										<td align="left" valign="middle">注册时间：</td>
+									  	<td>${user?.time?.format('yyyy-MM-dd')}</td>
+									</tr>
+									<tr>
+										<td align="left" valign="middle">信用额度：</td>
+									  	<td>${user?.creditLine?.format('###,##0.00')}元</td>
+									</tr>
+									<tr>
+										<td align="left" valign="middle">财富统计：</td>
+									  	<td><a href="@{front.account.accountHome.auditingLoanBids()}" ><span class="xf_mem_acc_sjvip">${user?.investAmount?.bid_count}</span>条借款标记录</a>，
+							    			<a href="@{front.account.InvestAccount.investRecord()}"><span class="xf_mem_acc_sjvip">${user?.investAmount?.invest_count}</span>条投标记录</a>，
+							    			<a href="@{front.account.InvestAccount.myDebts()}"><span class="xf_mem_acc_sjvip">${user?.investAmount?.transfer_count}</span>条债权转让记录</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>

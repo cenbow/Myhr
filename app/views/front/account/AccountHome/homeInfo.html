@@ -1,0 +1,268 @@
+<div class="p-zhrttoptips clr mb30">
+    <div class="p-zhrt-ye clearfix pt10 fl">
+        <i class="p-zhrt-ye-jg fz18 fl ml20">!</i>
+        <span class="p-zhrt-ye-wz fz18 fl ml15">您的环讯账户余额:<i class="p-zhrt-ye-wz-money">${ipsBalance?.format('###,##0.00')}</i>元</span>
+    </div>
+    <div class="p-zhrt-tx fr pt10 fz18 mr20">
+        <a href="@{front.account.FundsManage.submitIPSWithdrawal()}">立即提现>></a>
+    </div>
+</div>
+<!--余额提醒-->
+<script>
+    $(function () {
+        //hy: 环迅可用;hxye:环迅里面有余额
+        var hy = true;
+        var hxye =${ipsBalance?.format('###,##0.00')};
+        if(hy&& hxye>0){
+            $(".p-zhrttoptips").show();
+        }
+        else {
+            $(".p-zhrttoptips").hide();
+        }
+    })
+</script>
+<!--环迅支付弹窗-->
+<script>
+    $(function () {
+        $("#p-hxbj-main-close").click(function () {
+            $("#hxbj_top").hide();
+        });
+        /*状态码 hxbj 参数*/
+        var hxbj = true;
+        var hxye =${ipsBalance?.format('###,##0.00')};
+        var bank_code = "${user?.bankAcctNo}";
+
+        if(hxbj&&(hxye>0||bank_code=="")){
+                $("#hxbj_top").show();
+        }
+
+    })
+</script>
+
+<div class="p-sytanc p-pop hxbj" id="hxbj_top" style="display: none">
+    <div class="p-popbg"></div>
+    <div class="p-hxbj-main p-popbox">
+        <i class="p-hxbj-main-close fz26" id="p-hxbj-main-close">×</i>
+        <div class="clearfix p-hxbj-main-btn-wrap mid">
+            <a href="@{front.account.FundsManage.loginAccount}" class="p-hxbj-main-btn fz16 fl p-hxbj-main-btn-l">添加银行卡</a>
+            <a href="###" class="p-hxbj-main-btn fz16 fr p-hxbj-main-btn-r">环迅提现</a>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="p-zhrtopbox clr">
+    <div class="p-zhnamebox">
+        <div class="p-zhtouxiang">
+            <img src="${user?.photo}" alt="" width="100" height="100" alt="头像" id="image"/>
+        </div>
+        <dl class="p-zhnamexx">
+            <dt>
+                <span>${user?.name?.substring(0,3)}****${user?.name?.substring(7)}</span>
+                <!-- 如果已经认证就加上类名cur -->
+                
+                
+               	<!--<a href="@{front.account.basicInformation.modifyEmail()}" class="ico ico1 #{if user?.isEmailVerified} cur #{/if}" title="邮箱认证"></a>-->
+                
+                <a href="@{front.account.basicInformation.certification()}" class="ico ico2 #{if user?.idNumber != null} cur #{/if}" title="实名认证"></a>
+                
+                <a href="@{front.account.basicInformation.modifyMobile()}" class="ico ico3 #{if user?.mobile != null} cur #{/if}" title="手机认证"></a>
+            </dt>
+            <dd>
+            	#{if unreadSystemMsgCount > 0 || (unreadSystemMsgCount == 0 && unreadInboxMsgCount == 0)}
+                	<a href="@{front.account.Message.systemMsgs()}">
+                #{/if}
+                #{elseif unreadInboxMsgCount == 0}
+                	<a href="@{front.account.Message.inboxMsgs()}">
+                #{/elseif}
+                	<i class="ico"></i>您有<em>${unreadSystemMsgCount+unreadInboxMsgCount}</em>未读短信
+                	
+                </a>
+            </dd>
+        </dl>
+    </div>
+    <dl class="p-zhmoney">
+        <dt>可用余额 （￥） 　#{if user?.lastLoginTime!=null}最后登录：${user?.lastLogoutTime?.format('yyyy-MM-dd')}#{/if}</dt>
+        <dd><em>${(accountInfo?.user_account-accountInfo?.freeze+accountInfo?.user_account2)?.format('###,##0.00')}</em></dd>
+    </dl>
+    <div class="p-zhabox">
+        <a href="@{front.account.FundsManage.recharge()}" class="cur">充值</a>
+        <a href="@{front.account.FundsManage.withdrawal()}">提现</a>
+        *{#{if user?.name == "jsnjfz"} 
+        <a href="@{front.account.FundsManage.NoviceInterestSend(489)}">发放体验标收益</a>
+        #{/if}}*
+        *{#{if user?.name == "jsnjfz"}
+        <a href="@{front.account.FundsManage.BonusHandGetBack(111,222,333)}">回收体验金红包</a>
+        #{/if}}*
+    </div>
+</div>
+
+<div class="p-zhrtcenbox mt20">
+    <ul class="p-zhshouyi clr">
+        <li>
+            <div class="p-zhsytitle">昨日收益 （￥）</div>
+            <div class="p-zhsyword"><em>${yesterdayIncome?.format('###,##0.00')}</em></div>
+        </li>
+        <li>
+            <div class="p-zhsytitle">累积收益 （￥）</div>
+            <div class="p-zhsyword"><em>${totalIncome?.format('###,##0.00')}</em></div>
+        </li>
+        <li>
+            <dl class="p-zhsydl">
+                <dd><i class="iconfont">&#xe607;</i>您有<a href="@{front.account.accountHome.auditingLoanBids()}">借款记录</a>：<span class="cozhuse">${user?.investAmount?.bid_count}</span></dd>
+                <dd><i class="iconfont">&#xe604;</i>您有<a href="@{front.account.InvestAccount.investRecord()}">投标记录</a>：<span class="cozhuse">${user?.investAmount?.invest_count}</span></dd>
+                <dd><i class="iconfont">&#xe608;</i>您有<a href="@{front.account.InvestAccount.myDebts()}">债权转让</a>：<span class="cozhuse">${user?.investAmount?.transfer_count}</span></dd>
+                
+            </dl>
+        </li>
+    </ul>
+    <div class="p-zhechartsbox clr">
+        <dl class="p-zhallmoney">
+            <dt><em>${totalAmount?.format('###,##0.00')}</em></dt>
+            <dd>总资产 （￥）</dd>
+        </dl>
+        <div class="p-zhcharleft" style="width:410px;height:410px;" id="p_pie"></div>
+            <!-- ECharts单文件引入 -->
+            <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+            <script type="text/javascript">
+                // 路径配置
+                require.config({
+                    paths: {
+                        echarts: 'http://echarts.baidu.com/build/dist'
+                    }
+                });
+                 // 使用
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/pie' // 使用饼状图就加载pie模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('p_pie'));
+                        var indata;
+                        var option = {
+                               tooltip: {
+                                   trigger: "item",
+                                   showDelay:200,
+                                   formatter: function(){
+                                        return "{b} : {c} ({d}%)";
+                                   }() //"{a} <br/>{b} : {c} ({d}%)"
+                               },
+                               color:['#E6E6E6','#99D64B','#F99C35','#F04430'],
+                               toolbox: {
+                                   show: false,
+                                   feature: {
+                                       mark: {
+                                           show: true
+                                       },
+                                       dataView: {
+                                           show: true,
+                                           readOnly: true
+                                       },
+                                       restore: {
+                                           show: true
+                                       },
+                                       saveAsImage: {
+                                           show: true
+                                       }
+                                   }
+                               },
+                               calculable: false,
+                               series: [
+                                   {
+                                       type: "pie",
+                                       center:["50%","50%"],
+                                       radius: ["134px", "154px"],
+                                       selectedMode: "single",
+                                       itemStyle: {
+                                           normal: {
+                                               label: {
+                                                   show: false
+                                               },
+                                               labelLine: {
+                                                   show: false
+                                               }
+                                           },
+                                           emphasis: {
+                                               label: {
+                                                   show: false,
+                                                   position: "center",
+                                                   textStyle: {
+                                                       fontSize: "12",
+                                                       fontWeight: "normal"
+                                                   }
+                                               },
+                                               selectedOffset:10,
+                                           }
+                                       },
+                                       data: [ //这里面填数据
+                                           {
+                                               value: ${accountInfo?.freeze},
+                                               name: "冻结金额"
+                                           },
+                                           {
+                                               value: ${(accountInfo?.user_account-accountInfo?.freeze)},
+                                               name: "可用余额"
+                                           },
+                                           {
+                                               value: ${accountInfo?.receive_corpus},
+                                               name: "待收本息"
+                                           },
+                                           {
+                                               value: ${accountInfo?.receive_interest},
+                                               name: "存钱罐收益"
+                                           }
+                                       ]
+                                   }
+                               ]
+                            }
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+                    }
+                );
+            </script>
+        <ul class="p-zhmoneyitem">
+            <li class="clr">
+                <dl>
+                    <dt><i class="ico1"></i>冻结金额（￥）</dt>
+                    <dd><em>${accountInfo?.freeze?.format('###,##0.00')}</em></dd>
+                </dl>
+                <dl>
+                    <dt><i class="ico2"></i>可用余额（￥）</dt>
+                    <dd><em>${(accountInfo?.user_account-accountInfo?.freeze)?.format('###,##0.00')}</em></dd>
+                </dl>
+            </li>
+            <li class="clr" >
+                <dl>
+                    <dt><i class="ico3"></i>待收本息（￥）</dt>
+                   	<dd><em>${accountInfo?.receive_corpus?.format('###,##0.00')}</em></dd>
+                </dl>
+                <dl>
+                    <dt><i class="ico4"></i>存钱罐收益（￥）</dt>
+                    <dd><em>${accountInfo?.receive_interest?.format("###,##0.00")}</em></dd>
+                </dl>
+            </li>
+            #{if !user?.isEnterpriseUser}
+	            <li>
+	                <div class="p-zhchacon"><a href="@{front.invest.InvestAction.investHome()}" class="">马上投资</a></div>
+	            </li>
+	        #{/if}
+        </ul>
+    </div>
+    <ul class="p-zhshouyi clr bordertop">
+        <!--<li>-->
+            <!--<div class="p-zhsytitle">冻结金额 （￥）</div>-->
+            <!--<div class="p-zhsyword"><em>${accountInfo?.freeze?.format('###,##0.00')}</em></div>-->
+        <!--</li>-->
+        <li style="width: 470px;">
+            <div class="p-zhsytitle">体验金 （￥）</div>
+            <div class="p-zhsyword"><a href="@{front.account.FundsManage.myExperienceGold()}"><em>${goldAmount?.format('###,##0.00')}</em></a></div>
+        </li>
+        <li style="width: 470px;">
+            <div class="p-zhsytitle">红包（个）</div>
+            <div class="p-zhsyword"><a href="@{front.account.accountHome.bonusByUser()}"><em>${userBonus?.count}</em></a></div>
+        </li>
+    </ul>
+</div>

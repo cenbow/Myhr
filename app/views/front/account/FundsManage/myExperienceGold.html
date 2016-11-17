@@ -1,0 +1,108 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 资金管理  | 我的体验金'/}
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	
+	<!-- 右侧内容区 begin -->
+	
+	<div class="p-cfright">
+        <div class="p-zhmobanbox">
+            <div>
+            	<div class="xf_mem_Account">
+					<h3 class="xf_mem_accout_title">我的体验金 <a href="@{front.invest.InvestAction.investHome()}" target="_blank" style="float: right;">立即投资</a></h3>
+					<div class="xf_membill_search_jg" style="margin-top: 20px;">
+						<table border="0" cellpadding="0" cellspacing="0"  class="xf_membill_acc_viewcpms">
+							<tbody>
+								<tr>
+									<th align="center" width="140px">体验金金额</th>
+								  	<th align="center" width="190px">到期时间</th>
+								  	<th align="center" width="200px">使用时间</th>
+								  	<th align="center" width="221px">使用状态</th>
+								</tr>
+								<tr>
+									<td align="center">${gold?.experience_amount?.format('###,##0.00')}</td>
+									<td align="center">${gold?.expire_time?.format('yyyy-MM-dd')}</td>
+									<td align="center">${gold?.invest_use_time?.format('yyyy-MM-dd')}</td>
+									<td align="center">
+										#{if gold?.status == 0}
+											未使用
+										#{/if}
+										#{elseif gold?.status == 1}
+											处理中
+										#{/elseif}
+										#{elseif gold?.status == 2}
+											已使用
+										#{/elseif}
+										#{elseif gold?.status == -1}
+											已过期
+										#{/elseif}
+										
+									</td>
+								</tr>
+						
+						
+						</table>
+					</div>
+				</div>
+				<!-- 清除浮动 -->
+				<div class="clear"></div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+*{
+<!-- 内容区域 start -->
+<div class="xf_con_box">
+	<div class="xf_con_mem_nav"></div>
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	<div class="xf_mem_Account">
+		<h3 class="xf_mem_accout_title">我的体验金 <a href="@{front.invest.InvestAction.investHome()}" target="_blank" style="float: right;">立即投资</a></h3>
+		<div class="xf_membill_search_jg" style="margin-top: 20px;">
+			<table border="0" cellpadding="0" cellspacing="0"  class="xf_membill_acc_viewcpms">
+				<tbody>
+					<tr>
+						<th align="center" width="140px">体验金金额</th>
+					  	<th align="center" width="190px">到期时间</th>
+					  	<th align="center" width="200px">使用时间</th>
+					  	<th align="center" width="221px">使用状态</th>
+					</tr>
+					<tr>
+						<td align="center">${gold?.experience_amount?.format('###,##0.00')}</td>
+						<td align="center">${gold?.expire_time?.format('yyyy-MM-dd')}</td>
+						<td align="center">${gold?.invest_use_time?.format('yyyy-MM-dd')}</td>
+						<td align="center">
+							#{if gold?.status == 0}
+								未使用
+							#{/if}
+							#{elseif gold?.status == 1}
+								处理中
+							#{/elseif}
+							#{elseif gold?.status == 2}
+								已使用
+							#{/elseif}
+						</td>
+					</tr>
+			
+			
+			</table>
+		</div>
+	</div>
+	<!-- 清除浮动 -->
+	<div class="clear"></div>
+</div>
+}*
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		myAccountSelect(8,52);
+	});
+</script>

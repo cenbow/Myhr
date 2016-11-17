@@ -1,0 +1,272 @@
+%{
+business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle +' | 我的账户 | 我的账户首页' /}
+
+<div class="p-main clr mt30">
+    <!-- 左边导航区域 -->
+    #{include "front/account/AccountHome/homeLeft.html"/}
+    <div class="p-cfright">
+        <div class="step_wrap clearfix">
+            <div class="step_title clearfix">
+                <h1 class="fl">绑定银行卡 ( 只限绑定一张,不支持信用卡 )</h1>
+                <div class="xr"><i class="sina_ico"></i></div>
+            </div>
+                <!--绑定银行卡页面-->
+            <div class="step_bord">
+                <!--新用户 start-->
+                #{form @front.account.FundsManage.bankCardBinding(),method:'POST', id:'submit'}
+                    <div class="Validform" id="bank_bind">
+                        <table class="form_tb">
+                            <tbody>
+                            <tr>
+                                <th width="30%">真实姓名</th>
+                                <td width="70%">${user?.realityName}</td>
+                            </tr>
+                            <tr>
+                                <th><span class="red">* </span>选择银行</th>
+                                <td>
+                                    <div class="clearfix">
+                                    #{select 'bank', items:banks, valueProperty:'bank_code', labelProperty:'bank_name', value:flash?.bank, class:'ui_select fl', id:'bank', style:'width:275px;'/}
+                                        <div class="fl money1"><a href="@{'/public/special/rechargeQuickLimitList.html'}" target="_blank">查看快捷充值限额</a></div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><span class="red">* </span>储蓄卡卡号</th>
+                                <td>
+                                    <input class="ui_input" id="account" name="account" type="text" placeholder="请输入您的储蓄卡卡号" datatype="n16-19" sucmsg=" " errormsg="请输入16-19位卡号" nullmsg="请填写内容"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><span class="red">* </span>开户地区</th>
+                                <td>
+								#{select 'province', items:provinces, valueProperty:'id', labelProperty:'name', value:flash?.province, class:'ui_select fl', id:'province',style:'width:192px;'/}
+								#{select 'city', items:cityList, valueProperty:'id', labelProperty:'name', value:flash?.city, class:'ui_select fl', id:'city', style:'width:192px;'/}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><span class="red">* </span>预留手机号码</th>
+                                <td>
+                                    <input class="ui_input" id="phone2" name="phone" value="" type="text" placeholder="请输入您的预留手机号码" datatype="n11-11" sucmsg=" " errormsg="请输入合法的手机号码" nullmsg="请填写内容"/>
+                                    <input type="hidden" id="province2" name="province"/>
+                                    <input type="hidden" id="city2" name="city"/>
+                                    <input type="hidden" id="branche2" name="branche"/>
+                                    <input type="hidden" id="bankCode" name="bankCode"/>
+                                    <input type="hidden" id="bankName" name="bankName"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="30%"><span class="red">* </span>短信验证码</th>
+
+                                <td width="70%">
+                                    <input class="ui_input" id="valid_code" name="code" type="text" placeholder="请输入短信码" datatype="n6-6" sucmsg=" " errormsg="请输入6位数字" nullmsg="请填写内容" style="width:262px;"/>
+                                    <input value="获取短信码" class="btn_common btn_green" type="button" id="getnumber" onclick="getPhoneNumber()" style="width:115px !important;">
+                                    <input id="ticket" value="" type="hidden">
+                                    <input id="param" value="" type="hidden">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td class="f12">
+                                    <input type="checkbox" checked="checked" disabled="disabled"/> 我已同意并阅读<a href="/public/special/reprotocalXinlangQuickPay.html" target="_blank">《新浪支付快捷支付协议》</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td colspan="2">
+                                    <input id='submit-btn' class="btn_common btn_blue bank_btn" value="确 定" onclick="check()" type="button">
+                                        <!--<span>确定</span>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                #{/form}
+                <!--新用户 end-->
+            </div>
+            <!--绑完银行卡页面-->
+            <div class="step_bord"></div>
+            <div class="help_tip">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>1. 使用的卡必须是银联卡，且开通网银支付功能。</li>
+                    <li>2. 绑卡需要提供姓名、证件号、银行预留手机号、短信验证码等，与银行开户信息一致。</li>
+                    <li>3. 工商银行：①用户必须柜面留存手机，电话留存的手机号码不可以；②用户卡不能是集体卡，单位集体办理的卡一律不能使用；③同一个用户不能有跨省卡，如A有一张北京工行卡，一张上海工行卡，那A的工行卡都不可以使用。</li>
+                    <li>4. 浦发银行：需要用户开通"网上银行"和"无卡支付"。</li>
+                    <li>5. 光大银行：需要用户开通“网上支付”。</li>
+                    <li>6. 邮储银行和上海银行：需要用户开通“银联无卡自助消费业务”。</li>
+                    <li>7. 必须使用银行卡进行绑定，纸质存折不能绑定。</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+    $(function () {
+        /* 高亮显示 */
+        //showHighLightFront2(7, 1);
+        myAccountSelect(1, 110);
+    });
+
+</script>
+<script>
+    /*
+     本地异步绑卡
+     * */
+    var account = $("#account").val();
+
+</script>
+<script type="text/javascript">
+
+$(function(){
+    $(".ui_input").val("");
+
+});
+
+
+/**
+ *定时判断函数
+ */
+var maxtime = 50;
+var invalidTime = '900';
+var timer;
+$("#getnumber").removeClass("btn_gray").addClass("btn_green");
+var flag = true;//获取短信码按钮是否可以点击
+var flag2 = true;//提交按钮是否可以点击
+clearInterval(timer);
+
+function CountDown(){
+    //短信验证码过期计时
+    if (invalidTime >= 1){
+        --invalidTime;
+    }
+    //获取短信码按钮计时控制
+    if(maxtime>=1){
+        //按钮不能按
+        var seconds = Math.floor(maxtime%120);
+        $("#getnumber").removeClass("btn_green").addClass("btn_gray");
+        flag = false;
+        var msg =seconds+"s";
+        document.getElementById("getnumber").value=msg+"后重发";
+        --maxtime;
+    }else if (maxtime==0){
+        //按钮还原
+        --maxtime;
+        $("#getnumber").removeClass("btn_gray").addClass("btn_green");
+        flag = true;
+        document.getElementById("getnumber").value="获取短信码";
+    }
+    //停止计时
+    if (invalidTime <= 0 && maxtime < 0){
+        clearInterval(timer);
+    }
+}
+
+
+$("#province").change(function(){
+	var selectVal = $(this).children('option:selected').val();
+	var jsAction = #{jsAction @Application.getCity(":provinceId")/}
+	$.post(jsAction({provinceId:selectVal}),function(data) {
+		var cityList = [];
+		for(var i = 0; i < data.length; i ++){
+			cityList.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+		}
+		$("#city").html(cityList);
+	});
+});
+
+
+
+    /**
+     * 异步绑定银行卡
+     */
+    function check() {
+        //获取参数
+//        $("#getnumber").blur();
+        var branche = '';
+        var msg = '';
+        flag2 = true;
+
+//        $("#getnumber").addClass("btn_gray");
+        var bankcode = document.getElementById("bank").value;
+        var account = document.getElementById("account").value;
+        var province = document.getElementById("province").value;
+        var city = document.getElementById("city").value;
+        var phone = document.getElementById("phone2").value;
+        var valid_code = document.getElementById("valid_code").value;
+        var bankName = $("#bank option:selected").text();
+        if ((msg == '') && (province == '' || province == '请选择所在省份' || city == '' || city == '请选择城市')) {
+            msg = '请选择开户地区！';
+        }
+        if ((msg == '') && (bankcode == '')) {
+            msg = '请选择银行！';
+        }
+        if ((msg == '') && (account == '')) {
+            msg = '请输入银行卡号！';
+        }
+        if ((msg == '')) {
+            var partten = /^1[3,5,8,4,7]\d{9}$/;
+            if (!partten.test(phone)) {
+                msg = '请输入合法的手机号码！';
+            }
+        }
+        if ((msg == '')&& (valid_code== '')) {
+            var partten = /^1[3,5,8,4,7]\d{9}$/;
+            if (!partten.test(phone)) {
+                msg = '请输入验证码';
+            }
+        }
+        if ((msg == '')) {
+            var nums = /\d{6}$/;
+            if (!nums.test(valid_code)) {
+                msg = '请输入6位验证码';
+            }
+        }
+        if (msg != '') {
+            alert(msg);
+            flag2 = !flag2;
+            $("#submit-btn").removeClass("btn_gray");
+            return;
+        }
+        $("#bankCode").val(bankcode);
+        $("#bankName").val(bankName);
+        $("#submit").submit();
+    }
+
+    /**
+     * 绑定银行卡，获取ticket和短信验证码
+     */
+    function getPhoneNumber() {
+        	var bank = document.getElementById("bank").value;
+        	var account = document.getElementById("account").value;
+        	var province = $("#province").find("option:selected").text();
+        	var city = $("#city").find("option:selected").text();
+        	var mobile = document.getElementById("phone2").value;
+
+     	    var verifyMobile = #{jsAction @front.account.FundsManage.verifyMobileForBankCard(":bank",":account",":province",":city",":mobile")/}
+
+     		$.post(verifyMobile({bank,account,province,city,mobile}),function(data){
+     		    if(data.code < 0){
+                    alert(data.msg);
+     		    }else{
+                    if (flag) {
+                        invalidTime = 0;
+                        $("#getnumber").removeClass("btn_green").addClass("btn_gray");
+                        flag = false;
+                        timer = setInterval("CountDown()", 1000);
+                        $("#getnumber").attr("onclick", "void(0);");
+                    }
+     			}
+     		},'json');
+
+    }
+
+
+</script>

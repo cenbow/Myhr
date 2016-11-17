@@ -1,0 +1,151 @@
+<script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+<link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+<script   type="text/javascript">  
+    var editor;
+    KindEditor.ready(function(K) {
+      editor = K.create('#TextArea4', {
+           cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+           uploadJson : '@{FileUpload.uploadImage2()}',
+        allowFileManager : true,
+        allowUpload: true
+      });
+    });
+</script>
+
+<div class="xf_ht_tab_view">
+  #{table class:"xf_con_view_table", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+    #{tr}
+      #{td class:"xf_pcir_ltitle"}注册资料#{/td}
+      #{td align:"left"}
+        #{table class:"xf_view_table_lm", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+          #{tr}
+            #{td width:"262"}<span class="xfht_view_table_s">用户名：</span>${bid?.user?.name}#{/td}
+            #{td width:"210"}<span class="xfht_view_table_s">注册时间：</span>${bid?.user?.time?.format('yyyy-MM-dd')}#{/td}
+          #{/tr}
+          #{tr}
+            #{td}
+              <span class="xfht_view_table_s">注册邮箱：</span>
+              ${bid?.user?.email}
+	          #{if bid?.user?.isEmailVerified}
+	          	[已校验]
+	          #{/if}
+	          #{else}
+	          	[未校验]
+	          #{/else}
+            #{/td}
+            #{td}
+              <span class="xfht_view_table_s">手机号码：</span>
+              ${bid?.user?.mobile}
+	           #{if bid?.user?.isMobileVerified}
+	              [已校验]
+	           #{/if}
+	           #{else}
+	          	  [未校验]
+	           #{/else}
+            #{/td}
+          #{/tr}
+        #{/table}
+      #{/td}
+    #{/tr}
+    #{tr}
+      #{table class:"xf_con_view_table", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+        #{tr}
+          #{td class:"xf_pcir_ltitle"}借款人<br />基本资料#{/td}
+          #{td align:"left"}
+            #{table class:"xf_view_table_lm", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+				#{tr}
+	              #{td colspan:"3"}
+	                  *{
+	              	  <textarea class="xf_ht_jr_obttd_textarea" id="TextArea4" style="width:650px;">
+	              	  	    #{if bid?.userBasicInfo != null}
+	              	  			${bid?.userBasicInfo}
+		              	  	#{/if}
+		              	  	#{if userBasicInfo != null}
+		              	  		${userBasicInfo}
+		              	  	#{/if}
+	              	  </textarea>
+	              	  }*
+	              	  
+	              	  <table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_memjbzl_table">
+              	      <tr>
+              	      	<td>
+              	      		<span class="xf_jbzl_stitle">借款人：</span>
+              	      		<input type="text" name="name1" value="${userBasicInfo?.name}" />
+              	      	</td>
+              	      	<td>
+              	      		<span class="xf_jbzl_stitle">身份证号：</span>
+              	      		<input type="text" name="idcard1" value="${userBasicInfo?.idcard}" />
+              	      	</td>
+              	      </tr>
+					  <tr>
+						<td>
+							<span class="xf_jbzl_stitle">年龄：</span>
+							<input class="xf_jbzl_input" name="age1" id="age" value="${userBasicInfo?.age}" onkeyup="ndigitInteger(this,2)"/>
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">性别：</span>
+							<select name="sex1" class="xf_jbzl_selectAge" value="${userBasicInfo?.sex}">   
+							   #{if user?.sex == 1}
+							   <option value="0" >--请选择--</option> 	
+						       <option value="1" selected>男</option> 
+						       <option value="2" >女</option>
+						      #{/if}
+						      #{elseif userBasicInfo?.sex == 2}
+						      <option value="0" >--请选择--</option> 	
+						      <option value="1">男</option> 
+						       <option value="2" selected>女</option>
+						       #{/elseif}
+						       #{else}
+						       <option value="0" selected>--请选择--</option> 	
+						       <option value="1">男</option> 
+						       <option value="2">女</option>
+						       #{/else}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">户口所在地：</span>
+							#{select 'province', items:provinces, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.province, class:'xf_jbzl_selectAge', id:'province',style:'width:75px'/}
+							#{select 'city1', items:cityList, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.city, class:'xf_jbzl_selectAge', id:'city',style:'width:100px' /}
+						</td>
+							<td>
+							<span class="xf_jbzl_stitle">文化程度：</span>
+							#{select 'education1', items:educations, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.education, class:'xf_jbzl_selectAge_2', id:'education' /}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">购车情况：</span>
+							#{select 'car1', items:cars, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.car, class:'xf_jbzl_selectAge_2', id:'car' /}
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">婚姻情况：</span>
+							#{select 'marital1', items:maritals, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.marital, class:'xf_jbzl_selectAge_2', id:'marital' /}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">购房情况：</span>
+							#{select 'house1', items:houses, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.house, class:'xf_jbzl_selectAge_2', id:'house' /}
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">借款用途：</span>
+							<span>${purposes?.name}</span>
+							<input type="hidden" name="goal1" value="${purposes?.name}" style="width:250px;" id="goal"/>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
+	              #{/td}
+            	#{/tr}
+            #{/table}
+          #{/td}
+        #{/tr}
+      #{/table}
+    #{/tr}
+  #{/table}
+</div>

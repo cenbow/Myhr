@@ -1,0 +1,87 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle +' | 我的账户 | 我的账户首页' /}
+
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	<div class="p-cfright">
+        <div class="p-hbtopbox">
+            <h4>我的红包</h4>
+            <ul class="p-hbinfo clr">
+                <li>红包总额：<span class="cozhuse"><em>${userBonus?.amount?.format("###,##0.00")}</em>￥</span></li>
+                <li class="p-hbline"></li>
+                <li>红包个数：<span class="cozhuse"><em>${userBonus?.count}</em>个</span></li>
+                <li class="p-hbtzbtn"><a href="@{front.invest.InvestAction.investHome()}" class="btn">马上投资&gt;</a></li>
+            </ul>
+            <ul class="p-hbxuanz clr">
+                <li>
+                    <div><span>#{if statusStr==100}全部#{/if}#{elseif statusStr == 1}未使用#{/elseif}#{elseif statusStr == 2}已使用#{/elseif}#{elseif statusStr == -2}已过期#{/elseif}</span><i class="icon"></i></div>
+                    <dl class="p-hbhidnav">
+                        <a href="@{front.account.AccountHome.bonusByUser()}?status=1&type=${typeStr}"><dd>未使用</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?status=2&type=${typeStr}"><dd>已使用</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?status=-2&type=${typeStr}"><dd>已过期</dd></a>
+                    </dl>
+                </li>
+                <li>
+                    <div><span>#{if typeStr==100}全部#{/if}#{elseif typeStr == 1}注册红包#{/elseif}#{elseif typeStr == 2}系统送红包#{/elseif}#{elseif typeStr == 3}生日红包#{/elseif}#{elseif typeStr == 4}投资满就送红包#{/elseif}</span><i class="icon"></i></div>
+                    <dl class="p-hbhidnav">
+                    	<a href="@{front.account.AccountHome.bonusByUser()}?type=100&status=${statusStr}"><dd>全部</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?type=1&status=${statusStr}"><dd>注册红包</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?type=2&status=${statusStr}"><dd>系统送红包</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?type=3&status=${statusStr}"><dd>生日红包</dd></a>
+                        <a href="@{front.account.AccountHome.bonusByUser()}?type=4&status=${statusStr}"><dd>投资满就送红包</dd></a>
+                    </dl>
+                </li>
+            </ul>
+        
+        <!--  <div class="p-hbshaix mt30">
+            <a href="@{front.account.AccountHome.bonusByUser()}?status=100"><span #{if status == 100}  class="cur" #{/if}>全部</span></a> |
+            <a href="@{front.account.AccountHome.bonusByUser()}?status=1"><span #{if status == 1}  class="cur" #{/if}>使用中</span></a> |
+            <a href="@{front.account.AccountHome.bonusByUser()}?status=2"><span #{if status == 2}  class="cur" #{/if}>已使用</span></a> |
+            <a href="@{front.account.AccountHome.bonusByUser()}?status=-2"><span #{if status == -2}  class="cur" #{/if}>已过期</span></a>
+        </div>-->
+        <ul class="p-hblistul clr">
+        	#{list tbs}
+            <li #{if _?.status == 1}  class="red" #{/if}#{else} class="gray" #{/else}>
+                <div class="p-hbtitle"><i class="iconfont">&#xe60f;</i>
+                #{if _?.type == 1}注册红包#{/if}#{elseif _?.type == 2}系统送红包#{/elseif}#{elseif _?.type == 3}生日红包#{/elseif}#{elseif _?.type == 4}投资送红包#{/elseif}#{elseif _?.type == 5}投资送红包#{/elseif}#{elseif _?.type == 6}投资送红包#{/elseif}#{elseif _?.type == 7}投资送红包#{/elseif}
+                </div>
+                <div class="p-hbxinxi"><i class="ico"></i>#{if _?.status == 1}未使用#{/if}#{elseif _?.status == 2}已使用(${_?.pay_time?.format('yyyy-MM-dd')})#{/elseif}#{elseif _?.status == -1}失效#{/elseif}#{elseif _?.status == -2}已过期#{/elseif}</div>
+                <dl class="p-hbxiangx clr">
+                    <dt><em>${_?.amount?.format("###,##0")}</em>￥
+                    <p class="p-hbxiangx-show">适用于${_?.used_month}月以上的标的</p>
+                    </dt>
+                    <dd>
+
+                        <p>单笔满<i style="color: #ffff00 ;">￥${_?.min_invest?.format("###,##0.00")} </i>可用</p>
+                        <p><i>发放时间：</i>${_?.use_time?.format('yyyy-MM-dd')}</p>
+                        <p><i>到期时间：</i>${_?.validity_time?.format('yyyy-MM-dd')}</p>
+                    </dd>
+                </dl>
+            </li>
+            #{/list}
+        </ul>
+        <div class="p-hbtips">
+            <h4>使用说明</h4>
+            <div class="p-hbtpword">
+                <p>${userBonus?.exp?.raw()}</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		//showHighLightFront2(7, 1);
+		myAccountSelect(8,70);
+	});
+	
+</script>

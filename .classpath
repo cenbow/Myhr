@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="views/**" kind="src" path="app"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/User Library"/>
+	<classpathentry kind="lib" path="E:/code/java/dev_p2p_code_pc/play1.2.7/framework/play-1.2.7.jar"/>
+	<classpathentry kind="output" path="eclipse/classes"/>
+</classpath>

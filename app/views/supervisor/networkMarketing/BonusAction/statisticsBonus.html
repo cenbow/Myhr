@@ -1,0 +1,235 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'CPS推广员列表' /}
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+<!--左-->
+#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}    
+<!--右-->
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+  #{form @supervisor.networkMarketing.BonusAction.statisticsBonus(), id:'submit'}
+  <input type="hidden" id="currPage" name="currPage"/>
+  <input type="hidden" id="pageSize" name="pageSize"/>
+  <input type="hidden" id="orderType" name="orderType" value="${page?.conditions?.orderType}"/>
+  <!-- 搜索 -->
+    <div class="xf_ht_search">
+      <div class="xf_ht_search_l">
+        <span id="div_0" onClick="conditonSearch(0)">默认排序</span>
+		<span id="div_1" onClick="conditonSearch(1)">领取日期 <a id="tab_1">↑</a></span>
+		<span id="div_3" onClick="conditonSearch(3)">红包金额 <a id="tab_3">↑</a></span>
+      </div>
+     </div>
+     <div class="xf_ht_search_inon">
+       <div class="xf_ht_search_r">
+       	<div class="xf_ht_search_xl">
+         红包类型：
+          <select class="xf_membill_selectAge" id="type" name="type">
+            <option value="0" #{if page?.conditions?.type == 0} selected="selected" #{/if}>
+				全部
+			</option>
+			<option value="1" #{if page?.conditions?.type == 1} selected="selected" #{/if}>
+				注册送红包
+			</option>
+			<option value="2" #{if page?.conditions?.type == 2} selected="selected" #{/if}>
+				手动发红包
+			</option>
+			<option value="3" #{if page?.conditions?.type == 3} selected="selected" #{/if}>
+				生日红包
+			</option>
+			<option value="4" #{if page?.conditions?.type == 4} selected="selected" #{/if}>
+				满就送红包
+			</option>
+			<option value="5" #{if page?.conditions?.type == 5} selected="selected" #{/if}>
+				名列前茅
+			</option>
+			<option value="6" #{if page?.conditions?.type == 6} selected="selected" #{/if}>
+				稳操胜券
+			</option>
+			<option value="7" #{if page?.conditions?.type == 7} selected="selected" #{/if}>
+				勇冠群雄
+			</option>
+			<option value="8" #{if page?.conditions?.type == 8} selected="selected" #{/if}>
+				体验金7天收益红包
+			</option>
+          </select>
+          
+          <select class="xf_membill_selectAge" id="queryType" name="queryType">
+			<option value="0" #{if page?.conditions?.queryType == 0} selected="selected" #{/if}>
+				发放日期
+			</option>
+			<option value="1" #{if page?.conditions?.queryType == 1} selected="selected" #{/if}>
+				领取日期
+			</option>
+			<option value="2" #{if page?.conditions?.queryType == 2} selected="selected" #{/if}>
+				到期日期
+			</option>
+			<option value="3" #{if page?.conditions?.queryType == 3} selected="selected" #{/if}>
+				使用日期
+			</option>
+          </select>
+          
+         </div>
+         <div class="xf_ht_search_xl">
+         <input name="beginTime" type="text" id="beginTime" class="search_time" onclick="laydate()" value="${page?.conditions?.beginTime}" style="cursor: pointer"/>
+	         	<span class="search_timesp">--</span>
+	         <input name="endTime" type="text" id="endTime" class="search_time" onclick="laydate()" value="${page?.conditions?.endTime}" style="cursor: pointer"/>
+         </div>
+         <div class="xf_ht_search_xl">
+         	使用状态：
+         	<select class="xf_membill_selectAge" id="status" name="status">
+			<option value="100" #{if page?.conditions?.status == 100} selected="selected" #{/if}>
+				全部
+			</option>
+			<option value="0" #{if page?.conditions?.status == 0} selected="selected" #{/if}>
+				未使用
+			</option>
+			<option value="1" #{if page?.conditions?.status == 1} selected="selected" #{/if}>
+				使用中
+			</option>
+			<option value="2" #{if page?.conditions?.status == 2} selected="selected" #{/if}>
+				已使用
+			</option>
+			<option value="-2" #{if page?.conditions?.status == -2} selected="selected" #{/if}>
+				已过期
+			</option>
+          </select>
+        	 是否现金红包：
+         <select class="xf_membill_selectAge" id="cashType" name="cashType">
+            <option value="100" #{if page?.conditions?.cashType == 100} selected="selected" #{/if}>
+				全部
+			</option>
+			<option value="1" #{if page?.conditions?.cashType == 1} selected="selected" #{/if}>
+				现金红包
+			</option>
+			<option value="0" #{if page?.conditions?.cashType == 0} selected="selected" #{/if}>
+				非现金红包
+			</option>
+          </select>
+         </div>
+         <div class="xf_ht_search_xl">
+           <input name="key" type="text" class="search_w"  value="${page?.conditions?.key}" placeholder="用户名"/>
+         </div>
+         <div class="xf_ht_search_xl">
+           <input type="submit" class="search_button" value="搜索">
+         </div>
+         
+         <div class="xf_ht_search_xl" style="float:right;">
+	         <input type="hidden" id="isExport" name="isExport" value="0">
+	         <input type="button" class="search_button" onclick="search(1);" onmouseout="$('#isExport').val(0);" value="导出">
+    	 </div>
+       </div>
+     </div>
+     #{/form}
+	<!-- 列表内容 -->
+	<div class="xn_c_content_top">
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+        #{tr}
+          #{th}序号#{/th}
+          #{th}红包类型#{/th}
+          #{th}是否现金红包#{/th}
+          #{th}会员名#{/th}
+          #{th}金额#{/th}
+          #{th}发放时间#{/th}
+          #{th}领取时间#{/th}
+          #{th}到期时间#{/th}
+          #{th}使用时间#{/th}
+          #{th}使用状态#{/th}
+        #{/tr}
+        #{list page?.page}
+        #{tr tr_index:_index}
+          #{td}${(page?.currPage - 1) * page?.pageSize + _index}#{/td}
+          #{td}#{if _?.type == 1}注册送红包#{/if}#{elseif _?.type == 2}手动发红包#{/elseif}#{elseif _?.type == 3}生日红包#{/elseif}#{elseif _?.type == 4}满就送红包#{/elseif}#{elseif _?.type == 5||_?.type == 6||_?.type == 7}投资送红包#{/elseif}#{elseif _?.type == 8}体验金7天收益红包#{/elseif}#{/td}
+          #{td}#{if _?.is_cash == 1}是#{/if}#{else}否#{/else}#{/td}
+          #{td}${_?.user_name}#{/td}
+          #{td}${_?.amount?.format("###,##0.00")}#{/td}
+          #{td}${_?.time?.format('yyyy-MM-dd')}#{/td}
+          #{td}${_?.use_time?.format('yyyy-MM-dd')}#{/td}
+          #{td}#{if _?.is_cash == 1}/#{/if}#{else}${_?.validity_time?.format('yyyy-MM-dd')}#{/else}#{/td}
+          #{td}${_?.pay_time?.format('yyyy-MM-dd')}#{/td}
+          #{td}
+          #{if _?.is_cash == 1}/#{/if}#{else}
+          #{if _?.status == 1}使用中#{/if}#{elseif _?.status == 0}未使用#{/elseif}#{elseif _?.status == 2}已使用#{/elseif}#{elseif _?.status == -1}停用#{/elseif}#{else}过期#{/else}
+       	  #{/else}
+       	  #{/td}
+        #{/tr}
+        #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+        <div class="page_warp">
+          #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+function search(isExport){
+	$("#isExport").val(isExport);
+	$("#submit").submit();
+}
+
+function conditonSearch(num){
+  var orderType= ${page?.conditions?.orderType};
+  if(orderType == 0){
+    $("#orderType").val(num);
+    $("#submit").submit();
+    return;
+  }
+  
+  var sum = orderType/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = orderType - 1;
+    if(sum2 == num){
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+    }else{
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+     }
+  }else{
+    if(orderType == num){
+      $("#orderType").val(num + 1);
+      $("#submit").submit();
+      return;
+    }else{
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+       }
+     }
+   }
+
+$(function(){
+  //高亮显示
+  showHighLight(5,5,14);
+  
+  //条件查询控制样式
+  var num= ${page?.conditions?.orderType};
+  if(num == 0){
+    $("#div_0").addClass("xf_sea_isshow");
+    return;
+  }
+       
+  var sum = num/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = num -1;
+    $("#div_"+sum2).addClass("xf_sea_isshow");
+    $("#tab_"+sum2).html("↓");
+    return;
+  }
+  
+  $("#div_"+num).addClass("xf_sea_isshow");
+  $("#tab_"+num).html("↑");
+});
+
+		
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+}
+</script>

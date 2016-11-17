@@ -1,0 +1,91 @@
+%{
+		business.User currUser = business.User.currUser();
+		}%
+<!--banner开始-->
+<div class="p-bannerbox">
+    <div class="p-banner">
+    	#{list homeAds}	
+        
+            <a 
+        	#{if _?.is_link_enabled}
+        		href = "${_?.url}" 
+        		#{if _?.target == 1}
+					target = "_self"'
+				#{/if}
+				#{else}
+					target = "_blank"
+				#{/else}
+				style="cursor: pointer;"
+			#{/if}
+			style="cursor: default;">
+				#{img src:"${_?.image_filename}",alt:"广告"}#{/img}
+			</a>
+        #{/list}
+    </div>
+    <div class="p-conbox">
+        <div class="p-main p-control"></div>
+    </div>
+
+</div>
+
+<!-- 20160219 new -->
+<div class="p-loginbox">
+    <!-- 登陆前和登陆后切换None类名就可以了，有none类名就会被隐藏 -->
+    <!-- 登陆前 -->
+    #{if currUser == null}
+    #{form @front.account.loginAndRegisterAction.logining(), id:'submit'}
+    <div class="p-login ">
+        <!--<h4>注册送红包</h4>-->
+        <!--<div class="p-loitem mt15">-->
+            <!--<input type="text" class="p-input" name="name" id="name" placeholder="请输入用户名"/>-->
+            <!--<span class="p-tips"></span>-->
+            <!--<i class="icon1"></i>-->
+        <!--</div>-->
+        <!--<div class="p-loitem mt15">-->
+            <!--<input type="password" class="p-input" name="password" id="password" autocomplete="off" placeholder="请输入登录密码"/>-->
+            <!--<span class="p-tips"></span>-->
+            <!--<i class="icon2"></i>-->
+        <!--</div>-->
+        <!--<div class="mt15">-->
+            <!--<a href="javascript:void(0)" onClick="login();" class="p-lobtn p-op">安全登录</a>-->
+        <!--</div>-->
+        <!--<div class="p-lobot">-->
+            <!--<span class="fl">没有账号？<a href="@{front.account.LoginAndRegisterAction.registerMobile()}">立即注册</a></span>-->
+            <!--<a href="@{front.account.loginAndRegisterAction.resetPasswordByEmail()}" class="fr">忘记密码</a>-->
+        <!--</div>-->
+        <!-- <span class="p-dllerror">用户名或密码错误，请重新输入！</span>  -->
+        <h4 class="p-zclhb-title">拓米金融欢迎您</h4>
+        <div class="p-zclhb-num">预期年化收益率7-15%</div>
+        <div class="p-login-shove clearfix">
+           <table>
+               <tr>
+                   <td style="width: 50%"><span style="float: right;margin-right: 10px">环迅支付资金托管</span></td>
+                   <td style="width: 50%;"><span style="float: left ;margin-left: 10px">资金快捷到账</span></td>
+               </tr>
+           </table>
+            <p>注册即送<em>18888</em>元体验金,实名再送<strong style="color: #C7000A;">188</strong>元红包</p>
+        </div>
+        <div class="p-login-btn clearfix">
+            <a  class="p-login-btn-dl" title="" target="_self" href="@{front.account.loginAndRegisterAction.login()}">登录</a>
+            <a  class="p-login-btn-zc" title="" target="_self" href="@{front.account.LoginAndRegisterAction.registerMobile()}">注册</a>
+            <a  class="p-login-btn-cz" title="" target="_self" href="@{front.account.FundsManage.recharge()}">充值</a>
+            <a  class="p-login-btn-tz" title="" target="_self" href="@{front.invest.InvestAction.investHome()}">投资</a>
+        </div>
+        <!--<a title="" target="_self" class="p-lobtn p-op p-zclhb" href="@{front.account.LoginAndRegisterAction.registerMobile()}">注册领红包</a>-->
+        <!--<p>已有账号?<a class="p-ljdl" title="" target="_self" href="@{front.account.loginAndRegisterAction.login()}">立即登录</a> </p>-->
+    </div>
+    </div>
+    #{/form}
+
+    #{/if}
+	#{else}
+    <!-- 登陆后 -->
+    <div class="p-login after ">
+        <img src="${currUser?.photo}" alt="" class="p-lotoux" />
+        <p class="p-loword">${currUser?.name?.substring(0,3)}****${currUser?.name?.substring(7)}，欢迎您来到拓米金融</p>
+        <p class="p-loword p-loword-new">邀请好友注册，再送现金红包！</p>
+        <a href="@{front.account.accountHome.home()}" class="p-loabtn p-op">进入我的账户</a>
+    </div>
+    #{/else}
+</div>
+<!--内容区-->

@@ -1,0 +1,283 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'CPS推广员列表' /}
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+<!--左-->
+#{include "supervisor/networkMarketing/CPSSpreadAction/networkMarketingLeft.control"/}    
+<!--右-->
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+  #{form @supervisor.networkMarketing.CPSSpreadAction.employeeSpreadList(), id:'submit'}
+  <input type="hidden" id="currPage" name="currPage"/>
+  <input type="hidden" id="pageSize" name="pageSize"/>
+  <input type="hidden" id="orderType" name="orderType" value="${page?.conditions?.orderType}"/>
+  <!-- 搜索 -->
+    <!-- <div class="xf_ht_search">
+      <div class="xf_ht_search_l">
+        <span id="div_0" onClick="conditonSearch(0)">默认排序</span>
+		<span id="div_1" onClick="conditonSearch(1)">注册时间 <a id="tab_1">↑</a></span>
+		<span id="div_3" onClick="conditonSearch(3)">推广会员数 <a id="tab_3">↑</a></span>
+		<span id="div_5" onClick="conditonSearch(5)">佣金总额<a id="tab_5">↑</a></span>
+      </div>
+     </div> -->
+     <!-- <div class="xf_ht_search_inon">
+       <div class="xf_ht_search_r">
+         <div class="xf_ht_search_xl">
+           <input name="name" type="text" class="search_w"  value="${page?.conditions?.name}" placeholder="用户名"/>
+         </div>
+         <div class="xf_ht_search_xl">
+           <input type="submit" class="search_button" value="搜索">
+         </div>
+       </div>
+     </div> -->
+     <div class="xf_ht_search_inon">
+      <div>
+      	<div class="xf_ht_search_xl">
+          <span class="search_timesp">会员：</span>
+          <input name="nameMobile" type="text" class="search_w" id="nameMobile" value="${page?.conditions?.nameMobile}" placeholder="真实姓名/手机">
+        </div> 
+        <div class="xf_ht_search_xl">
+          <span class="search_timesp">业绩时间：</span>
+          <input name="beginTime" type="text" id="startDate" name="beginTime" class="search_time" onclick="laydate()" style="cursor: pointer" value="${page?.conditions?.beginTime}">
+          <span class="search_timesp">--</span>
+          <input name="endTime" type="text" id="endDate" name="endTime" class="search_time" onclick="laydate()" style="cursor: pointer" value="${page?.conditions?.endTime}">
+        </div>
+        <div class="xf_ht_search_xl">
+          <input type="submit" class="search_button" onclick="searchSubmit();" value="搜 索">
+          <input type="button" class="search_button" onclick="javascript:if(confirm('你确定要执行该操作吗？')){location.href='@{supervisor.networkMarketing.CPSSpreadAction.employeeSpreadInit}'}" value="重新生成">
+        </div>
+        
+        <div class="xf_ht_search_xl" style="float:right;">
+       		<input type="hidden" name="isExport" value="0" id="isExport">
+       		<input type="hidden" name="exportType" value="current" id="exportType">
+<!-- 			<input type="button" class="search_button" onmouseout="clearIsExport();" onclick="download('current');" value="导出当前页"> -->
+			<input type="button" class="search_button" onmouseout="clearIsExport();" onclick="download('all');" value="导出所有">
+      	</div>
+      </div>
+    </div>
+     #{/form}
+	<!-- 列表内容 -->
+	<div class="xn_c_content_top">
+      #{table class:"xn_c_content_list",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj"}
+        #{tr}
+          #{th}序号#{/th}
+          #{th}用户名#{/th}
+          #{th}手机号#{/th}
+          #{th}注册时间#{/th}
+          #{th}员工姓名#{/th}
+          #{th}推广会员数#{/th}
+          *{
+          #{th}当日业绩#{/th}
+          #{th}当月业绩#{/th}
+          }*
+          #{th}累计业绩#{/th}
+          #{th}操作#{/th}
+        #{/tr}
+        #{list page?.page}
+        #{tr tr_index:_index}
+          #{td}${(page?.currPage - 1) * page?.pageSize + _index}#{/td}
+          #{td}${_?.username}#{/td}
+          #{td}${_?.mobile}#{/td}
+          #{td}${_?.registerTime?.format('yyyy-MM-dd')}#{/td}
+          #{td}${_?.realityname}#{/td}
+          #{td}${_?.spreadCount}#{/td}
+          *{
+          #{td}${_?.todayAmount?.format("###,##0.00")}#{/td}
+          #{td}${_?.monthAmount?.format("###,##0.00")}#{/td}
+          }*
+          #{td}${_?.totalAmount?.format("###,##0.00")}#{/td}
+          #{td}<span class="xf_ta_onclick" onClick="employeeSpreadDetail(${_?.id})">详情</span>#{/td}
+        #{/tr}
+        #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+        <div class="page_warp">
+          #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+        </div>
+    </div>
+  </div>
+</div>
+<div class="xn_c_ban_jox xn_c_ban_jox_hyxq" id="showCpaDetail"></div>
+</div>
+</div>
+<script type="text/javascript">
+/* 下载数据 */
+function download(exportType){
+  $("#isExport").val(1);
+  $("#exportType").val(exportType);
+  $("#submit").submit();
+  $("#isExport").val(0);
+}
+
+//设置初始时间
+function endTime(){  
+    var d = new Date();   
+    var year = d.getFullYear();   
+    var month = d.getMonth()+1;   
+    var date = d.getDate();   
+    var curDateTime= year;  
+    if(month>9)  
+    curDateTime = curDateTime +"-"+month;  
+    else  
+    curDateTime = curDateTime +"-0"+month;  
+    if(date>9)  
+    curDateTime = curDateTime +"-"+date;  
+    else  
+    curDateTime = curDateTime +"-0"+date;  
+    return curDateTime;   
+}
+function startTime(){  
+    var d = new Date();   
+    var year = d.getFullYear();   
+    var month = d.getMonth()+1;   
+    var date = 1;   
+    var curDateTime= year;  
+    if(month>9)  
+    curDateTime = curDateTime +"-"+month;  
+    else  
+    curDateTime = curDateTime +"-0"+month;  
+    if(date>9)  
+    curDateTime = curDateTime +"-"+date;  
+    else  
+    curDateTime = curDateTime +"-0"+date;  
+    return curDateTime;   
+}
+
+function showPagess(currPage, pageSize) {
+	var startDate =  "";
+	if($.trim($("#startDate1").val()) == ""){
+		startDate = $("#startDate").val();
+	}else{
+		startDate = $("#startDate1").val();
+	}
+	
+	var endDate = "";
+	if($.trim($("#endDate1").val()) == ""){
+		endDate = $("#endDate").val();
+	}else{
+		endDate = $("#endDate1").val();
+	}
+	  var key = "";
+	  $.ajax({
+		url : "@{employeeSpreadDetail()}",
+		type : "GET",
+		data : {
+		"id" : gobalId,
+		"currPage" : currPage,
+		"pageSize" : pageSize,
+		"nameMobile" : $("#nameMobile1").val(),
+		"beginTime" : startDate,
+		"endTime" : endDate
+		},
+		success : function(data) {
+	  	  var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+		  if(result){
+			 return;
+		  }
+		  if (data.code < 0) {
+	    	alert(data.msg);
+			return;
+		  }
+		  $("#showCpaDetail").html(data);
+		  $.layer({
+		     type: 1,
+		     area: ['780', 'auto'],
+		     title: '推广明细',
+		     page: {dom : '#showCpaDetail'}
+	      });
+	    },
+		error : function() {
+		  alert(data.msg);
+		}
+	  });
+	}
+
+
+
+/* function conditonSearch(num){
+  var orderType= ${page?.conditions?.orderType};
+  if(orderType == 0){
+    $("#orderType").val(num);
+    $("#submit").submit();
+    return;
+  }
+  
+  var sum = orderType/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = orderType - 1;
+    if(sum2 == num){
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+    }else{
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+     }
+  }else{
+    if(orderType == num){
+      $("#orderType").val(num + 1);
+      $("#submit").submit();
+      return;
+    }else{
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+       }
+     }
+   } */
+
+$(function(){
+  //高亮显示
+  showHighLight(1,1,4);
+  *{
+  #{if page?.conditions?.endTime == null}
+	  $("#startDate").val(startTime());
+  #{/if}
+  #{if page?.conditions?.endTime == null}
+	  $("#endDate").val(endTime()); 
+  #{/if}
+  }*
+  //条件查询控制样式
+  /* var num= ${page?.conditions?.orderType};
+  if(num == 0){
+    $("#div_0").addClass("xf_sea_isshow");
+    return;
+  }
+       
+  var sum = num/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = num -1;
+    $("#div_"+sum2).addClass("xf_sea_isshow");
+    $("#tab_"+sum2).html("↓");
+    return;
+  }
+  
+  $("#div_"+num).addClass("xf_sea_isshow");
+  $("#tab_"+num).html("↑"); */
+});
+
+   
+ var gobalId = 0;
+function employeeSpreadDetail(id) {
+  //清空搜索条件 
+  $("#nameMobile1").val("");
+  $("#startDate1").val("");
+  $("#endDate1").val(""); 
+  /* alert($("#startDate1").val());
+  alert(curDateTime1());
+  $("#startDate1").val(curDateTime1());
+  alert($("#startDate1").val());
+  $("#endDate1").val(curDateTime()); */
+  gobalId = id;
+  showPagess(1,5);
+}
+		
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+}
+</script>

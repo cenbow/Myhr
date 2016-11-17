@@ -1,0 +1,18 @@
+%{
+    business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle /}
+<!-- 内容区域 start -->
+<!-- 内容区域 end -->
+
+
+<iframe src ="/public/special/special${themeId}.html?t=${timeId}" id="special_main" width="100%"  style="margin-bottom:-60px;" frameborder="0">
+</iframe>
+
+<script>
+    $("#special_main").load(function(){
+        var mainheight = $(this).contents().find("body").height()+0;
+        $(this).height(mainheight);
+    });
+</script>

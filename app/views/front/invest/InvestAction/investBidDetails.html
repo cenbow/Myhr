@@ -1,0 +1,455 @@
+<div class="p-bdbotbox mt30" id="xf_wyjkview_xxk">
+	<ul class="p-bdxxkul clr">
+		<li id="investabout">借款标详情</li>
+		<li id="investRecords">投标记录</li>
+		<!--<li id="bidInvestQuestions">向借款人提问</li>-->
+        #{if bid?.isNoviceInvest == false}
+		<li id="investPayment" onclick="calculate();" >还款明细</li>
+		<!--<li id="bidInvestQuestions">向借款人提问</li>-->
+        #{/if}
+		<!-- 条件：是团标；关联了机构标放款，设置为在前台显示 -->
+	 	#{if bid?.isGroup && bid?.relationBidIds != null && bid?.isShow}
+ 			<li id="relationBids">关联借款标</li>
+  		#{/if}
+	</ul>
+	<div class="p-bdtabox" >
+        #{if bid?.isNoviceInvest == false && bid?.isExperience == false}
+    	<h4>借款人基本资料</h4>
+        <div class="p-bdziliao">
+            <table class="p-bdzltable">
+                <tr>
+                    <td style="width:840px;">
+                    	*{ ${bid?.userBasicInfo} }*
+                    	#{if bid?.user_basicinfo_id == 0} 
+                    		*{ 之前的版本 }*
+                    		#{include 'front/invest/InvestAction/userBasicInfo.control' /}
+                    	#{/if}
+                    	#{else}
+                    	    *{ 之后的版本 }*
+                    		<table class="p-bdzltable">
+							<tbody>
+								<tr>
+									<td style="width: 840px;">
+										<table style="width: 100%;" align="center" border="1" cellpadding="2" cellspacing="0">
+											<tbody>
+												<tr>
+													<td>
+														<table class="p-bdzltable ke-zeroborder" align="center">
+															<tbody>
+																<tr>
+																	<td style="text-align: center;" width="72">借款人：</td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+													<td style="text-align: center;"><b id="realName">${userBasicInfo?.name}</b><br>
+													</td>
+													<td style="text-align: center;">性别：<br>
+													</td>
+													<td style="text-align: center;">${sexStr}</td>
+													<td style="text-align: center;">年龄：</td>
+													<td style="text-align: center;">${userBasicInfo?.age}</td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">身份证号：</td>
+													<td style="text-align: center;"><b id="idCard">${userBasicInfo?.idcard}</b><br>
+													</td>
+													<td style="text-align: center;"><span>户口所在地：</span><br>
+													</td>
+													<td style="text-align: center;"><span>${address}</span><br>
+													</td>
+													<td style="text-align: center;">文化程度：</td>
+													<td style="text-align: center;">${educationStr}</td>
+												</tr>
+												<tr>
+													<td style="text-align: center;"><span>婚姻情况：</span><br>
+													</td>
+													<td style="text-align: center;"><span>${maritalStr}</span><br>
+													</td>
+													<td style="text-align: center;">购房情况：<br>
+													</td>
+													<td style="text-align: center;"><span>${buyHouse}</span><br>
+													</td>
+													<td style="text-align: center;">购车情况：<br>
+													</td>
+													<td style="text-align: center;">${buyCar}</td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">借款目的：</td>
+													<td style="text-align: center;"><span>${userBasicInfo?.goal}</span><br>
+													</td>
+													<td><br></td>
+													<td><br></td>
+													<td><br></td>
+													<td><br></td>
+												</tr>
+											</tbody>
+										</table>
+										<p>
+											<br>
+										</p>
+										<p>
+											<span><span style="line-height: normal;"></span></span>
+										</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+                    	#{/else}
+					</td>
+                </tr>
+            </table>
+        </div>
+        
+        #{if bid?.housing_mortgage_info != null&&bid?.housing_mortgage_info != '' }
+        <h4>抵押房产信息</h4>
+        <div class="p-bdshuom">
+            <p>#{include 'front/invest/InvestAction/housingMortgageInfo.control' /}</p>
+        </div>
+        #{/if}
+        
+        #{if bid?.caring_mortgage_info != null&&bid?.caring_mortgage_info != '' }
+        <h4>抵押车信息</h4>
+        <div class="p-bdshuom">
+            <p>#{include 'front/invest/InvestAction/caringMortgageInfo.control' /}</p>
+        </div>
+        #{/if}
+        
+        <h4>对借款用途还款能力的详细说明</h4>
+        <div class="p-bdshuom">
+            <p>${bid?.description}</p>
+        </div>
+        
+        *{<h4>必须资料审核科目</h4>
+        <div class="p-bdziliao">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="xf_wylc_viewcpms_Tab xf_wylc_viewcpms_Tab2">
+                <tbody>
+                    <tr>
+                        <th valign="middle">序号</th>
+                        <th>审核科目</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                        <th> <b>CBO风控体系审核</b>
+                        </th>
+                    </tr>
+					#{list uItems}
+						#{if _?.status == 2}
+                 			<tr>
+		                       	<td align="center">${_index}</td>
+	                         	<td align="center">${_?.auditItem?.name}</td>
+	                         	<td align="center">${_?.strStatus}</td>
+	                         	<td align="center" width="">
+									#{if _?.isVisible}
+										<a onclick="showitemNow('${_?.mark}','${bid?.signUserId}',${bid?.id});">查看</a>
+									#{/if}
+									#{else}
+										不可见
+									#{/else}
+								</td>
+								#{if _index == 1}
+	                         		<td valign="top" rowspan="${uItems?.size}" class="xf_wylc_l_memhyA_zh">
+	                             		<pre class="multiline_show_cbo">${bid?.auditSuggest}</pre>
+	                         		</td>
+								#{/if}
+                  			</tr>
+						#{/if}
+					#{/list}
+                </tbody>
+            </table>
+        </div>
+        }*
+        #{/if}
+        #{else}
+        	#{if bid?.isNoviceInvest == true}
+        	    <h4>体验标详情</h4>
+		        <p class="inverst-xsb-p">1.体验标仅限于新注册用户，一个用户只能参与一次；</p>
+				<p class="inverst-xsb-p">2.新用户注册时，系统会自动发放18888元体验金，体验金自发放之日起15日内有效，过期作废；</p>
+				<p class="inverst-xsb-p">3.新用户完成首投后，系统将会把18888元体验金自动投入到体验标中；</p>
+				<p class="inverst-xsb-p">4.体验金专享体验标产生的收益归用户所有，到期收益自动返还到用户账户中，可提现，体验金到期后系统自动收回；</p>
+				<p class="inverst-xsb-p">5.体验金专享体验标期限为1天，当天计算收益，年化收益为15%。</p>
+        	#{/if}
+        	#{else}
+        		<h4>米粒宝新人计划</h4>
+		        <p class="inverst-xsb-p">
+		          "米粒宝"新人计划是拓米金融（www.tome.cn）为新注册用户体验平台而推出的便捷高效的委托投资计划，用户委托平台将资金投向平台项目，且回款本息由客户委托系统复投，保障资金利用率，期限结束时通过债权转让退出。每个注册用户仅限一次购买机会。
+		        <br></p>
+        	#{/else}
+        #{/else}
+	</div>
+
+	<input type="hidden" id="hiddenbidvalue" name="hiddenbidvalue" value=${bid?.sign} />
+	<input type="hidden" id="hiddenUserId" name="hiddenbidvalue" value=${bid?.signUserId} />
+	<!--	借款投标记录 -->
+	<div class="p-bdtabox none" id="bidInvestRecords">
+
+	</div>
+    <!--还款明细 -->
+    <div class="p-bdtabox none" id="bidInvestPayment">
+        <div class="xf_mem_jsq_xyjsq">
+            <div class="xf_mem_jsq_hk_t"  style="display: none">
+                <table border="0" cellpadding="0" cellspacing="0" width="739" class="xf_mem_jsq_hk_table">
+                    <tr>
+                        <td class="xf_mem_jsq_hk_tdl">借款金额：</td>
+                        <td class="xf_mem_jsq_hk_tdr">
+                            <input class="xf_mem_jsq_hk_input" type="text" id="amount" onkeyup="ndigitInteger(this,8)"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d  |^\.]/g,''))" value="${bid?.amount}" readonly="readonly" />
+                            &nbsp;元
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="xf_mem_jsq_hk_tdl">年利率：</td>
+                        <td class="xf_mem_jsq_hk_tdr">
+                            <input class="xf_mem_jsq_hk_input" type="text" id="apr" onkeyup="proportionRange(this)"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d  |^\.]/g,''))" value="${bid?.apr}" readonly="readonly"/>
+                            &nbsp;%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="xf_mem_jsq_hk_tdl">借款期限：</td>
+                        <td class="xf_mem_jsq_hk_tdr"><input class="xf_mem_jsq_hk_input" type="text" id="period" onkeyup="ndigitInteger(this,2)"
+                                                             onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d  |^\.]/g,''))" onblur="checkPeriod()" value="${bid?.period}" readonly="readonly"/>&nbsp;
+                            <select id="periodUnit"  onchange="test()">
+                                <option value="${bid?.strPeriodUnit}">${bid?.strPeriodUnit}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="xf_mem_jsq_hk_tdl">还款方式：</td>
+                        <td class="xf_mem_jsq_hk_tdr">
+                            <select name="xf_memhkjsq_selectAge" class="xf_memhkjsq_selectAge" id="repaymentType">
+                                <option value="${bid?.repayment?.id}">${bid?.repayment?.name}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="xf_mem_jsq_xyjsq_go"  style="display: none" >
+                <a class="xf_con_inputfbjk" onclick="calculate();">计 算</a>
+            </div>
+            <!-- 还款明细 -->
+            <div class="xf_mem_jsq_hk_b" id="showRepaymentDetail">
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+	<!--借款提问记录 -->
+	<div class="p-bdtabox none" id="bidQuestions">
+	</div>
+
+	<!--关联借款标 -->
+	<div class="p-bdtabox none" id="relationBidArea">
+	</div>
+
+
+
+	<!-- 查看资料弹出层 -->
+   	<div id="showitem" class="xf_ht_ttc" >
+   	</div>
+</div>
+
+
+<script type="text/javascript">
+	function showitemNow(mark,signUserId,bidId){
+   		/** 检查用户是否激活, fronMain.html 中的拦截器*/
+	   	var result = frontJSIntercepter();
+	   	if(!result){
+    		showitem(mark,signUserId,bidId);
+   		}
+	};
+
+	/* 查看弹出层 */
+	function showitem(mark,signUserId,bidId){
+		var listAction = #{jsAction @front.invest.InvestAction.showitem(':mark',':signUserId',":bidId") /};
+		$.post(listAction({mark:mark,signUserId:signUserId,bidId:bidId}), function(data) {
+			//拦截器，拦截判断。frontMain.html
+			if(checkIntercepterResult(data)){
+				return;
+			}
+			showDiv($("#showitem").html(data));
+		});
+	};
+
+
+	$(function(){
+   		$("#investRecords").click(function(){
+	 		var bidId = $("#hiddenbidvalue").val();
+		 	var pageSize = 10;
+ 		 	var pageNum = 1;
+ 		 	showBidRecords(pageNum, pageSize,bidId);
+    	})
+
+   		$("#bidInvestQuestions").click(function(){
+  			showBidAllQuestion(1, 10);
+			changeCode();
+   		})
+   		//关联借款标
+   		$("#relationBids").click(function(){
+   			calculate();showRelationBids(1, 10);
+   		})
+
+   	});
+	function showBidRecords(pageNum, pageSize,bidId) {
+   		var bidId = $("#hiddenbidvalue").val();
+	   	$.ajax({
+   			url : "@{viewBidInvestRecords()}",
+		    type : "POST",
+		    data : {
+	     		"pageNum" : pageNum, "pageSize":pageSize, "bidIdSign":bidId
+	     	},
+    		success : function(data) {
+	     		$("#bidInvestRecords").html(data);
+	     	},
+		   	error : function() {
+				alert("对不起，出现错误!");
+			}
+		});
+	};
+
+	function showBidAllQuestion(pageNum, pageSize){
+		var bidId = $("#hiddenbidvalue").val();
+		$.ajax({
+     		url : "@{viewBidAllQuestion()}",
+		    type : "POST",
+		    data : {
+		     	"pageNum" : pageNum, "pageSize":pageSize, "bidIdSign":bidId
+	     	},
+		    success : function(data) {
+			     $("#bidQuestions").html(data);
+	     	},
+		    error : function() {
+				alert("对不起，出现错误!");
+			}
+		});
+	};
+	
+	
+
+
+	//显示关联借款标
+	function showRelationBids(pageNum, pageSize){
+		var bidId = $("#hiddenbidvalue").val();
+		$.ajax({
+     		url : "@{viewRelationBids()}",
+		    type : "POST",
+		    data : {
+		     	"pageNum" : pageNum, "pageSize":pageSize, "bidIdSign":bidId
+	     	},
+		    success : function(data) {
+			     $("#relationBidArea").html(data);
+	     	},
+		    error : function() {
+				alert("对不起，出现错误!");
+			}
+		});
+	};
+</script>
+<script type="text/javascript">
+    $(function(){
+        /* 计算结果层 */
+        $("#showResult").hide();
+        /* 返款明细层 */
+        $("#showRepaymentDetail").hide();
+
+        $("#apr").focus(function(){
+            this.value = $("#apr").val();
+        });
+        $("#amount").val("${bid?.amount}");
+        $("#period").focus(function(){
+            this.value = $("#period").val();
+        });
+    })
+
+    /* 计算 */
+    function calculate(){
+        var amount = $("#amount").val()*1;
+        var apr = $("#apr").val() * 1;
+        var period = $("#period").val() * 1;
+        var periodUnitss = $("#periodUnit").val();
+        var a ="年";
+        var b = "月";
+        var c  = "天";
+        var d = "日";
+        if(a == periodUnitss) {
+            periodUnit =-1;
+        }else if(b == periodUnitss){
+            periodUnit =0;
+        }else if (c == periodUnitss||d ==periodUnitss ){
+            periodUnit =1;
+        }
+
+        var repaymentType = $("#repaymentType").val() * 1;
+        var interest = 0; // 总利息
+        var monthApr = apr / 12 / 100; // 月利率
+        var rperiod = 0; // 还款期数
+
+        if("1" == periodUnit &&　period > 30){
+            alert("天标借款期限不能大于30天！");
+            return ;
+        }
+
+        /* 根据借款期限算出利息 */
+        switch(periodUnit){
+                /* 年 */
+            case -1:
+                interest = apr/100*period*amount;
+                rperiod = period * 12;
+                break;
+                /* 月 */
+            case 0:
+                interest = apr/12/100*period*amount;
+                rperiod = period;
+                break;
+                /* 日 */
+            case 1:
+                interest = apr/360/100*period*amount;
+                rperiod = 1;
+                break;
+        }
+
+        var mcist = $("#monthCapitalInterestSumText");
+        var monthSum = 0;
+        if(periodUnit == "1"){
+            mcist.html("应还本息");
+            monthSum = interest + amount;
+        }else{
+            /* 根据还款方式算出利息 */
+            switch(repaymentType){
+                    /* 按月还款、等额本息 */
+                case 1:
+                    monthSum = (amount * monthApr * Math.pow((1 + monthApr), rperiod)) / (Math.pow((1 + monthApr), rperiod) - 1);
+                    interest = (monthSum * rperiod - amount).toFixed(2);
+                    mcist.html("月还本息");
+                    break;
+
+                    /* 按月付息、一次还款 */
+                case 2:
+                    mcist.html("月还利息");
+                    monthSum = interest / rperiod;
+                    break;
+
+                    /* 一次还款 */
+                case 3:
+                    mcist.html("应还本息");
+                    monthSum = interest + amount;
+                    break;
+            }
+        }
+
+        $("#totalAmount").html(amount);
+        $("#monthApr").html((monthApr * 100).toFixed(2));
+        $("#monthCapitalInterestSum").html(monthSum.toFixed(2));
+        $("#capitalInterestSum").html((interest*1 + amount*1).toFixed(2));
+
+        $("#showResult").show(); // 计算结果层
+
+        /* 还款明细异步加载 */
+        var listAction = #{jsAction @wechat.others.InterestCalculator.repaymentCalculate(':amount', ':apr', ':period', ':periodUnit', ':repaymentType') /};
+        $.post(listAction({amount:amount, apr:apr, period:period, periodUnit:periodUnit, repaymentType:repaymentType}), function(data) {
+            $("#showRepaymentDetail").html(data).show();
+        });
+    }
+
+</script>
+	      

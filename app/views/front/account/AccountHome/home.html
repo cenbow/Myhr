@@ -1,0 +1,60 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle +' | 我的账户 | 我的账户首页' /}
+
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+
+    
+    <!-- 用户头像 -->
+    <div class="p-cfright">
+    	<!-- 账户头像 账户信息 -->
+    	#{include "front/account/AccountHome/homeInfo.html"/}
+        
+        <!-- 转让和借款标详情 -->
+		#{include "front/account/AccountHome/homeRecommendation.html"/}
+    </div>
+</div>
+
+
+<!-- 内容区域 end -->     
+<!-- vip弹出层  -->     
+#{include "front/account/AccountHome/homeVipApply.control"/}
+#{include "front/account/AccountHome/homeVipContent.control"/}
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		//showHighLightFront2(7, 1);
+		myAccountSelect(1,1);
+	});
+	
+	
+	//修改头像
+	function upload(imgFile, image) {
+		$.ajaxFileUpload({
+			url : '@{front.account.AccountHome.uploadPhoto()}',
+			secureuri : false,
+			fileElementId : 'imgFile',
+			dataType : 'text',
+			success : function(data) {
+				var data1 = $.evalJSON(data);
+				if (data1.error.code < 0) {
+					alert(data1.error.msg);
+	
+					return;
+				}
+				$("#image").attr("src", data1.filename);
+				$("#imgFile").val('');
+			},
+			error : function(data, status, e) {
+				alert("上传图片失败");
+			}
+		})
+	}
+</script>

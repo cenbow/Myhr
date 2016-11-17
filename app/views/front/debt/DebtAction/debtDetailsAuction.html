@@ -1,0 +1,108 @@
+#{form @front.debt.debtAction.auction(debt?.id), method:'POST', id:'auction'}
+<div class="p-bdtopright">
+   <div class="p-bdrtitem">
+	   <span class="p-bdrtitem mtf10 co999">剩余时间：</span>
+      #{if debt.status == 1 && new java.util.Date() < debt?.endTime}
+    <div class="p-bdsytime">
+        <em id="day">2</em> 天 
+        <em id="hour">21</em> 小时 
+        <em id="minutes">28</em> 分 
+        <em id="seconds">22</em> 秒
+    </div>
+    #{/if}
+    #{else}
+     <div class="p-bdsytime">
+        <em >00</em> 天 
+        <em >00</em> 小时 
+        <em >00</em> 分 
+        <em >00</em> 秒
+    </div>
+    #{/else}
+   </div>
+    <div class="p-bdrtitem mt10">
+        <span class="co999">转让状态：</span>
+        <span class="cozhuse">
+        	#{if debt?.status == 1}
+				转让中
+			#{/if}
+			#{if debt?.status == 2}
+				等待认购
+			#{/if}
+			#{if debt?.status == 3}
+				已成功
+			#{/if}
+			#{if debt?.status == 4}
+				等待确认
+			#{/if}
+			#{if debt?.status == -2}
+				流拍
+			#{/if}
+			#{if debt?.status == -3}
+				流拍
+			#{/if}
+			#{if debt?.status == -5}
+				流拍
+			#{/if}
+		</span>
+    </div>
+    <div class="p-bdrtitem2 mt10">
+        <span class="co999">剩余本息：</span> #{format money:debt.debtAmount}#{/format}元
+    </div>
+    <div class="p-bdrtitem2 mt10">
+        <span class="co999">转让定价：</span> #{format money:debt.transferPrice}#{/format}元
+    </div>
+    #{if debt.status == 1 && new java.util.Date() < debt?.endTime}
+					 *{<div class="p-bdrtitem2 mt15">交易密码：<input type="text"  name="dealpwd" id="dealpwd" autocomplete="off" onfocus="this.type='password'" onMouseOver="checkPwdDel();"></input></div>
+				   #{if user != null && user.payPassword == null}
+				    <div class="p-bdrtitem2 mt10"><a href="@{front.account.BasicInformation.modifyPassword()}" >您未设置交易密码！点击此处设置交易密码</a></div>
+				     
+				      #{/if}}*
+    	<a href="javascript:void(0);" class="btn p-bdbtn mt30" onclick="auctionsub();">我要购买</a>
+	#{/if}
+</div>				
+#{/form}	
+<script type="text/javascript">
+	showTime();
+ 	function showTime(){
+    	var endTime =" ${debt?.endTime?.format('yyyy/MM/dd HH:mm:ss')}";
+    	var date = new Date(endTime);
+       	var tt = date.getTime();
+    	var now = new Date().getTime();
+        var cha = tt-now;
+        var SysSecond=parseInt(cha);
+ 	 	if (SysSecond > 0) { 
+        	int_day=Math.floor(SysSecond/86400000);
+         	SysSecond-=int_day*86400000;
+         	int_hour=Math.floor(SysSecond/3600000);
+         	SysSecond-=int_hour*3600000;
+         	int_minute=Math.floor(SysSecond/60000);
+         	SysSecond-=int_minute*60000;
+         	int_second=Math.floor(SysSecond/1000);
+    		if(int_hour<10){
+	       		int_hour="0"+int_hour;
+          	}
+            if(int_minute<10){
+        		int_minute="0"+int_minute;
+           	}
+    		if (int_second<10){
+     	    	int_second="0"+int_second;
+            }
+	       	$("#day").html(int_day);
+	       	$("#hour").html(int_hour);
+	       	$("#minutes").html(int_minute);
+	       	$("#seconds").html(int_second);
+       	} else{
+       	   	$("#day").html("00");
+	       	$("#hour").html("00");
+	       	$("#minutes").html("00");
+	       	$("#seconds").html("00");
+       	}
+		setTimeout('showTime()',1000); 
+ 	};
+ 	
+ 	function auctionsub(){
+ 		if(confirm("确定购买？")){
+ 			$("#auction").submit();
+ 		}
+ 	}
+</script>

@@ -1,0 +1,349 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle +'| 债权转让' /}
+
+<div class="p-main mt30">
+    <div class="p-lcbanner">
+        <img src="/public/images/zqbanner.jpg" alt="" width="100%" ondragstart="return false;" />
+        <a title="" target="" href="javascript:void(0)" class="p-lclose"><i class="icons"></i></a>
+    </div>
+    
+    
+    <!-- 搜索begin -->
+    #{form @front.debt.DebtAction.debtHome(),method:'GET',id :'debtsSearch'}
+    
+	    <input type="hidden" id="currPage" name="currPage"/>
+	    <input type="hidden" id="pageSize" name="pageSize"/>
+	    <input type="hidden" id="aprtemp" name="apr" value="${page?.conditions?.apr}"/>
+	    <input type="hidden" id="debtAmounttemp" name="debtAmount" value="${page?.conditions?.amount}"/>
+	    <input type="hidden" id="orderType" name="orderType" value="${page?.conditions?.orderType}"/>
+    
+	    <div class="p-lcshaixpx pt20 mt20">
+	        <div class="clr p-lctopss pb10">
+	            <span class="p-lclfsous">债权搜索：</span>
+	            <div class="p-lcssbox">
+	                <input type="text" class="p-lcsinput" id="keywords" name="keywords" value="${page?.conditions?.keywords}" maxlength="12"/>
+	                <a href="javascript:void(0);" onclick="showDebtLists();"><i class="iconfont">&#xe615;</i></a>
+	            </div>
+	            <div class="p-lclickbtn">
+	                <a href="javascript:void(0)"></a><span>分类查询</span>
+	            </div>
+	        </div>
+	        <div class="p-pr p-lchidebox">
+	            <table class="p-lcshxtable">
+	                <!-- 年化利率 -->
+	                <tr height="32" id="apr">
+	                    <th width="100">预期年化：</th>
+	                    <td><span value="0" #{if page?.conditions?.apr == 0} class="cur" #{/if}>全部</span></td>
+	                    <td><span value="1" #{if page?.conditions?.apr == 1} class="cur" #{/if}>10%以下</span></td>
+	                    <td><span value="2" #{if page?.conditions?.apr == 2} class="cur" #{/if}>10%-15%</span></td>
+	                    <td><span value="3" #{if page?.conditions?.apr == 3} class="cur" #{/if}>15%-20%</span></td>
+	                    <td><span value="4" #{if page?.conditions?.apr == 4} class="cur" #{/if}>20%以上</span></td>
+	                    <td>&nbsp;</td>
+	                </tr>
+	                
+				
+	                <tr height="32" id="debtAmount">
+	                    <th>待收本金：</th>
+	                    <td><span value="0" #{if page?.conditions?.debtAmount == 0} class="cur" #{/if}>全部</span></td>
+	                    <td><span value="1" #{if page?.conditions?.debtAmount == 1} class="cur" #{/if}>1000以下</span></td>
+	                    <td><span value="2" #{if page?.conditions?.debtAmount == 2} class="cur" #{/if}>1001—5000</span></td>
+	                    <td><span value="3" #{if page?.conditions?.debtAmount == 3} class="cur" #{/if}>5001—10000</span></td>
+	                    <td><span value="4" #{if page?.conditions?.debtAmount == 4} class="cur" #{/if}>10001—30000</span></td>
+	                    <td><span value="5" #{if page?.conditions?.debtAmount == 5} class="cur" #{/if}>30000以上</span></td>
+	                </tr>
+	                
+	                <tr height="32">
+	                    <th>借款标类型：</th>
+	                    <td colspan="6">
+	                    	<select name="loanType" id="loanType" class="p-zqselct">
+	                    		<option value="">请选择</option>
+	                    		#{list items:products,as:'product'}  
+	                    			<option value="${product?.id}"  #{if page?.conditions?.loanType == product?.id} selected="selected" #{/if}>${product?.name}</option>  
+	                    		#{/list}
+	                    	</select>
+	                    </td>
+	                </tr>
+	            </table>
+	            <a title="利率计算器" href="@{front.home.HomeAction.wealthToolkit(4)}" target="_blank" class="p-lcjisq"></a>
+	        </div>
+	        
+			<div class="p-lcpaixu clr">
+	            <a href="javascript:void(0);" onClick="conditonSearch(0);" id="div_0">默认排序</a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(1);" id="div_1">待收本金<i class="icos"></i></a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(3);" id="div_3">利率<i class="icos"></i></a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(5);" id="div_5">剩余时间<i class="icos"></i></a>
+	            <!--<a href="javascript:void(0);" onClick="conditonSearch(7);" id="div_7">还款日<i class="icos"></i></a>-->
+	        </div>
+	    </div>
+    #{/form}
+    <!-- 搜索end -->
+    
+    
+    <!-- 搜索结果 begin -->
+    #{list items:page.page, as:'debt'}
+	    <div class="p-lcitem clr">
+	        <div class="p-lcwleft">
+	            <h6 class="p-lcbtitle">
+	            	<img src="${debt?.small_image_filename}" alt="" /> 
+	            	#{if debt?.status == 1 && new java.util.Date() < debt?.end_time}		
+	            	<a target="_self" href="@{debtDetails(debt?.id)}"><strong>${debt?.title}</strong></a>
+	            	#{/if}
+	            	#{else}
+					<a target="_self" style="color:#CDC9C9" href="@{debtDetails(debt?.id)}"><strong>${debt?.title}</strong></a>
+					#{/else}
+	            </h6>
+	            <table class="p-lclistable">
+	                <tr height="33">
+	                    <td width="15%" class="lclistable_1"><span class="fz30 cozhuse">${debt?.apr}</span> <span class="cozhuse fz16">%</span></td>
+	                    <td width="28%" class="lclistable_2"><span class="fz22 co333">
+	                    	#{if debt?.transfer_price >= 10000}
+	                    		${(debt?.transfer_price/10000)?.format('###,##0.00')}</span> <span class="co333 fz16">万</span>
+	                    	#{/if}
+	                    	#{else}
+	                    		${(debt?.transfer_price)?.format('###,##0.00')}</span> <span class="co333 fz16">元</span>
+	                    	#{/else}
+	                    </td>
+	                    <th width="23%" class="lclistable_3"><span class="fz18 co333" id="syqx${debt_index}">${debt?.repayment_time != null ? debt?.repayment_time?.format('yyyy-MM-dd') : '已还款'}</span></th>
+	                    <input id="syqxTime${debt_index}" type="hidden" value="${debt?.repayment_time != null ? debt?.repayment_time?.format('yyyy-MM-dd') : '已还款'}"></input>
+                        <td class="lclistable_2">
+                            <span class="co333">
+		                    	#{if debt?.status == 1 || debt?.status == 2 || debt?.status == 4}
+									<input id="hiddenTime${debt_index}" type="hidden" value="${debt?.end_time?.format('yyyy/MM/dd HH:mm:ss')}"></input>
+					                <strong class="cozhuse" id="day${debt_index}"></strong> 天
+					                <strong class="cozhuse" id="hours${debt_index}"></strong> 时
+					                <strong class="cozhuse" id="minutes${debt_index}"></strong> 分
+					                <strong class="cozhuse" id="seconds${debt_index}"></strong> 秒
+								#{/if}
+								#{else}
+									<span class="xf_zqzr_list_czxcontent"><span class="xf_c_idx_4_hxje">已结束</span></span><br />
+								#{/else}
+	                    	</span>
+                        </td>
+	                </tr>
+	                <tr height="32">
+	                    <td class="lclistable_1">年利率</td>
+	                    <td class="lclistable_2">转让定价</td>
+	                    <th class="lclistable_3">剩余期限</th>
+	                    <td class="lclistable_2">剩余时间：
+	                    </td>
+	                </tr>
+	            </table>
+	        </div>
+	        <div class="p-lcwright pt70">
+				#{if debt?.status == 1 && new java.util.Date() < debt?.end_time}					
+	            	<a target="_self" href="@{front.debt.DebtAction.debtDetails(debt.id)}" class="p-lcbtn">我要购买</a>
+	            #{/if}
+	            #{else}
+	            	<a target="_self" style="border:1px solid #fff;color:#fff" href="@{front.debt.DebtAction.debtDetails(debt.id)}" class="p-lcbtn">查看详情</a>
+	            #{/else}
+	        </div>
+	        
+	        *{
+	        <div class="p-lcshouc none" title="收藏"><i class="iconfont kx">&#xe612;</i><i class="iconfont sx none">&#xe611;</i></div>
+	        }*
+	    </div>
+   	#{/list}
+    <!-- 搜索结果 begin -->
+    
+    <!-- 分页 -->
+    <div class="xf_wylc_page p-lcpage">
+		<!-- 分页器 -->
+		#{page pageTitle:"个债权标",currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:2}
+		#{/page}
+	</div>
+</div>
+
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_claim.js'}"></script>		
+<script type="text/javascript">
+		
+	$(function(){
+		$('img.lazy').lazyload({ 
+		  //effect:'fadeIn' 
+		});
+		$("#debtDetails").click(function(){
+			$("#xf_wyjkfb_4_window").hide();
+		})
+	});
+	
+	
+	
+  	showTime();
+ 	function showTime(){
+ 		var listsize = ${page?.page.size};
+
+	 	for(var i = 1; i <= listsize; i++){
+	 		var time = $("#hiddenTime"+i).val();
+	
+	 		if(typeof(time) == 'undefined' || time == null || time == "")
+	 			continue;
+	 	 	
+	 		var date = new Date(time);
+			var tt = date.getTime();
+			var now = new Date().getTime();
+			var cha = tt-now;
+			var SysSecond=parseInt(cha);
+	  
+		    if (SysSecond > 0) { 
+	   	        int_day=Math.floor(SysSecond/86400000);
+	            SysSecond-=int_day*86400000;
+	            int_hour=Math.floor(SysSecond/3600000);
+	            SysSecond-=int_hour*3600000;
+	            int_minute=Math.floor(SysSecond/60000);
+	            SysSecond-=int_minute*60000;
+	            int_second=Math.floor(SysSecond/1000);
+	            
+	            if(int_hour<10){
+	             	 int_hour="0"+int_hour;
+				 }
+				 
+	            if(int_minute<10){
+	           		int_minute="0"+int_minute;
+			     }
+			     
+	       		if (int_second<10){
+	            	int_second="0"+int_second;
+	            }
+	             
+	  			$("#day"+i).html(int_day);
+	  			$("#hours"+i).html(int_hour);
+	  			$("#minutes"+i).html(int_minute);
+	  			$("#seconds"+i).html(int_second);
+	  			
+	  		}else{
+		        $("#day"+i).html("00");
+			    $("#hour"+i).html("00");
+			    $("#minutes"+i).html("00");
+			    $("#seconds"+i).html("00");
+	        }
+	   	}
+	   	for(var i = 1; i <= listsize; i++){
+	 		var time = $("#syqxTime"+i).val();
+	 		if(typeof(time) == 'undefined' || time == null || time == "已还款")
+	 			continue;
+	 	 	
+	 		var date = new Date(time);
+			var tt = date.getTime();
+			var now = new Date().getTime();
+			var cha = tt-now;
+			var SysSecond=parseInt(cha);
+	  
+		    if (SysSecond > 0) { 
+	   	        int_day=Math.floor(SysSecond/86400000);
+	            SysSecond-=int_day*86400000;
+	            int_hour=Math.floor(SysSecond/3600000);
+	            SysSecond-=int_hour*3600000;
+	            int_minute=Math.floor(SysSecond/60000);
+	            SysSecond-=int_minute*60000;
+	            int_second=Math.floor(SysSecond/1000);
+	            
+	            if(int_hour<10){
+	             	 int_hour="0"+int_hour;
+				 }
+				 
+	            if(int_minute<10){
+	           		int_minute="0"+int_minute;
+			     }
+			     
+	       		if (int_second<10){
+	            	int_second="0"+int_second;
+	            }
+	            int_day = int_day +1;
+	             $("#syqx"+i).html(int_day+"天");
+	  		}
+	   	}
+	    setTimeout('showTime()',1000);
+ 	};
+ 	
+	
+   	
+   	$(function(){
+   		$("#apr td").click(function() {
+   			$("#apr span").removeClass("cur");
+   			$(this).addClass("cur");
+   			apr = $(this).find("span").attr("value");
+   			$("#aprtemp").val(apr);
+   			showDebtLists();
+   		});
+   		
+   		
+   		$("#debtAmount td").click(function() {
+   			$("#debtAmount span").removeClass("cur");
+   			$(this).addClass("cur");
+   			debtAmount = $(this).find("span").attr("value");
+   			$("#debtAmounttemp").val(debtAmount);
+   			showDebtLists();
+   		});
+   		
+   		$("#loanSchedule td").click(function() {
+   			$("#loanSchedule span").removeClass("cur");
+   			$(this).addClass("cur");
+   			loanSchedule = $(this).find("span").attr("value");
+   			$("#loanScheduletemp").val(loanSchedule);
+   			showDebtLists();
+   		});
+	});
+   	
+   	function showDebtLists(){
+  		$("#debtsSearch").submit();
+   	};
+   	
+   	$(function(){
+  	 	//条件查询控制样式
+	 	var num= '${page?.conditions?.orderType}';
+  		if(num == 0){
+  		$("#div_0").addClass("default_color");
+    		return;
+  		}
+
+  		var sum = num/2;
+  		if(sum.toString().indexOf('.') == -1){
+    		var sum2 = num -1;
+    		$("#div_"+sum2).removeClass("down");
+    		$("#div_"+sum2).addClass("up");
+    		return;
+  		} else {
+    		$("#div_"+num).addClass("down");
+  		}
+  	});
+   	
+   	function conditonSearch(num){
+  	 	var order= '${page?.conditions?.orderType}';
+   	  	if(order == 0){
+   	    	$("#orderType").val(num);
+   	    	$("#debtsSearch").submit();
+   	    	return;
+   	  	}
+   	  	var sum = order/2;
+   	  	if(sum.toString().indexOf('.') == -1){
+   	    	var sum2 = order - 1;
+   	    	$("#orderType").val(num);
+   	    	$("#debtsSearch").submit();
+   	    	return;
+   	  	} else {
+   	    	if(order == num){
+   	      		$("#orderType").val(num + 1);
+   	      		$("#debtsSearch").submit();
+   	      		return;
+   	     	} else {
+   	      		$("#orderType").val(num);
+   	      		$("#debtsSearch").submit();
+   	      		return;
+   	    	}
+   	  	}
+  	};
+  	
+	function showPage(currPage, pageSize){
+	    $("#currPage").val(currPage);
+	    $("#pageSize").val(pageSize);
+	    $("#debtsSearch").submit();
+	};
+</script>
+		
+	
+		
+		
+		

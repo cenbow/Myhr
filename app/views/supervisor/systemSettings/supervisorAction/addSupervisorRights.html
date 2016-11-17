@@ -1,0 +1,634 @@
+%{
+	boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/supervisor.html' /}
+#{set title:'管理员权限地图分配' /}
+
+    <!-- 内容区域 -->
+    <div class="xn_c_contentwarp">
+        <div class="xn_c_contentlist">
+        #{include "supervisor/systemSettings/common/leftBar.control"/}
+            <div class="xn_c_content">
+                <div class="xf_ht_tablelist">
+                <!-- 2015.11.03 新增-->
+             	    <input type="button" value="只读权限分配" class="xf_onlyread_btn" />
+                    <input type="button" value="操作权限分配" class="xf_operating_btn" />
+                    <!-- 列表内容 -->
+                    <div class="xn_c_content_top xf_back_competence_box">
+                        <table class="xn_c_content_list xf_back_competence" cellspacing="0" cellpadding="0" border="0" width="100%" >
+                            <tr>
+                                <th width="15%">一级菜单</th>
+                                <th width="15%">二级菜单</th>
+                                <th width="70%">三级菜单</th>
+                            </tr>
+                            <!-- 首页管理 -->
+                            <tr>
+                                <td rowspan="1"><label class="first-nav" id="1"><span>首页管理</span><input type="checkbox" value=""/><i></i></label></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- 平台内容管理 -->
+                            <tr>
+                                <td rowspan="5"><label class="first-nav" id="2"><span>平台内容管理</span><input type="checkbox" value=""/><i></i></label></td>
+                                <td><label id="21"><input type="checkbox"  value=""/><i></i><span>新闻资讯管理</span></label></td>
+                                <td>
+                                    <label id="211"><input type="checkbox"  value=""/><i></i><span>内容管理</span></label>
+                                    <label id="212"><input type="checkbox"  value=""/><i></i><span>类别管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="22"><input type="checkbox" /><i></i><span>广告内容管理</span></label></td>
+                                <td>
+                                    <label id="221"><input type="checkbox" /><i></i><span>广告条管理</span></label>
+                                    <label id="222"><input type="checkbox" /><i></i><span>4大安全保障</span></label>
+                                    <label id="223"><input type="checkbox" /><i></i><span>合作伙伴</span></label>
+                                    <label id="224"><input type="checkbox" /><i></i><span>底部链接管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="23"><input type="checkbox" /><i></i><span>站内信管理</span></label></td>
+                                <td>
+                                    <label id="231"><input type="checkbox" /><i></i><span>发送站内信</span></label>
+                                    <label id="232"><input type="checkbox" /><i></i><span>待回复站内信</span></label>
+                                    <label id="233"><input type="checkbox" /><i></i><span>已回复站内信</span></label>
+                                    <label id="234"><input type="checkbox" /><i></i><span>已删除站内信</span></label>
+                                    <label id="235"><input type="checkbox" /><i></i><span>发送记录</span></label>
+                                    <label id="236"><input type="checkbox" /><i></i><span>拒收名单</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="24"><input type="checkbox" /><i></i><span>借款产品管理</span></label></td>
+                                <td>
+                                    <label id="241"><input type="checkbox" /><i></i><span>借款产品列表</span></label>
+                                    <label id="242"><input type="checkbox" /><i></i><span>审核科目库管理</span></label>
+                                    <label id="243"><input type="checkbox" /><i></i><span>信用等级列表</span></label>
+                                    <label id="244"><input type="checkbox" /><i></i><span>信用规则设置</span></label>
+                                    <label id="245"><input type="checkbox" /><i></i><span>借款标常量设置</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="25"><input type="checkbox" /><i></i><span>系统通知模块</span></label></td>
+                                <td>
+                                    <label id="251"><input type="checkbox" /><i></i><span>邮件模板列表</span></label>
+                                    <label id="252"><input type="checkbox" /><i></i><span>短信模板列表</span></label>
+                                    <label id="253"><input type="checkbox" /><i></i><span>站内信模板列表</span></label>
+                                    <label id="254"><input type="checkbox" /><i></i><span>平台协议模板列表</span></label>
+                                </td>
+                            </tr>
+                            <!-- 借款标管理 -->
+                            <tr>
+                                <td rowspan="4"><label class="first-nav" id="3"><span>借款标管理</span><input type="checkbox" /><i></i></label></td>
+                                <td><label id="31"><input type="checkbox" /><i></i><span>平台借款标管理</span></label></td>
+                                <td>
+                                	<label id="310"><input type="checkbox" /><i></i><span>意向借款标列表</span></label>
+                                    <label id="311"><input type="checkbox" /><i></i><span>审核中的借款标列表</span></label>
+                                    <label id="312"><input type="checkbox" /><i></i><span>借款中的借款标列表</span></label>
+                                    <label id="313"><input type="checkbox" /><i></i><span>满标的借款标列表</span></label>
+                                    <label id="314"><input type="checkbox" /><i></i><span>还款中的借款标列表</span></label>
+                                    <label id="315"><input type="checkbox" /><i></i><span>逾期的借款标列表</span></label>
+                                    <label id="316"><input type="checkbox" /><i></i><span>已完成的借款标列表</span></label>
+                                    <label id="317"><input type="checkbox" /><i></i><span>失败的借款标列表</span></label>
+                                    <label id="318"><input type="checkbox" /><i></i><span>坏账的借款标列表</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="32"><input type="checkbox" /><i></i><span>个人标管理</span></label></td>
+                                <td>
+                                    <label id="321"><input type="checkbox" /><i></i><span>个人标列表</span></label>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td><label id="34"><input type="checkbox" /><i></i><span>企业标管理</span></label></td>
+                                <td>
+                                    <label id="341"><input type="checkbox" /><i></i><span>企业标列表</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="33"><input type="checkbox" /><i></i><span>债权转让管理</span></label></td>
+                                <td>
+                                    <label id="331"><input type="checkbox" /><i></i><span>待审核的债权转让标</span></label>
+                                    <label id="332"><input type="checkbox" /><i></i><span>转让中的债权转让标</span></label>
+                                    <label id="333"><input type="checkbox" /><i></i><span>成功的债权转让标</span></label>
+                                    <label id="334"><input type="checkbox" /><i></i><span>未通过的债权转让标</span></label>
+                                    <label id="335"><input type="checkbox" /><i></i><span>失败的债权转让标</span></label>
+                                </td>
+                            </tr>
+                            <!--账单催收 -->
+                            <tr>
+                                <td rowspan="3"><label class="first-nav" id="4"><span>账单催收管理</span><input type="checkbox" /><i></i></label></td>
+                                <td><label id="41"><input type="checkbox" /><i></i><span>借款会员分配</span></label></td>
+                                <td>
+                                    <label id="411"><input type="checkbox" /><i></i><span>待分配借款会员</span></label>
+                                    <label id="412"><input type="checkbox" /><i></i><span>已分配借款会员</span></label>
+                                    <label id="413"><input type="checkbox" /><i></i><span>逾期借款会员</span></label>
+                                    <label id="414"><input type="checkbox" /><i></i><span>催收客服管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="42"><input type="checkbox" /><i></i><span>我的会员账单</span></label></td>
+                                <td>
+                                    <label id="421"><input type="checkbox" /><i></i><span>本月将到期账单</span></label>
+                                    <label id="422"><input type="checkbox" /><i></i><span>已还账单</span></label>
+                                    <label id="423"><input type="checkbox" /><i></i><span>逾期账单</span></label>
+                                    <label id="424"><input type="checkbox" /><i></i><span>坏账账单</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="43"><input type="checkbox" /><i></i><span>手动逾期</span></label></td>
+                                <td>
+                                    <label id="431"><input type="checkbox" /><i></i><span>账单列表</span></label>
+                                </td>
+                            </tr>
+                            <!--会员管理 -->
+                            <tr>
+                                <td rowspan="10"><label class="first-nav" id="5"><span>会员管理</span><input type="checkbox" /><i></i></label></td>
+                                
+                                <td><label id="51"><input type="checkbox" /><i></i><span>全部会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="52"><input type="checkbox" /><i></i><span>借款会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="53"><input type="checkbox" /><i></i><span>理财会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="54"><input type="checkbox" /><i></i><span>复合会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="55"><input type="checkbox" /><i></i><span>VIP会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="56"><input type="checkbox" /><i></i><span>未激活会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="57"><input type="checkbox" /><i></i><span>已锁定会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="58"><input type="checkbox" /><i></i><span>被举报会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="59"><input type="checkbox" /><i></i><span>黑名单会员列表</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                           <tr>
+                                <td><label id="50"><input type="checkbox" /><i></i><span>客服管理</span></label></td>
+                                <td>
+                                </td>
+                            </tr>
+                            
+                            <!--财务管理 -->
+                            <tr>
+                            	#{if ipsEnable}
+                                <td rowspan="7"><label class="first-nav" id="6"><span>财务管理</span><input type="checkbox" /><i></i></label></td>
+                                #{/if}
+                                #{else}
+                                <td rowspan="4"><label class="first-nav" id="6"><span>财务管理</span><input type="checkbox" /><i></i></label></td>
+                                #{/else}
+                                <td><label id="61"><input type="checkbox" /><i></i><span>放款管理</span></label></td>
+                                <td>
+                                    <label id="611"><input type="checkbox" /><i></i><span>待放款借款标管理</span></label>
+                                    <label id="612"><input type="checkbox" /><i></i><span>已放款借款标管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="62"><input type="checkbox" /><i></i><span>应收账单管理</span></label></td>
+                               <td>
+                                    <label id="621"><input type="checkbox" /><i></i><span>待收款借款账单列表</span></label>
+                                    <label id="622"><input type="checkbox" /><i></i><span>逾期账单列表</span></label>
+                                    <label id="623"><input type="checkbox" /><i></i><span>已收款借款账单列表</span></label>
+                                    <label id="624"><input type="checkbox" /><i></i><span>已完成借款标列表</span></label>
+                                    <label id="625"><input type="checkbox" /><i></i><span>应收款借款账单统计表</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="63"><input type="checkbox" /><i></i><span>应付账单列表</span></label></td>
+                                <td>
+                                    <label id="631"><input type="checkbox" /><i></i><span>待付款理财账单列表</span></label>
+                                    <label id="632"><input type="checkbox" /><i></i><span>逾期未付理财账单列表</span></label>
+                                    <label id="633"><input type="checkbox" /><i></i><span>已付款理财账单列表</span></label>
+                                    <label id="634"><input type="checkbox" /><i></i><span>本金垫付理财账单列表</span></label>
+                                    <label id="635"><input type="checkbox" /><i></i><span>应付款理财账单统计表</span></label>
+                                    <label id="636"><input type="checkbox" /><i></i><span>坏账借款标列表</span></label>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td><label id="64"><input type="checkbox" /><i></i><span>平台账户管理</span></label></td>
+                                <td>
+                                    <label id="641"><input type="checkbox" /><i></i><span>待审核提现列表</span></label>
+                                    <label id="642"><input type="checkbox" /><i></i><span>待付款提现列表</span></label>
+                                    <label id="643"><input type="checkbox" /><i></i><span>已付款提现列表</span></label>
+                                    <label id="644"><input type="checkbox" /><i></i><span>未通过提现列表</span></label>
+                                    #{if ipsEnable}
+                                    <label id="645"><input type="checkbox" /><i></i><span>提现记录</span></label>
+                                    #{/if}
+                                    #{else}
+                                    <label id="645"><input type="checkbox" /><i></i><span>手工充值</span></label>
+                                    #{/else}
+                                    <label id="646"><input type="checkbox" /><i></i><span>充值记录</span></label>
+                                    <label id="647"><input type="checkbox" /><i></i><span>交易记录</span></label>
+                                    <label id="648"><input type="checkbox" /><i></i><span>本金保障账户信息</span></label>
+                                    <label id="649"><input type="checkbox" /><i></i><span>保障金收支记录</span></label>
+                                </td>
+                            </tr>
+                            #{if ipsEnable}
+                            <tr>
+                                <td><label id="65"><input type="checkbox" /><i></i><span>汇付商户管理</span></label></td>
+                                <td>
+                                    <label id="651"><input type="checkbox" /><i></i><span>商户号充值</span></label>
+                                    <label id="652"><input type="checkbox" /><i></i><span>商户号提现</span></label>
+                                    <label id="653"><input type="checkbox" /><i></i><span>交易记录</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="66"><input type="checkbox" /><i></i><span>用户资金校对</span></label></td>
+                                <td>
+                                    <label id="661"><input type="checkbox" /><i></i><span>校对列表</span></label>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td><label id="67"><input type="checkbox" /><i></i><span>托管交易日志</span></label></td>
+                                <td>
+                                    <label id="671"><input type="checkbox" /><i></i><span>托管交易日志</span></label>
+                                </td>
+                            </tr>
+                            #{/if}
+                            <!--平台推广 -->
+                            <tr>
+                                <td rowspan="5"><label class="first-nav" id="7"><span>平台推广管理</span><input type="checkbox" /><i></i></label></td>
+                                <td><label id="71"><input type="checkbox" /><i></i><span>CPS推广管理</span></label></td>
+                                <td>
+                                    <label id="711"><input type="checkbox" /><i></i><span>推广会员列表</span></label>
+                                    <label id="712"><input type="checkbox" /><i></i><span>佣金发放统计表</span></label>
+                                    <label id="713"><input type="checkbox" /><i></i><span>推广规则设置</span></label>
+                                    <label id="714"><input type="checkbox" /><i></i><span>员工推广奖励</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="72"><input type="checkbox" /><i></i><span>财富圈管理</span></label></td>
+                               <td>
+                                    <label id="721"><input type="checkbox" /><i></i><span>财富圈邀请码</span></label>
+                                    <label id="722"><input type="checkbox" /><i></i><span>财富圈统计</span></label>
+                                    <label id="723"><input type="checkbox" /><i></i><span>邀请规则设置</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="73"><input type="checkbox" /><i></i><span>直客</span></label></td>
+                                <td>
+                                    <label id="731"><input type="checkbox" /><i></i><span>直客规则设置</span></label>
+                                    <label id="732"><input type="checkbox" /><i></i><span>直客管理</span></label>
+                                    <label id="733"><input type="checkbox" /><i></i><span>直客统计</span></label>
+                                    <label id="734"><input type="checkbox" /><i></i><span>我的直客</span></label>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td><label id="74"><input type="checkbox" /><i></i><span>网站流量统计分析</span></label></td>
+                                <td>
+                                    <label id="741"><input type="checkbox" /><i></i><span>流量统计分析</span></label>
+                                    <label id="742"><input type="checkbox" /><i></i><span>编辑流量统计代码</span></label>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td><label id="75"><input type="checkbox" /><i></i><span>SEO设置</span></label></td>
+                                <td>
+                                </td>
+                            </tr> 
+                            <!--数据统计 -->
+                            <tr>
+                                <td rowspan="2"><label class="first-nav" id="8"><span>数据统计管理</span><input type="checkbox" /><i></i></label></td>
+                                <td><label id="81"><input type="checkbox" /><i></i><span>财务数据统计分析表</span></label></td>
+                                <td>
+                                    <label id="811"><input type="checkbox" /><i></i><span>充值统计表</span></label>
+                                    <label id="812"><input type="checkbox" /><i></i><span>提现统计表</span></label>
+                                    <label id="813"><input type="checkbox" /><i></i><span>平台收入统计表</span></label>
+                                    <label id="814"><input type="checkbox" /><i></i><span>平台浮存金统计表</span></label>
+                                    <label id="815"><input type="checkbox" /><i></i><span>本金保障统计分析表</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="82"><input type="checkbox" /><i></i><span>运营数据统计分析表</span></label></td>
+                               <td>
+                                    <label id="821"><input type="checkbox" /><i></i><span>会员数据统计分析表</span></label>
+                                    <label id="822"><input type="checkbox" /><i></i><span>借款情况统计分析表</span></label>
+                                    <label id="823"><input type="checkbox" /><i></i><span>理财情况统计分析表</span></label>
+                                    <label id="824"><input type="checkbox" /><i></i><span>借款标销售情况分析表</span></label>
+                                    <label id="825"><input type="checkbox" /><i></i><span>债权转让统计分析表</span></label>
+                                    <label id="826"><input type="checkbox" /><i></i><span>审核科目统计分析表</span></label>
+                                </td>
+                            </tr>
+                            <!--系统设置 -->
+                            <tr>
+                                <td rowspan="8"><label class="first-nav" id="9"><span>系统设置管理</span><input type="checkbox" /><i></i></label></td>
+                                <td><label id="91"><input type="checkbox" /><i></i><span>权限管理</span></label></td>
+                                <td>
+                                    <label id="911"><input type="checkbox" /><i></i><span>管理员列表</span></label>
+                                    <label id="912"><input type="checkbox" /><i></i><span>管理员组</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="92"><input type="checkbox" /><i></i><span>安全设置</span></label></td>
+                               <td>
+                                    <label id="921"><input type="checkbox" /><i></i><span>安全云盾设置</span></label>
+                                    <label id="922"><input type="checkbox" /><i></i><span>安全参数设置</span></label>
+                                    <label id="923"><input type="checkbox" /><i></i><span>安全问题设置</span></label>
+                                    <label id="924"><input type="checkbox" /><i></i><span>数据初始化管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="93"><input type="checkbox" /><i></i><span>财务设置</span></label></td>
+                               <td>
+                                    <label id="931"><input type="checkbox" /><i></i><span>服务费设置</span></label>
+                                    <label id="932"><input type="checkbox" /><i></i><span>支付方式设置</span></label>
+                                    <label id="933"><input type="checkbox" /><i></i><span>应付账单设置</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="94"><input type="checkbox" /><i></i><span>第三方通道设置</span></label></td>
+                               <td>
+                                    <label id="941"><input type="checkbox" /><i></i><span>短信通道设置</span></label>
+                                    <label id="942"><input type="checkbox" /><i></i><span>邮件通道设置</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="95"><input type="checkbox" /><i></i><span>操作日志管理</span></label></td>
+                               <td>
+                                    <label id="951"><input type="checkbox" /><i></i><span>操作日志列表</span></label>
+                                    <label id="952"><input type="checkbox" /><i></i><span>删除操作日志</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="96"><input type="checkbox" /><i></i><span>微信设置</span></label></td>
+                               <td>
+                                    <label id="961"><input type="checkbox" /><i></i><span>关注欢迎语设置</span></label>
+                                    <label id="962"><input type="checkbox" /><i></i><span>在线咨询语设置</span></label>
+                                    <label id="963"><input type="checkbox" /><i></i><span>微信菜单管理</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="97"><input type="checkbox" /><i></i><span>APP版本管理</span></label></td>
+                               <td>
+                                    <label id="971"><input type="checkbox" /><i></i><span>APP版本设置</span></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label id="98"><input type="checkbox" /><i></i><span>软件授权设置</span></label></td>
+                               <td>
+                                    <label id="981"><input type="checkbox" /><i></i><span>系统基本资料设置</span></label>
+                                    <label id="982"><input type="checkbox" /><i></i><span>软件正版注册信息</span></label>
+                                </td>
+                            </tr>
+                            
+                         <tr>
+                            <td colspan="0">
+                                <label class="xf_allchecked" id="0"><span>全选</span><input type="checkbox" /><i></i></label>
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                    <!-- 列表底部 -->
+                    <div class="xn_c_content_bottom xf_competence_bottom">
+                   	    #{form @saveSupervisorRights(), method:'POST', id:'saveRights'}
+                   	    <input type="hidden" id="sign" name="sign" value="${sign}"/>
+                        <input type="hidden" id="send1" name="send1" value=""/>
+                        <input type="hidden" id="send2" name="send2" value=""/>
+                        <input class="xf_safebtn" type="submit" value="保存"/>
+                        <input class="xf_returnbtn" type="button" value="返回" onclick="backList();"/>
+                        #{/form}
+                    </div>
+                <!-- 2015.11.03 新增end-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 内容区域end -->
+<script type="text/javascript">
+
+$(function(){
+    var $operatingbtn = $(".xf_operating_btn"),
+        $onlyreadbtn = $(".xf_onlyread_btn"),
+        $table = $(".xf_back_competence_box"),
+        $label = $table.find("label"),
+        $checkbox = $label.children("input"),
+        $i = $label.children("i");
+    showHighLight(3,4,10);
+    
+    var rights1 = ${rights1};
+    var rights2 = ${rights2};
+    for(var i=0; i<rights1.length; i++){
+    	$("#"+rights1[i]).addClass("onlyread");
+    }
+    for(var i=0; i<rights2.length; i++){
+    	$("#"+rights2[i]).addClass("operating");
+    }
+    
+    $label.click(function(){
+    	if($onlyreadbtn.hasClass("clicked")){//onlyread操作
+    		if($(this).hasClass("xf_allchecked")){//如果是全选label
+    			allLevelLabelClick("onlyread", "operating", $(this), $label);
+    		}else if($(this).attr("id").length==1 && $(this).attr("id")!="0"){//如果是一级label
+    			oneLevelLabelClick("onlyread", "operating", $(this));
+    			oneLevelLabelTraverse("onlyread", "operating");
+    		}else if($(this).attr("id").length==2){//如果是二级label
+    			twoLevelLabelClick("onlyread", "operating", $(this));
+    			twoLevelLabelTraverse("onlyread", "operating", $(this));
+    		}else if($(this).attr("id").length==3){//如果是三级label
+    			threeLevelLabelClick("onlyread", "operating", $(this));
+    			threeLevelLabelTraverse("onlyread", "operating", $(this));
+    		}else{
+    			alert('页面读取后台数据出现异常');
+    		}
+    	}else if($operatingbtn.hasClass("clicked")){//operating操作
+			if($(this).hasClass("xf_allchecked")){//如果是全选label
+				allLevelLabelClick("operating", "onlyread", $(this), $label);
+    		}else if($(this).attr("id").length==1 && $(this).attr("id")!="0"){//如果是一级label
+    			oneLevelLabelClick("operating", "onlyread", $(this));
+    			oneLevelLabelTraverse("operating", "onlyread");
+    		}else if($(this).attr("id").length==2){//如果是二级label
+    			twoLevelLabelClick("operating", "onlyread", $(this));
+    			twoLevelLabelTraverse("operating", "onlyread", $(this));
+    		}else if($(this).attr("id").length==3){//如果是三级label
+    			threeLevelLabelClick("operating", "onlyread", $(this));
+    			threeLevelLabelTraverse("operating", "onlyread", $(this));
+    		}else{
+    			alert('页面读取后台数据出现异常');
+    		}
+    	}else{
+    		return false;
+    	}
+    })
+    $i.css("display","inline-block");
+    $checkbox.click(function(e){
+        e.stopPropagation();
+        return false;
+    })
+    $operatingbtn.click(function(){
+        if(!$(this).hasClass("clicked")){
+            $checkbox.prop("checked",false);
+            $(this).addClass("clicked");
+            $onlyreadbtn.removeClass("clicked");
+        }
+    });
+    $onlyreadbtn.click(function(){
+        if(!$(this).hasClass("clicked")){
+            $checkbox.prop("checked",false);
+            $(this).addClass("clicked");
+            $operatingbtn.removeClass("clicked");
+        }
+    });
+    $onlyreadbtn.click();
+});
+
+$(function(){
+	$("#saveRights").submit(function(){
+	    var $table = $(".xf_back_competence_box"),
+   	    $label = $table.find("label"),
+	    send1 = new Array(),
+		send2 = new Array();
+	    $label.each(function(){
+	    	if($(this).hasClass("operating")){
+	    		send2.push($(this).attr("id"));
+	    	}else if($(this).hasClass("onlyread")){
+	    		send1.push($(this).attr("id"));
+	    	}
+	    });
+	    $("#send1").val(send1.join());
+	    $("#send2").val(send2.join());
+	});
+});
+
+function backList(){
+	window.location.href='@{supervisor.systemSettings.supervisorAction.list}';
+}
+
+//全选label触发,type:当前操作; hastype:已经有的选中状态
+function allLevelLabelClick(type, hastype, label, alllabel){
+	if(label.hasClass(type)){//如果全选label已经被type选中
+		alllabel.removeClass(type).children("input").prop("checked",false);//去掉所有的type
+	}else{
+		alllabel.removeClass(hastype).children("input").prop("checked",false);//去掉所有的hastype
+		alllabel.addClass(type).children("input").prop("checked",true);//添加当前type
+	}
+}
+//一级label触发，type:当前操作; hastype:已经有的选中状态；labe：当前的一级label
+function oneLevelLabelClick(type, hastype, label){
+	var tr = label.parent().parent();
+	var rowspan = label.parent().attr("rowspan") || 0;
+	if(label.hasClass(type)){//一级label已经被type选中
+		for(var i = 1; i <= rowspan; i++){ //去掉tr下节点的type
+      	    tr.find("label").removeClass(type).children("input").prop("checked",false);
+            tr = tr.next();
+        }
+	}else{
+		for(var i = 1; i <= rowspan; i++){ //去掉tr下节点的hastype，并加上type
+			tr.find("label").removeClass(hastype).children("input").prop("checked",false);
+			tr.find("label").addClass(type).children("input").prop("checked",true);
+            tr = tr.next();
+        }
+	}
+}
+//一级label遍历检查，type:当前操作
+function oneLevelLabelTraverse(type, hastype){
+	var flag = true;
+	$(".first-nav").each(function(){
+		if(!$(this).hasClass(type)){
+			flag = false
+			return false;
+		}
+		return true;
+	});
+	if(flag){
+		$(".xf_allchecked").removeClass(hastype).children("input").prop("checked",false);//去掉全选label的hastype
+		$(".xf_allchecked").addClass(type).children("input").prop("checked",true);//加上全选label的type
+	}else{
+		$(".xf_allchecked").removeClass(type).children("input").prop("checked",false);//去掉全选label的type
+		$(".xf_allchecked").removeClass(hastype).children("input").prop("checked",false);//去掉全选label的hastype
+	}	
+}
+//二级label触发，type:当前操作; hastype:已经有的选中状态；labe：当前的一级label
+function twoLevelLabelClick(type, hastype, label){
+	if(label.hasClass(type)){
+		label.removeClass(type).children("input").prop("checked",false);
+		label.parent().next().find("label").each(function(){
+				$(this).removeClass(type).children("input").prop("checked",false);
+		});
+	}else{
+		label.removeClass(hastype).children("input").prop("checked",false);//去掉已经有的hastype
+		label.addClass(type).children("input").prop("checked",true);
+		label.parent().next().find("label").each(function(){
+				$(this).removeClass(hastype).children("input").prop("checked",false);
+				$(this).addClass(type).children("input").prop("checked",true);
+		});
+	}
+}
+//二级label遍历检查，type:当前操作
+function twoLevelLabelTraverse(type, hastype, label){
+	var flag = true;
+	var tr = label.parent().parent();
+	while(tr.children("td:first").attr("rowspan")==undefined){
+		tr = tr.prev();
+	}
+	var rowspan = tr.children("td:first").attr("rowspan");
+	var td = tr.children("td:first").next();
+	var flag = true;
+	for(var i=1; i<=rowspan; i++){
+		if(!td.children("label").hasClass(type)){
+			flag = false;
+			break;
+		}
+		td = td.parent().next().children("td:first");
+	}
+	if(flag){
+		tr.children("td:first").children("label").removeClass(hastype).children("input").prop("checked",false);//清除一级的hastype
+		tr.children("td:first").children("label").addClass(type).children("input").prop("checked",true);//加上一级的type
+	}else{
+		tr.children("td:first").children("label").removeClass(type).children("input").prop("checked",false);//清除一级的type
+		tr.children("td:first").children("label").removeClass(hastype).children("input").prop("checked",false);//清除一级的hastype
+	}
+	oneLevelLabelTraverse(type, hastype);
+}
+//三级label触发，type:当前操作; hastype:已经有的选中状态；labe：当前的一级label
+function threeLevelLabelClick(type, hastype, label){
+	if(label.hasClass(type)){
+		label.removeClass(type).children("input").prop("checked",false);
+	}else{
+		label.removeClass(hastype).children("input").prop("checked",false);//去掉已经有的hastype
+		label.addClass(type).children("input").prop("checked",true);
+	}
+}
+//三级label遍历检查，type:当前操作
+function threeLevelLabelTraverse(type, hastype, label){
+	var td = label.parent();
+	var flag = true;
+	td.find("label").each(function(){
+		if(!$(this).hasClass(type)){
+			flag = false;
+			return false;
+		}
+		return true;
+	});
+	if(flag){
+		td.prev().children("label").removeClass(hastype).children("input").prop("checked",false);//清除二级的hastype
+		td.prev().children("label").addClass(type).children("input").prop("checked",true);//加上二级的type
+	}else{
+		td.prev().children("label").removeClass(type).children("input").prop("checked",false);//清除二级的type
+		td.prev().children("label").removeClass(hastype).children("input").prop("checked",false);//清除二级的hastype
+	}
+	twoLevelLabelTraverse(type, hastype, td.prev().children("label:first"));
+}
+</script>

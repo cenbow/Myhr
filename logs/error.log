@@ -1,0 +1,285 @@
+2016-11-07 10:08:05,787 ERROR ~ Cannot connected to the database : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 101294
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:348)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2391)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2428)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2213)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:797)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:133)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:257)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:298)
+	... 16 more
+2016-11-07 10:08:07,342 ERROR ~ 
+
+@72213ijd7
+Internal Server Error (500) for request GET /
+
+Database error
+A database error occured : Cannot connected to the database, Communications link failure  The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 102849
+play.exceptions.DatabaseException: Cannot connected to the database, Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:185)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:348)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2391)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2428)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2213)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:797)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at play.db.DBPlugin.onApplicationStart(DBPlugin.java:133)
+	... 5 more
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:257)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:298)
+	... 16 more
+2016-11-07 10:08:07,343 ERROR ~ 
+
+@72213ijd8
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 102850
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:08:07,748 ERROR ~ 
+
+@72213ijd9
+Internal Server Error (500) for request GET /favicon.ico
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 103255
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve404(PlayHandler.java:691)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/404.html.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:08:07,749 ERROR ~ 
+
+@72213ijda
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 103256
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:15:02,638 ERROR ~ 
+
+@72214gc3f
+Error during job execution (jobs.Bootstrap)
+
+Oops: VerifyError
+An unexpected error occured caused by exception VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 21860
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.Invoker$Invocation.onException(Invoker.java:244)
+	at play.jobs.Job.onException(Job.java:124)
+	at play.jobs.Job.call(Job.java:163)
+	at Invocation.Job(Play!)
+Caused by: java.lang.VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+	at jobs.Bootstrap.doJob(Bootstrap.java:36)
+	at play.jobs.Job.doJobWithResult(Job.java:50)
+	at play.jobs.Job.call(Job.java:146)
+	... 1 more
+2016-11-07 10:15:03,298 ERROR ~ 
+
+@72214gc3g
+Internal Server Error (500) for request GET /
+
+Oops: VerifyError
+An unexpected error occured caused by exception VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22520
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.jobs.JobsPlugin.afterApplicationStart(JobsPlugin.java:131)
+	at play.plugins.PluginCollection.afterApplicationStart(PluginCollection.java:531)
+	at play.Play.start(Play.java:554)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.VerifyError: Inconsistent stackmap frames at branch target 348 in method business.User.withdrawalFee(DJ)D at offset 266
+	at jobs.Bootstrap.doJob(Bootstrap.java:36)
+	at play.jobs.Job.doJobWithResult(Job.java:50)
+	at play.jobs.Job.call(Job.java:146)
+	at Invocation.Job(Play!)
+2016-11-07 10:15:03,298 ERROR ~ 
+
+@72214gc3h
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22520
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:15:03,641 ERROR ~ 
+
+@72214gc3i
+Internal Server Error (500) for request GET /favicon.ico
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22863
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve404(PlayHandler.java:691)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/404.html.(line:3)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:15:03,642 ERROR ~ 
+
+@72214gc3j
+Error during the 500 response generation
+
+Execution exception (In /app/business/BackstageSet.java around line 445)
+IllegalStateException occured : The play Cache is not alive.
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22864
+play.exceptions.JavaExecutionException: The play Cache is not alive.
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:90)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.server.PlayHandler.serve500(PlayHandler.java:784)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalStateException: The play Cache is not alive.
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2438)
+	at net.sf.ehcache.Cache.get(Cache.java:1541)
+	at net.sf.ehcache.Cache.get(Cache.java:1522)
+	at play.cache.EhCacheImpl.get(EhCacheImpl.java:75)
+	at play.cache.Cache.get(Cache.java:174)
+	at business.BackstageSet.getCurrentBackstageSet(BackstageSet.java:445)
+	at business.BackstageSet$getCurrentBackstageSet.call(Unknown Source)
+	at /app/views/errors/500.html.(line:2)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 4 more
+2016-11-07 10:16:34,472 ERROR ~ 读取新浪配置库时 :E:\document\dev_p2p_code_pc\play1.2.7\com.shovesoft.sp2p\conf\sina\sina.properties (系统找不到指定的路径。)  ~ play.Logger.error(Logger.java:399) ~ play ~ 19281

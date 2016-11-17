@@ -1,0 +1,150 @@
+<div class="xn_c_ban_jox xn_c_ban_jox_ptsh" style="padding-top: 5px;">
+	<input type="hidden" name="sign" id="bidSign" value="${groupBid?.sign}"/>
+	<input type="hidden" name="bidsAndAmount" id="bidsAndAmount" />
+	<div class="xf_ht_jr_obu_width">
+    	<div class="xfht_t_j_y_s_y xfht_t_CPS_tg2">
+    		*{
+      		<div class="xfht_t_jk_zt3 xf_ht_obu_ss">
+        		<div class="xfht_t_jk_ss_k" style="padding: 0">
+	          		<input type="hidden" id="orderType" name="orderType"/>
+		          	<input type="hidden" id="currPage" name="currPage"/>
+		          
+		          	<select class="xf_membill_selectAge" name="type">
+	            		<option value="0" id="type0" #{if pageBean.conditions?.type == 0} selected="selected" #{/if}>全部</option>     
+			        	<option value="1" id="type1" #{if pageBean.conditions?.type == 1} selected="selected" #{/if}>标题</option>   
+			        	<option value="2" id="type2" #{if pageBean.conditions?.type == 2} selected="selected" #{/if}>借款人</option>  
+		          	</select>
+		          	<input type="text" class="search_w" name="keyword" id="keyword" maxlength="25" value="${pageBean?.conditions?.keyword}" placeholder="借款人/标题"/>
+		          	
+		          	<input type="hidden" value="${bidId}" id="bid">
+		          	<a id="search" class="xf_ht_jkbgl_page_prev xf_ht_dfp">搜索</a>
+        		</div>
+      		</div>
+      		}*
+    	</div>
+	    <div class="xf_ht_ures_view_tcc">
+	    	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="xf_con_mem_r_b_table">
+	        	<tr id="header">
+	        		<th width="15px">选择</th>
+          			<th width="30px">标的编号</th>
+		          	<th width="40px">借款人</th>
+		          	<th width="80px">借款金额(元)</th>
+		          	<th width="40px">借款期限</th>
+		        </tr>
+	        	#{list pageBean.page, as:'bid'}
+		        	<tr class="select_bid">
+		        		<td><input type="checkbox" name="relationBids" bidId="${bid?.id}" amount="${bid?.amount}" userName="${bid?.user_name}" bidNo ="${bid?.bid_no}"/></td>
+		          		<td>${bid?.bid_no}</td>
+			          	<td>${bid?.user_name}</td>
+			          	<td>${bid?.amount?.format("###,##0.00")}</td>
+			          	<td>
+	          				${bid.period} 
+							#{if bid.period_unit == -1} 
+								[年] 
+							#{/if} 
+							#{elseif bid.period_unit == 1}
+								[日] 
+							#{/elseif} 
+							#{else} 
+								[月] 
+							#{/else}	
+			          	</td>
+		        	</tr>
+	        	#{/list}
+	     	</table>
+	    </div>
+	    <div style="height:30px;padding: 0px 19px 0px 15px;">
+	      	<div class="page_warp">
+	      		#{page funMethod:"selectRelationBid",currPage:pageBean.currPage,totalCount:pageBean.totalCount,pageSize:pageBean.pageSize,theme:2,style:4/}
+	      	</div>
+	    </div>
+	    <div style="height:50px;padding: 0px 0px 0px 15px">
+	    	<input class="xf_ht_tcc_button_ok" type="button" onClick="confirmSelect(this)" value="确定">
+	      	<input class="xf_ht_tcc_button_on" type="button" onClick="cancleSelect(this)" value="取 消">
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$("input[name='is_show'][value='0']").prop("checked","true");
+	});
+	
+	function cancle(){
+  		layer.closeAll();
+	};
+	function confirmSubmit() {
+		
+	}
+	
+	/* function confirmSubmit() {
+		var amount = ${groupBid.amount};//借款标已投金额
+		var selectAmount = 0;
+		var as = [];
+		var temp = []; 
+		$.each($(".bid_amount"),function(){
+			console.log($(this).attr("bidId"));
+			console.log($(this).find("input").val());
+			selectAmount = selectAmount + $(this).find("input").val() * 1;
+			temp = [];
+			temp.push('{"bidId":');
+			temp.push($(this).attr("bidId"));
+			temp.push(',"correctAmount":');
+			temp.push($(this).find("input").val());
+			temp.push(',"oldBidAmount":');
+			temp.push($(this).attr("oldBidAmount"));
+			temp.push('}');
+			as.push(temp.join("")); 
+		});
+		console.log(as.toString());
+		if(selectAmount != amount) {
+			alert("累计金额必须等于已投金额："+ amount +"元");
+			return false;
+		}
+		$("#bidsAndAmount").val(as.toString());
+		$("#relationFundraiseToEaitLoan").submit();
+	}; */
+	
+	//删除关联标的
+	/* function deleteBid(obj) {
+		console.log($(obj).parent("td").parent("tr"));
+		$(obj).parent("td").parent("tr").remove();
+	}; */
+	
+	/* $(".correct_amount").blur(function(){
+		//console.log($(this));
+		console.log($(this).val()); 
+	}); */
+	var bidIds = [];
+	
+	//确定
+	function confirmSelect(obj) {
+		var index = layer.getIndex($(obj));
+		layer.close(index);
+		$("#relation_table .select_bid").remove();
+		$('input[name="relationBids"]:checked').each(function(n){
+			var bidId = $(this).attr("bidId");//借款标ID
+			var userName = $(this).attr("userName");//借款人姓名
+			var amount = $(this).attr("amount");//借款金额
+			var bidNo = $(this).attr("bidNo");//借款标编号
+			$(".xubox_page").css("position","relative").css("max-height","500px").css("overflow",'auto');
+			$(".xubox_main").css("height","auto").css("overflow","hidden");
+			$("#xubox_border1").css("height","auto");
+			
+			$("#relation_table").append("<tr class='select_bid'>"+
+					"<td>"+bidNo+"</td>"+
+					"<td>"+userName+"</td>"+
+					"<td>"+amount+"</td>"+
+					"<td class='bid_amount' bidId='"+bidId+"' oldBidAmount='"+amount+"'><input class='correct_amount' type='text' value='"+amount+"' name='correctAmount' onkeyup='ndigitInteger(this,7)'/></td>"+
+					"<td><a href='javascript:void(0);' onclick='deleteBid(this);'>删除</a></td>"+
+					"</tr>"
+			);
+		});
+	};
+	
+	//取消
+	function cancleSelect(obj) {
+		var index = layer.getIndex($(obj));
+		layer.close(index);
+	};
+</script>

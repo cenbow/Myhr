@@ -1,0 +1,317 @@
+#{extends 'common/frontMain.html' /} 
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|关于我们' /}
+
+
+<div class="p-main clr mt30 p-abmain">
+    <div class="p-cfleft">
+        <ul class="p-cfnav aboutus_leftnav">
+        	#{list types}
+				#{if _?.name == '合作伙伴'}
+					<li id="aboutUs${_?.id}">
+						<a href="@{front.help.HelpCenterAction.partner(-1008)}">${_?.name}</a>
+					</li>
+				#{/if}
+				#{else}
+					<li id="aboutUs${_?.id}">
+						<a href="@{front.home.HomeAction.aboutUs(_?.id)}">${_?.name}</a>
+					</li>
+				#{/else}
+			#{/list}
+        </ul>
+    </div>
+    
+    	#{if id==7||id==8||id==9||id==10}
+    	#{form @aboutUs(),id:'wealthHomeForm'}
+    	<input type="hidden" id="currPage" name="currPage"/>
+	    <input type="hidden" id="pageSize" name="pageSize"/>
+	    <input type="hidden" id="id" name="id" value="${id}"/>
+	    <div class="p-cfright">
+	        <ul class="p-cflist">
+	            	#{list items:newsList.page, as:'news'}
+	            		<li class="clr">
+			                <img src="${news?.image_filename}" alt="" width="120" height="75" class="p-cfimg" />
+			                <div class="p-cfword">
+			                    <h6><a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(news?.id)}" target="_blank" >${news?.title}</a></h6>
+			                    <div class="p-cftext">
+			                    	<span>
+			                    		${news?.content}
+			                    		*{
+										   <!-- 使用这种方式当点击链接过快的时候回出现文本溢出的情况 -->
+			                    		   <span limit = "100">${news?.content.raw()}</span>
+			                    		}*
+			                    	</span>
+			                    </div>
+			                    	<span class="p-date">${news?.start_show_time?.format('yyyy/MM/dd')}</span>
+			                </div>
+			            </li>
+	    			#{/list}
+	        </ul>
+	        <div class="xf_wylc_page p-lcpage">
+	        	#{page pageTitle:"财富咨询列表", currPage:newsList.currPage,totalCount:newsList.totalCount,pageSize:newsList.pageSize,theme:2,style:2}
+				#{/page}
+	        </div>
+	    </div>
+	    #{/form}
+	    #{/if}
+	    
+	    #{else}
+	        <div class="p-abright">
+        <h4 class="p-abtitle nav_title"></h4>
+        <div class="p-abword clr">
+        	    #{list contentList}
+		  		<div class="">
+		  			<div class="xf_about_gltd_rcon">
+		  				${_?.raw()}
+		  			</div>
+		  		</div>
+		  		<div style="border-bottom:#ddd 1px dashed;clear:both"></div>	
+			#{/list}
+        </div>
+    	</div>
+    	#{/else}
+	    
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#aboutUs" + ${id}).addClass("cur ");
+		$(".nav_title").html($("li.cur").find("a").html());
+	});
+</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_aboutus.js'}"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=reIqTukfBniAS3nHEIi5aURM"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<!--
+//联系我们上传本段代码
+<div id="map">
+             <div style="width:100%; height:580px;" id="allmap"></div>
+          </div>
+          -->
+<script type="text/javascript">
+
+    $(function () {
+
+        ShowMap('118.732506,32.002622', '南京公司', '地址：南京市建邺区新地中心4601' , '电话：400-9688-606（总机）' , ' ' , ' ' , '19');
+
+        /*$(".subitem p a").hide();*/
+
+    })
+
+
+
+    function ShowMap(zuobiao, name, addrsee, phone, chuanzhen,transfer, zoom) {
+
+        // 百度地图API功能
+
+        var arrzuobiao = zuobiao.split(',');
+
+        var map = new BMap.Map('allmap');
+
+        var poi = new BMap.Point(arrzuobiao[0], arrzuobiao[1]);
+
+        map.centerAndZoom(poi, zoom);
+
+        var navigationControl = new BMap.NavigationControl({
+
+            // 靠左上角位置
+
+            anchor: BMAP_ANCHOR_TOP_RIGHT,
+
+//			// LARGE类型
+
+//			type: BMAP_NAVIGATION_CONTROL_LARGE,
+
+//			// 启用显示定位
+
+//			enableGeolocation: true
+
+        });
+
+        map.addControl(navigationControl);
+
+        map.disableDragging();
+
+        map.disableScrollWheelZoom();
+
+
+
+        var content = '<div style="margin:0;line-height:20px;padding:2px;">'+addrsee+'<br/>'+phone+'<br/>'+chuanzhen+'<br/>'+transfer+'</div>';
+
+
+
+        //创建检索信息窗口对象
+
+        var searchInfoWindow = null;
+
+        searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+
+            title  : name,      //标题
+
+            width  : 400,             //宽度
+
+            height : 85,              //高度
+
+            panel  : "panel",         //检索结果面板
+
+            enableAutoPan : true,     //自动平移
+
+            searchTypes   :[
+
+                BMAPLIB_TAB_SEARCH,   //周边检索
+
+                BMAPLIB_TAB_TO_HERE,  //到这里去
+
+                BMAPLIB_TAB_FROM_HERE //从这里出发
+
+            ]
+
+        });
+
+        var marker = new BMap.Marker(poi); //创建marker对象
+
+        marker.enableDragging(); //marker可拖拽
+
+        marker.addEventListener("click", function(e){
+
+            searchInfoWindow.open(marker);
+
+        })
+
+        map.addOverlay(marker); //在地图中添加marker
+
+        searchInfoWindow.open(marker);
+
+    }
+
+
+
+</script>
+
+
+
+<!-- 私用 js -->
+
+<script type="text/javascript">
+
+    (function () {
+
+        var sup = $('#contact-1 .cont-areas'),
+
+                idx = 0,
+
+                menus = sup.find('.belong a'),
+
+                areas = sup.find('.comps .item'),
+
+                addrs = sup.find('.addrs .item'),
+
+
+
+                curr_m = menus.eq(idx).addClass('on'),
+
+                curr_ar = areas.eq(idx).stop().fadeIn(300),
+
+                curr_ad = addrs.eq(idx).stop().fadeIn(300);
+
+
+
+        // addrs.find('.subitem').eq(0).fadeIn(300);
+
+
+
+        menus.on('click', function (e, elem, i) {
+
+            elem = $(this);
+
+            i = elem.index();
+
+            if (i === idx) return;
+
+            idx = i;
+
+            curr_m.removeClass('on');
+
+            curr_m = elem.addClass('on');
+
+            areas.hide();
+
+            areas.eq(i).show();
+
+//                curr_ar.stop().fadeOut(300);
+
+//                curr_ar = areas.eq(i).stop().fadeIn(300);
+
+//
+
+//                curr_ad.stop().fadeOut(300);
+
+//                curr_ad = addrs.eq(i).stop().fadeIn(300);
+
+        });
+
+
+
+        menus.each(function (i) {
+
+            var menu = menus.eq(i),
+
+                    area = areas.eq(i),
+
+                    addr = addrs.eq(i),
+
+
+
+                    area_items = area.find('a'),
+
+                    addr_items = addr.find('.subitem'),
+
+                    curr_ar_i = area_items.eq(0).addClass('on'),
+
+                    curr_ad_i = addr_items.eq(0).stop().fadeIn(300);
+
+
+
+            // menus.each(function() {
+
+            for (var i = 0, len = area_items.length; i < len; i++) {
+
+                area_items.eq(i).attr('idx', i);
+
+            }
+
+            area_items.on('click', function (idx) {
+
+                curr_ar_i.removeClass('on');
+
+                curr_ar_i = $(this).addClass('on');
+
+
+
+                // idx = parseInt(curr_ar_i.attr('idx'));
+
+                curr_ad_i.stop().fadeOut(300);
+
+                curr_ad_i = addr_items.eq(parseInt(curr_ar_i.attr('idx'))).stop().fadeIn(300);
+
+            });
+
+        });
+
+    }());
+</script>
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_wealth.js'}"></script>
+
+<script type="text/javascript">
+	function showPage(currPage, pageSize){
+		$("#currPage").val(currPage);
+	    $("#pageSize").val(pageSize);
+	    $("#wealthHomeForm").submit();
+	};
+</script>

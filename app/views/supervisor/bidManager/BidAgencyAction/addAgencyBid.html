@@ -1,0 +1,798 @@
+#{extends 'common/supervisor.html' /} 
+#{set title:'发布个人标' /} 
+<!-- 内容区域 -->
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+     #{include '/supervisor/bidManager/bidManagerLeft.control'/}		
+     <div class="xn_c_content">
+        <div class="xf_content_add">
+          #{form @addingAgencyBid(bid, product?.id, uuid), method:'POST', id:'createBid'}
+            <div class="xfht_t_j_y_2">
+              <!--右上-->
+              <div class="xf_ht_obu_fklm">
+                                          发布：个人标
+              </div>
+              <!-- 发布：机构合作标 -->
+              <div class="xf_htgl_jgone">
+                <h3 class="xf_htgl_jgtitle">借款标基本信息</h3>
+                  <div class="xf_htgl_jg_tableone">
+                    #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_jg_tableone_table"}
+                    
+                    	*{
+                   		#{tr}
+                         #{td width:"114", align:"right"}担保机构：#{/td}
+                         #{td}
+                           <select name="bid.guaranteeId" class="xf_ht_jr_dfk_i" id="guaranteeId">
+	                   	     <option value="0">无</option>
+	                   	       #{list agencys}
+	                   		     <option value="${_?.id}" #{if _?.id == loanBid?.agencyId}selected="selected"#{/if}>${_?.name}</option>
+	                   		   #{/list}
+	                   	    </select>
+                          #{/td}
+                        #{/tr}
+                        
+                       #{tr}
+                         #{td width:"114", align:"right"}合作机构：#{/td}
+                         #{td}
+                           <select name="bid.agencyId" class="xf_ht_jr_dfk_i" id="agencyId">
+	                   	     <option value="0">无</option>
+	                   	       #{list agencys}
+	                   		     <option value="${_?.id}" #{if _?.id == loanBid?.agencyId}selected="selected"#{/if}>${_?.name}</option>
+	                   		   #{/list}
+	                   	    </select>
+                          #{/td}
+                        #{/tr}
+                        }*
+                        
+                        *{
+                        #{tr}
+                          #{td align:"right"}显示机构名称：#{/td}
+                          #{td}
+		                    <input type="radio" value="1" #{if loanBid?.isShowAgencyName}checked="checked" #{/if} name="bid.isShowAgencyName" />显示
+		                    &nbsp;&nbsp;&nbsp;
+		                    <input type="radio" value="0" #{if !loanBid?.isShowAgencyName}checked="checked" #{/if} name="bid.isShowAgencyName" />隐藏
+                          #{/td}
+                        #{/tr}
+                        }*
+                        
+                        *{发布机构和坐标，借款人只能为普通用户}*
+                        #{tr}
+                          #{td align:"right"}直接借款人：#{/td}
+                          #{td}
+                            <input type="hidden" id="sign" name="sign" value="${loanBid?.sign}">
+                            <input type="hidden" id="isActivation" name="isActivation"/>
+                            <input type="hidden" id="isAddBaseInfo" name="isAddBaseInfo"/> 
+                            <input class="xfht_zr_input" type="text" id="userName" name="userName" value="${loanBid?.userName}" title="请填写/选择用户名">
+                            <a style="cursor: pointer;" id="xf_dfk_fkzh_tcc10" class="xfht_zr_input_a" onclick="usersWillSelect(1, 10);">选择</a>
+                          #{/td}
+                        #{/tr}
+                        
+                        #{tr}
+                          #{td align:"right"}借款用途：#{/td}
+                          #{td}
+                            <select class="xf_ht_jr_dfk_i" name="bid.purpose.id" style="padding-bottom: 5px;padding-left: -50px;">
+								#{list purpose}
+									<option value=${_?.id} #{if _?.id == loanBid?.purpose?.id}selected="selected"#{/if}>
+										${_?.name}
+									</option>
+								#{/list}
+							</select>
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}借款标题：#{/td}
+                          #{td}
+                            <input type="text" class="xfht_zr_input xfht_zr_input_three" id="title" name="bid.title" maxlength="24" value="${loanBid?.title}" />
+		                    <br/>不超过<span class="xfht_lv">24</span>个汉字，重视标题描述，能加快借款标满标。
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}借款金额：#{/td}
+                          #{td}
+                            <input class="xfht_zr_input xfht_zr_input_left" type="text" name="bid.amount" id="amount" 
+                              onkeyup="ndigitInteger(this,7)" onblur="ndigitInteger(this,7)" value="${loanBid?.amount}"/>元
+                                                                               金额:${product?.minAmount}~${product?.maxAmount}
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}借款期限：#{/td}
+                          #{td}
+                            <select class="xf_ht_jr_dfk_i" name="bid.periodUnit" id="periodUnit" >
+								<option value="-99">请选择</option>
+								<option value="-1"
+									#{if loanBid?.periodUnit == -1}
+										selected="selected"
+									#{/if}
+								>年</option>
+								<option value="0"
+									#{if loanBid?.periodUnit == 0}
+										selected="selected"
+									#{/if}
+								>月</option>
+								<option value="1"
+									#{if loanBid?.periodUnit == 1}
+										selected="selected"
+									#{/if}
+								>日</option>
+							</select>
+							<select class="xf_ht_jr_dfk_i" name="bid.period" id="period">
+							</select>
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}还款方式：#{/td}
+                          #{td}
+                          	*{
+                          	<select class="xf_ht_jr_dfk_i" name="bid.repayment.id" id="repaymentType">
+						      #{list product?.repaymentType}
+							    <option value="${_?.id}"
+								  #{if _?.id == loanBid?.repayment?.id}
+									selected="selected"
+								  #{/if}
+							    >
+								  ${_?.name }
+							    </option>
+						      #{/list}
+					        </select>
+					        }*
+					        <p id="product_repaymentType">
+					        #{list product?.repaymentType}
+					        	<span>
+						        	<input type="radio" #{if _.code == "1"} checked="checked" #{/if} class="" name="bid.repayment.id" value="${_?.id}" id="repaymentType_${_?.id}"/>
+						        	<label for="repaymentType_${_?.id}" style="cursor: pointer;">${_?.name }</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					        	</span>
+					        #{/list}
+					        </p>
+                          #{/td}
+                        #{/tr}
+                      #{/table}  
+                    </div>
+                    <div class="xf_htgl_jg_table_two clr">
+                      <div class="xf_htgl_jg_table_two_l">
+                        #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_two_table"}
+                          #{tr}
+                            #{td colspan:"2", style:"padding:0 0 10px 20px"}
+                              <input type="radio" id="zbBlow" name="zbType" checked="checked"/> 
+                      		 	按最低金额招标
+                            #{/td}
+                          #{/tr}
+                          #{tr}
+                            #{td width:"135px", align:"right"}按最低金额招标：#{/td}
+                            #{td}
+                              <input type="text" name="bid.minInvestAmount" id="minInvestAmount" class="xfht_zr_input"
+							    onkeyup="ndigitInteger(this,6)" onblur="ndigitInteger(this,6)" value="${loanBid?.minInvestAmount}"/>
+                            #{/td}
+                          #{/tr}
+                          #{tr}
+                            #{td}&nbsp;#{/td}
+                            #{td}最低设置不低于<span class="xfht_lv">${product?.minInvestAmount}</span>元。#{/td}
+                          #{/tr}
+                        #{/table}
+                      </div>
+                      <div class="xf_htgl_jg_table_two_r">
+                        #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_two_table"}
+                          #{tr}
+                            #{td colspan:"2", style:"padding:0 0 10px 20px;"}
+                             <input type="radio" name="zbType" id="zbArange" #{if loanBid?.averageInvestAmount > 0}checked="checked"#{/if}/> 
+                 		                  按平均金额招标：
+                            #{/td} 
+                          #{/tr}
+                          #{tr}
+                            #{td}平均每份：#{/td}
+                            #{td}
+                              <input type="text" name="bid.averageInvestAmount" id="averageInvestAmount" value="${loanBid?.averageInvestAmount}" onblur="showAverage(this);"
+								class="xfht_zr_input xfht_zr_input_left" onkeyup="ndigitInteger(this,7);showAverage(this);" onblur="ndigitInteger(this,7)"/> 
+								元<br/>(合计<span id="sumCopies" style="color: red">0</span>份)
+                            #{/td}
+                          #{/tr}
+                          #{tr}
+                            #{td}&nbsp;#{/td}
+                            #{td}[注]：借款标最多拆分不超过:<span class="xfht_lv">${product?.maxCopies}(份)</span>#{/td}
+                          #{/tr}
+                        #{/table}
+                      </div>
+                    </div>
+                    <div class="xf_htgl_jg_tableone xf_htgl_jg_tablefure">
+                      #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_jg_tableone_table"}
+                      *{add by fz 20160607 修改个人标增加倒计时}*
+                                 #{tr}
+                    					#{td width:"170", align:"right"}标的上线时间：#{/td}
+                    					#{td}
+                    						&nbsp;&nbsp;
+                    						<input type="radio" name="bid.isStartTime" id="isStartTime" value="1"/>开启
+                    						&nbsp;&nbsp;
+                    						<input type="radio" name="bid.isStartTime" id="isStartTime" value="0" checked="checked"/>关闭
+                    						
+                    						<span id="openStart" style="display: none;">
+                    							&nbsp;&nbsp;&nbsp;
+                    							<input class="search_time" name="bid.startTime" id="startTime"  style="width:140px" readonly="readonly" onclick="laydate({istime: true,  format: 'YYYY-MM-DD hh:mm:ss'})">
+                    							&nbsp;&nbsp;&nbsp;
+                    							预约模式：
+	                    						&nbsp;&nbsp;
+	                    						<input type="radio" name="bid.isOrder" id="isOrder" value="1" checked="checked"/>开启
+	                    						&nbsp;&nbsp;
+	                    						<input type="radio" name="bid.isOrder" id="isOrder" value="0"/>关闭
+                    						</span>
+                    					#{/td}
+                    				#{/tr}
+                    				#{tr}
+                                        #{td width:"170", align:"right"}是否新手标：#{/td}
+                                        #{td}
+                                            &nbsp;&nbsp;
+                                            <input type="radio" name="bid.isExperience" id="isNoviceInvest" value="1" />是
+                                            &nbsp;&nbsp;
+	                    					<input type="radio" name="bid.isExperience" id="isOrder" value="0" checked="checked"/>否
+                                
+                                        #{/td}
+                                    #{/tr}
+                    				
+                        #{tr}
+                          #{td width:"114", align:"right"}满标期限：#{/td}
+                          #{td}
+                            <select class="xf_ht_jr_dfk_i" name="bid.investPeriod" id="investPeriod">
+								<option value="0">
+									请选择 
+								</option>
+								#{list product?.investPeriodArray}
+									<option value="${_}"
+										#{if loanBid?.investPeriod + "" == _}
+											selected="selected"
+										#{/if}
+									>
+										${_}
+									</option>
+								#{/list}
+							</select>
+								日
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}年利率：#{/td}
+                          #{td}
+                            <input type="text" class="xfht_zr_input" id="apr" name="bid.apr" onblur="planapr();" 
+					         onkeyup="proportionRange(this)" onblur="proportionRange(this)" value="${loanBid?.apr}"/>
+							<span class="xf_c_wyjkfb_3_nllPer">
+								% 利率:${product?.minInterestRate}%~${product?.maxInterestRate}% 
+							</span>
+                          #{/td}
+                        #{/tr}
+                        #{tr}
+                          #{td align:"right"}实际支付利息：#{/td}
+                          #{td}
+                            <input type="text" class="xfht_zr_input" onfocus="planapr();" id="showapr" disabled="disabled"/>元
+					      #{/td}
+                        #{/tr}
+                      #{/table}
+                    </div>
+                  </div>
+                  <div class="xf_htgl_jgone">
+                    <h3 class="xf_htgl_jgtitle">
+                    	<input type="hidden" value="${housing_mortgage_info}" id="housing_mortgage_info_hidden"/>
+                    	<input type="hidden" value="${caring_mortgage_info}" id="caring_mortgage_info_hidden"/>
+                    	<input type="radio" name="mortgage" id="housing_mortgage_info_radio" value="1" checked="checked"/><label for="housing_mortgage_info_radio" style="cursor: pointer;">抵押房产信息</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<input type="radio" name="mortgage" id="caring_mortgage_info_radio" value="2"/><label for="caring_mortgage_info_radio" style="cursor: pointer;">抵押车信息</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<input type="radio" name="mortgage" id="none_mortgage_info_radio" value="3"/><label for="none_mortgage_info_radio" style="cursor: pointer;">无抵押信息</label>
+                    </h3>
+                    <div style="margin:0px 20px;">
+                    	<textarea class="xf_ht_fbhzjg_textarea" name="bid.housing_mortgage_info" id="mortgage_info" style="/*width:960px;height:350px;*/">${housing_mortgage_info}</textarea>
+                    </div>
+                  </div>
+                  <div class="xf_htgl_jgone">
+                    <h3 class="xf_htgl_jgtitle">借款详情（对借款用途、还款能力进行详细说明）</h3>
+                    <textarea class="xf_ht_fbhzjg_textarea" name="bid.description" id="description" onkeyup="editorLimit(this)" oninput="editorLimit(this)">${loanBid?.description}</textarea>
+                  <span class="xf_ht_wa_font" id="limit" style="padding:20px">您还可以输入<span class="xf_con_zqzr_znxsz" id="editornum">600</span>字</span>
+                  </div>
+                <div class="xf_htgl_bott_on xf_ht_shmx_button">
+                   <input class="xf_ht_tcc_button_tq" type="submit" value="提交发布">
+                </div>
+              </div>
+          #{/form}
+        </div>
+     </div>
+  </div>
+</div>
+<!-- 直接借款人-弹出层 -->
+<div  id="zjjkr"></div>
+<script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+<link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+<script type="text/javascript">
+	/* var editor;
+	KindEditor.ready(function(K) {
+	  editor = K.create('#mortgage_info', {
+	       cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+	       uploadJson : '@{FileUpload.uploadImage2()}',
+	    allowFileManager : true,
+	    allowUpload: true,
+	    afterBlur: function(){this.sync();}
+	  });
+	}); */
+	
+	//qq风格 http://kindeditor.net/demo.php
+	/* var editor;
+	KindEditor.ready(function(K) {
+		K.each({
+			'plug-align' : {
+				name : '对齐方式',
+				method : {
+					'justifyleft' : '左对齐',
+					'justifycenter' : '居中对齐',
+					'justifyright' : '右对齐'
+				}
+			},
+			'plug-order' : {
+				name : '编号',
+				method : {
+					'insertorderedlist' : '数字编号',
+					'insertunorderedlist' : '项目编号'
+				}
+			},
+			'plug-indent' : {
+				name : '缩进',
+				method : {
+					'indent' : '向右缩进',
+					'outdent' : '向左缩进'
+				}
+			}
+		},function( pluginName, pluginData ){
+			var lang = {};
+			lang[pluginName] = pluginData.name;
+			KindEditor.lang( lang );
+			KindEditor.plugin( pluginName, function(K) {
+				var self = this;
+				self.clickToolbar( pluginName, function() {
+					var menu = self.createMenu({
+							name : pluginName,
+							width : pluginData.width || 100
+						});
+					K.each( pluginData.method, function( i, v ){
+						menu.addItem({
+							title : v,
+							checked : false,
+							iconClass : pluginName+'-'+i,
+							click : function() {
+								self.exec(i).hideMenu();
+							}
+						});
+					})
+				});
+			});
+		});
+		editor = K.create('#mortgage_info', {
+			themeType : 'qq',
+			items : [
+				'bold','italic','underline','fontname','fontsize','forecolor','hilitecolor','plug-align','plug-order','plug-indent','link'
+			]
+		});
+	}); */
+	
+	var editor;
+	KindEditor.ready(function(K) {
+	  editor = K.create('#mortgage_info', {
+		       cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+		       uploadJson : '@{FileUpload.uploadImage2()}',
+			   allowFileManager : true,
+			   allowUpload: true,
+			   afterBlur: function(){
+				   this.sync();
+		   	   },
+		   	   items:['justifyleft','justifycenter','justifyright','justifyfull','fullscreen','|','formatblock','fontname','fontsize','|','forecolor',
+		   	          'hilitecolor','bold','italic','underline','strikethrough','emoticons','table']
+	  		   });
+	});
+
+	$("input[type=radio][name=mortgage]").click(function(){
+		var radioVal =  $(this).val();
+		var housing_mortgage_value = $("#housing_mortgage_info_hidden").val();
+		var caring_mortgage_value = $("#caring_mortgage_info_hidden").val();
+		$(".ke-container-default").show();
+		if(radioVal == 1){
+			//抵押房产信息
+			$("#mortgage_info").attr("name","bid.housing_mortgage_info");
+			editor.html(housing_mortgage_value);
+		}else if(radioVal == 2){
+			//抵押车信息
+			$("#mortgage_info").attr("name","bid.caring_mortgage_info");
+			editor.html(caring_mortgage_value);
+		}else{
+			//无抵押信息
+			$("#mortgage_info").attr("name","");
+			$(".ke-container-default").hide();
+		}
+	});
+
+	/* 动态赋值  */
+	function setUser(sign, name, isActivation, isAddBaseInfo){
+		$("#sign").val(sign);
+		$("#userName").val(name);
+		$("#isActivation").val(isActivation);
+		$("#isAddBaseInfo").val(isAddBaseInfo);
+		
+		$("#zjjkr").hide();
+		layer.closeAll();
+	}
+	function editorLimit(obj){
+		if(obj.value.length>600){
+			obj.value=obj.value.substring(0,600);
+		}
+		$("#editornum").html(600-obj.value.length);
+	}
+	/* 选择用户 */
+	function usersWillSelect(currPage, pageSize) {
+		$.ajax({
+			url : "@{selectUsersInit()}",
+			type : "POST",
+			data : {
+				"currPage" : currPage,
+				"pageSize" : pageSize,
+				"keyword" : $("#keyword").val()
+			},
+			success : function(data) {
+				var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){
+					return;
+				}
+				if (data.code < 0) {
+					alert(data.msg);
+
+					return;
+				}
+
+				$("#zjjkr").html(data);
+				$.layer({
+		          type: 1,
+		          area: ['800px', '540px'],
+		          title: '用户列表(请点击用户名选择)',
+		          page: {dom : '#zjjkr'},
+		          close:function(){
+		          	$("#keyword").val('');
+		          }
+		        });
+			},
+			error : function() {
+				//layer.msg("对不起，出现错误!", 1, 5);
+				alert("对不起，出现错误!");
+			}
+		});
+	}
+	
+	/* 总付利息 */
+	function planapr() {
+		var period = $("#period").val() * 1;
+		var unit = $("#periodUnit").val() * 1; 
+		var apr = $("#apr").val() * 1;
+		var amount = $("#amount").val() * 1;
+		var repaymentType = $("input[type=radio]:checked").val() * 1;
+		var interest = getInterest(period, unit, apr, amount, repaymentType);
+		$("#showapr").val(interest);
+	}
+	
+	$("input[type=radio]").click(function(){
+		planapr();
+	});
+
+	/* 算出实际支付利息 */
+	function getInterest(period, unit, apr, amount, repaymentType){
+		if(isNaN(apr) || isNaN(amount))return 0;
+		var ymdapr = 0; 
+		var interest = 0;
+		var rperiod = 0; // 还款期数
+		
+		switch (unit) {
+			case -1: 
+					interest = apr/100*period*amount;
+					rperiod = period * 12; 
+					break;
+			case 0: 
+					interest = apr/12/100*period*amount;
+					rperiod = period; 
+					break;
+			case 1: 
+					interest = apr/360/100*period*amount;
+					rperiod = 1; 
+					break;
+			default: 
+					return 0; 
+		}
+
+		var monthSum = 0;
+		var monthApr = apr / 12 / 100; // 月利率
+		/* 根据还款方式算出利息 */
+		switch(repaymentType){
+			/* 按月还款、等额本息 */
+			case 1: 
+				monthSum = (amount * monthApr * Math.pow((1 + monthApr), rperiod)) / (Math.pow((1 + monthApr), rperiod) - 1); 
+				interest = monthSum * rperiod - amount;
+				break;
+		}
+
+		interest = interest.toFixed(2);
+		
+		return interest;
+	}
+
+	function showAverage(po){
+		var amount = $("#amount").val();
+		var average = $(po).val();
+		if(amount % average != 0){
+			$("#sumCopies").html("0");
+		}else{
+			$("#sumCopies").html(amount/average);
+		}
+	}
+	
+	function rTypeChange(value){
+		var repaymentType = $("#repaymentType");
+		var period = $("#period");
+		//repaymentType.empty();
+		period.empty();
+		
+		switch(value){
+		/* 年 */
+		case -1:
+			#{list product?.periodYearArray}
+				period.append('<option value="${_}" #{if loanBid?.period + "" == _} selected="selected" #{/if}>${_}</option>');
+			#{/list}
+		
+		 	#{list product?.repaymentType}
+		 		repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+	  	   #{/list}
+			break;
+		/* 月 */
+		case 0:
+			#{list product?.periodMonthArray}
+				period.append('<option value="${_}" #{if loanBid?.period + "" == _} selected="selected" #{/if}>${_}</option>');
+			#{/list}
+			
+			#{list product?.repaymentType}
+			 	repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+		    #{/list}
+			break;
+		/* 日 */
+		case 1:
+			#{list product?.periodDayArray}
+				period.append('<option value="${_}" #{if loanBid?.period + "" == _} selected="selected" #{/if}>${_}</option>');
+			#{/list}
+			
+			#{list product?.repaymentType}
+				#{if _?.id == once_repayment}
+					repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+				#{/if}
+		    #{/list}
+			break;
+		default:
+			period.attr('disabled','disabled');
+			break;
+		}
+	}
+
+	$(function(){
+		/* 高亮显示 */
+		showHighLight(2, 2, 9);
+		
+		rTypeChange($("#periodUnit").val() * 1);
+		
+		planapr();
+
+		/* 借款期限动态下拉 */
+		$("#periodUnit").change(function(){
+			
+			var period = $('#period');
+			var repaymentType = $("#repaymentType");
+			
+			if(-99 != $("#periodUnit").val()){
+				repaymentType.empty();
+			}
+			
+			period.removeAttr('disabled').empty();
+			
+			//隐藏所有的还款方式
+			$("#product_repaymentType span").hide();
+			switch($(this).val() * 1){
+			
+			/* 年 */
+			case -1:
+				#{list product?.periodYearArray}
+					period.append('<option value="${_}" #{if loanBid?.period + "" == _} selected="selected" #{/if}>${_}</option>');
+				#{/list}
+				
+				 #{list product?.repaymentType}
+				 	repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+			     #{/list}
+				$("#product_repaymentType span").show();
+				$("#product_repaymentType span:eq(0) [type=radio]").attr("checked","checked");
+				break;
+			/* 月 */
+			case 0:
+				#{list product?.periodMonthArray}
+					period.append('<option value="${_}" #{if loanBid?.period == '_'} selected="selected" #{/if}>${_}</option>');
+				#{/list}
+				
+				#{list product?.repaymentType}
+				 	repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+			    #{/list}
+			    
+			    $("#product_repaymentType span").show();
+				$("#product_repaymentType span:eq(0)").find("[type=radio]").attr("checked","checked");
+				break;
+			/* 日 */
+			case 1:
+				#{list product?.periodDayArray}
+					period.append('<option value="${_}" #{if loanBid?.period == '_'} selected="selected" #{/if}>${_}</option>');
+				#{/list}
+				
+				#{list product?.repaymentType}
+					#{if _?.id == once_repayment}
+						repaymentType.append('<option value="${_?.id}" #{if _?.id == loanBid?.repayment?.id} selected="selected" #{/if}>${_?.name }</option>');
+					#{/if}
+			    #{/list}
+				$("#product_repaymentType span:eq(1)").show();
+				$("#product_repaymentType span:eq(1)").find("[type=radio]").attr("checked","checked");
+				break;
+			default:
+				period.attr('disabled','disabled');
+				$("#product_repaymentType span").show();
+				break;
+			}
+		});
+		
+		/* 标的上线倒计时 */
+		if($("input[name='bid.isStartTime']:checked").val() == 1) {
+			var startTime = $("#startTime").val();
+			if(!startTime) {
+				alert("请选择团标上线时间");
+				return false;
+			}
+		}
+		
+		if($("input[name='bid.isStartTime']:checked").val() == 0) {
+			$("#startTime").val("");
+			$("#openStart").hide();
+		} else if($("input[name='bid.isStartTime']:checked").val() == 1) {
+			$("#openStart").show();
+		}
+		
+		$("input[name='bid.isStartTime']").click(function(){
+			if(this.value == 0) {//关闭
+				$("#openStart").hide();
+			} else if(this.value == 1) {//开启
+				$("#openStart").show();
+			}
+		});
+
+		/* 最低金额招标 */
+		$("#zbBlow").click(function(){
+			 $("#averageInvestAmount").val('');
+		});
+
+		/* 平均金额招标 */
+		$("#zbArange").click(function(){
+			$("#minInvestAmount").val('');
+		});
+		
+		/* 提交验证事件 */
+		$("#createBid").submit(function(){
+			/* alert($("#mortgage_info").val());
+			$("#mortgage_info").val(editor.html());
+			alert($("#mortgage_info").val()); */
+			/* if($("#agencyId").val() == 0){
+				alert("请选择合作机构!");
+				return false;
+			} */
+			return true;
+			if(('' == $("#sign").val()) || ('' == $("#userName").val())){
+				alert("直接借款人有误!");
+				return false;
+			}
+			var isActivation = $("#isActivation").val();
+			if('false' == isActivation){
+				alert("借款人未激活！");
+				return false;
+			}
+			
+			var isAddBaseInfo = $("#isAddBaseInfo").val();
+			if('false' == isAddBaseInfo){
+				alert("借款人未填写基本资料！");
+				return false;
+			}
+			if($("#purposeId").val() == 0){
+				alert("借款用途有误!");
+				return false;
+			}
+			if($.trim($("#title").val()) == ""){
+				alert("借款标题有误!");
+				return false;
+			} 
+			var amount = $.trim($("#amount").val());
+			if(amount == ""){
+				alert("借款金额有误!");
+				return false;
+			}
+			if(amount * 1 < ${product?.minAmount} || amount * 1 > ${product?.maxAmount}){
+				alert("借款金额有误!");
+				return false;
+			} 
+			var periodUnit = $("#periodUnit").val() * 1;
+			if(periodUnit < -1 || periodUnit > 1){
+				alert("借款期限有误!");
+				return false;
+			} 
+			if($("#periodUnit").val() == ""){
+				alert("借款期限单位有误!");
+				return false;
+			} 
+			var period = $("#period").val();
+			if(period == null || period == ""){
+				alert("借款期限有误!");
+				return false;
+			}
+			if($("#investPeriod").val() == 0){
+				alert("满标期限有误!");
+				return false;
+			}
+			var minInvestAmount = $.trim($("#minInvestAmount").val());
+			var averageInvestAmount = $.trim($("#averageInvestAmount").val());
+			if(minInvestAmount == "" && averageInvestAmount == ""){
+				alert("招标方案有误!");
+				return false;
+			}
+			
+			if($("#zbBlow").is(":checked") && minInvestAmount * 1 < ${product?.minInvestAmount}){
+				alert("最低投标金额有误!");
+				return false;
+			}
+			if($("#zbArange").is(":checked")){
+				if((amount % averageInvestAmount != 0) || amount/averageInvestAmount * 1 > ${product?.maxCopies}){
+					alert("平均招标金额有误!");
+					return false;
+				}
+			}
+			var apr = $.trim($("#apr").val());
+			if(apr == "" || apr * 1 < ${product?.minInterestRate} || apr * 1 > ${product?.maxInterestRate}){
+				alert("年利率有误!");
+				return false;
+			} 
+			if(apr.split(".").length > 2){
+				alert("年利率有误!");
+				return false;
+			}
+			
+			*{
+			if(${product?.loanImageType} == 0){
+				var loanImage = $("#loanImage").attr("src");
+				if(loanImage == "/public/images/default.png" || loanImage == ""){
+					alert("借款图片有误!");
+					return false;
+				}
+				$("#imageFilename").val(loanImage);
+			}
+			}*
+			
+			
+			if($.trim($("#description").val()) == ""){
+				alert("借款详情有误!");
+				return false;
+			}
+			if($("#rbonus").is(":checked")){
+				var bonus = $("#bonus").val();
+				if(bonus == "" || bonus < 0 || bonus > amount * 1){
+					alert("固定奖励有误!");
+					return false;
+				}
+			}
+			if($("#rawardScale").is(":checked")){
+				var awardScale = $("#awardScale").val();
+				if(awardScale == "" || awardScale > 100 || awardScale < 0){
+					alert("比例奖励有误!");
+					return false;
+				}
+			}
+			
+			/* 页面防止重复提交 */
+			$(":submit",this).attr("disabled","disabled");
+			
+			return true;
+		});
+	}); 
+</script>

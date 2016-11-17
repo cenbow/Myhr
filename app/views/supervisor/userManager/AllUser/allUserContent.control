@@ -1,0 +1,498 @@
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+    <!-- 搜索 -->
+    #{form @allUser(), id:'submit'}
+    <input type="hidden" id="currPage" name="currPage"/>
+    <input type="hidden" id="pageSize" name="pageSize"/>
+    <input type="hidden" id="orderType" name="orderType" value="${page.conditions?.orderType}"/>
+    <div class="xf_ht_search">
+      <div class="xf_ht_search_l">
+        <span id="div_0" onClick="conditonSearch(0)">默认排序</span>
+        <span id="div_1" onClick="conditonSearch(1)">累计充值金额 <a id="div_a_1">↑</a></span>
+        <span id="div_3" onClick="conditonSearch(3)">累计投标金额 <a id="div_a_3">↑</a></span>
+        <span id="div_5" onClick="conditonSearch(5)">累计投标数量 <a id="div_a_5">↑</a></span>
+        <span id="div_7" onClick="conditonSearch(7)">累计借款金额 <a id="div_a_7">↑</a></span>
+        <span id="div_9" onClick="conditonSearch(9)">累计借款标数量 <a id="div_a_9">↑</a></span>
+        <span id="div_11" onClick="conditonSearch(11)">信用等级 <a id="div_a_11">↑</a></span>
+        <span id="div_13" onClick="conditonSearch(13)">累计审核科目数 <a id="div_a_13">↑</a></span>
+      </div>
+    </div>
+    <div class="xf_ht_search_inon">
+      <div>
+      	<div class="xf_ht_search_xl">
+          <span class="search_timesp">会员：</span>
+          <input name="name" type="text" class="search_w" id="name" value="${page.conditions?.name}" placeholder="会员名/手机/邮箱" />
+        </div> 
+        <div class="xf_ht_search_xl">
+          <span class="search_timesp">注册时间：</span>
+          <input name="beginTime" type="text" id="startDate" class="search_time" onclick="laydate()" style="cursor: pointer" value="${page?.conditions?.beginTime}" />
+          <span class="search_timesp">--</span>
+          <input name="endTime" type="text" id="endDate" class="search_time" onclick="laydate()" style="cursor: pointer" value="${page?.conditions?.endTime}" />
+        </div>
+        <div class="xf_ht_search_xl">
+          <span class="search_timesp">充值金额：</span>
+          	<input name="minInvest" type="text" class="search_w" id="minInvest" value="${page.conditions?.minInvest}" placeholder="" onkeyup="maxRange(this)"/>
+          	至<input name="maxInvest" type="text" class="search_w" id="maxInvest" value="${page.conditions?.maxInvest}" placeholder="" onkeyup="maxRange(this)"/>
+        </div>
+        <div class="xf_ht_search_xl">
+          <input type="button" class="search_button" onclick="searchSubmit();" value="搜 索" />        
+        </div>
+        <div class="xf_ht_search_xl">
+             <input type="button"  class="search_button" value="批量改客服" onclick="batchCustomers()" />      
+        </div>
+     
+        <div class="xf_ht_search_xl" style="float:right;">
+			<input type="button" class="search_button" onclick="createUserInit();" value="添加会员">
+      	</div>
+      </div>
+    </div>
+    #{/form}
+    <!-- 列表内容 -->
+    <div class="xn_c_content_top">
+      #{table class:"xn_c_content_list1",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj",width:"1700px"}
+        #{tr}
+          #{th}序号#{/th}
+          #{th}会员名#{/th}
+          #{th}真实姓名#{/th}
+          #{th}真实年龄#{/th}
+          #{th}注册时间#{/th}
+          #{th}信用等级#{/th}
+          #{th}累计充值金额#{/th}
+          #{th}累计投标数量#{/th}
+          #{th}累计投标金额#{/th}
+          #{th}累计借款标数量#{/th}
+          #{th}累计借款金额#{/th}
+         *{#{th}绑定邮箱#{/th}}*
+         *{ #{th}是否激活#{/th}}*
+          #{th}绑定手机#{/th}
+          #{th}手机号归属地#{/th}
+         *{#{th}已审核科目数#{/th}}*
+          #{th}是否黑名单#{/th}
+          #{th}账户可用余额#{/th}
+          #{th}最后登录时间#{/th}
+          #{th}状态#{/th}
+          #{th}推荐人#{/th}
+          #{th}推荐人手机号#{/th}
+          #{th}客服#{/th}
+          #{th}用户类型#{/th}
+          #{th}备注#{/th}
+          #{th}操作#{/th}
+        #{/tr}
+       <input type="checkbox" id="father" onclick="changeAll()" />全选    
+       
+       #{list page?.page}
+       #{tr tr_index:_index}
+          #{td}<input type="checkbox" name="son" value="${_?.id}" onclick="change()" />${(page?.currPage - 1) * page?.pageSize + _index}#{/td}
+          #{td}${_?.name}#{/td}
+          #{td}${_?.reality_name}#{/td}
+          #{td}${_?.reality_age}#{/td}
+          #{td}${_?.register_time?.format('yyyy-MM-dd HH:mm:ss')}#{/td}
+          #{td}#{img src:"${_?.credit_level_image_filename}",alt:"",width:"30px",height:"30px"}#{/img}#{/td}
+          #{td}${_?.recharge_amount?.format("###,##0.00")}#{/td}
+          #{td}${_?.invest_count}#{/td}
+          #{td}${_?.invest_amount?.format("###,##0.00")}#{/td}
+          #{td}${_?.bid_count}#{/td}
+          #{td}${_?.bid_amount?.format("###,##0.00")}#{/td}
+         *{ #{td}${_?.email}#{/td}}*
+         *{ #{td}#{if _?.is_activation}是#{/if}#{else}否#{/else}#{/td}}*
+          #{td}${_?.mobile}#{/td}
+          #{td}${_?.mobile_area}#{/td}
+         *{#{td}${_?.audit_item_count}#{/td}}*
+          #{td}#{if _?.is_blacklist}是#{/if}#{else}否#{/else}#{/td}
+          #{td}${_?.user_amount?.format("###,##0.00")}#{/td}
+          #{td}${_?.last_login_time?.format('yyyy-MM-dd')}#{/td}
+          #{td}${_.is_allow_login ? "锁定" : "未锁定"}#{/td}
+          #{td}${_?.recommend_user_name}#{/td}
+          #{td}${_?.recommend_user_mobile}#{/td}
+          #{td}${_?.t_customer}#{/td}
+          #{td}${_?.user_type}#{/td}
+          #{td}<textarea name=""  cols="30" rows="1" style="width: 100%;"readonly>${_?.remark}</textarea><br>#{/td}
+          #{td}
+            <span class="xf_ta_onclick" onclick="details('${_?.sign}');">详情</span>
+            #{if constants.Constants.IPS_ENABLE}
+            <span class="xf_ta_onclick" onclick="edit('${_?.sign}');">编辑</span>
+            #{/if}
+            <span class="xf_ta_onclick" onclick="station('${_?.name}','${_?.sign}');">站内信</span>
+            <span class="xf_ta_onclick" onclick="email('${_?.email}');">邮件</span>
+            <span class="xf_ta_onclick" onclick="sendMsg('${_?.mobile}','${_?.name}');">发短信</span>
+            <span class="xf_ta_onclick" onclick="resetPassword('${_?.name}','${_?.email}');">重置密码</span>
+            <a href="@{supervisor.userManager.AllUser.simulateLogin(_?.sign)}" class="xf_ta_onclick" target="_blank">模拟登录</a>
+            #{if _?.is_allow_login}
+            #{/if}
+            #{else}
+            <span class="xf_ta_onclick" onclick="locking('${_?.sign}');">锁定</span>
+            #{/else}
+            <span class="xf_ta_onclick" onclick="changeSign('${_?.sign}');">更新签名</span>           
+            <span class="xf_ta_onclick" onclick="changeCustomer('${_?.id}')">更改客服</span>            
+            <span class="xf_ta_onclick" onclick="changeUserType('${_?.id}')">更改客户类型</span>
+            <span class="xf_ta_onclick" onclick="editRemark('${_?.id}')">编辑备注</span>
+          #{/td}
+        #{/tr}
+        #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+      <div class="page_warp">
+        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var fathers=document.getElementById("father");
+    var sons=document.getElementsByName("son");
+    
+ function changeAll(){      
+  if(fathers.checked){
+   for(var i=0;i<sons.length;i++){   
+    sons[i].checked="checked";
+   } 
+  }else{
+   for(var i=0;i<sons.length;i++){
+    sons[i].checked="";
+   }
+  }
+ }
+ 
+ function  change(){
+  var isTrue=true; 
+  for(var i=0;i<sons.length;i++){
+   isTrue=(isTrue&&sons[i].checked);    
+  }
+  if(isTrue){  
+   fathers.checked="checked"; 
+  }else{ 
+   fathers.checked="" ;  
+   } 
+ }
+ 
+function conditonSearch(num){
+  var orderType= ${page.conditions?.orderType};
+  if(orderType == 0){
+    $("#orderType").val(num);
+    $("#submit").submit();
+    return;
+  }
+  var sum = orderType/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = orderType - 1;
+    $("#orderType").val(num);
+    $("#submit").submit();
+    return;
+  }else{
+    if(orderType == num){
+      $("#orderType").val(num + 1);
+      $("#submit").submit();
+      return;
+    }else{
+      $("#orderType").val(num);
+      $("#submit").submit();
+      return;
+    }
+  }
+}
+
+$(function(){  
+  /* 高亮显示 */
+  highLight(1);
+  
+  //条件查询控制样式
+  var num= ${page.conditions?.orderType};
+  
+  if(num == 0){
+    $("#div_0").addClass("xf_sea_isshow");
+    return;
+  }
+
+  var sum = num/2;
+  if(sum.toString().indexOf('.') == -1){
+    var sum2 = num -1;
+    $("#div_"+sum2).addClass("xf_sea_isshow");
+    $("#div_a_"+sum2).html("↓");
+    return;
+  }
+
+  $("#div_"+num).addClass("xf_sea_isshow");
+  $("#div_a_"+num).html("↑");
+});
+
+function showPage(currPage, pageSize){
+  $("#currPage").val(currPage);
+  $("#pageSize").val(pageSize);
+  $("#submit").submit();
+}
+
+function searchSubmit(){
+	var minInvest = $("#minInvest").val();
+	var maxInvest = $("#maxInvest").val();
+	if(minInvest == "" || maxInvest == ""){
+		$("#submit").submit();
+		return;
+	}
+	minInvest = parseFloat(minInvest);
+	maxInvest = parseFloat(maxInvest);
+	if(minInvest > maxInvest){
+		alert("起始充值金额不能大于结束充值金额！");
+		return;
+	}
+	$("#submit").submit();
+}
+
+function edit(sign){
+  $.ajax({
+    url : "@{supervisor.userManager.AllUser.editUserInfoWin()}",
+    type : "POST",
+    data : {
+      "sign" : sign
+    },
+    success : function(data) {
+    	 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+			if(result){
+				return;
+			}
+    
+    
+      if (data.code < 0) {
+        alert(data.msg);
+
+        return;
+      }
+        
+      $("#edit_user_info").html(data);
+      $.layer({
+		    type: 1,
+		    area: ['560px', 'auto'],
+		    title: '编辑用户信息',
+		    page: {dom : '#edit_user_info'}
+		  });
+    },
+    error : function() {
+      alert("对不起，出现错误!");
+    }
+  });
+}
+function changeSign(userId){
+ $.ajax({
+    url : "@{supervisor.userManager.AllUser.changeSign()}",
+    type : "POST",
+    data : {
+      "sign" : userId
+    },
+    success : function(data) {
+    
+    	 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+			if(result){
+				return;
+			}
+    
+    
+        alert(data.msg);
+    },
+    error : function() {
+      alert("对不起，出现错误!");
+    }
+  });
+}
+
+function addUser() {
+	window.location.href="/supervisor/allUser/addUser";
+}
+
+function createUserInit() {
+	$.ajax({
+      url : "@{supervisor.userManager.AllUser.createUserInit()}",
+      type : "POST",
+      data : {
+      },
+      success : function(data) {
+		var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+		if(result){
+			return;
+		}
+        if (data.code < 0) {
+          alert(data.msg);
+          
+          return;
+        }
+      
+        var ttc = $("#xf_ht_tjgly_ttc");
+        ttc.html(data);
+        $.layer({
+          type: 1,
+          area: ['610', 'auto'],
+          title: '添加会员',
+          page: {dom : ttc}
+        });
+        //showDiv(ttc);
+      },
+      error : function() {
+        alert("对不起，出现错误!");
+      }
+    });
+}
+
+*{add by lbd 20160705   更改用户客服}*
+function changeCustomer(id) {
+	$.ajax({
+      url : "@{supervisor.userManager.AllUser.customer()}",
+      type : "GET",
+      data : {
+	    "id":id
+      },
+      success : function(data) {
+		var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+		if(result){
+			return;
+			
+		}
+        if (data.code < 0) {
+          alert(data.msg);
+          
+          return;
+        }
+      
+        var ttc = $("#xf_ht_tjgly_ttc");
+        ttc.html(data);
+        $.layer({
+          type: 1,
+          area: ['610', 'auto'],
+          title: '更改客服',
+          page: {dom : ttc}
+        });
+        //showDiv(ttc);
+      },
+      error : function() {
+        alert("对不起，出现错误!");
+      }
+    });
+}
+
+*{add by lbd 20160829   批量更改用户客服}*
+var ids1 = "";
+function batchCustomers(ids) {
+  for(var i=0;i<sons.length;i++){
+  if(sons[i].checked){
+    var id=sons[i].value;
+	ids1 = ids1 + id;
+	if(i != sons.length - 1){
+       ids1 = ids1 + ",";
+      	
+    }
+  }
+  }
+  
+	$.ajax({
+      url : "@{supervisor.userManager.AllUser.batchCustomers()}",
+      type : "GET",
+      data : {
+	    "ids":ids1
+      },
+      success : function(data) {
+		var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+		if(result){
+			return;
+			
+		}
+        if (data.code < 0) {
+          alert(data.msg);
+          
+          return;
+        }
+      
+        var ttc = $("#xf_ht_tjgly_ttc");
+        ttc.html(data);
+        $.layer({
+          type: 1,
+          area: ['610', 'auto'],
+          title: '更改客服',
+          page: {dom : ttc}
+        });
+        //showDiv(ttc);
+      },
+      error : function() {
+        alert("对不起，出现错误!");
+      }
+    });
+}
+
+*{add by lbd 20160706 更改客户类型}*
+function changeUserType(id){
+    $.ajax({
+        url : "@{supervisor.userManager.AllUser.queryUserType()}",
+        type : "GET",
+        data : {
+        "id":id
+        },
+        success : function(data) {
+          var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+          if(result){
+              return;
+              
+          }
+          if (data.code < 0) {
+            alert(data.msg);
+            
+            return;
+          }
+        
+          var ttc = $("#xf_ht_tjgly_ttc");
+          ttc.html(data);
+          $.layer({
+            type: 1,
+            area: ['610', 'auto'],
+            title: '更改客户类型',
+            page: {dom : ttc}
+          });
+          //showDiv(ttc);
+        },
+        error : function() {
+          alert("对不起，出现错误!");
+        }
+      });
+    
+    
+}
+
+*{add by lbd 20160706   编辑备注}*
+function editRemark(id,remark) {
+    $.ajax({
+      url : "@{supervisor.userManager.AllUser.editRemark()}",
+      type : "GET",
+      data : {
+        "id":id,
+        "remark":remark
+      },
+      success : function(data) {
+        var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+        if(result){
+            return;
+            
+        }
+        if (data.code < 0) {
+          alert(data.msg);
+          
+          return;
+        }
+      
+        var ttc = $("#xf_ht_tjgly_ttc");
+        ttc.html(data);
+        $.layer({
+          type: 1,
+          area: ['610', 'auto'],
+          title: '编辑备注',
+          page: {dom : ttc}
+        });
+        //showDiv(ttc);
+      },
+      error : function() {
+        alert("对不起，出现错误!");
+      }
+    });
+}
+    
+
+
+
+</script>

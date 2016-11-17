@@ -1,0 +1,548 @@
+#{extends 'common/supervisor.html' /} 
+#{set title:'添加机构' /}
+
+<script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+<link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+<script   type="text/javascript">  
+var editor;
+KindEditor.ready(function(K) {
+  editor = K.create('#tab2_content', {
+       cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+       uploadJson : '@{FileUpload.uploadImage2()}',
+    allowFileManager : true,
+    allowUpload: true
+  });
+});
+</script>
+
+
+<div class="xn_c_contentwarp">
+	<div class="xn_c_contentlist">
+    	#{include '/supervisor/bidManager/bidManagerLeft.control'/}
+    	<div class="xn_c_content">
+       		<div class="xf_content_add">
+      			#{form @addingAgency(agency), method:'POST', id:'addingAgency' }
+      				<input type="hidden" name="agency.id" value="${agencyTemp?.id}" />
+      				<!-- 关联的企业用户ID -->
+      				*{
+		            <input type="hidden" id="sign" name="sign"/>
+      				}*
+      				<input type="hidden" id="sign" name="agency.sign"/>
+		            <div class="xfht_t_j_y_2">
+	              		<!--右上-->
+		              	<div class="xf_ht_obu_fklm">
+							添加机构
+		              	</div>
+		              	<div class="xf_htgl_jgone">
+	                  		<div class="xf_htgl_jg_tableone">
+		                    #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_jg_tableone_table"}
+	                       		#{tr}
+	                         		#{td width:"114", align:"left"}机构名称：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.name" id="agencyName" value="${agencyTemp?.name}"/>
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}关联企业用户：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.relationUsername" id="relationUsername" readonly="readonly"/>
+		                           		<a href="javascript:void(0);" onclick="usersWillSelect(1, 10);">选择</a>
+		                           		<a href="javascript:void(0);" onclick="clearUser();">清除</a>&nbsp;&nbsp;(非必填)
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}手机号：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.mobile" id="mobile" class="relationed"/>
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}法人姓名：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.realityName" id="realityName" class="relationed"/>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}营业执照：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.businessLicense" id="businessLicense" class="relationed"/>
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}身份证号：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.idNumber" id="idNumber" class="relationed"/>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}税务登记证：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.taxCertificate" id="taxCertificate" class="relationed"/>
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}组织机构代码：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.organizationCode" id="organizationCode" class="relationed"/>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}法人邮箱：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.email" id="email" class="relationed"/>
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}开户许可证：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.openingPermit" id="openingPermit" class="relationed"/>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+	                         	#{tr}
+	                         		#{td width:"114", align:"left"}财务登记证：#{/td}
+		                         	#{td width:"200"}
+		                           		<input type="text" maxlength="30" name="agency.financeCertificate" id="financeCertificate" class="relationed"/>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+	                          	
+	                         	#{tr}
+	                          		#{td align:"left"}LOGO：#{/td}
+		                          	#{td}
+		                            	<span style="position: relative; vertical-align:middle;">
+		                            		*{
+			                            	#{img src:"${treasure?.images}",id:"image",name:"image",alt:"",width:"50",height:"50"}#{/img}
+					                  	 	<input style="margin-top: 14px;margin-right: 10px;" class='upload_btn' type="button" value="上传图片" style="display:inline-block; *margin-top:-28px !important;"> &nbsp;&nbsp;
+			               				 	<input type="file" class="upload_file" name="imgFile" id="imgFile" style="margin-top: 14px;left:-70px;*top:4px !important; *left:10px !important!" onchange="uploadImageType('imgFile','image');" />
+			                          	 	<input type="hidden" name="images" id="filename" />
+		                            		}*
+		                            		<span style="position: relative; vertical-align:middle;">
+		                            		#{img src:"${agencyTemp?.imageFilenames}",id:"loanImage",alt:"头像",width:"110px",height:"110px"}#{/img}
+                     	 					<input type="hidden" name="agency.imageFilenames" id="imageFilename" />
+						    				<input type="file" id="imgFile" name="imgFile"/>
+						    				<input type="button" onclick="uploadImage('imgFile','loanImage');" value="上传">
+		                          		</span>
+		                          		</span>
+		                          	#{/td}
+		                        #{/tr}
+		                        #{tr}
+	                          		#{td align:"left"}担保机构简介：#{/td}
+	                          		#{td colspan:"3"}
+	                           			<div class="xf_ht_news_conr">
+			                  	 			<textarea name="agency.introduction" id="introduction"  class="xf_ht_jr_obttd_textarea"></textarea>
+			                  	 		</div>
+	                          		#{/td}
+	                        	#{/tr}
+		                        
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}机构相关图片：#{/td}
+		                         	#{td width:"820"}
+		                           		<table id="upload_img" border="1px solid #ddd">
+		                           			<tr id="head">
+			                           			<!-- 序号 -->
+			                           			<td style="text-align: center;" width="70px;"><span class="index">序号</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			                           			<td style="text-align: center;" width="100px;">名称</td>
+			                           			<td style="text-align: center;" width="150px;">图片</td>
+			                           			<td style="text-align: center;" width="100px;">上传情况</td>
+			                           			<td style="text-align: center;" width="400px;">操作</td>
+		                           			</tr>
+		                           			*{
+		                           			<tr class="img_item">
+			                           			<!-- 序号 -->
+			                           			<td style="text-align: center;"><span class="index">序号</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			                           			<td style="text-align: center;"><input type="text" name="img_name" id="img_name"/></td>
+			                           			<td style="text-align: center;"><span></span></td>
+			                           			<td style="text-align: center;"><span></span></td>
+			                           			<td style="text-align: center;">
+			                           				<input type="file" id="imgFile" name="imgFile"/>
+							    					<input type="button" onclick="uploadImage('imgFile','loanImage');" value="上传">
+							    					<input type="button" onclick="delectImg(this);" value="删除" />
+			                           			</td>
+		                           			</tr>
+		                           			}*
+		                           		</table>
+		                           		<input type="button" onclick="addImg();" value="添加" />
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+		                      #{/table}  
+		                    </div>
+		                	<div class="xf_htgl_bott_on xf_ht_shmx_button">
+		                   		<input class="xf_ht_tcc_button_tq" type="submit" value="保存">
+		                	</div>
+	              		</div>
+	          		#{/form}
+		        </div>
+		     </div>
+		  </div>
+   	</div>
+	
+</div>
+<!-- 直接借款人-弹出层 -->
+<div  id="zjjkr"></div>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		showHighLight(6, 6, 18);
+		
+		$("#addingAgency").submit(function(){
+			var agencyName = $.trim($("#agencyName").val());
+			if(!agencyName || agencyName == "机构名重复!"){
+				alert("请填写机构名称!");
+				return false;
+			}
+			
+			//手机号
+			var mobile = $.trim($("#mobile").val());
+			if(!mobile) {
+				alert("请填写手机号");
+				return false;
+			} else if(!mobile.isMobileNum()) {
+				alert("手机号不正确");
+				return false;
+			}
+			
+			//法人姓名
+			var realityName = $.trim($("#realityName").val());
+			if(!realityName) {
+				alert("请填写法人姓名");
+			}
+			
+			//营业执照
+			var businessLicense = $.trim($("#businessLicense").val());
+			if(!businessLicense) {	
+				alert("请填写营业执照");
+				return false;
+			}
+			
+			//身份证号
+			var idNumber = $.trim($("#idNumber").val());
+			if(!idNumber) {
+				alert("请填写身份证号码");
+				return false;
+			}
+			
+			//税务登记证
+			var taxCertificate = $.trim($("#taxCertificate").val());
+			if(!taxCertificate) {
+				alert("请填写税务登记证");
+				return false;
+			}
+			
+			//组织机构代码
+			var organizationCode = $.trim($("#organizationCode").val());
+			if(!organizationCode) {
+				alert("请填写组织机构代码");
+				return false;
+			}
+			
+			//法人邮箱
+			var email = $.trim($("#email").val());
+			if(!email) {
+				alert("请填写法人邮箱");
+				return false;
+			} else if(!email.isEmail()) {
+				alert("邮箱格式不正确");
+				return false;
+			}
+			
+			//开户许可证
+			var openingPermit = $.trim($("#openingPermit").val());
+			if(!openingPermit) {
+				alert("请填写开户许可证");
+				return false;
+			}
+			
+			//财务登记证
+			var financeCertificate = $.trim($("#financeCertificate").val());
+			if(!financeCertificate) {
+				alert("请填写财务登记证");
+				return false;
+			}
+			
+			//LOGO图片
+			var imageName = $("#loanImage").attr("src");
+			if(typeof(imageName) == "undefined" || imageName == "" || imageName.indexOf("/public/images/default.png") != -1){
+				alert("请上LOGO!");
+				
+				return false;
+	        }
+			$("#imageFilename").val(imageName);
+			
+			//机构简介
+			var introduction = $.trim($("#introduction").val());
+			if(!introduction) {
+				alert("请填写机构简介");
+				return false;
+			}
+			
+			return true;
+			
+			
+			
+			/* 
+			var agencyIdNumber = $("#id_number").val();
+			if($.trim(agencyIdNumber) == '' || agencyIdNumber == "营业执照号重复!"){
+				//layer.msg("请填写营业执照号!", 1, 5);
+				alert("请填写营业执照号!");
+				
+				return false;
+			}
+			
+			var imageName = $("#loanImage").attr("src");
+			if(typeof(imageName) == "undefined" || imageName == "" || imageName.indexOf("/public/images/default.png") != -1){
+				alert("请上LOGO!");
+				
+				return false;
+	        }
+			$("#imageFilename").val(imageName);
+			
+			if($("#creditLevel").val() == 0){
+				//layer.msg("请选择信用级别!", 1, 5);
+				alert("请选择信用级别!");
+			
+				return false;
+			}
+			
+			if($.trim($("#introduction").val()) == ""){
+				//layer.msg("请填写机构简介!", 1, 5);
+				alert("请填写机构简介!");
+				
+				return false;
+			}
+			
+			//alert("添加合作机构成功");
+			return true; */
+		});
+	});
+
+	function checkName(po){
+		var action = #{jsAction @checkName(':name') /};
+		$.post(action({name:encodeURI(po.value)}), function(data) {
+			
+			var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+			if(result){
+				return;
+			}
+			
+			if(data) {
+				$(po).css("color","red").val("机构名重复!");
+			}else {
+				$(po).css("color","green");
+			}
+		});
+	}
+	
+	function checkIdNumber(po){
+		var action = #{jsAction @checkIdNumber(':idNumber') /};
+		$.post(action({idNumber:encodeURI(po.value)}), function(data) {
+			var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+			if(result){
+				return;
+			}
+			if(data) {
+				$(po).css("color","red").val("营业执照号重复!");
+			}else {
+				$(po).css("color","green");
+			}
+		});
+	};
+	
+	
+	
+	/* 动态赋值  */
+	function setUser(sign, name, isActivation, isAddBaseInfo,mobile,realityName,businessLicense,idNumber,tax_certificate,organization_code,opening_permit,finance_certificate,email){
+		$("#sign").val(sign);
+		$("#relationUsername").val(name);
+		$("#mobile").val(mobile);
+		$("#realityName").val(realityName);
+		$("#businessLicense").val(businessLicense);
+		$("#idNumber").val(idNumber);
+		$("#taxCertificate").val(tax_certificate);
+		$("#organizationCode").val(organization_code);
+		$("#openingPermit").val(opening_permit);
+		$("#financeCertificate").val(finance_certificate);
+		
+		
+		//$("#isActivation").val(isActivation);
+		//$("#isAddBaseInfo").val(isAddBaseInfo);
+		
+		$("#email").val(email);
+		
+		$("input[class='relationed']").attr("readonly","true");
+		$("#zjjkr").hide();
+		layer.closeAll();
+	}
+	function editorLimit(obj){
+		if(obj.value.length>600){
+			obj.value=obj.value.substring(0,600);
+		}
+		$("#editornum").html(600-obj.value.length);
+	}
+	/* 选择用户 */
+	function usersWillSelect(currPage, pageSize) {
+		$.ajax({
+			url : "@{selectEnterpriseUsersInit()}",
+			type : "POST",
+			data : {
+				"currPage" : currPage,
+				"pageSize" : pageSize,
+				"keyword" : $("#keyword").val()
+			},
+			success : function(data) {
+				var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){
+					return;
+				}
+				if (data.code < 0) {
+					alert(data.msg);
+
+					return;
+				}
+
+				$("#zjjkr").html(data);
+				$.layer({
+		          type: 1,
+		          area: ['800px', '540px'],
+		          title: '用户列表(请点击用户名选择)',
+		          page: {dom : '#zjjkr'},
+		          close:function(){
+		          	$("#keyword").val('');
+		          }
+		        });
+			},
+			error : function() {
+				//layer.msg("对不起，出现错误!", 1, 5);
+				alert("对不起，出现错误!");
+			}
+		});
+	};
+	
+	//清楚关联企业用户
+	function clearUser(){
+		$("input[class='relationed']").removeAttr("readonly").val("");
+		$("#relationUsername").val("");
+		$("#sign").val("");
+	};
+	
+	
+	$(function(){
+		var relationUsername = "${agencyTemp?.relationUsername}";
+		if(relationUsername) {//关联了企业用户
+			$("#relationUsername").val(relationUsername);
+			$("input[class='relationed']").attr("readonly","true");
+		}
+		$("#mobile").val('${agencyTemp?.mobile}');
+		$("#realityName").val("${agencyTemp?.realityName}");
+		$("#businessLicense").val("${agencyTemp?.businessLicense}");
+		$("#idNumber").val("${agencyTemp?.idNumber}");
+		$("#taxCertificate").val("${agencyTemp?.taxCertificate}");
+		$("#email").val("${agencyTemp?.email}");
+		$("#organizationCode").val("${agencyTemp?.organizationCode}");
+		$("#openingPermit").val("${agencyTemp?.openingPermit}");
+		$("#financeCertificate").val("${agencyTemp?.financeCertificate}");
+		$("#introduction").val("${agencyTemp?.introduction}");
+		$("#sign").val("${agencyTemp?.sign}");
+	});
+	
+	//添加图片
+	function addImg() {
+		var index = $(".img_item").size() +1;
+		$("#upload_img").append("<tr class='img_item' id='img_item"+index+"'>"+
+				"<td><span class='index'>"+index+"</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>"+
+				"<td><input type='text' name='imgName' id='imgName'"+index+"/></td>"+
+				"<td><img alt='' width='20px' src='' id='relateImage"+index+"'><input type='hidden' name='relateImg' id='relateImgName"+index+"' /></td>"+
+				"<td class='is_uploaded'></td>"+
+				"<td>"+
+				"<input type='file' id='imgFile"+index+"' name='imgFile'/>"+
+				"<input type='button' onclick=\"uploadAgencyImage('imgFile"+index+"','relateImage"+index+"',"+index+");\" value='上传'>"+
+				"<input type='button' onclick='delectImg(this);' value='删除' />"+
+				"</td>"+
+				"</tr>"
+		);
+	};
+	
+	
+	//删除图片
+	function delectImg(obj) {
+		$(obj).parentsUntil("tbody").remove();
+		
+	};
+	
+	function uploadAgencyImage(fileElementId, imageElementId, index) {
+		var path = $("#" + fileElementId).val();
+		if(path == "") {
+			alert("请选择上传的图片");
+			return;
+		}
+		
+		$.ajaxFileUpload({
+			url : http_path + "/FileUpload/uploadImage",
+			secureuri : false,
+			fileElementId : fileElementId,
+			dataType : 'text',
+			success : function(data) {
+				data = $.evalJSON(data);
+				if (data.error.code < 0) {
+					alert(data.error.msg);
+
+					return;
+				}
+				$("#" + imageElementId).attr("src", data.filename);
+				$("#relateImgName"+index).val(data.filename);
+				$('#img_item'+index).find(".is_uploaded").html("已上传");
+			},
+			error : function(data, status, e) {
+				alert("上传图片失败");
+			}
+		})
+	};
+	
+	
+	$(function(){
+		*{
+		var size = ${agencyTemp?.relateImgList?.size()}+1;
+		#{list items:agencyTemp?.relateImgList, as:'imgItem'}
+			$("#upload_img").append("<tr class='img_item' id='img_item"+${imgItem_index}+"'>"+
+					"<td><span class='index'>"+${imgItem_index}+"</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>"+
+					"<td><span class='index'>"+${imgItem_index}+"</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>"+
+					"<td><img alt='' width='20px' src='"+'${imgItem}'+"' id='relateImage"+${imgItem_index}+"'><input type='hidden' name='relateImg' id='relateImgName"+${imgItem_index}+"' /></td>"+
+					"<td class='is_uploaded'>已上传</td>"+
+					"<td>"+
+					"<input type='file' id='imgFile"+${imgItem_index}+"' name='imgFile'/>"+
+					"<input type='button' onclick=\"uploadAgencyImage('imgFile"+${imgItem_index}+"','relateImage"+${imgItem_index}+"',"+${imgItem_index}+");\" value='上传'>"+
+					"<input type='button' onclick='delectImg(this);' value='删除' />"+
+					"</td>"+
+					"</tr>"
+			);
+			$("#relateImgName"+${imgItem_index}).val('${imgItem}');
+		#{/list}
+		}*
+		
+		#{list items:agencyTemp?.relateImgList, as:'imgItem'}
+			$("#upload_img").append("<tr style='text-align: center;' class='img_item' id='img_item"+${imgItem_index}+"'>"+
+					"<td style='text-align: center;'><span class='index'>"+${imgItem_index}+"</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>"+
+					"<td style='text-align: center;'><input type='text' name='imgName' id='imgName'"+${imgItem_index}+" value='"+'${imgItem?.img_name}'+"'/></td>"+
+					"<td style='text-align: center;'><img alt='' width='20px' src='"+'${imgItem?.relate_img}'+"' id='relateImage"+${imgItem_index}+"'><input type='hidden' name='relateImg' id='relateImgName"+${imgItem_index}+"' /></td>"+
+					"<td class='is_uploaded'>已上传</td>"+
+					"<td style='text-align: center;'>"+
+					"<input type='file' id='imgFile"+${imgItem_index}+"' name='imgFile'/>"+
+					"<input type='button' onclick=\"uploadAgencyImage('imgFile"+${imgItem_index}+"','relateImage"+${imgItem_index}+"',"+${imgItem_index}+");\" value='上传'>"+
+					"<input type='button' onclick='delectImg(this);' value='删除' />"+
+					"</td>"+
+					"</tr>"
+			);
+			$("#relateImgName"+${imgItem_index}).val('${imgItem?.relate_img}');
+		#{/list}
+		
+		
+	});
+</script>

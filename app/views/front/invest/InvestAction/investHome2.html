@@ -1,0 +1,220 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle+'| 我要理财' /}
+<div class="xf_c_wyjk_1_wyjk">
+	<!--理财流程开始-->
+	#{include "front/invest/InvestAction/homeProcedure.control"/}
+	<!--投标搜索-->
+	#{include "front/invest/InvestAction/homeSearch.control"/}
+	<!-- 排序条件 -->
+	<!-- 搜索结果 -->
+	<div class="xf_wylc_sousoulist" id="bidList">
+	
+	<!-- 搜索结果 -->
+	<ul class="xf_c_idx_4_items xf_c_wylc_items">
+		<!--foreach start：-->
+		#{list items:pageBean.page, as:'bid'}
+		<li>
+			<div class="xf_c_idx_4_itemsWrap">
+				<div class="xf_c_idx_4_imgWrap">
+					<div class="xf_c_idx_4_userImg">
+					#{img class:"lazy", data_original:"${bid?.bid_image_filename}", src:"/public/images/loading.gif",alt:"",align:"absmiddle",width:"111px",height:"110px"}#{/img}
+						
+					</div>
+					<div class="xf_c_idx_4_zrzhongImg">
+					
+					</div>
+					#{if bid?.status == 14}
+					<div style="position:absolute;bottom:18px;left:-5px;width:105px;background:url(../images/index_bg.png) no-repeat -961px -559px;height:25px; color: #fff;font-size: 15px; padding:10px 0 0 45px; line-height: 16px;">
+					${bid?.strStatus}
+					#{/if}
+					#{else}
+					<div class="xf_c_idx_4_zrzhongImg">
+					${bid?.strStatus}
+					#{/else}
+					</div>
+				</div>
+				<div class="xf_c_idx_4_tableWrap xf_c_wylc_tableWrap">
+					<div class="xf_c_idx_4_colTitle xf_wylc_colTitle">
+						<span >
+						#{img class:"lazy", data_original:"${bid?.small_image_filename}", src:"/public/images/loading.gif",alt:"",style:"width: 20px; height: 20px;  display: inline-block; float: left; margin: 5px 6px 0 0;"}#{/img}
+						</span> <span
+							class="xf_c_idx_4_loanTitle xf_c_wylc_loanTitle"><a
+							href="@{invest(bid?.id)}" target="_self">${bid?.title}</a> </span> <span
+							class="xf_wylc_lcpocd">编号：${bid?.no}</span> <span
+							class="xf_c_idx_4_loanProgres"> <span
+							class="xf_c_idx_4_progText">借款进度：</span> <span
+							class="xf_c_idx_4_proWrap"><span id="loanSchedule${bid_index}" class="xf_c_idx_4_proPer">${bid?.loan_schedule}%</span>
+						</span> </span>
+					</div>
+					<div class="xf_c_idx_4_data">
+						<ul class="xf_c_idx_4_dataul">
+							<li><div>年利率</div>
+								<div class="xf_c_idx_4_nhsy">${bid?.apr}%</div>
+							</li>
+							<li><div>借款金额</div>
+								<div class="xf_c_idx_4_jkje">${bid?.amount?.format('###,##0.00')}</div>
+							</li>
+							<li><div>还款期限</div>
+								<div class="xf_c_idx_4_hkqx">
+								#{if bid?.period_unit ==-1}
+								${bid?.period}年
+								#{/if}
+								#{if bid?.period_unit ==0}
+								${bid?.period}个月
+								#{/if}
+								#{if bid?.period_unit ==1}
+								${bid?.period}天
+								#{/if}
+								</div>
+							</li>
+							<li><div>还款日期</div>
+								<div class="xf_c_idx_4_hkqx">
+								#{if bid?.repayment_time == null}
+								---
+								#{/if}
+								${bid?.repayment_time?.format('yyyy-MM-dd')}
+								</div>
+							</li>
+							<li class="xf_c_idx_4_last"><div>信用等级</div>
+								<div class="xf_c_idx_4_xydj">
+								#{img class:"lazy", data_original:"${bid?.creditLevel?.image_filename}", src:"/public/images/loading.gif",alt:""}#{/img}
+								</div>
+							</li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<div class="xf_c_idx_4_tableBttom">
+						<span class="xf_c_idx_4_hxjeWrap">还需金额：<span
+							class="xf_c_idx_4_hxje">￥
+							#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}
+							元</span> </span> <span
+							class="xf_c_idx_4_hkfsWrap">
+							还款方式：${bid?.repay_name}
+						</span> 
+					</div>
+				</div>
+				<div class="xf_wylc_tableWrap_cz">
+			   		#{if bid?.is_hot ==true}
+						<b class="xf_wylc_tableWrap_czishot">火</b>
+					#{/if}
+					#{if  bid?.amount > bid?.has_invested_amount && bid?.status == 2}
+				 		<a href="@{invest(bid?.id)}" target="_self">立即投标</a>
+				 	#{/if}
+				 	#{elseif bid?.amount > bid?.has_invested_amount && bid?.status == 30}
+				 		<span>距离开标时间：</span>
+				 		<span class="xf_wylc_l_memhyA">
+				 			<span id="day${bid?.id}"></span>
+				 			<span class="font_onetwo">天</span>
+				 			<span id="hours${bid?.id}"></span>
+				 			<span class="font_onetwo">小时</span>
+				 			<span id="minutes${bid?.id}"></span>
+				 			<span class="font_onetwo">分</span>
+				 			<span id="seconds${bid?.id}"></span><span class="font_onetwo">秒</span> 
+			 			</span>
+			 			<script type="text/javascript">
+				 				showOrderTime();
+				 				function showOrderTime(){
+			 						var endTime =" ${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}";
+							     	time_end = new Date(endTime);//结束的时间
+				 			        var tt = time_end.getTime();
+				 			      	var now = new Date().getTime();
+				 			        var cha = tt-now;
+				 			        var SysSecond=parseInt(cha);
+				 			 	 	if (SysSecond > 0) { 
+				 				        int_day=Math.floor(SysSecond/86400000);
+				 				        SysSecond-=int_day*86400000;
+				 				        int_hour=Math.floor(SysSecond/3600000);
+				 				        SysSecond-=int_hour*3600000;
+				 				        int_minute=Math.floor(SysSecond/60000);
+				 				        SysSecond-=int_minute*60000;
+				 				        int_second=Math.floor(SysSecond/1000);
+				 			            if(int_hour<10){
+				 			     	    	int_hour="0"+int_hour;
+				 			          	}
+				 			            if(int_minute<10){
+				 			   		       	int_minute="0"+int_minute;
+				 			            }
+				 			   		    if (int_second<10){
+				 			        	    int_second="0"+int_second;
+				 			           	}
+				 				       	$("#day${bid?.id}").html(int_day);
+				 				       	$("#hours${bid?.id}").html(int_hour);
+				 				       	$("#minutes${bid?.id}").html(int_minute);
+				 				       	$("#seconds${bid?.id}").html(int_second);
+				 			       	} else{
+				 			       	   	$("#day${bid?.id}").html("00");
+				 				       	$("#hours${bid?.id}").html("00");
+				 				       	$("#minutes${bid?.id}").html("00");
+				 				       	$("#seconds${bid?.id}").html("00");
+				 			       	}
+				 					setTimeout('showOrderTime()',1000); 
+				 			   	};
+			 			</script>
+			 			
+				 		<a href="@{invest(bid?.id)}" target="_self">我要预约</a>
+				 	#{/elseif}
+					#{if bid?.amount == bid?.has_invested_amount}
+						<a href="@{invest(bid?.id)}" target="_self">查看详细</a>
+					#{/if}
+				</div>
+			</div></li>
+			#{/list}
+		<!--foreach ends-->
+	</ul>
+	<div class="xf_wylc_page">
+		<!-- 分页器 -->
+			#{page pageTitle:"个标",currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:3 /}
+	</div>
+	</div>
+	<!--投标搜索 ends-->
+</div>
+
+<!-- 财富理财说明 -->
+<div class="xf_wylc_wylcExp">
+	#{include "common/WealthToolbox.control"/}
+		
+	#{include "common/CreditRatingIcons.control"/}
+	
+	#{include "common/BorrowingIcons.control"/}
+	
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_invest.js'}"></script>
+
+<script>
+    $(function(){
+     
+	  #{list items:pageBean.page, as:'bid'}
+	    $('#loanSchedule'+${bid_index}).css({"width":${bid?.loan_schedule}})
+	  #{/list}
+    })
+
+    function checkLogin(bidId){
+    	
+  	  /** 检查用户是否激活, fronMain.html 中的拦截器*/
+  	  var result = frontJSIntercepter();
+  	  
+  	  if(!result){
+  		  collectCurrentBid(bidId);  
+  	  }			
+     }   
+  
+    function collectCurrentBid(bidId){
+    	var collectBid = #{jsAction @collectBid(':bidId')/}
+    	$.post(collectBid({bidId:bidId}),function(data){
+    		//拦截器，拦截判断。frontMain.html
+			if(checkIntercepterResult(data)){
+				return;
+			}
+    		var arr=eval(data);
+			var result = arr.error.msg;
+			alert(result);
+    	})
+    
+    }
+    
+</script>

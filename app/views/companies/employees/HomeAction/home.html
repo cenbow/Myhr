@@ -1,0 +1,509 @@
+<!--<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- saved from url=(0046)https://zhirenhr.com/companies/10172/employees -->
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<script src="https://js-agent.newrelic.com/nr-998.min.js"></script>
+<script type="text/javascript" src="@{'/public/javascripts/mixpanel-2.2.min.js'}"></script>
+
+<script type="text/javascript">window.BWEUM||(BWEUM={});BWEUM.info={"beacon":"bi-collector.oneapm.com/beacon/rum/ruby","errorBeacon":"bi-collector.oneapm.com/beacon/error/ruby","licenseKey":"2RYvV~rUuUauQYIz","applicationID":7924,"transactionName":"DxIrEjNQPyMiJSEPWzZYLCsxXT4pJiMmSV02Eyw+","queueTime":0,"applicationTime":1011,"agent":"//bi-collector.oneapm.com/static/js/bw-send-411.4.9.js"}</script>
+<script type="text/javascript" src="@{'/public/javascripts/bw-loader-411.4.9.js'}"></script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"f814cbac62","applicationID":"30640806","transactionName":"e1deQ0NWCFxUQUpWWUhUX05UXBcfWF0BVkw=","queueTime":0,"applicationTime":1011,"agent":""}</script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var o=t[n]={exports:{}};e[n][0].call(o.exports,function(t){var o=e[n][1][t];return r(o||t)},o,o.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(e,t,n){function r(){}function o(e,t,n){return function(){return i(e,[(new Date).getTime()].concat(u(arguments)),t?null:this,n),t?void 0:this}}var i=e("handle"),a=e(2),u=e(3),c=e("ee").get("tracer"),f=NREUM;"undefined"==typeof window.newrelic&&(newrelic=f);var s=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit"],l="api-",p=l+"ixn-";a(s,function(e,t){f[t]=o(l+t,!0,"api")}),f.addPageAction=o(l+"addPageAction",!0),f.setCurrentRouteName=o(l+"routeName",!0),t.exports=newrelic,f.interaction=function(){return(new r).get()};var d=r.prototype={createTracer:function(e,t){var n={},r=this,o="function"==typeof t;return i(p+"tracer",[Date.now(),e,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[Date.now(),r,o],n),o)try{return t.apply(this,arguments)}finally{c.emit("fn-end",[Date.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){d[t]=o(p+t)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,(new Date).getTime()])}},{}],2:[function(e,t,n){function r(e,t){var n=[],r="",i=0;for(r in e)o.call(e,r)&&(n[i]=t(r,e[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],3:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,o=n-t||0,i=Array(o<0?0:o);++r<o;)i[r]=e[t+r];return i}t.exports=r},{}],ee:[function(e,t,n){function r(){}function o(e){function t(e){return e&&e instanceof r?e:e?c(e,u,i):i()}function n(n,r,o){if(!p.aborted){e&&e(n,r,o);for(var i=t(o),a=v(n),u=a.length,c=0;c<u;c++)a[c].apply(i,r);var f=s[w[n]];return f&&f.push([y,n,r,i]),i}}function d(e,t){b[e]=v(e).concat(t)}function v(e){return b[e]||[]}function g(e){return l[e]=l[e]||o(n)}function m(e,t){f(e,function(e,n){t=t||"feature",w[n]=t,t in s||(s[t]=[])})}var b={},w={},y={on:d,emit:n,get:g,listeners:v,context:t,buffer:m,abort:a,aborted:!1};return y}function i(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var u="nr@context",c=e("gos"),f=e(2),s={},l={},p=t.exports=o();p.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(o.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[t]=r,r}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){o.buffer([e],r),o.emit(e,t,n)}var o=e("ee").get("handle");t.exports=r,r.ee=o},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!h++){var e=y.info=NREUM.info,t=l.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return f.abort();c(b,function(t,n){e[t]||(e[t]=n)}),u("mark",["onload",a()],null,"api");var n=l.createElement("script");n.src="https://"+e.agent,t.parentNode.insertBefore(n,t)}}function o(){"complete"===l.readyState&&i()}function i(){u("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var u=e("handle"),c=e(2),f=e("ee"),s=window,l=s.document,p="addEventListener",d="attachEvent",v=s.XMLHttpRequest,g=v&&v.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:v,REQ:s.Request,EV:s.Event,PR:s.Promise,MO:s.MutationObserver},e(1);var m=""+location,b={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-998.min.js"},w=v&&g&&g[p]&&!/CriOS/.test(navigator.userAgent),y=t.exports={offset:a(),origin:m,features:{},xhrWrappable:w};l[p]?(l[p]("DOMContentLoaded",i,!1),s[p]("load",r,!1)):(l[d]("onreadystatechange",o),s[d]("onload",r)),u("mark",["firstbyte",a()],null,"api");var h=0},{}]},{},["loader"]);</script>
+  <title>员工</title>
+  <meta name="keywords" content="HR,人事,人力资源,薪酬,社保,考勤,请假,审批">
+  <meta name="description" content="一站整合和自动处理人事、薪酬、考勤、请假等所有事务工作，让人力资源化繁为简。">
+
+  <!-- <link rel="stylesheet" media="all" href="./员工-首页_files/application-b99ad155de923966a45de45d6a9807f5edffa73e9780ef8e849e085b260658fc.css" data-turbolinks-track="true"> -->
+  
+  <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/application-b99ad155de923966a45de45d6a9807f5edffa73e9780ef8e849e085b260658fc.css'}" />
+
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="/FH3unqU93vyrMTX+5ZCLorVYrsO8ym1DGgFYqLyj7RpUVliOMP98MgjvPGK699Qoa8fbLbPc8c6Sgop3vuLVA==">
+
+  *{<!-- 友盟网站统计 -->
+  <style>html.turbolinks-progress-bar::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background-color: #0076ff;
+  height: 3px;
+  opacity: 0.99;
+  width: 0%;
+  transition: width 300ms ease-out, opacity 150ms ease-in;
+  transform: translate3d(0,0,0);
+}</style></head><body id="employees-index" data-no-transition-cache=""><span id="cnzz_stat_icon_1259145335" style="display:none;"><a href="http://www.cnzz.com/stat/website.php?web_id=1259145335" target="_blank" title="站长统计">站长统计</a></span><script src="./员工-首页_files/z_stat.php" type="text/javascript"></script><script src="./员工-首页_files/core.php" charset="utf-8" type="text/javascript"></script>
+<script type="text/javascript">
+(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+
+mixpanel.init("ee3d54b2657b1124908a7e028b405e84");
+mixpanel.identify(121680);
+mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC","$first_name":"管强","$last_name":"","$phone":"18912975120","$last_login":"2016-11-08 03:01:30 UTC","$platform":"pc","$as_hr":true,"$company_id":10172,"$company_name":"my","$demo":true});
+</script>*}
+
+
+
+
+
+<div class="system-notification warning" data-stick="" style="display: block;">
+  这是一个演示公司，操作数据将不会保留
+</div>
+
+	*{"@{front.home.HomeAction.aboutUs(10)}"}*
+  <div class="system-notification" style="display: block;">
+    有43个员工尚未开通知人微信服务，马上 <a href="https://zhirenhr.com/companies/10172/wechats/employee_settings">邀请他们开通</a>
+  </div>
+
+  <div class="system-notification" style="display: block;">
+    有75个员工尚未开通知人钉钉服务，马上 <a href="https://zhirenhr.com/companies/10172/dingtalks/employee_settings">邀请他们开通</a>
+  </div>
+
+<div class="system-notification warning" style="display: block;">
+  你的手机号或Email为空，请 <a href="https://zhirenhr.com/users/121680/setting/edit">完善个人设置</a>
+</div>
+
+
+
+  
+
+
+<div class="sidebar" style="left: 101.5px;">
+  <div class="company-name">
+      <span class="name">演示</span>
+  </div>
+  <!-- <div class="search">
+    <input type="text" class="field-search" value="" />
+    <i class="zr zr-search"></i>
+  </div> -->
+  <ul class="nav">
+    <!-- <li class="">
+      <i class="zr zr-home"></i>
+      <a href="/companies/10172">首页</a>
+    </li> -->
+
+    <li class="current">
+      <i class="zr zr-roster"></i>
+      <a href="https://zhirenhr.com/companies/10172/employees">员工</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-salary"></i>
+      <a href="https://zhirenhr.com/companies/10172/salaries/index">薪酬</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-welfare"></i>
+      <a href="https://zhirenhr.com/companies/10172/benefits/bills">社保</a>
+    </li>
+
+      <li class="">
+        <i class="zr zr-attendance"></i>
+        <a href="https://zhirenhr.com/companies/10172/attendances/portal">出勤</a>
+      </li>
+
+    <li class="">
+      <i class="zr zr-check-square-o"></i>
+      <a href="https://zhirenhr.com/companies/10172/processes">审批</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-stock"></i>
+      <a href="https://zhirenhr.com/options/pools/62">期权</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-calendar"></i>
+      <a href="https://zhirenhr.com/companies/10172/calendars">日历</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-puzzle-piece"></i>
+      <a href="https://zhirenhr.com/companies/10172/apps">服务</a>
+    </li>
+
+    <li class="">
+      <i class="zr zr-stat"></i>
+      <a href="https://zhirenhr.com/companies/10172/statistics">统计</a>
+    </li>
+
+  </ul>
+
+  <ul class="account-links">
+
+
+    <li>
+      <a href="https://zhirenhr.com/users/121680/setting/edit">管强</a>
+    </li>
+
+    <li>
+      <a data-no-turbolink="true" href="https://zhirenhr.com/signout">退出</a>
+    </li>
+
+  </ul>
+
+</div>
+
+<script id="dialog-contact" type="text/html">
+  <h3 class='dialog-contact_title'>联系在线客服</h3>
+	<p><img src="@{'/public/images/wx_download.png'}" /></p>
+  <p class='dialog-contact_desc'>扫码获取帮助</p>
+</script>
+
+*{<div class="help-card">
+  <div class="help-btn">
+    <span><i class="zr zr-question-circle"></i>帮助中心</span>
+  </div>
+  <h3 class="title">不知道如何使用知人？</h3>
+  <p>1. 使用自助服务</p>
+  <ul>
+    <li><a href="https://zhirenhr.com/guides?id=5">管理员：熟悉掌握知人</a></li>
+    <li><a href="https://zhirenhr.com/guides?id=4">员工：<span>合理使用知人</span></a></li>
+  </ul>
+  <div class="user-guide-btn">
+    <a class="button button-small button-inverse" href="https://zhirenhr.com/guides">进入用户指南</a>
+  </div>
+  <hr>
+  <p>2. 联系在线客服</p>
+  <img src="./员工-首页_files/contact-qrcode-961cc934a0b9131a2007af68dbcfc4bc2bb51799d1ce91fd68f85df34297d4bb.jpg">
+</div>}*
+
+
+<div class="page" data-no-transition-cache="" style="min-height: 567.016px;">
+    <div class="page-title">
+      <h1>员工</h1>
+        <div class="links">
+          <a class="link-dimission-employees" href="https://zhirenhr.com/companies/10172/employees?dimission=true">
+            <i class="zr zr-user"></i>
+            6个离职员工
+</a>        </div>
+    </div>
+
+    <div class="employee-roster">
+
+
+
+
+  
+
+<form class="form search-and-filters" id="employee_search" action="https://zhirenhr.com/companies/10172/employees" accept-charset="UTF-8" data-remote="true" method="get"><input name="utf8" type="hidden" value="✓">
+
+  <div class="controls">
+    <div class="buttons">
+            <a class="button button-small button-inverse" href="https://zhirenhr.com/companies/10172/employees/new">录入单个员工</a>
+
+    </div>
+
+    <div class="search empty">
+      <i class="zr zr-search"></i>
+      <input placeholder="输入员工的姓名、拼音缩写、手机号或身份证号并回车" class="field-search" type="text" name="q[name_or_nickname_or_pinyin_or_pinyin_abbr_or_mobile_or_id_number_cont]" id="field-q-name_or_nickname_or_pinyin_or_pinyin_abbr_or_mobile_or_id_number_cont">
+      <a class="link-reset-search" href="javascript:;">
+        <i class="zr zr-close"></i>
+</a>    </div>
+
+    <div class="filters">
+      <a class="button-toggle-filters button button-inverse button-small" href="javascript:;">
+        <i class="zr zr-filter"></i>
+        筛选
+</a>
+      <div class="filter-popover">
+          <div class="filter-item">
+              <input placeholder="工号" class="field-filter field-filter-empno_eq" type="text" name="q[empno_eq]" id="field-q-empno_eq">
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="员工状态"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="0">
+  <span class="label">待入职</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1">
+  <span class="label">试用期</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="2">
+  <span class="label">在职</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-employment_status_in field-simple-select" multiple="multiple" data-placeholder="员工状态" data-options="{&quot;remote&quot;:null}" name="q[employment_status_in][]" id="field-q-employment_status_in" style="display: none;"><option value=""></option>
+<option value="0">待入职</option>
+<option value="1">试用期</option>
+<option value="2">在职</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="员工类型"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="0">
+  <span class="label">全职</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1">
+  <span class="label">兼职</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="2">
+  <span class="label">实习生</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="3">
+  <span class="label">劳务派遣</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-category_in field-simple-select" multiple="multiple" data-placeholder="员工类型" data-options="{&quot;remote&quot;:null}" name="q[category_in][]" id="field-q-category_in" style="display: none;"><option value=""></option>
+<option value="0">全职</option>
+<option value="1">兼职</option>
+<option value="2">实习生</option>
+<option value="3">劳务派遣</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select simple-select-remote">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="输入所属部门名称"></textarea></div>
+  <div class="popover"><div class="no-results">没有找到相关数据，请重新输入</div></div>
+<select class="field-filter field-filter-department_id_include_descendant field-simple-select" multiple="multiple" data-placeholder="输入所属部门名称" data-options="{&quot;remote&quot;:{&quot;url&quot;:&quot;/companies/10172/departments.json?options_for_select=true&quot;,&quot;searchKey&quot;:&quot;q[name_or_pinyin_or_pinyin_abbr_cont]&quot;}}" name="q[department_id_include_descendant][]" id="field-q-department_id_include_descendant" style="display: none;"><option value=""></option>
+</select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select simple-select-remote">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="输入职级名称"></textarea></div>
+  <div class="popover"><div class="no-results">没有找到相关数据，请重新输入</div></div>
+<select class="field-filter field-filter-level_in field-simple-select" multiple="multiple" data-placeholder="输入职级名称" data-options="{&quot;remote&quot;:{&quot;url&quot;:&quot;/companies/10172/levels.json?options_for_select=true&quot;,&quot;searchKey&quot;:&quot;level&quot;}}" name="q[level_in][]" id="field-q-level_in" style="display: none;"><option value=""></option>
+</select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select simple-select-remote">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="输入职位名称"></textarea></div>
+  <div class="popover"><div class="no-results">没有找到相关数据，请重新输入</div></div>
+<select class="field-filter field-filter-job_title_id_in field-simple-select" multiple="multiple" data-placeholder="输入职位名称" data-options="{&quot;remote&quot;:{&quot;url&quot;:&quot;/companies/10172/job_titles.json?options_for_select=true&quot;,&quot;searchKey&quot;:&quot;q[name_or_pinyin_or_pinyin_abbr_cont]&quot;}}" name="q[job_title_id_in][]" id="field-q-job_title_id_in" style="display: none;"><option value=""></option>
+</select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="标签"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="1110">
+  <span class="label">试试</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1111">
+  <span class="label">+</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-tags_id_in field-simple-select" multiple="multiple" data-placeholder="标签" data-options="{&quot;remote&quot;:null}" name="q[tags_id_in][]" id="field-q-tags_id_in" style="display: none;"><option value=""></option>
+<option data-key="试试" value="1110">试试</option>
+<option data-key="+" value="1111">+</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="工作地点"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="482">
+  <span class="label">成都</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="483">
+  <span class="label">武汉</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="484">
+  <span class="label">哈尔滨</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="485">
+  <span class="label">四川 成都 武侯 力宝大厦S区</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="486">
+  <span class="label">深圳</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="487">
+  <span class="label">家里</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="488">
+  <span class="label">杭州</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="489">
+  <span class="label">北京</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1012">
+  <span class="label">上海</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1565">
+  <span class="label">纽约</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-workplace_id_in field-simple-select" multiple="multiple" data-placeholder="工作地点" data-options="{&quot;remote&quot;:null}" name="q[workplace_id_in][]" id="field-q-workplace_id_in" style="display: none;"><option value=""></option>
+<option data-key="成都 chengdou cd" value="482">成都</option>
+<option data-key="武汉 wuhan wh" value="483">武汉</option>
+<option data-key="哈尔滨 haerbin heb" value="484">哈尔滨</option>
+<option data-key="四川 成都 武侯 力宝大厦S区 sichuanchengdouwuhoulibaodashasqu sccdwhlbdsSq" value="485">四川 成都 武侯 力宝大厦S区</option>
+<option data-key="深圳 shenzhen sz" value="486">深圳</option>
+<option data-key="家里 jiali jl" value="487">家里</option>
+<option data-key="杭州 hangzhou hz" value="488">杭州</option>
+<option data-key="北京 beijing bj" value="489">北京</option>
+<option data-key="上海 shanghai sh" value="1012">上海</option>
+<option data-key="纽约 niuyue ny" value="1565">纽约</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="学历"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="364">
+  <span class="label">本科</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="365">
+  <span class="label">硕士</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="366">
+  <span class="label">大专</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-degree_id_in field-simple-select" multiple="multiple" data-placeholder="学历" data-options="{&quot;remote&quot;:null}" name="q[degree_id_in][]" id="field-q-degree_id_in" style="display: none;"><option value=""></option>
+<option data-key="本科 benke bk" value="364">本科</option>
+<option data-key="硕士 shuoshi ss" value="365">硕士</option>
+<option data-key="大专 dazhuan dz" value="366">大专</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="所属公司"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="912">
+  <span class="label">知人演示有限公司</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1929">
+  <span class="label">上海屋顶信息技术有限公司</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-department_sub_company_id_in field-simple-select" multiple="multiple" data-placeholder="所属公司" data-options="{&quot;remote&quot;:null}" name="q[department_sub_company_id_in][]" id="field-q-department_sub_company_id_in" style="display: none;"><option value=""></option>
+<option data-key="知人演示有限公司" value="912">知人演示有限公司</option>
+<option data-key="上海屋顶信息技术有限公司" value="1929">上海屋顶信息技术有限公司</option></select></div>
+          </div>
+          <div class="filter-item">
+              <div class="simple-select">
+  <div class="input multiple"><textarea class="text-field" rows="1" autocomplete="off" placeholder="合同公司"></textarea></div>
+  <div class="popover"><div class="select-item" data-value="912">
+  <span class="label">知人演示有限公司</span>
+  <span class="hint"></span>
+</div><div class="select-item" data-value="1929">
+  <span class="label">上海屋顶信息技术有限公司</span>
+  <span class="hint"></span>
+</div></div>
+<select class="field-filter field-filter-sub_company_id_in field-simple-select" multiple="multiple" data-placeholder="合同公司" data-options="{&quot;remote&quot;:null}" name="q[sub_company_id_in][]" id="field-q-sub_company_id_in" style="display: none;"><option value=""></option>
+<option data-key="知人演示有限公司" value="912">知人演示有限公司</option>
+<option data-key="上海屋顶信息技术有限公司" value="1929">上海屋顶信息技术有限公司</option></select></div>
+          </div>
+
+        <input type="submit" name="commit" value="确定" class="button-submit-filters button-small" data-disable-with="确定">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="loading">
+    <i class="zr zr-spinner zr-spin"></i>
+    正在加载...
+  </div>
+
+</form>
+	#{list items:homeEmployee, as:'person'}
+    <table cellspacing="0" class="table employees-table table-with-border">
+      *{<thead>
+        <tr>
+            <th class="align-right">
+              <a class="link-roster-setting" title="自定义员工列表" data-remote="true" href="https://zhirenhr.com/roster_settings/4356/edit">
+                <i class="zr zr-settings"></i>
+			  </a>          
+		    </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=pinyin+asc">姓名</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=employment_status+asc">员工状态</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=category+asc">员工类型</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=job_title_pinyin+asc">职位</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=department_pinyin+asc">所属部门</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D%5B%5D=empno_prefix+asc&amp;q%5Bs%5D%5B%5D=empno_body+asc">工号</a>
+            </th>
+            <th>
+                <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=join_date+asc">入职日期</a>
+            </th>
+        </tr>
+      </thead>}*
+      <tbody>
+          <tr>
+            *{<td class="td-avatar">
+              <img class="avatar" src="./员工-首页_files/default-avatar.png" alt="李秋波">
+
+            </td>
+              <td><a href="https://zhirenhr.com/employees/1047517" class="name" target="_blank">李秋波</a></td>
+              <td>person.name</td>
+              <td>全职</td>
+              <td></td>
+              <td>行政组</td>
+              <td><span class="empno">003</span></td>
+              <td>2016年10月8日</td>}*
+              
+              <td>${person.name}</td>
+          </tr>
+          
+      </tbody>
+    </table>
+    #{/list}
+
+    <div class="pagination-wrapper">
+      <div class="pagination-entries-info">
+        共 <b>75</b> 条数据，当前显示第 <b>1&nbsp;-&nbsp;25</b> 条
+      </div>
+        <nav class="pagination">
+    
+    
+        <span class="page current">
+  1
+</span>
+
+        <span class="page">
+  <a rel="next" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=2">2</a>
+</span>
+
+        <span class="page">
+  <a data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=3">3</a>
+</span>
+
+    <span class="next">
+  <a rel="next" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=2">下一页 ›</a>
+</span>
+
+    <span class="last">
+  <a data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=3">末页 »</a>
+</span>
+
+  </nav>
+
+    </div>
+</div>
+
+
+
+</div>
+
+
+<a class="back-to-top" title="回到页面顶部" href="javascript:;">
+  <i class="zr zr-arrow-up"></i>
+</a>
+
+*{
+<script type="text/javascript" id="gon">
+window.gon={};gon.env="production";gon.locale="zh-CN";gon.mobile=false;gon.wechat=null;gon.dingtalk=null;gon.android=false;gon.ios=false;gon.baidu_browser_ak="YKYbGMU3hzwW8y7UoItfU1CT";gon.pageId="employees-index";gon.controller="employees";gon.action="index";gon.me={"id":121680,"name":"管强","email":"","mobile":"18912975120","tz":"Asia/Shanghai","weixin_unionid":"oryzGuL4WeqlpdoMScjupF_rM42I","weixin_openid":"oQkCKs83PP9ARCEQ2xUaBdSWfqY0","company_id":10172};gon.qiniu={"uploadPath":"https://up.qbox.me","uptoken":{"attachment":"HSSakwBv9ykjLbJQ1LHYt6q1ayaYhmdNJ8Jv62xa:7QjOKXD4ABUjDAVBjzvKTpgGNkY=:eyJzY29wZSI6InpoaXJlbiIsImNhbGxiYWNrVXJsIjoiaHR0cHM6Ly96aGlyZW5oci5jb20vcWluaXUvYXR0YWNobWVudC9jYWxsYmFjayIsImNhbGxiYWNrQm9keSI6ImJ1Y2tldD0kKGJ1Y2tldClcdTAwMjZyZXNvdXJjZT0kKGtleSlcdTAwMjZmaWxlX25hbWU9JChmbmFtZSlcdTAwMjZmaWxlX3NpemU9JChmc2l6ZSlcdTAwMjZtaW1lX3R5cGU9JChtaW1lVHlwZSlcdTAwMjZ3aWR0aD0kKGltYWdlSW5mby53aWR0aClcdTAwMjZoZWlnaHQ9JChpbWFnZUluZm8uaGVpZ2h0KVx1MDAyNm1vZGVsPSQoeDptb2RlbClcdTAwMjZjcmVhdGVfYXR0YWNobWVudD0kKHg6Y3JlYXRlX2F0dGFjaG1lbnQpXHUwMDI2YXR0YWNoYWJsZV9zZ2lkPSQoeDphdHRhY2hhYmxlX3NnaWQpIiwiZGVhZGxpbmUiOjE0Nzg1Nzc2OTAsImZzaXplTGltaXQiOjIwOTcxNTIwLCJkZXRlY3RNaW1lIjoxfQ==","photo":"HSSakwBv9ykjLbJQ1LHYt6q1ayaYhmdNJ8Jv62xa:-s2tZAjknMs_uDdJ5dg_vhFwLJs=:eyJzY29wZSI6ImF2YXRhciIsImNhbGxiYWNrVXJsIjoiaHR0cHM6Ly96aGlyZW5oci5jb20vcWluaXUvcGhvdG8vY2FsbGJhY2siLCJjYWxsYmFja0JvZHkiOiJwaG90bz0kKGtleSkiLCJkZWFkbGluZSI6MTQ3ODU3NzY5MCwiZnNpemVMaW1pdCI6NDE5NDMwNCwiZGV0ZWN0TWltZSI6MSwibWltZUxpbWl0IjoiaW1hZ2UvanBlZztpbWFnZS9wbmc7aW1hZ2UvZ2lmIn0="}};gon.i18n={"companies":{"imports":{"new":{"processing":"数据处理中，请耐心等待..."}}},"calendars":{"index":{"content_default":"新建日程安排"}},"sessions":{"new":{"email_blank":"请填写邮箱地址","password_blank":"请输入登录密码"}},"digital_signatures":{"sign":{"signature_blank":"你还没有签名"}},"statistics":{"total":"总计","recent":"最近%{months}个月","age":{"range_50":"50后","range_60":"60后","range_70":"70后","range_80":"80后","range_90":"90后","range_00":"00后"},"working_life":{"range_1":"不满1年","range_1_2":"1~2年","range_3_5":"3~5年","range_6_9":"6~9年","range_10":"10年以上"},"sex":{"range_male":"男","range_female":"女"},"fulltime":"全职","part_time":"兼职","intern":"实习","index":{"age_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%","working_life_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%","sex_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%","degree_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%"},"report_for_age":{"series_age":"年龄分布","age_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%"},"report_for_sex":{"series_sex":"性别比例","sex_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%"},"report_for_degree":{"series_degree":"学历分布","degree_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%"},"report_for_working_life":{"working_life_tooltip":"\u003cb\u003e%{ point_name }：\u003c/b\u003e\u003cbr/\u003e%{y} 人，占 %{percentage}%","working_life":"工作年限"},"report_for_dimission":{"dimission_rate":"离职率"},"exporting":"正在导出，稍后会自动下载"},"simple":{"select":{"loading":"正在加载...","noResults":"没有找到相关数据，请重新输入"}},"humans":{"offers":{"show":{"confirm_unbind":"确定解绑"},"welcome":{"confirm_unbind":"确定解绑"}}},"login_again":"重新登录","ok":"确定","cancel":"取消","got_it":"知道了","this_field":"这个字段","redirecting":"正在跳转","confirm_unbind":"确定解绑","submitting":"正在提交","uploading_file":"正在上传文件","submit":"提交","amount":"总计","retry":"重试","date":{"year_month":"YYYY年MM月","month":"MM月"},"errors":{"500":{"status_desc":"抱歉，知人出了一点小问题，我们正在紧急处理\u003cbr/\u003e休息，休息一会儿"},"404":{"status_desc":"你要找的东西不存在或者已经被删除了"},"403":{"status_desc":"你没有权限查看此信息"}},"wechat_jssdk_error":"微信接口无法正常使用，请退出重试或联系知人客服处理。","dingtalk_jssdk_error":"钉钉接口无法正常使用，请退出重试或联系知人客服处理。","pikaday":{"previousMonth":"上个月","nextMonth":"下个月","months":["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],"weekdays":["周日","周一","周二","周三","周四","周五","周六"],"weekdaysShort":["日","一","二","三","四","五","六"]},"joins":{"show":{"confirm_unbind":"确定解绑"}}};
+</script>
+}*
+
+
+<script src="./员工-首页_files/application-3fff6554880c4583f93a41020413de14181cac3009a00ec0e4ea35efe40ca19e.js.下载" data-turbolinks-track="true" data-turbolinks-eval="false"></script>
+
+<script type="text/javascript">
+mixpanel.track("访问员工首页", {"demo":true,"action_name":"index","controller_name":"employees","company_id":10172,"ip_address":"218.94.132.122","company_name":"知人演示有限公司","extra_values":{"resource_class":"Company","resource_id":10172},"as_hr":true});
+</script>
+
+*{<script src="./员工-首页_files/bw-send-411.4.9.js.下载"></script>
+<script type="text/javascript" src="./员工-首页_files/saved_resource" async=""></script>*}
+
+</body>
+</html>

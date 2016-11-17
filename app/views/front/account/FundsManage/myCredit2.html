@@ -1,0 +1,82 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 资金管理  | 我的信用等级'/}
+
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	
+	<!-- 右侧内容区 begin -->
+	
+	<div class="p-cfright">
+        <div class="p-zhmobanbox">
+            <div>
+            	<!-- 我的信用等级 -->
+				#{include "front/account/FundsManage/myCreditRating.control"/}
+				<!-- 信用积分明细 -->
+				#{include "front/account/FundsManage/myCreditDetail.control"/}
+				
+				#{if ipsEnable}
+					<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window" style="display: none;">
+						#{include "front/account/FundsManage/fundsSubmitAuditItemInitIps.html"/}
+					</div>
+				#{/if}
+				#{else}
+					<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window" style="display: none;">
+					   #{include "front/account/FundsManage/fundsSubmitAuditItemInit.html"/}
+					</div>
+				#{/else}
+				
+				<!-- 清除浮动 -->
+				<div class="clear"></div>
+				<div id="position" style="z-index:11;"></div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+<div id="very">
+</div>
+
+
+*{
+<!-- 内容区域 start -->
+<div class="xf_con_box">
+	<div class="xf_con_mem_nav"></div>
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+	<!-- 右侧内容区域 -->
+	<!-- 我的信用等级 -->
+	#{include "front/account/FundsManage/myCreditRating.control"/}
+	<!-- 信用积分明细 -->
+	#{include "front/account/FundsManage/myCreditDetail.control"/}
+	
+	#{if ipsEnable}
+		<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window" style="display: none;">
+			#{include "front/account/FundsManage/fundsSubmitAuditItemInitIps.html"/}
+		</div>
+	#{/if}
+	#{else}
+		<div class="xf_wyjkfb_4_window" id="xf_wyjkfb_4_window" style="display: none;">
+		   #{include "front/account/FundsManage/fundsSubmitAuditItemInit.html"/}
+		</div>
+	#{/else}
+	
+	<!-- 清除浮动 -->
+	<div class="clear"></div>
+	<div id="position" style="z-index:11;"></div>
+</div>
+<div id="very">
+</div>
+}*
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		myAccountSelect(1,26);
+	});
+</script>

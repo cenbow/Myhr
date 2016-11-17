@@ -1,0 +1,144 @@
+<div id="xf_wyjkview_xxk">
+	<ul class="p-zhrtxxkul mt50 clr">
+	    <li onClick="bidRecommend();" class="cur">优质借款标推荐</li>
+	    
+	</ul>
+</div>
+<div class="xf_con_wyjk_tentultbody" id="loanCommend">
+                    	
+</div>
+
+
+*{
+<div class="p-zhtabox none">
+    <div class="p-lcitem clr p-zhitem">
+        <div class="p-lcwleft">
+            <h6 class="p-lcbtitle"><img src="images/p-bshi.png" alt=""> <a title="" target="" href="债权详情.html"><strong>天瑞贷</strong> 0892152333</a></h6>
+            <table class="p-lclistable">
+                <tbody><tr height="33">
+                    <td width="16%"><span class="fz30 cozhuse">10</span> <span class="cozhuse fz16">%</span></td>
+                    <td width="18%"><span class="fz22 co333">30</span> <span class="co333 fz16">万元</span></td>
+                    <th width="28%"><span class="fz18 co333 mlfl35">2015-08-01</span></th>
+                    <!--<td>信用等级：<img src="images/p-xinb2.png" alt=""></td>-->
+                </tr>
+                <tr height="32">
+                    <td>年利率</td>
+                    <td>借款金额</td>
+                    <th><span class="mlfl35">借款期限</span></th>
+                    <td>剩余时间：<span class="co333">12天8小时43分06秒</span></td>
+                </tr>
+            </tbody></table>
+        </div>
+        <div class="p-lcwright pt45">
+            <a title="" target="" href="债权详情.html" class="p-lcbtn">我要竞拍</a>
+        </div>
+        <div class="p-lcshouc none" title="收藏"><i class="iconfont kx"></i><i class="iconfont sx none"></i></div>
+    </div>
+    <div class="p-lcitem clr p-zhitem">
+        <div class="p-lcwleft">
+            <h6 class="p-lcbtitle"><img src="images/p-bshi.png" alt=""> <a title="" target="" href="债权详情.html"><strong>天瑞贷</strong> 0892152333</a></h6>
+            <table class="p-lclistable">
+                <tbody><tr height="33">
+                    <td width="16%"><span class="fz30 cozhuse">10</span> <span class="cozhuse fz16">%</span></td>
+                    <td width="18%"><span class="fz22 co333">30</span> <span class="co333 fz16">万元</span></td>
+                    <th width="28%"><span class="fz18 co333 mlfl35">2015-08-01</span></th>
+                    <td>信用等级：<img src="images/p-xinb2.png" alt=""></td>
+                </tr>
+                <tr height="32">
+                    <td>年利率</td>
+                    <td>借款金额</td>
+                    <th><span class="mlfl35">借款期限</span></th>
+                    <td>剩余时间：<span class="co333">12天8小时43分06秒</span></td>
+                </tr>
+            </tbody></table>
+        </div>
+        <div class="p-lcwright pt45">
+            <a title="" target="" href="债权详情.html" class="p-lcbtn">我要竞拍</a>
+        </div>
+        <div class="p-lcshouc none" title="收藏"><i class="iconfont kx"></i><i class="iconfont sx none"></i></div>
+    </div>
+    <div class="p-lcitem clr p-zhitem">
+        <div class="p-lcwleft">
+            <h6 class="p-lcbtitle"><img src="images/p-bshi.png" alt=""> <a title="" target="" href="债权详情.html"><strong>天瑞贷</strong> 0892152333</a></h6>
+            <table class="p-lclistable">
+                <tbody><tr height="33">
+                    <td width="16%"><span class="fz30 cozhuse">10</span> <span class="cozhuse fz16">%</span></td>
+                    <td width="18%"><span class="fz22 co333">30</span> <span class="co333 fz16">万元</span></td>
+                    <th width="28%"><span class="fz18 co333 mlfl35">2015-08-01</span></th>
+                    <td>信用等级：<img src="images/p-xinb2.png" alt=""></td>
+                </tr>
+                <tr height="32">
+                    <td>年利率</td>
+                    <td>借款金额</td>
+                    <th><span class="mlfl35">借款期限</span></th>
+                    <td>剩余时间：<span class="co333">12天8小时43分06秒</span></td>
+                </tr>
+            </tbody></table>
+        </div>
+        <div class="p-lcwright pt45">
+            <a title="" target="" href="债权详情.html" class="p-lcbtn">我要竞拍</a>
+        </div>
+        <div class="p-lcshouc none" title="收藏"><i class="iconfont kx"></i><i class="iconfont sx none"></i></div>
+    </div>
+</div>
+}*
+
+
+
+<script type="text/javascript">
+	bidRecommend();
+	
+	
+	//优质债权转让
+    function queryQualityDebts() {
+		$.ajax({
+			url : "@{front.account.AccountHome.queryQualityDebts()}",
+			type : "POST",
+			data : {},
+			success : function(data) {
+				if (data.code < 0) { 
+					alert(data.msg);
+					return;
+				}
+				
+			    $("#loanCommend").html(data);
+			},
+			error : function() {
+				alert(data.msg);
+			}
+		});
+	};
+	
+	//优质借款标
+	function bidRecommend(){
+	     $.ajax({
+			url : "@{front.account.AccountHome.queryQualityBids()}",
+			type : "POST",
+			data : {},
+			success : function(data) {
+				if (data.code < 0) {
+					alert(data.msg);
+					return;
+				}
+			    $("#loanCommend").html(data);
+			},
+			error : function() {
+				alert(data.msg);
+			}
+		});
+	};
+</script>
+
+
+*{
+ 
+              <div class="xf_con_mem_r_content" id="xf_wyjkview_xxk">
+					<ul class="xf_con_mem_r_tentul clr">
+						<li class="xf_con_wyjk_r_liishot" onClick="bidRecommend()">优质借款标推荐</li>
+						
+					</ul>
+					<div class="xf_con_wyjk_tentultbody" id="loanCommend">
+                    	
+                    </div>
+				</div>
+}*

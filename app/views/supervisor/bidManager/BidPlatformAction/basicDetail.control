@@ -1,0 +1,141 @@
+<script type="text/javascript" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor.js'}"></script>
+<link rel="stylesheet" src="@{'public/javascripts/kindeditor-4.1.7/themes/default/default.css'}" />
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/kindeditor-min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/kindeditor-4.1.7/lang/zh_CN.js'}"></script>
+<script   type="text/javascript">  
+    var editor;
+    KindEditor.ready(function(K) {
+      editor = K.create('#TextArea3', {
+           cssPath :"@{'public/javascripts/kindeditor-4.1.7/plugins/code/prettify.css'}",
+           uploadJson : '@{FileUpload.uploadImage2()}',
+        allowFileManager : true,
+        allowUpload: true,
+        afterBlur: function(){this.sync();}
+      });
+    });
+</script>
+
+<div class="xf_ht_tab_view">
+   #{table class:"xf_con_view_table", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+     #{tr}
+		#{td class:"xf_pcir_ltitle"}借款人<br />基本资料#{/td}
+		#{td align:"left"}
+		  #{table class:"xf_view_table_lm", cellspacing:"0", cellpadding:"0", border:"0"}
+		    *{
+		    #{tr}
+		      #{td width:"262"}<span class="xfht_view_table_s">真实姓名：</span>${bid?.user?.realityName}#{/td}
+		      #{td width:"210"}<span class="xfht_view_table_s">性别：</span>${bid?.user?.sex}#{/td}
+		      #{td}<span class="xfht_view_table_s">年龄：</span>${bid?.user?.age}#{/td}
+		    #{/tr}
+		    #{tr}
+		      #{td}<span class="xfht_view_table_s">身份证号：</span>${bid?.user?.idNumber}#{/td}
+              #{td}<span class="xfht_view_table_s">户口所在地：</span>${bid?.user?.provinceName}${bid?.user?.cityName}#{/td}
+              #{td}<span class="xfht_view_table_s">文化程度：</span>${bid?.user?.educationName}#{/td}
+		    #{/tr}
+		    #{tr}
+		      #{td}<span class="xfht_view_table_s">婚姻情况：</span>${bid?.user?.maritalName}#{/td}
+              #{td}<span class="xfht_view_table_s">购房情况：</span>${bid?.user?.houseName}#{/td}
+              #{td}<span class="xfht_view_table_s">购车情况：</span>${bid?.user?.carName}#{/td}
+		    #{/tr}
+		    #{tr}
+              #{td colspan:"3"}<span class="xfht_view_table_s">借款用途：</span>${bid?.purpose?.name}#{/td}
+            #{/tr}
+            }*
+            #{tr}
+              #{td colspan:"3"}
+              	  *{
+              	  <textarea class="xf_ht_jr_obttd_textarea" id="TextArea3">
+              	  	#{if bid?.userBasicInfo != null}
+              	  		${bid?.userBasicInfo}
+              	  	#{/if}
+              	  	#{if userBasicInfo != null}
+              	  		${userBasicInfo}
+              	  	#{/if}
+              	  </textarea>
+              	  <br/>
+              	  &nbsp;&nbsp;<span style="color:red;">提示：请先上传相关资料，并审核资料，再来编辑借款人的相关信息！</span>
+              	  }*
+              	  
+              	  <table border="0" cellpadding="0" cellspacing="0" width="738" class="xf_memjbzl_table" style="text-align:left;">
+              	      <tr>
+              	      	<td>
+              	      		<span class="xf_jbzl_stitle">借款人：</span>
+              	      		<input type="text" name="name" value="${userBasicInfo?.name}" id="name"/>
+              	      	</td>
+              	      	<td>
+              	      		<span class="xf_jbzl_stitle">身份证号：</span>
+              	      		<input type="text" name="idcard" value="${userBasicInfo?.idcard}" id="idcard"/>
+              	      	</td>
+              	      </tr>
+					  <tr>
+						<td>
+							<span class="xf_jbzl_stitle">年龄：</span>
+							<input class="xf_jbzl_input" name="age" id="age" value="${userBasicInfo?.age}" onkeyup="ndigitInteger(this,2)"/>
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">性别：</span>
+							<select name="sex" class="xf_jbzl_selectAge" value="${userBasicInfo?.sex}">   
+							   #{if userBasicInfo?.sex == 1}
+							   <option value="0" >--请选择--</option> 	
+						       <option value="1" selected="selected">男</option> 
+						       <option value="2" >女</option>
+						      #{/if}
+						      #{elseif userBasicInfo?.sex == 2}
+						      <option value="0" >--请选择--</option> 	
+						      <option value="1">男</option> 
+						       <option value="2" selected="selected">女</option>
+						       #{/elseif}
+						       #{else}
+						       <option value="0" selected="selected">--请选择--</option> 	
+						       <option value="1">男</option> 
+						       <option value="2">女</option>
+						       #{/else}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">户口所在地：</span>
+							#{select 'province', items:provinces, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.province, class:'xf_jbzl_selectAge', id:'province' ,style:'width:75px'/}
+							#{select 'city', items:cityList, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.city, class:'xf_jbzl_selectAge', id:'city' ,style:'width:100px'/}
+						</td>
+							<td>
+							<span class="xf_jbzl_stitle">文化程度：</span>
+							#{select 'education', items:educations, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.education, class:'xf_jbzl_selectAge_2', id:'education' /}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">购车情况：</span>
+							#{select 'car', items:cars, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.car, class:'xf_jbzl_selectAge_2', id:'car' /}
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">婚姻情况：</span>
+							#{select 'marital', items:maritals, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.marital, class:'xf_jbzl_selectAge_2', id:'marital' /}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="xf_jbzl_stitle">购房情况：</span>
+							#{select 'house', items:houses, valueProperty:'id', labelProperty:'name', value:userBasicInfo?.house, class:'xf_jbzl_selectAge_2', id:'house' /}
+						</td>
+						<td>
+							<span class="xf_jbzl_stitle">借款用途：</span>
+							<span>${purposes?.name}</span>
+							<input type="hidden" name="goal" value="${purposes?.name}" style="width:250px;" id="goal"/>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
+              #{/td}
+            #{/tr}
+		  #{/table}
+		#{/td}
+     #{/tr}
+     #{tr}
+       #{td class:"xf_pcir_ltitle"}还款能力详细说明#{/td}
+       #{td align:"left"}<pre class="multiline_show">${bid?.description}</pre>#{/td}
+     #{/tr}
+   #{/table}
+</div>

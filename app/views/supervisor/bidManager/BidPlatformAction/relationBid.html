@@ -1,0 +1,78 @@
+<div class="xf_ht_tab_view">
+	#{table class:"xf_con_mem_r_b_table", cellspacing:"0", cellpadding:"0", border:"0", width:"100%"}
+    	#{tr}
+    		#{th}序号#{/th}
+		  	#{th}编号#{/th}
+          	#{th}标题#{/th}
+          	#{th}借款人#{/th}
+          	#{th}信用等级#{/th}
+          	#{th}借款标类型#{/th}
+          	#{th}借款金额[￥]#{/th}
+          	#{th}年利率#{/th}
+          	#{th}借款期限#{/th}
+          	#{th}申请时间#{/th}
+          	*{
+		  	#{th}须审核科目#{/th}
+		  	#{th}已提交科目#{/th}
+		  	#{th}审核进度#{/th}
+          	}*
+		  	#{th}审核状态#{/th}
+		  	#{th}借款状态#{/th}
+		  	#{th}操作#{/th}
+     	#{/tr}
+     	#{list pageBean?.page}	
+     		#{tr}
+       			#{td}${(pageBean?.currPage - 1)*pageBean?.pageSize + _index}#{/td}
+		  		#{td}${_?.bid_no}#{/td}
+		  		#{td}${_?.title}#{/td}
+		  		#{td}${_?.user_name}#{/td}
+		  		#{td}#{img src:"${_?.credit_level_image_filename}",alt:"",width:"25",height:"25"}#{/img}#{/td}
+		  		#{td}#{img src:"${_?.small_image_filename}",alt:"",width:"20",height:"20"}#{/img}#{/td}
+		  		#{td}${_?.amount?.format("###,##0.00")}#{/td}
+		  		#{td}${_?.apr}#{/td}
+		  		#{td}
+		    		${_?.period}
+	  				#{if _?.period_unit == -1}
+		  				[年]
+	    			#{/if}
+	    			#{elseif _?.period_unit == 1}
+	      				[日]
+	    			#{/elseif}
+	    			#{else}
+	      				[月]
+	    			#{/else}
+		  		#{/td}
+		  		#{td}${_?.time?.format('yyyy-MM-dd')}#{/td}
+		  		*{
+		  		#{td}${_?.product_item_count}#{/td}
+		  		#{td}${_?.user_item_submit}#{/td}
+		  		#{td}<span id="show${_index}"></span>#{/td}
+		  		}*
+		  		#{td}
+					已通过
+		  		#{/td}
+		  		#{td}
+		  			#{if _?.status == 0}
+        				待放款
+        			#{/if}
+        			#{else}
+        				还款中
+        			#{/else}
+		  		#{/td}
+		  		#{td}
+		  			#{if _?.status == 0}
+        				<a class="xf_ta_onclick" href="@{auditingDetail(_?.id)}">详情</a>
+        			#{/if}
+        			#{else}
+        				<a class="xf_ta_onclick" href="@{loanSucceedDetail(_?.id, 4, 6)}">详情</a>
+        			#{/else}
+		  		#{/td}
+     		#{/tr}
+     	#{/list}
+   	#{/table}
+  	<div class="xf_ht_page">
+    	<div class="page_warp">
+      		#{page funMethod:"reportRecord",currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:4 /}
+   		</div>
+	</div>
+</div>

@@ -1,0 +1,132 @@
+#{extends 'common/supervisor.html' /} #{set title:'意向借款列表' /}
+<div class="xn_c_contentwarp">
+	<div class="xn_c_contentlist">
+		#{include '/supervisor/bidManager/bidManagerLeft.control'/}
+	
+	
+	
+		<div class="xn_c_content">
+       		<div class="xf_content_add">
+		            <input type="hidden" name="id"/>
+		            <div class="xfht_t_j_y_2">
+	              		<!--右上-->
+		              	<div class="xf_ht_obu_fklm" style="text-align: left;color: #3399CC;">
+							${loanApplication?.title}
+		              	</div>
+		              	<div class="xf_htgl_jgone">
+	                  		<div class="xf_htgl_jg_tableone">
+		                    #{table border:"0", cellspacing:"0", cellpadding:"0", class:"xf_htgl_jg_tableone_table"}
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}个人信息：#{/td}
+		                         	#{td width:"200"}
+		                           		真实姓名：${loanApplication?.user_name}
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}#{/td}
+		                         	#{td width:"200"}
+		                           		联系方式：${loanApplication?.mobile}
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}借款基本信息：#{/td}
+		                         	#{td width:"200"}
+		                           		借款标题：${loanApplication?.title}
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}#{/td}
+		                         	#{td width:"200"}
+		                           		借款金额：${loanApplication?.amount}元
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+	                         	#{tr}
+	                         		#{td width:"114", align:"left"}#{/td}
+		                         	#{td width:"200"}
+		                           		能承受利率范围：
+		                           		#{if loanApplication?.apr == 1}
+						          			5%-10%
+						          		#{/if}
+						          		#{elseif loanApplication?.apr == 2}
+						          			10%-15%
+						          		#{/elseif}
+						          		#{elseif loanApplication?.apr == 3}
+						          			15%-18%
+						          		#{/elseif}
+		                          	#{/td}
+		                          	
+		                          	#{td width:"114", align:"left"}#{/td}
+		                         	#{td width:"200"}
+		                           		借款期限：
+		                           		${loanApplication?.period} 
+										#{if loanApplication?.period_unit == -1} 
+											[年] 
+										#{/if} 
+										#{elseif loanApplication?.period_unit == 1}
+											[日] 
+										#{/elseif} 
+										#{else} 
+											[月] 
+										#{/else}
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        
+		                        #{tr}
+	                         		#{td width:"114", align:"left"}借款详情：#{/td}
+		                         	#{td width:"200"}
+		                           		${loanApplication?.description}
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                        #{tr}
+		                          	#{td align:"middle"}身份证正面：#{/td}
+		                          	#{td}
+		                            		<span style="position: relative; vertical-align:middle;">
+		                            		#{img src:"${loanApplication?.id_image_front}",id:"loanImage",alt:"身份证",width:"200px",height:"200px"}#{/img}
+                     	 					<input type="hidden" name="application.idImageFront" id="idImageFront" />
+		                          		</span>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+	    
+	                         	#{tr}
+		                          	#{td align:"middle"}身份证反面：#{/td}
+		                          	#{td}
+		                            		<span style="position: relative; vertical-align:middle;">
+		                            		#{img src:"${loanApplication?.id_image_back}",id:"loanImage1",alt:"身份证",width:"200px",height:"200px"}#{/img}
+                     	 					<input type="hidden" name="application.idImageBack" id="idImageBack" />
+		                          		</span>
+		                          	#{/td}
+		                        #{/tr}
+		                        
+		                      #{/table}  
+		                    </div>
+		                	<div class="xf_htgl_bott_on xf_ht_shmx_button">
+		                		#{form @loanApplicationDetails(), id:'exportLoanApplication'}
+		                			<input type="hidden" name="isExport" value="1" id="isExport">
+		                			<input type="hidden" id="applicationId" name="applicationId" value="${loanApplication?.id}"/>
+		                   			<input class="xf_ht_tcc_button_tq" type="submit" value="导出">
+		                   		#{/form}
+		                	</div>
+	              		</div>
+		        </div>
+		     </div>
+		  </div>
+		
+		
+		
+		
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		//高亮显示
+		showHighLight(1, 1, 0);
+	});
+	
+</script>

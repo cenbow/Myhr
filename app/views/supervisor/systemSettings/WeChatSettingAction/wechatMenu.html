@@ -1,0 +1,18 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'微信菜单管理' /}
+<!-- 内容区域 -->
+<div class="xn_c_contentwarp">
+  <div class="xn_c_contentlist">
+   #{include "supervisor/systemSettings/common/leftBar.control"/}
+  <!-- 内容区 --> 
+  #{include "supervisor/systemSettings/WeChatSettingAction/wechatMenuContent.html"/}
+  </div>
+</div>
+
+#{include "supervisor/systemSettings/WeChatSettingAction/editWeChatMenu.control"/}
+<script type="text/javascript">
+$(function(){
+	//高亮显示
+	showHighLight(8,8,21);
+})
+</script>

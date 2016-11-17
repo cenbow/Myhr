@@ -1,0 +1,372 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle+'| 我要理财' /}
+<div class="p-main mt30">
+    <div class="p-lcbanner">
+        <img src="/public/images/lcbanner.png" alt="" width="100%" ondragstart="return false;" />
+        <a title="" target="" href="javascript:void(0)" class="p-lclose"><i class="icons"></i></a>
+    </div>
+    
+    <!-- 搜索begin -->
+    #{form @investHome(),method:'GET',id :'bidsSearch'}
+    	<input type="hidden" id="currPage" name="currPage"/>
+      	<input type="hidden" id="pageSize" name="pageSize"/>
+      	<input type="hidden" id="aprtemp" name="apr" value="${pageBean?.conditions?.apr}"/>
+      	<input type="hidden" id="amounttemp" name="amount" value="${pageBean?.conditions?.amount}"/>
+      	<input type="hidden" id="loanScheduletemp" name="loanSchedule" value="${pageBean?.conditions?.loanSchedule}" />
+      	<input type="hidden" id="orderType" name="orderType" value="${pageBean?.conditions?.orderType}"/>
+	    <div class="p-lcshaixpx pt20 mt20">
+	        <div class="clr p-lctopss pb10">
+	            <span class="p-lclfsous">投标搜索：</span>
+	            <div class="p-lcssbox">
+	                <input type="text" class="p-lcsinput" id="keywords" name="keywords" value="${pageBean?.conditions?.keywords}" maxlength="12"/>
+	                <a href="javascript:void(0);" onclick="showHomeBids();"><i class="iconfont">&#xe615;</i></a>
+	            </div>
+	            <div class="p-lclickbtn">
+	                <a title="" target="" href="javascript:void(0)" class=""></a><span>分类查询</span>
+	            </div>
+	        </div>
+	        <div class="p-pr p-lchidebox">
+	            <table class="p-lcshxtable">
+	            	<!-- 年化利率 -->
+	                <tr height="32" id="apr">
+	                    <th width="100">预期年化：</th>
+	                    <td><span value="0" #{if pageBean?.conditions?.apr == 0} class="cur" #{/if}>全部</span></td>
+	                    <td><span value="1" #{if pageBean?.conditions?.apr == 1} class="cur" #{/if}>10%以下</span></td>
+	                    <td><span value="2" #{if pageBean?.conditions?.apr == 2} class="cur" #{/if}>10%-15%</span></td>
+	                    <td><span value="3" #{if pageBean?.conditions?.apr == 3} class="cur" #{/if}>15%-20%</span></td>
+	                    <td><span value="4" #{if pageBean?.conditions?.apr == 4} class="cur" #{/if}>20%以上</span></td>
+	                    <td>&nbsp;</td>
+	                </tr>
+			            
+	                <tr height="32" id="amount">
+	                    <th>借款金额：</th>
+	                    <td><span value="0" #{if pageBean?.conditions?.amount == 0} class="cur" #{/if}>全部</span></td>
+	                    <td><span value="1" #{if pageBean?.conditions?.amount == 1} class="cur" #{/if}>10万以下</span></td>
+	                    <td><span value="2" #{if pageBean?.conditions?.amount == 2} class="cur" #{/if}>10—20万</span></td>
+	                    <td><span value="3" #{if pageBean?.conditions?.amount == 3} class="cur" #{/if}>50—100万</span></td>
+	                    <td><span value="4" #{if pageBean?.conditions?.amount == 4} class="cur" #{/if}>100—300万</span></td>
+	                    <td><span value="5" #{if pageBean?.conditions?.amount == 5} class="cur" #{/if}>300万以上</span></td>
+	                </tr>
+	                <tr height="32" id="loanSchedule">
+	                    <th>认购进度：</th>
+	                    <td><span value="0" #{if pageBean?.conditions?.loanSchedule == 0} class="cur" #{/if}>全部</span></td>
+	                    <td><span value="1" #{if pageBean?.conditions?.loanSchedule == 1} class="cur" #{/if}>50%以下</span></td>
+	                    <td><span value="2" #{if pageBean?.conditions?.loanSchedule == 2} class="cur" #{/if}>50%-80%</span></td>
+	                    <td><span value="3" #{if pageBean?.conditions?.loanSchedule == 3} class="cur" #{/if}>80%以上</span></td>
+	                    <td><span value="4" #{if pageBean?.conditions?.loanSchedule == 4} class="cur" #{/if}>满标</span></td>
+	                    <td>&nbsp;</td>
+	                </tr>
+	            </table>
+	            <a title="利率计算器" href="@{front.home.HomeAction.wealthToolkit(4)}" target="_blank" class="p-lcjisq"></a>
+	        </div>
+	        <div class="p-lcpaixu clr">
+	            <a href="javascript:void(0);" onClick="conditonSearch(0);" id="div_0">默认排序</a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(1);" id="div_1">金额<i class="icos"></i></a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(3);" id="div_3">利率<i class="icos"></i></a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(5);" id="div_5">进度<i class="icos"></i></a>
+	            <a href="javascript:void(0);" onClick="conditonSearch(7);" id="div_7">还款期限<i class="icos"></i></a>
+	        </div>
+	    </div>
+    #{/form}  
+    <!-- 搜索end -->
+    
+    
+    <!-- 搜索结果 begin -->
+    #{list items:pageBean.page, as:'bid'}
+    <div class="p-lcitem clr">
+	        <div class="p-lcwleft">
+	            <h6 class="p-lcbtitle">
+	            	<img src="${bid?.small_image_filename}" alt="" width="20px" height="20px"/>
+	            	#{if bid?.amount == bid?.has_invested_amount}
+	            	<a title="" #{if bid?.status != 5} href="@{invest(bid?.id)}" #{/if} #{else} href="javascript:void(0);" #{/else} style="color:#CDC9C9" target="_self">
+	            	#{/if}
+	            	#{else}
+	            	<a title="" #{if bid?.status != 5} href="@{invest(bid?.id)}" #{/if} #{else} href="javascript:void(0);" #{/else} target="_self">
+	            	#{/else}
+	            	<strong>${bid?.title}</strong> *{${bid?.no}}*
+	            	</a>
+	            	#{if bid?.is_hot}
+	            		<img src="/public/images/hot.png" alt="" class="ml10" />
+	            	#{/if}
+	            	#{if bid?.is_novice_invest}
+                        <div class="xf_bid_type_novice" style="float: left;">体验</div>
+                    #{/if}
+                    #{if bid?.is_experience}
+                        <div class="xf_bid_type_novice" style="float: left;">新手</div>
+                    #{/if}
+	            	
+	            </h6>
+	            <table class="p-lclistable">
+	                <tr height="33">
+	                    <td width="15%" class="lclistable_1"><span class="fz30 cozhuse">${bid?.apr}</span> <span class="cozhuse fz16">%</span></td>
+	                    <td width="28%" class="lclistable_2"><span class="fz24 co333">
+	                    #{if !bid?.is_novice_invest}
+	                     ${bid?.amount?.format('###,##0')}
+                    	</span> 
+	                    <span class="co333 fz16">元</span>
+                    	#{/if}
+	                    </td>
+	                    <td width="20%" class="lclistable_3">
+	                    	<span class="fz24 co333">${bid?.period}</span>
+	                    	<span class="co333 fz24">
+	                    		#{if bid?.period_unit ==-1}
+	                    			年
+	                    		#{/if}
+	                    		#{if bid?.period_unit == 0}
+									个月
+								#{/if}
+								#{if bid?.period_unit ==1}
+									天
+								#{/if}
+	                    	</span>
+	                    </td>
+	                    <td class="lclistable_2 fz24"><span class="co333">
+	                    #{if !bid?.is_novice_invest}
+	                    ￥${(bid?.amount-bid?.has_invested_amount)?.format('###,##0')}
+                    	<span class="co333 fz16">元</span>
+                    	#{/if}
+	                    </span></td>
+	                </tr>
+	                <tr height="32">
+	                    <td class="lclistable_1">年利率</td>
+	                    #{if bid?.is_novice_invest}
+	                    <td></td>
+                    	#{/if}
+                    	#{else}
+	                    <td class="lclistable_2">借款金额</td>
+	                    #{/else}
+	                    <td class="lclistable_3">借款期限</td>
+	                    #{if bid?.is_novice_invest}
+	                    <td></td>
+                    	#{/if}
+                    	#{else}
+	                    <td class="lclistable_2">剩余金额</td>
+	                    #{/else}
+	                </tr>
+	            </table>
+	        </div>
+        
+        <div class="p-lcwright">
+        	<!-- 借款中 -->
+        	#{if  bid?.amount > bid?.has_invested_amount && (bid?.status == 2 || bid?.status == 1)}
+        		<div class="p-lcwtime">
+                	<span class="p-lcjindt"><span style="width: ${bid?.loan_schedule}%;"></span></span>
+                	<span class="p-lcjindtnum">${bid?.loan_schedule}%</span>
+            	</div>
+        		<a href="@{invest(bid?.id)}" id="bid${bid?.id}"target="_self" class="p-lcbtn">立即投标</a>
+        	#{/if}
+        	<!-- 预约中 -->
+        	#{elseif bid?.amount > bid?.has_invested_amount && bid?.status == 30}
+       			<script type="text/javascript">
+       				$(function(){
+	        			showOrderTime(${bid?.id},"${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}");
+       				});
+		 		</script>
+        		<div class="p-lcwtime">
+	                <strong class="cozhuse" id="day${bid?.id}"></strong> 天
+	                <strong class="cozhuse" id="hours${bid?.id}"></strong> 时
+	                <strong class="cozhuse" id="minutes${bid?.id}"></strong> 分
+	                <strong class="cozhuse" id="seconds${bid?.id}"></strong> 秒开始
+	            </div>
+	            <a href="@{invest(bid?.id)}" id="bid${bid?.id}"target="_self" class="p-lcbtn">我要预约</a>
+       		#{/elseif}
+       		<!-- 满标 -->
+       		#{elseif bid?.amount == bid?.has_invested_amount}
+       			<div class="p-lcwtime">
+                	<span class="p-lcjindt"><span style="width: ${bid?.loan_schedule}%;"></span></span>
+                	<span class="p-lcjindtnum">${bid?.loan_schedule}%</span>
+            	</div>
+            	#{if bid?.status == 3}
+            		<a href="@{invest(bid?.id)}" id="bid${bid?.id}" style="border:1px solid #fff;color:#fff" target="_self" class="p-lcbtn p-lcbtn-over">审核中..</a>
+            	#{/if}
+            	#{elseif bid?.status == 4}
+            		<a href="@{invest(bid?.id)}" id="bid${bid?.id}" style="border:1px solid #fff;color:#fff" target="_self" class="p-lcbtn p-lcbtn-over">回款中..</a>
+            	#{/elseif}
+                #{elseif bid?.status == 5}
+            		<a href="javascript:void(0);" id="bid${bid?.id}" style="border:1px solid #fff;color:#fff" target="_self" class="p-lcbtn p-lcbtn-over">已完成</a>
+            	#{/elseif}
+            	#{else}
+					<a href="@{invest(bid?.id)}" id="bid${bid?.id}" style="border:1px solid #fff;color:#fff" target="_self" class="p-lcbtn p-lcbtn-over">被抢光了..</a>
+            	#{/else}
+			#{/elseif}
+        </div>
+        
+        *{
+        <div class="p-lcshouc none" title="收藏" onclick="checkLogin(${bid?.id});">
+        	<i class="iconfont kx">&#xe612;</i>
+        	<i class="iconfont sx none">&#xe611;</i>
+        </div>
+        }*
+    </div>
+    #{/list}
+    
+    
+    <div class="xf_wylc_page p-lcpage">
+		<!-- 分页器 -->
+		#{page pageTitle:"个标",currPage:pageBean.currPage,totalCount:pageBean.totalCount,pageSize:pageBean.pageSize,theme:2,style:2}
+		#{/page}
+	</div>
+</div>
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_invest.js'}"></script>
+
+<script>
+	$(function(){
+		#{list items:pageBean.page, as:'bid'}
+  			$('#loanSchedule'+${bid_index}).css({"width":${bid?.loan_schedule}})
+		#{/list}
+ 	});
+
+	function checkLogin(bidId){
+ 		/** 检查用户是否激活, fronMain.html 中的拦截器*/
+  	  	var result = frontJSIntercepter();
+  	  	if(!result){
+ 			collectCurrentBid(bidId);  
+  	  	}			
+    };   
+  
+    function collectCurrentBid(bidId){
+    	var collectBid = #{jsAction @collectBid(':bidId')/}
+    	$.post(collectBid({bidId:bidId}),function(data){
+    		//拦截器，拦截判断。frontMain.html
+			if(checkIntercepterResult(data)){
+				return;
+			}
+    		var arr=eval(data);
+			var result = arr.error.msg;
+			alert(result);
+    	})
+    };
+    
+    $(function(){
+   		$("#apr td").click(function() {
+   			$("#apr span").removeClass("cur");
+   			$(this).addClass("cur");
+   			apr = $(this).find("span").attr("value");
+   			$("#aprtemp").val(apr);
+   			showHomeBids();
+   		});
+   		
+   		
+   		$("#amount td").click(function() {
+   			$("#amount span").removeClass("cur");
+   			$(this).addClass("cur");
+   			amount = $(this).find("span").attr("value");
+   			$("#amounttemp").val(amount);
+   			showHomeBids();
+   		});
+   		
+   		$("#loanSchedule td").click(function() {
+   			$("#loanSchedule span").removeClass("cur");
+   			$(this).addClass("cur");
+   			loanSchedule = $(this).find("span").attr("value");
+   			$("#loanScheduletemp").val(loanSchedule);
+   			showHomeBids();
+   		});
+	});
+    
+    function showHomeBids(){
+    	var minLevel = $("#minLevel").val();
+     	$("#bidsSearch").submit();
+	};
+    
+	
+  	//日期比较函数   yyyy-MM-dd hh:mm:ss格式  
+  	//true 表示 date1 大于 date2 ；false 表示 date1 小于 date2
+	function comPareTime(date1,date2) {
+		date1 = date1.replace("-", "/").replace("-", "/");
+		date2 = date2.replace("-", "/").replace("-", "/");
+		var date1Str = Date.parse(date1);
+		var date2Str = Date.parse(date2);
+		if(Date.parse(date1) > Date.parse(date2)) {  
+		   return true;
+		} else {
+			return false;
+		}
+	};
+	
+	
+	function showOrderTime(index,endTime){
+		//var endTime =" ${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}";
+   		time_end = new Date(endTime);//结束的时间
+        var tt = time_end.getTime();
+      	var now = new Date().getTime();
+        var cha = tt-now;
+        var SysSecond=parseInt(cha);
+ 	 	if (SysSecond > 0) { 
+	        int_day=Math.floor(SysSecond/86400000);
+	        SysSecond-=int_day*86400000;
+	        int_hour=Math.floor(SysSecond/3600000);
+	        SysSecond-=int_hour*3600000;
+	        int_minute=Math.floor(SysSecond/60000);
+	        SysSecond-=int_minute*60000;
+	        int_second=Math.floor(SysSecond/1000);
+            if(int_hour<10){
+     	    	int_hour="0"+int_hour;
+          	}
+            if(int_minute<10){
+   		       	int_minute="0"+int_minute;
+            }
+   		    if (int_second<10){
+        	    int_second="0"+int_second;
+           	}
+	       	$("#day"+index).html(int_day);
+	       	$("#hours"+index).html(int_hour);
+	       	$("#minutes"+index).html(int_minute);
+	       	$("#seconds"+index).html(int_second);
+       	} else{
+       	   	$("#day"+index).html("00");
+	       	$("#hours"+index).html("00");
+	       	$("#minutes"+index).html("00");
+	       	$("#seconds"+index).html("00");
+       	}
+		setTimeout('showOrderTime('+index+',"'+endTime+'")',1000); 
+   	};
+
+   	
+	function conditonSearch(num){
+		var order= '${pageBean?.conditions?.orderType}';
+	  	if(order == 0){
+	    	$("#orderType").val(num);
+	    	$("#bidsSearch").submit();
+	    	return;
+	  	}
+	  	if(order == num){
+	    	$("#orderType").val(num + 1);
+	    	$("#bidsSearch").submit();
+	     	return;
+	  	} else {
+	    	$("#orderType").val(num);
+	    	$("#bidsSearch").submit();
+	     	return;
+	  	}
+	};
+	
+	$(function(){
+  	 	//条件查询控制样式
+	 	var num= '${pageBean?.conditions?.orderType}';
+  		if(num == 0){
+  		$("#div_0").addClass("default_color");
+    		return;
+  		}
+
+  		var sum = num/2;
+  		if(sum.toString().indexOf('.') == -1){
+    		var sum2 = num -1;
+    		$("#div_"+sum2).removeClass("down");
+    		$("#div_"+sum2).addClass("up");
+    		return;
+  		} else {
+    		$("#div_"+num).addClass("down");
+  		}
+  	});
+	
+	function showPage(currPage, pageSize){
+	    $("#currPage").val(currPage);
+	    $("#pageSize").val(pageSize);
+	    $("#bidsSearch").submit();
+	};
+</script>

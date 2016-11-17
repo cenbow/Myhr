@@ -1,0 +1,204 @@
+<div class="p-zhtabox">
+	#{if qualityBids?.size()!= 0}
+		#{list items:qualityBids,as:'qualityBids'}
+		    <div class="p-lcitem clr p-zhitem">
+		        <div class="p-lcwleft">
+		            <h6 class="p-lcbtitle"><img src="${qualityBids?.small_image_filename}" alt=""> 
+		            	<a href="@{front.invest.InvestAction.invest(qualityBids?.id)}" target="_self"><strong>${qualityBids?.title}</strong></a>
+		            </h6>
+		            <table class="p-lclistable">
+		                <tbody><tr height="33">
+		                    <td width="19%"><span class="fz30 cozhuse">${qualityBids?.apr}</span> <span class="cozhuse fz16">%</span></td>
+		                    <td width="25%"><span class="fz22 co333">
+		                    	#{if qualityBids?.amount >= 10000}
+		                    		${(qualityBids?.amount/10000)?.format('###,##0.00')}</span> <span class="co333 fz16">万</span>
+		                    	#{/if}
+		                    	#{else}
+		                    		${(qualityBids?.amount)?.format('###,##0.00')}</span> <span class="co333 fz16">元</span>
+		                    	#{/else}
+		                    	
+		                    </td>
+		                    <td width="20%">
+		                    	<span class="fz22 co333">
+		                    		${qualityBids?.period}  
+		                    	</span> 
+		                    	<span class="co333 fz16">
+		                    		#{if qualityBids.period_unit == 1}
+										日
+									#{/if}
+									#{elseif qualityBids.period_unit == 0}
+										月
+									#{/elseif}
+									#{else}
+										年
+									#{/else}
+		                    	</span>
+		                    </td>
+		                    *{20160612 update by fz  需要以后修改回去 }*
+		                    *{ <td>信用等级：<img src="${qualityBids?.creditLevel?.imageFilename}" alt=""></td> }*
+		                </tr>
+		                <tr height="32">
+		                    <td>年利率</td>
+		                    <td>借款金额</td>
+		                    <td>借款期限</td>
+		                    <td>还需金额：<span class="co333">￥${(qualityBids?.amount - qualityBids?.has_invested_amount)?.format('###,##0.00')}</span></td>
+		                </tr>
+		            </tbody></table>
+		        </div>
+		        <div class="zhzl-p-lcwright">
+		            <div class="p-lcwtime">
+		            	*{
+		                <strong class="cozhuse" id="day${bid?.id}"></strong> 天
+		                <strong class="cozhuse" id="hours${bid?.id}"></strong> 时
+		                <strong class="cozhuse" id="minutes${bid?.id}"></strong> 分
+		                <strong class="cozhuse" id="seconds${bid?.id}"></strong> 秒开始
+		                }*
+		            </div>
+		            #{if  bid?.amount > bid?.has_invested_amount && bid?.status == 2}
+		            	<div class="p-lcwtime">
+			                <strong class="cozhuse" id="day${bid?.id}"></strong> 天
+			                <strong class="cozhuse" id="hours${bid?.id}"></strong> 时
+			                <strong class="cozhuse" id="minutes${bid?.id}"></strong> 分
+			                <strong class="cozhuse" id="seconds${bid?.id}"></strong> 秒开始
+			            </div>
+			            <script type="text/javascript">
+		       				$(function(){
+			        			showOrderTime(${bid?.id},"${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}");
+		       				});
+				 		</script>
+		            	<a target="_self" href="@{front.invest.investAction.invest(qualityBids?.id)}" class="p-lcbtn">立即投标</a>
+		            #{/if}
+		            #{elseif bid?.amount > bid?.has_invested_amount && bid?.status == 30}
+		            	<script type="text/javascript">
+		       				$(function(){
+			        			showOrderTime(${bid?.id},"${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}");
+		       				});
+				 		</script>
+				 		<div class="p-lcwtime">
+			                <strong class="cozhuse" id="day${bid?.id}"></strong> 天
+			                <strong class="cozhuse" id="hours${bid?.id}"></strong> 时
+			                <strong class="cozhuse" id="minutes${bid?.id}"></strong> 分
+			                <strong class="cozhuse" id="seconds${bid?.id}"></strong> 秒开始
+			            </div>
+			            <a target="_self" href="@{front.invest.investAction.invest(qualityBids?.id)}" class="p-lcbtn">我要预约</a>
+		            #{/elseif}
+		            #{elseif bid?.amount == bid?.has_invested_amount}
+		            	<a target="_self" href="@{front.invest.investAction.invest(qualityBids?.id)}" class="p-lcbtn">立即投资</a>
+		            #{/elseif}
+		        </div>
+		        *{收藏
+		        <div class="p-lcshouc none" title="收藏"><i class="iconfont kx">&#xe612;</i><i class="iconfont sx none">&#xe611;</i></div>
+		        }*
+		    </div>
+	   	#{/list}
+   	#{/if}
+</div>
+*{
+<div class="xf_mem_rzqzr_tab">
+	<ul class="xf_c_idx_4_items">
+		<!--foreach start：-->
+		#{if qualityBids?.size()!=0}
+     #{list items:qualityBids,as:'qualityBids'}
+		<li>
+			<div class="xf_c_idx_4_itemsWrap">
+				<div class="xf_c_idx_4_imgWrap">
+					<div class="xf_c_idx_4_userImg">
+							#{img src:"${qualityBids?.bid_image_filename}",alt:"",align:"absmiddle",width:"111px",height:"110px"}#{/img}
+					</div>
+					<div class="xf_c_idx_4_arrowImg"></div>
+				</div>
+				<div class="xf_c_idx_4_tableWrap xf_c_mem_4_tableWrap">
+					<div class="xf_c_idx_4_colTitle">
+						<span >#{img src:"${qualityBids?.small_image_filename}",style:"width: 20px; height: 20px;  display: inline-block; float: left; margin: 5px 6px 0 0;"}#{/img}</span>
+						<span class="xf_c_idx_4_loanTitle"><a href="@{front.invest.InvestAction.invest(qualityBids?.id)}" target="_self">${qualityBids?.title}</a></span>
+						<span class="xf_c_idx_4_loanProgres">
+							<span class="xf_c_idx_4_progText">进度：</span>
+							<span class="xf_c_idx_4_proWrap" >
+							<span class="xf_c_idx_4_proPer" style="width:${qualityBids?.loan_schedule}px;">
+								${qualityBids?.loan_schedule}%
+							</span>
+							</span>
+						</span>
+					</div>
+					<div class="xf_c_idx_4_data">
+						<ul class="xf_c_idx_4_dataul xf_c_mem_dataul">
+							<li><div>年利率</div><div class="xf_c_idx_4_nhsy">${qualityBids?.apr}%</div></li>
+							<li><div>借款金额</div><div class="xf_c_idx_4_jkje">${qualityBids?.amount?.format('###,##0.00')}</div></li>
+							<li><div>还款期限</div><div class="xf_c_idx_4_hkqx">
+								${qualityBids?.period}  
+								#{if qualityBids.period_unit == 1}
+									日
+								#{/if}
+								#{elseif qualityBids.period_unit == 0}
+									月
+								#{/elseif}
+								#{else}
+									年
+								#{/else}
+								</div></li>
+							<li><div>信用等级</div><div class="xf_c_idx_4_xydj">
+							#{img src:"${qualityBids?.creditLevel?.imageFilename}",alt:"",align:"absmiddle"}#{/img}
+							</div></li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<div class="xf_c_idx_4_tableBttom xf_c_mem_4_tableBttom">
+						<span class="xf_c_idx_4_hxjeWrap">还需金额：<span class="xf_c_idx_4_hxje">${(qualityBids?.amount - qualityBids?.has_invested_amount)?.format('###,##0.00')}</span></span>
+						<span class="xf_c_idx_4_hkfsWrap">${qualityBids?.repayment_type_name}</span>
+						<a href="@{front.invest.investAction.invest(qualityBids?.id)}" class="xf_accout_cont_imginput" target="_self">投 标</a>
+						<a href="@{front.invest.investAction.invest(qualityBids?.id)}" class="xf_accout_cont_imginput" target="_self">查看详细</a>
+					</div>
+				</div>
+			</div>
+		</li>
+		#{/list}
+		#{/if}
+	</ul>
+</div>
+}*
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	function showOrderTime(index,endTime){
+		//var endTime =" ${bid?.start_time?.format('yyyy/MM/dd HH:mm:ss')}";
+		time_end = new Date(endTime);//结束的时间
+	    var tt = time_end.getTime();
+	  	var now = new Date().getTime();
+	    var cha = tt-now;
+	    var SysSecond=parseInt(cha);
+	 	if (SysSecond > 0) { 
+	        int_day=Math.floor(SysSecond/86400000);
+	        SysSecond-=int_day*86400000;
+	        int_hour=Math.floor(SysSecond/3600000);
+	        SysSecond-=int_hour*3600000;
+	        int_minute=Math.floor(SysSecond/60000);
+	        SysSecond-=int_minute*60000;
+	        int_second=Math.floor(SysSecond/1000);
+	        if(int_hour<10){
+	 	    	int_hour="0"+int_hour;
+	      	}
+	        if(int_minute<10){
+			       	int_minute="0"+int_minute;
+	        }
+			    if (int_second<10){
+	    	    int_second="0"+int_second;
+	       	}
+	       	$("#day"+index).html(int_day);
+	       	$("#hours"+index).html(int_hour);
+	       	$("#minutes"+index).html(int_minute);
+	       	$("#seconds"+index).html(int_second);
+	   	} else{
+	   	   	$("#day"+index).html("00");
+	       	$("#hours"+index).html("00");
+	       	$("#minutes"+index).html("00");
+	       	$("#seconds"+index).html("00");
+	   	}
+		setTimeout('showOrderTime('+index+',"'+endTime+'")',1000); 
+	};
+</script>

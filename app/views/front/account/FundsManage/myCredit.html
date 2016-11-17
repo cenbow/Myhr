@@ -1,0 +1,84 @@
+%{
+business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle + ' | 我的账户   | 我的专属客服'/}
+
+
+<div class="p-main clr mt30">
+    <!-- 左边导航区域 -->
+    #{include "front/account/AccountHome/homeLeft.html"/}
+
+    <!-- 右侧内容区 begin -->
+
+    <div class="p-cfright">
+        <div class="p-cfright-mykf clearfix">
+            <div class="p-cfright-mykf-t clearfix">
+                <div class="p-cfright-mykf-tm">
+                    <img src="${customer?.image}" onerror="this.src='@{'/public/images/default.png'}'" alt="">
+                    <span>
+                        <span class="p-cfright-mykf-tmname">${customer?.name}</span>
+                    </span>
+                </div>
+                <div class="p-cfright-mykf-tr">
+                    <span>我将为您提供一对一的优质服务，您在投资过程中遇到任何问题，我都将第一时间为您处理和解决。</span>
+                </div>
+            </div>
+            <i class="p-cfright-mykf-btn"></i>
+            <div class="p-cfright-mykf-info">
+                <div class="clearfix">
+                    <span class="p-cfright-mykf-info-tt">专属客服资料</span>
+                    <span class="p-cfright-mykf-info-line"></span>
+                </div>
+                <div class="p-cfright-mykf-info-conect">
+                    <span class="p-cfright-mykf-info-conect-sp1">
+                        专属手机&nbsp;&nbsp;<em>${customer?.mobile}</em>
+                    </span>
+                    <span class="p-cfright-mykf-info-conect-sp2">
+                        专属QQ&nbsp;&nbsp;<em>${customer?.qq}</em>
+                    </span>
+                    <span class="p-cfright-mykf-info-conect-sp3">
+                        专属微信&nbsp;&nbsp;<em>${customer?.weixin}</em>
+                    </span>
+                    <p class="mt10">在线咨询时间:工作日9:00-12:00和13:30-18:00</p>
+                </div>
+
+                <div class="clearfix mt30">
+                    <p class="p-cfright-mykf-info-tt">如未能及时为您服务,您还能通过以下方式联系客服人员</p>
+                    <span class="p-cfright-mykf-info-line2"></span>
+                </div>
+                <div class="clearfix mt30">
+                    <div class="p-cfright-mykf-info-ico clearfix">
+                        <img src="@{'/public/images/mykf-wx.png'}" alt="">
+                        <div class="p-cfright-mykf-info-ico-ms">
+                            <p class="p-cfright-mykf-info-ico-ms-tt">微信订阅号</p>
+                            <p class="p-cfright-mykf-info-ico-ms-bd ">订阅号将定时发布平台活动
+                                以及最新动态，您也可在订
+                                阅号上直接联系客服。</p>
+                        </div>
+                    </div>
+                    <div class="p-cfright-mykf-info-ico clearfix ml60">
+                        <img src="@{'/public/images/mykf-qq.png'}" alt="">
+                        <div class="p-cfright-mykf-info-ico-ms">
+                            <p class="p-cfright-mykf-info-ico-ms-tt">新手QQ群</p>
+                            <p class="p-cfright-mykf-info-ico-ms-bd">新客户专属QQ群，可在群
+                                里与其他投资者及客服进行
+                                交流</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+    $(function () {
+        /* 高亮显示 */
+        myAccountSelect(10, 1);
+    });
+</script>

@@ -1,0 +1,114 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	boolean ipsEnable = constants.Constants.IPS_ENABLE;
+}%
+#{extends 'common/frontMain.html' /}
+#{set title:currBackstageSet.seoTitle +' | 我的账户 | 我的账户首页' /}
+
+<div class="p-main clr mt30">
+	<!-- 左边导航区域 -->
+	#{include "front/account/AccountHome/homeLeft.html"/}
+<div class="p-cfright">
+        <div class="p-zhsafe">
+            <div class="p-sftitle">
+                <span class="fz16">账户安全等级：</span>
+                <span class="p-sfjdt"><span id="num_apr" style="width:100%;"></span></span>
+                <span class="cozhuse fz16" id="num_ch">高</span>
+                <span class="ml30">（请完善以下资料，提升安全等级，保障账户安全！）</span>
+            </div>
+            <table class="p-sftable" width="100%">
+                <tr style="display: none">
+                    <th>用户名</th>
+                    <td class="p-sftable-secondtd">${user?.name?.substring(0,3)}****${user?.name?.substring(7)}</td>
+                    <td><i class="p-icongg"></i></td>
+                    <td class="last"></td>
+                </tr>
+                <tr>
+                    <th>手机号码</th>
+                    #{if !user?.isEnterpriseUser}
+                    	<td>#{if user?.isMobileVerified}${user?.mobile?.substring(0,3)}****${user?.mobile?.substring(7)}#{/if}#{else}无#{/else}</td>
+                    	<td>#{if user?.isMobileVerified}<i class="p-icongg"></i>已绑定#{/if}</td>
+                    	<td class="last">
+	                    #{if !user?.isMobileVerified}
+	                    <span class="co999">未绑定</span>
+	                    #{/if}
+                    #{/if}
+                    #{else}
+                    	<td>${user?.mobile?.substring(0,3)}****${user?.mobile?.substring(7)}</td>
+                    	<td><i class="p-icongg"></i>已绑定</td>
+                    #{/else}
+                    <!--手机号码暂不可修改-->
+                    *{<a href="@{front.account.basicInformation.modifyMobile()}" class="cozhuse p-un">修改</a></td>}*
+                </tr>
+                <tr>
+                    <th>实名认证</th>
+                    <td>
+						#{if null == user?.realityName || user?.realityName == "" || null == user?.idNumber || user?.idNumber == ""}
+                        	未绑定
+                        #{/if}
+                        #{else}${user.realityName},${user.idNumber?.substring(0,6)}**********${user.idNumber?.substring(14)}#{/else}
+					</td>
+                    <td>
+                    #{if null == user?.realityName || user?.realityName == "" || null == user?.idNumber || user?.idNumber == ""}
+                        #{/if}
+                        #{else}<i class="p-icongg"></i>已绑定#{/else}
+                    </td>
+                    <td class="last">
+                    #{if null == user?.realityName || user?.realityName == "" || null == user?.idNumber || user?.idNumber == ""}
+                        <a href="@{front.account.basicInformation.certification()}" class="cozhuse p-un ml5">绑定</a>
+                     #{/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>登录密码</th>
+                    <td>********</td>
+                    <td><i class="p-icongg"></i>已设置</td>
+                    <td class="last"><a href="@{front.account.basicInformation.modifyPassword()}" class="cozhuse p-un">修改</a></td>
+                </tr>
+                <tr>
+                    <th>银行卡</th>
+                    <!--if如果没有绑定 如下-->
+
+                    #{if bankAcctNo == " " || null == bankAcctNo||bankAcctNo == ""}
+                    <td>
+                        ${bankAcctNo}
+                    </td>
+                    <td><i class="co999"></i>未绑定</td>
+                    <td class="last">
+                        <i class="co999"></i>未绑定
+                        <a href="@{front.account.FundsManage.loginAccount()}" class="cozhuse p-un">绑定</a>
+                    </td>
+                    #{/if}
+                    <!--i否则 绑定过,显示绑定的卡号-->
+                    #{else}
+                    <td>****************${bankAcctNo?.substring(bankAcctNo?.length()-4,bankAcctNo?.length())}</td>
+                    <td><i class="p-icongg"></i>已绑定</td>
+                    <td class="last">
+
+                    </td>
+                    #{/else}
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_usr.js'}"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 高亮显示 */
+		//showHighLightFront2(7, 1);
+		myAccountSelect(1,80);
+		var num = $(".p-icongg").length;
+		if(num>1&&num<=4){
+			$("#num_apr").css("background-color","#fff100");
+			$("#num_ch").text("中");
+		}
+		if(num>4){
+			$("#num_apr").css("background-color","#009944");
+			$("#num_ch").text("高");
+		}
+		var apr_ = 20*num;
+		$("#num_apr").css("width",apr_+"%");
+	});
+
+</script>

@@ -1,0 +1,320 @@
+ %{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle + '|借款申请'/}
+#{form @loanApplyNow(application, uuid), method:'POST', id:'loanApplyNow'}
+	<!--借款申请第一步 begin-->
+	<div class="p-main" id="step1">
+	    <h2 class="p-jktitle"><em>申请借款</em><br><span class="p-jktitle-en">APPLICATION FOR LOAN</span><span class="line"></span></h2>
+	    <div class="p-jkstep"><img src="/public/images/jkstep1.jpg" alt="" ondragstart="return false;" /></div>
+	    <div class="p-jkmain">
+	        <table class="p-jktable">
+	            <tr height="64">
+	                <th><i class="jk_name"></i></th>
+	                <td><input type="text" class="p-jkinput" name="application.userName" id="userName" placeholder="真实姓名" /></td>
+	            </tr>
+	            <tr height="64">
+	                <th><i class="jk_connect"></i></th>
+	                <td><input type="text" class="p-jkinput" name="application.mobile" id="mobile" placeholder="联系电话" onkeyup="value=value.replace(/[^\d]/g,'')"/></td>
+	            </tr>
+	            <tr height="100">
+	                <th>&nbsp;</th>
+	                <td><a title="" target="" href="javascript:void(0);" class="btn p-jkbtn ml5" onclick="applyStepOne();">下一步</a></td>
+	            </tr>
+	        </table>
+	    </div>
+	</div>	
+	<!--借款申请第一步 end-->
+	
+	<!--借款申请第二步 begin-->
+	<div class="p-main" id="step2" style="display: none;">
+		<h2 class="p-jktitle"><em>申请借款</em><br><span class="p-jktitle-en">APPLICATION FOR LOAN</span><span class="line"></span></h2>
+		<div class="p-jkstep"><img src="/public/images/jkstep2.jpg" alt="" ondragstart="return false;" /></div>
+	    <div class="p-jkmain step2">
+	        <table class="p-jktable step2">
+	            <tr height="64">
+	                <th>借款用途：</th>
+	                <td>
+	                    <div class="p-pr">
+	                        <input type="text" class="p-jkinput step2 p-input" id="title" name="application.title" onblur="checkTitle();"/>
+	                        <span class="p-tips">不超过24个汉字，重视标题描述，能加快借款满标</span>
+	                    </div>
+	                </td>
+	            </tr>
+	            <tr height="64">
+	                <th>借款金额：</th>
+	                <td><input type="text" class="p-jkinput" name="application.amount" id="amount" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="7"/> &nbsp;元</td>
+	            </tr>
+	            <tr height="64">
+	                <th>借款期限：</th>
+	                <td>
+	                    <select name="application.periodUnit" id="periodUnit" onchange="changePeriod(this.value);"  class="p-jkselct">
+	                    	<option value="-999">请选择</option>
+							<!--<option value="-1">年</option>-->
+							<option value="0">月</option>
+							<!--<option value="1">日</option>-->
+	                    </select>
+	                    <select name="application.period" id="period" class="p-jkselct">
+	                    	<option value="-999">请选择</option>
+	                    </select>
+	                </td>
+	            </tr>
+	            <tr height="64">
+	                <th>年利率：</th>
+	                <td>
+	                    <select name="application.apr" id="apr" class="p-jkselct w300">
+	                    	<option value="-999">请选择能承受的年利率范围</option>
+							<option value="1">10%-15%</option>
+							<option value="2">15%-20%</option>
+							<option value="3">20%-24%</option>
+						</select>
+	                </td>
+	            </tr>
+	            <tr height="100">
+	                <th>&nbsp;</th>
+	                <td><a title="" target="" href="javascript:void(0);" class="btn p-jkbtn ml50" onclick="applyStepTwo();">下一步</a></td>
+	            </tr>
+	        </table>
+	    </div>
+	</div>
+	<!--借款申请第二步 end-->
+	
+	
+	<!--借款申请第三步 begin-->
+	<div class="p-main" id="step3" style="display: none;">
+		<h2 class="p-jktitle"><em>申请借款</em><br><span class="p-jktitle-en">APPLICATION FOR LOAN</span><span class="line"></span></h2>
+		<div class="p-jkstep"><img src="/public/images/jkstep3.jpg" alt="" ondragstart="return false;" /></div>
+	    <div class="p-jkmain step3">
+	        <div class="p-texeareabox">
+	            <textarea class="p-input" name="application.description" id="description" oninput="editorLimit(this)"></textarea>
+	            <span class="p-tips">请对借款用途进行详细说明</span>
+                <table>
+                    #{tr}
+                    #{td align:"middle"}身份证正面(必填)：#{/td}
+                    #{td}
+		                            		<span style="position: relative; vertical-align:middle;">
+		                            		#{img src:"${LoanApplication?.idImageFront}",id:"loanImage",alt:"身份证",width:"110px",height:"110px"}#{/img}
+                     	 					<input type="hidden" name="application.idImageFront" id="idImageFront" />
+						    				<input type="file" id="imgFile" name="imgFile"/>
+                                             <a href="javascript: void (0)" onclick="uploadImage('imgFile','loanImage');"  class="loginbtn">上传</a>
+		                          		</span>
+                    #{/td}
+                    #{/tr}
+
+
+                    #{tr}
+                    #{td align:"middle"}身份证反面(必填)：#{/td}
+                    #{td}
+		                            		<span style="position: relative; vertical-align:middle;">
+		                            		#{img src:"${LoanApplication?.idImageBack}",id:"loanImage1",alt:"身份证",width:"110px",height:"110px"}#{/img}
+                     	 					<input type="hidden" name="application.idImageBack" id="idImageBack" />
+						    				<input type="file" id="imgFile1" name="imgFile"/>
+                                                <a href="javascript: void (0)" onclick="uploadImage('imgFile1','loanImage1');"  class="loginbtn">上传</a>
+		                          		</span>
+                    #{/td}
+                    #{/tr}
+                </table>
+	        </div>
+	        <a title="" target="" href="javascript:void(0)" class="btn p-jkbtn p-mauto" onclick="applyStepThird(this);">提交申请</a>
+	    </div>
+
+		                        
+	</div>
+	
+	
+	
+
+	<!--借款申请第三步 end-->
+#{/form}
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_bid.js'}"></script>
+<script type="text/javascript">
+
+	//借款申请第一步
+	function applyStepOne() {
+		//姓名
+		var userName = $.trim($("#userName").val());
+		if(!userName) {
+			alert("请填写姓名!");
+			$("#userName").val("");
+			return false;
+		}
+		
+		//联系方式
+		var mobile = $.trim($("#mobile").val());
+		if(!mobile) {
+			alert("请填写联系方式!");
+			$("#mobile").val("");
+			return false;
+		} else if(!mobile.isMobileNum()) {
+			alert("请填写正确的联系方式");
+			return false;
+		}
+		$("#step1").hide();
+		$("#step2").show();
+		$("#step3").hide();
+	};
+	
+	//借款申请第二步
+	function applyStepTwo() {
+		//借款标题
+		if($.trim($("#title").val()) == ""){
+			alert("请填写借款用途!");
+			$("#title").val("");
+			return false;
+		} 
+
+		//借款金额
+		var amount = $.trim($("#amount").val());
+		if(amount == ""){
+			alert("请填写借款金额!");
+			$("#amount").val("");
+			return false;
+		}
+        var min =1;
+        var max = 500000;
+        if(amount<min||amount>max){
+            alert('借款范围不能超过50W');
+            return false;
+        }
+
+		//借款期限单位
+		var periodUnit = $("#periodUnit").val() * 1;
+		if(periodUnit < -1 || periodUnit > 1){
+			alert("请选择借款期限单位!");
+			return false;
+		} 
+		
+		if($("#periodUnit").val() == ""){
+			alert("请选择借款期限单位!");
+			return false;
+		}
+
+		
+		var period = $("#period").val();
+		if(period == null || period == "" || period == 0){
+			alert("请选择借款期限!");
+			return false;
+		}
+
+		//利率
+		var apr = $("#apr").val();
+		if(apr == null || apr == "" || apr < 0){
+			alert("请选择年化利率范围!");
+			return false;
+		}
+		
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#step3").show();
+	};
+	
+	//借款申请第三步
+	function applyStepThird(obj) {
+		//借款描述
+		var description = $.trim($("#description").val());
+		if(description == "" || description.length > 1000){
+			//$("#description").html("请描述借款详情并控制在1~1000个字符单位之间!");
+			alert("请描述借款详情");
+			return false;
+		} else if(description.length > 1000 > 1000) {
+			alert("借款描述详情需控制在1~1000个字符之间");
+			return false;
+		}
+		$(obj).attr("disabled","disabled");
+		
+		//add by fz 20160601
+		//身份证图片
+		var imageFront = $("#loanImage").attr("src");
+		if(typeof(imageFront) == "undefined" || imageFront == "" || imageFront.indexOf("/public/images/default.png") != -1){
+			alert("请上传身份证正面!");
+			
+			return false;
+        }
+		$("#idImageFront").val(imageFront);
+		
+		var imageBack = $("#loanImage1").attr("src");
+		if(typeof(imageBack) == "undefined" || imageBack == "" || imageBack.indexOf("/public/images/default.png") != -1){
+			alert("请上传身份证反面!");
+			
+			return false;
+        }
+		$("#idImageBack").val(imageBack);
+		
+		$("#loanApplyNow").submit();
+	};
+
+	//富文本字数限制
+	function editorLimit(obj){
+  		if(obj.value.length > 600){
+	    	obj.value = obj.value.substring(0, 600);
+    	}
+	    $("#editornum").html(600 - obj.value.length);
+	};
+	
+	
+	
+	function checkTitle(){
+		if($.trim($("#title").val()) == ""){
+			$("#ctitle").html("请填写借款用途!");
+		}else{
+			$("#ctitle").html("");
+		} 
+	};
+	$(":input").blur(function(){
+		var idStr = $(this).attr("id");
+		var valueStr = $.trim($("#"+idStr).val());
+		if(idStr == 'userName') {
+			if(!valueStr) {
+				$("#aname").html("请填写姓名!");
+			} else {
+				$("#ctitle").html("");
+			}
+		} else if(idStr == 'mobile') {
+			if(!valueStr) {
+				$("#cmobile").html("联系方式不能为空!");
+			} else if(!valueStr.isMobileNum(valueStr)){
+				$("#cmobile").html("请填写正确的联系方式!");
+			} else {
+				$("#cmobile").html("");
+			}
+		} else if(idStr == 'title') {
+			if(!valueStr){
+				$("#ctitle").html("请填写借款用途!");
+			} else {
+				$("#ctitle").html("");
+			} 
+		} else if(idStr == 'amount') {
+			if(!valueStr) {
+				$("#camount").html("请填写借款金额!");
+			} else {
+				$("#camount").html("");
+			}
+		}
+	});
+	
+
+	function changePeriod(value) {
+		$("#period").removeAttr('disabled').empty();
+		$("#period").append('<option value="0">请选择</option>');
+		var i;
+		if(value == -1) {//年
+			for (i=1; i<=5; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		} else if(value == 0) {//月
+			for (i=1; i<=36; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		} else if(value == 1) {//日
+			for (i=1; i<=30; i++) {
+				$("#period").append('<option value="'+i+'">'+i+'</option>');
+			}
+		}
+	};
+	
+	
+	$(function(){
+		changePeriod($("#periodUnit").val());
+	});
+</script>

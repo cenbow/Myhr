@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>易宝跳转中...</title>
+</head>
+<body>
+<form action="${args.url}" id="frm1" method="post">
+       #{list args,as:'map'}
+          <input type="hidden" name="${map.key}" value="${map.value}" />
+        #{/list}
+</form>
+<script language="javascript">
+  document.getElementById("frm1").submit();
+</script>
+</body>
+</html>
+

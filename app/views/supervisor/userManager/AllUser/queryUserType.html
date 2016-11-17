@@ -1,0 +1,45 @@
+<div class="xn_c_content_top">
+      #{table class:"xn_c_content_list1 xn_c_content_listxx",cellspacing:"0",cellpadding:"0",border:"0",tr_class_even:"xn_tr_bj",width:"100%"}
+        #{tr}          
+          #{th}客户类型#{/th}
+          #{th}选择#{/th}
+        #{/tr}
+        #{list userTypeList}
+        #{tr tr_index:_index}
+          #{td}${_?.name}#{/td}      
+          #{td}<input type="button" value="确定" onClick="updateUserType('${_?.id}','${userId}')"/>#{/td}      
+        #{/tr}         
+        #{/list}
+      #{/table}
+    </div>
+    
+    <script type="text/javascript">
+function updateUserType(id,userId){
+	 $.ajax({
+	    url : "@{supervisor.userManager.AllUser.updateUserType()}",
+	    type : "GET",
+	    data : {
+	      "id" : id,
+	      "userId":userId
+	    },
+	    success : function(data) {	
+	    	alert("客户类型更改成功");
+	    	layer.closeAll();
+	    	location.reload();
+	    	
+	    	 var result = checkSupIntercepterResult(data);  //调用supervisor.html的方法
+				if(result){					
+					return;
+				}
+			if (data.code < 0) {			
+			alert(data.msg);		
+			return;
+			        }
+			
+	    },
+	    error : function() {
+	      alert("对不起，出现错误!");
+	    }
+	  });
+	}
+</script>

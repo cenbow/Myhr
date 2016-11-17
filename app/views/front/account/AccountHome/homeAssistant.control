@@ -1,0 +1,5 @@
+					<div class="xf_mem_Explanation clr">
+					#{list items:news, as:'news'}
+					<a href="@{front.wealthinfomation.WealthInfomationAction.newDetails(news.id)}" target="_blank">${news_index}、${news?.title} (${news?.read_count})</a><br />
+					#{/list}
+					</div>
