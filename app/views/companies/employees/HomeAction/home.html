@@ -50,12 +50,12 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
 
 
 
-
+*{
 <div class="system-notification warning" data-stick="" style="display: block;">
   这是一个演示公司，操作数据将不会保留
 </div>
 
-	*{"@{front.home.HomeAction.aboutUs(10)}"}*
+	"@{front.home.HomeAction.aboutUs(10)}"
   <div class="system-notification" style="display: block;">
     有43个员工尚未开通知人微信服务，马上 <a href="https://zhirenhr.com/companies/10172/wechats/employee_settings">邀请他们开通</a>
   </div>
@@ -68,7 +68,7 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
   你的手机号或Email为空，请 <a href="https://zhirenhr.com/users/121680/setting/edit">完善个人设置</a>
 </div>
 
-
+}*
 
   
 
@@ -395,9 +395,8 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
   </div>
 
 </form>
-	#{list items:homeEmployee, as:'person'}
     <table cellspacing="0" class="table employees-table table-with-border">
-      *{<thead>
+      <thead>
         <tr>
             <th class="align-right">
               <a class="link-roster-setting" title="自定义员工列表" data-remote="true" href="https://zhirenhr.com/roster_settings/4356/edit">
@@ -426,27 +425,22 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
                 <a class="sort_link  link-sort-column" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?q%5Bs%5D=join_date+asc">入职日期</a>
             </th>
         </tr>
-      </thead>}*
+      </thead>
+      
       <tbody>
+       #{list items:homeEmployee, as:'person'}
           <tr>
-            *{<td class="td-avatar">
-              <img class="avatar" src="./员工-首页_files/default-avatar.png" alt="李秋波">
-
-            </td>
-              <td><a href="https://zhirenhr.com/employees/1047517" class="name" target="_blank">李秋波</a></td>
-              <td>person.name</td>
-              <td>全职</td>
-              <td></td>
-              <td>行政组</td>
-              <td><span class="empno">003</span></td>
-              <td>2016年10月8日</td>}*
-              
-              <td>${person.name}</td>
+          	<td class="td-avatar"><img class="avatar" src="##" alt="${person.name}"></td>
+            <td class = "name" target="_blank">${person.name}</td>
+            <td><span class="status status-regular">${person.status}</span></td>
+            <td>${person.nickname}</td>
           </tr>
-          
+        #{/list}
       </tbody>
+      
     </table>
-    #{/list}
+    
+    
 
     <div class="pagination-wrapper">
       <div class="pagination-entries-info">

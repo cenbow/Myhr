@@ -1,26 +1,47 @@
-17 十一月 2016 16:11:05,893 INFO  ~ Starting E:\code\java\Myhr\com.fz.hr
-17 十一月 2016 16:11:07,720 WARN  ~ You're running Play! in DEV mode
-17 十一月 2016 16:11:07,885 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-17 十一月 2016 16:11:22,510 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/myhr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-17 十一月 2016 16:11:23,698 INFO  ~ Application 'com.fz.hr' is now started !
-17 十一月 2016 16:11:24,262 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:12:14,360 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:12:14,406 WARN  ~ SQL Error: 0, SQLState: S1009
-17 十一月 2016 16:12:14,406 ERROR ~ Value '0000-00-00' can not be represented as java.sql.Timestamp
-17 十一月 2016 16:12:14,412 INFO  ~ 人员信息查询时：org.hibernate.exception.GenericJDBCException: could not execute query
-17 十一月 2016 16:12:19,140 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:12:19,143 WARN  ~ SQL Error: 0, SQLState: S1009
-17 十一月 2016 16:12:19,144 ERROR ~ Value '0000-00-00' can not be represented as java.sql.Timestamp
-17 十一月 2016 16:12:19,146 INFO  ~ 人员信息查询时：org.hibernate.exception.GenericJDBCException: could not execute query
-17 十一月 2016 16:13:01,887 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:13:01,908 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.age
-17 十一月 2016 16:14:08,551 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:14:08,554 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.age
-17 十一月 2016 16:14:24,214 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:14:24,224 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.census_register_type
-17 十一月 2016 16:14:44,959 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:14:44,962 INFO  ~ 人员信息查询时：org.hibernate.PropertyAccessException: Null value was assigned to a property of primitive type setter of models.t_personal_info.degree
-17 十一月 2016 16:16:26,604 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:17:02,458 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:20:03,560 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-17 十一月 2016 16:28:48,866 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 14:48:36,899 INFO  ~ Starting E:\code\java\Myhr\com.fz.hr
+28 十一月 2016 14:48:38,597 WARN  ~ You're running Play! in DEV mode
+28 十一月 2016 14:48:38,788 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+28 十一月 2016 14:48:59,657 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/myhr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
+28 十一月 2016 14:49:01,092 INFO  ~ Application 'com.fz.hr' is now started !
+28 十一月 2016 14:49:01,841 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:02:18,530 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:18:34,669 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:19:38,996 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:20:29,503 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:21:43,728 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:25:02,421 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:28:28,994 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:29:17,217 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:29:20,517 ERROR ~ 
+
+@727pc91ld
+Internal Server Error (500) for request GET /
+
+Template execution error (In /app/views/companies/employees/HomeAction/home.html around line 434)
+Execution error occured in template /app/views/companies/employees/HomeAction/home.html. Exception raised was NullPointerException : Cannot get property 'name' on null object.
+
+play.exceptions.TemplateExecutionException: Cannot get property 'name' on null object
+	at play.templates.BaseTemplate.throwException(BaseTemplate.java:86)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
+	at play.templates.Template.render(Template.java:26)
+	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
+	at play.mvc.results.RenderTemplate.<init>(RenderTemplate.java:24)
+	at play.mvc.Controller.renderTemplate(Controller.java:662)
+	at play.mvc.Controller.renderTemplate(Controller.java:642)
+	at play.mvc.Controller.render(Controller.java:699)
+	at controllers.companies.employees.HomeAction.home(HomeAction.java:15)
+	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
+	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
+	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.NullPointerException: Cannot get property 'name' on null object
+	at /app/views/companies/employees/HomeAction/home.html.(line:434)
+	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
+	... 13 more
+28 十一月 2016 15:30:34,450 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:31:53,733 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:32:30,555 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:36:05,314 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+28 十一月 2016 15:36:08,615 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
