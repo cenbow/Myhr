@@ -428,12 +428,16 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
       </thead>
       
       <tbody>
-       #{list items:homeEmployee, as:'person'}
+       #{list items:pageBean.page, as:'person'}
           <tr>
-          	<td class="td-avatar"><img class="avatar" src="##" alt="${person.name}"></td>
+          	<td class="td-avatar"><img class="avatar" src="" alt="${person.name}"></td>
             <td class = "name" target="_blank">${person.name}</td>
             <td><span class="status status-regular">${person.status}</span></td>
-            <td>${person.nickname}</td>
+            <td>${person.employee_type}</td>
+            <td>${person.position_id}</td>
+            <td>${person.dept_id}</td>
+            <td>${person.staff_id}</td>
+            <td>${person.join_date}</td>
           </tr>
         #{/list}
       </tbody>
@@ -442,36 +446,7 @@ mixpanel.people.set({"ID":121680,"$email":"","$created":"2016-10-30 14:35:18 UTC
     
     
 
-    <div class="pagination-wrapper">
-      <div class="pagination-entries-info">
-        共 <b>75</b> 条数据，当前显示第 <b>1&nbsp;-&nbsp;25</b> 条
-      </div>
-        <nav class="pagination">
-    
-    
-        <span class="page current">
-  1
-</span>
 
-        <span class="page">
-  <a rel="next" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=2">2</a>
-</span>
-
-        <span class="page">
-  <a data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=3">3</a>
-</span>
-
-    <span class="next">
-  <a rel="next" data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=2">下一页 ›</a>
-</span>
-
-    <span class="last">
-  <a data-remote="true" href="https://zhirenhr.com/companies/10172/employees?page=3">末页 »</a>
-</span>
-
-  </nav>
-
-    </div>
 </div>
 
 

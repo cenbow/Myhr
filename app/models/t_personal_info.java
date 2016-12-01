@@ -84,4 +84,10 @@ public class t_personal_info extends Model {
 	/** 参加工作时间**/
 	public Date start_work_date;
 	
+	/** 状态**/
+	public int status;
+	
+	/** 员工类型**/
+	public int type;
+	
 }

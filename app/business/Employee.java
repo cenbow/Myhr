@@ -4,9 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.t_personal_info;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import models.v_staff;
 import play.Logger;
+import play.db.jpa.JPA;
 import utils.ErrorInfo;
+import utils.PageBean;
+import utils.QueryUtil;
 
 /**
  * 用户的业务实体
@@ -17,28 +23,53 @@ public class Employee implements Serializable
 {
 
 	/**
-	 * 根据不同位置查询广告条
+	 * 查询首页员工
 	 * 
 	 * @param location
 	 * @param error
 	 * @return
 	 */
-	public static List<t_personal_info> queryEmployees(ErrorInfo error) {
+	public static PageBean<v_staff> queryEmployees(int currPage, int pageSize,ErrorInfo error) {
 		error.clear();
-//		String sql = "select new t_content_advertisements(id, image_filename, url, is_link_enabled,"
-//				+ " target) from t_content_advertisements where location = ? and is_use = true order by id";
-		List<t_personal_info> emp = new ArrayList<t_personal_info>();
+        List<v_staff> empList = new ArrayList<v_staff>();
+        PageBean<v_staff> page = new PageBean<v_staff>();
+        page.pageSize = pageSize;
+        page.currPage = currPage;
+        
+        String sql = "select a.id,a.name,a.status,b.employee_type,b.position_id,b.dept_id,b.staff_id,a.join_date "
+     		   + "from t_personal_info a left join t_serve_staff b on a.id = b.person_id where 1=1 ";
+        
+        //查询条件
+        List<Object> params = new ArrayList<Object>();
+//        params.add(userId);
 
-		try {
-			emp = t_personal_info.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Logger.info("人员信息查询时：" + e.getMessage());
+        try
+        {
+            EntityManager em = JPA.em();
+            Query query = em.createNativeQuery(sql.toString(), v_staff.class);
+            for (int n = 1; n <= params.size(); n++)
+            {
+                query.setParameter(n, params.get(n - 1));
+            }
+            query.setFirstResult((currPage - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            empList = query.getResultList();
 
-			return null;
-		}
+            page.totalCount = QueryUtil.getQueryCountByCondition(em, sql.toString(), params);
 
-		return emp;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Logger.info(e.getMessage());
+            error.code = -1;
+
+            return page;
+        }
+        error.code = 1;
+        page.page = empList;
+
+        return page;
 	}
 
 

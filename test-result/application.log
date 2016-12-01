@@ -1,47 +1,79 @@
-28 十一月 2016 14:48:36,899 INFO  ~ Starting E:\code\java\Myhr\com.fz.hr
-28 十一月 2016 14:48:38,597 WARN  ~ You're running Play! in DEV mode
-28 十一月 2016 14:48:38,788 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
-28 十一月 2016 14:48:59,657 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/myhr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-28 十一月 2016 14:49:01,092 INFO  ~ Application 'com.fz.hr' is now started !
-28 十一月 2016 14:49:01,841 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:02:18,530 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:18:34,669 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:19:38,996 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:20:29,503 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:21:43,728 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:25:02,421 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:28:28,994 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:29:17,217 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:29:20,517 ERROR ~ 
-
-@727pc91ld
-Internal Server Error (500) for request GET /
-
-Template execution error (In /app/views/companies/employees/HomeAction/home.html around line 434)
-Execution error occured in template /app/views/companies/employees/HomeAction/home.html. Exception raised was NullPointerException : Cannot get property 'name' on null object.
-
-play.exceptions.TemplateExecutionException: Cannot get property 'name' on null object
-	at play.templates.BaseTemplate.throwException(BaseTemplate.java:86)
-	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:272)
-	at play.templates.Template.render(Template.java:26)
-	at play.templates.GroovyTemplate.render(GroovyTemplate.java:202)
-	at play.mvc.results.RenderTemplate.<init>(RenderTemplate.java:24)
-	at play.mvc.Controller.renderTemplate(Controller.java:662)
-	at play.mvc.Controller.renderTemplate(Controller.java:642)
-	at play.mvc.Controller.render(Controller.java:699)
-	at controllers.companies.employees.HomeAction.home(HomeAction.java:15)
-	at play.mvc.ActionInvoker.invokeWithContinuation(ActionInvoker.java:557)
-	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:508)
-	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:484)
-	at play.mvc.ActionInvoker.invokeControllerMethod(ActionInvoker.java:479)
-	at play.mvc.ActionInvoker.invoke(ActionInvoker.java:161)
-	at Invocation.HTTP Request(Play!)
-Caused by: java.lang.NullPointerException: Cannot get property 'name' on null object
-	at /app/views/companies/employees/HomeAction/home.html.(line:434)
-	at play.templates.GroovyTemplate.internalRender(GroovyTemplate.java:247)
-	... 13 more
-28 十一月 2016 15:30:34,450 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:31:53,733 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:32:30,555 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:36:05,314 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
-28 十一月 2016 15:36:08,615 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:03:44,017 INFO  ~ Starting E:\code\java\Myhr\com.fz.hr
+01 十二月 2016 17:03:44,547 WARN  ~ You're running Play! in DEV mode
+01 十二月 2016 17:03:44,643 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+01 十二月 2016 17:03:49,689 INFO  ~ Connected to jdbc:mysql://127.0.0.1:3306/myhr?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
+01 十二月 2016 17:03:50,658 INFO  ~ Application 'com.fz.hr' is now started !
+01 十二月 2016 17:03:50,855 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:03:57,977 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:03:59,588 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:04:01,130 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:05:55,519 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:05:58,615 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:02,833 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:02,970 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:31,093 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:34,068 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:34,187 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:38,643 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:38,769 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:53,430 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:56,346 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:06:56,457 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:00,609 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:00,753 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:02,053 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:02,188 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:24,391 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:27,352 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:27,441 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:31,116 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:31,218 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:07:43,347 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:31,118 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:36,094 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:49,236 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:52,384 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:56,573 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:08:56,690 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:09:12,640 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:09:19,108 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:09:22,356 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:14,191 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:19,102 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:20,548 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:22,289 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:40,322 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:44,335 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:45,733 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:10:59,135 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:02,025 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:03,713 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:05,636 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:28,246 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:33,483 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:35,253 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:36,953 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:41,035 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:11:46,295 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:13:47,297 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:13:50,343 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:13:56,575 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:13:56,678 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:03,632 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:09,653 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:12,843 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:20,045 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:22,988 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:23,074 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:26,655 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:14:26,862 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:04,061 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:10,044 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:23,551 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:26,455 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:26,570 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:27,472 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:27,577 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:33,092 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:17:33,187 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
+01 十二月 2016 17:20:26,170 DEBUG ~ 正在执行action请求命令：companies.employees.HomeAction.home
